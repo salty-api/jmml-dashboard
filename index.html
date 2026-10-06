@@ -105,6 +105,16 @@ h1 { font-size: 20px; font-weight: 600; color: #f8fafc; margin-bottom: 4px; }
 .filter-label { font-size: 11px; color: #475569; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
 select.filter-select { background: #111520; border: 1px solid #1e293b; color: #cbd5e1; font-size: 12px; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-family: inherit; }
 select.filter-select:focus { outline: none; border-color: #334155; }
+.owner-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px; width: 100%; }
+.owner-card { background: #111520; border: 1px solid #1e293b; border-radius: 8px; padding: 9px 11px; cursor: pointer; transition: border-color .15s, background .15s; }
+.owner-card:hover { border-color: #334155; }
+.owner-card.selected { border-color: #fcd34d; background: #1a1708; }
+.owner-card-name { font-size: 12.5px; font-weight: 700; color: #e2e8f0; }
+.owner-card-sub { font-size: 10px; color: #475569; margin-top: 2px; }
+.owner-card.selected .owner-card-sub { color: #94a3b8; }
+.hist-group { margin-bottom: 26px; }
+.hist-group-title { font-size: 13px; font-weight: 700; color: #94a3b8; margin-bottom: 10px; letter-spacing: 0.04em; }
+.streak-up { color: #4ade80; } .streak-down { color: #f87171; } .streak-flat { color: #475569; }
 .filter-chips { display: flex; gap: 6px; flex-wrap: wrap; }
 .chip { padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; cursor: pointer; border: 1.5px solid transparent; transition: opacity .15s; }
 .chip.off { opacity: 0.3; }
@@ -241,8 +251,9 @@ select.filter-select:focus { outline: none; border-color: #334155; }
   </div>
 
   <div class="section">
-    <div class="section-title">Season Cards <span id="card-count" style="font-weight:400;text-transform:none;font-size:10px;color:#334155"></span></div>
-    <div class="cards-grid" id="season-cards"></div>
+    <div class="section-title">Season Cards <span id="card-count" style="font-weight:400;text-transform:none;font-size:10px;color:#334155"></span>
+      <span class="toggle-pill" id="group-toggle" onclick="toggleCardGroup()"><span class="pill-dot"></span><span id="group-toggle-label">Grouped by year</span></span></div>
+    <div id="season-cards"></div>
   </div>
 
   <div class="section">
@@ -263,8 +274,8 @@ select.filter-select:focus { outline: none; border-color: #334155; }
   <p class="subtitle">Pick an owner to see their best teams, who they beat, and what they earned</p>
 
   <div class="filters">
-    <span class="filter-label">Owner</span>
-    <select class="filter-select" id="owner-select" onchange="renderOwner()"></select>
+    <input type="hidden" id="owner-select">
+    <div class="owner-cards" id="owner-cards"></div>
   </div>
 
   <div class="kpi-row" id="owner-kpis"></div>
@@ -333,13 +344,13 @@ select.filter-select:focus { outline: none; border-color: #334155; }
 
   <div class="section chart-row">
     <div>
-      <div class="section-title">Standings <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">· by wins, then points for · top 4 make the playoffs</span></div>
+      <div class="section-title">Standings <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">· by wins, then points for · arrow = rank change vs. last week</span></div>
       <table class="data-table" id="standings-2025">
         <thead><tr>
           <th class="num">#</th><th>Owner</th><th>Team</th>
           <th class="num">W</th><th class="num">L</th>
           <th class="num">PF</th><th class="num">PA</th><th class="num">PF/G</th>
-          <th></th>
+          <th>Streak</th>
         </tr></thead>
         <tbody id="standings-body"></tbody>
       </table>
@@ -640,7 +651,7 @@ function renderAllTimeScatter() {
 function renderFinishHistory() {
   destroyChart('finish-history');
   const owners = META.current_owners;
-  const years  = META.years.filter(y => y >= 2009);
+  const years  = META.years.filter(y => y >= 2009 && SEASONS.filter(s => s.season === y).every(s => s.finish != null));
   const datasets = owners.map(owner => {
     const data = years.map(y => {
       const s = SEASONS.find(s => s.owner === owner && s.season === y);
@@ -889,22 +900,26 @@ function renderScoreRange(seasons, yr, activeOwners) {
   );
 }
 
-function renderSeasonCards(seasons) {
-  const sorted = [...seasons].sort((a,b) => b.season - a.season || a.reg_season_finish - b.reg_season_finish);
-  document.getElementById('card-count').textContent = `· ${sorted.length} seasons`;
-  document.getElementById('season-cards').innerHTML = sorted.map(s => {
-    const finish = s.finish || s.reg_season_finish;
-    const isChamp = s.championships > 0 || s.finish === 1;
-    const isPlayoff = s.playoff_appearances > 0 || (s.finish && s.finish <= 4);
-    const inProgress = s.finish == null;
-    const badge = inProgress ? 'badge-reg' : isChamp ? 'badge-champ' : isPlayoff ? 'badge-playoff' : 'badge-reg';
-    const badgeText = inProgress ? 'In progress' : isChamp ? 'Champion' : isPlayoff ? 'Playoffs' : `#${finish}`;
-    const color = ownerColor(s.owner);
-    return `<div class="season-card" data-owner="${s.owner}" onclick="setActiveOwner('${s.owner}')" style="border-top: 2px solid ${color}40;cursor:pointer">
-      <div class="card-team">${s.team_name || '—'}</div>
-      <div class="card-owner" style="color:${color}">${s.owner} · ${s.season}</div>
-      <div class="card-wl">${s.wins??'—'}–${s.losses??'—'}</div>
-      <div class="card-pts">PF <span>${fmt1(s.points_for)}</span> &nbsp;·&nbsp; PA <span>${fmt1(s.points_against)}</span></div>
+let cardGroup = 'year', lastCardSeasons = [];
+function toggleCardGroup() {
+  cardGroup = cardGroup === 'year' ? 'owner' : 'year';
+  document.getElementById('group-toggle-label').textContent = cardGroup === 'year' ? 'Grouped by year' : 'Grouped by owner';
+  document.getElementById('group-toggle').classList.toggle('on', cardGroup === 'owner');
+  renderSeasonCards(lastCardSeasons);
+}
+function seasonCardHtml(s) {
+  const finish = s.finish || s.reg_season_finish;
+  const isChamp = s.championships > 0 || s.finish === 1;
+  const isPlayoff = s.playoff_appearances > 0 || (s.finish && s.finish <= 4);
+  const inProgress = s.finish == null;
+  const badge = inProgress ? 'badge-reg' : isChamp ? 'badge-champ' : isPlayoff ? 'badge-playoff' : 'badge-reg';
+  const badgeText = inProgress ? 'In progress' : isChamp ? 'Champion' : isPlayoff ? 'Playoffs' : `#${finish}`;
+  const color = ownerColor(s.owner);
+  return `<div class="season-card" data-owner="${s.owner}" onclick="setActiveOwner('${s.owner}')" style="border-top: 2px solid ${color}40;cursor:pointer">
+      <div class="card-team">${s.team_name || '\u2014'}</div>
+      <div class="card-owner" style="color:${color}">${s.owner} \u00b7 ${s.season}</div>
+      <div class="card-wl">${s.wins??'\u2014'}\u2013${s.losses??'\u2014'}</div>
+      <div class="card-pts">PF <span>${fmt1(s.points_for)}</span> &nbsp;\u00b7&nbsp; PA <span>${fmt1(s.points_against)}</span></div>
       <div style="margin-bottom:8px"><span class="badge ${badge}">${badgeText}</span></div>
       <div class="card-players">
         ${s.qb     ? `<strong>QB</strong> ${s.qb}<br>`     : ''}
@@ -913,6 +928,17 @@ function renderSeasonCards(seasons) {
         ${s.te     ? `<strong>TE</strong> ${s.te}`          : ''}
       </div>
     </div>`;
+}
+function renderSeasonCards(seasons) {
+  lastCardSeasons = seasons;
+  document.getElementById('card-count').textContent = `\u00b7 ${seasons.length} seasons`;
+  const byYear = cardGroup === 'year';
+  const keyOf = s => byYear ? s.season : s.owner;
+  const keys = [...new Set(seasons.map(keyOf))].sort(byYear ? (a, b) => b - a : (a, b) => a.localeCompare(b));
+  document.getElementById('season-cards').innerHTML = keys.map(k => {
+    const group = seasons.filter(s => keyOf(s) === k)
+      .sort(byYear ? (a, b) => (a.reg_season_finish || 99) - (b.reg_season_finish || 99) : (a, b) => b.season - a.season);
+    return `<div class="hist-group"><div class="hist-group-title">${k}</div><div class="cards-grid">${group.map(seasonCardHtml).join('')}</div></div>`;
   }).join('');
 }
 
@@ -949,16 +975,25 @@ function finishBadge(s) {
 const ordinal = n => n + (['th','st','nd','rd'][(n % 100 >> 3 ^ 1 && n % 10 < 4) ? n % 10 : 0]);
 
 function buildOwnerSelect() {
-  const sel = document.getElementById('owner-select');
-  const group = (label, names) => {
-    const g = document.createElement('optgroup'); g.label = label;
-    names.forEach(n => { const o = document.createElement('option'); o.value = n; o.textContent = n; g.appendChild(o); });
-    sel.appendChild(g);
-  };
   const cur = [...META.current_owners].sort();
-  group('Current owners', cur);
-  group('Retired owners', META.owners.filter(o => !isCurrent(o)).sort());
-  sel.value = cur.includes('Salty') ? 'Salty' : cur[0];
+  document.getElementById('owner-select').value = cur.includes('Buser') ? 'Buser' : cur[0];
+  renderOwnerCards();
+}
+function renderOwnerCards() {
+  const sel = document.getElementById('owner-select').value;
+  const agg = Object.fromEntries(ownerAggregates().map(a => [a.owner, a]));
+  document.getElementById('owner-cards').innerHTML = [...META.current_owners].sort().map(o => {
+    const a = agg[o];
+    return `<div class="owner-card ${o === sel ? 'selected' : ''}" onclick="selectOwner('${o}')">
+      <div class="owner-card-name">${o}</div>
+      <div class="owner-card-sub">${a.wins}\u2013${a.losses} \u00b7 ${a.championships} title${a.championships === 1 ? '' : 's'}</div>
+    </div>`;
+  }).join('');
+}
+function selectOwner(o) {
+  document.getElementById('owner-select').value = o;
+  renderOwnerCards();
+  renderOwner();
 }
 
 function renderOwner() {
@@ -1112,7 +1147,7 @@ function renderSeason() {
   document.getElementById('season-h1').textContent = `${SEASON_YEAR} Season`;
   document.getElementById('season-sub').textContent = `Through Week ${lastWeek} · standings, luck, and weekly recap`;
 
-  renderSeasonStandings(table);
+  renderSeasonStandings(table, games, lastWeek);
   renderSeasonScatter(table);
   renderLuck(table);
   renderRecap(games, lastWeek);
@@ -1120,7 +1155,15 @@ function renderSeason() {
   renderMatchupGrid(games, 'matchup-grid');
 }
 
-function renderSeasonStandings(table) {
+function streakInfo(owner, games) {
+  const rs = games.filter(m => m.owner === owner && m.game_type !== 'Playoffs').sort((a, b) => a.week - b.week);
+  if (!rs.length) return null;
+  const last = rs[rs.length - 1].result === 1; let n = 0;
+  for (let i = rs.length - 1; i >= 0 && (rs[i].result === 1) === last; i--) n++;
+  return { label: (last ? 'W' : 'L') + n, win: last };
+}
+function renderSeasonStandings(table, games, lastWeek) {
+  const prev = seasonTable(games.filter(m => m.week < lastWeek)).map(r => r.owner);
   document.getElementById('standings-body').innerHTML = table.map((r, i) => `<tr data-owner="${r.owner}" onclick="setActiveOwner('${r.owner}')">
       <td class="num" style="color:#334155">${i + 1}</td>
       <td><span class="owner-dot" style="background:${greyFor(r.owner)}"></span>${r.owner}</td>
@@ -1130,7 +1173,12 @@ function renderSeasonStandings(table) {
       <td class="num">${fmt1(r.pf)}</td>
       <td class="num">${fmt1(r.pa)}</td>
       <td class="num">${fmt1(r.ppg)}</td>
-      <td>${i < 4 ? '<span class="badge badge-playoff">Playoffs</span>' : ''}</td>
+      <td>${(() => {
+        const st = streakInfo(r.owner, games); if (!st) return '';
+        const pi = prev.indexOf(r.owner), d = pi < 0 ? 0 : pi - i;
+        const arrow = d > 0 ? `<span class="streak-up">\u25b2${d}</span>` : d < 0 ? `<span class="streak-down">\u25bc${-d}</span>` : '<span class="streak-flat">\u2013</span>';
+        return `<span class="${st.win ? 'streak-up' : 'streak-down'}" style="font-weight:700">${st.label}</span> ${arrow}`;
+      })()}</td>
     </tr>`).join('');
 }
 
