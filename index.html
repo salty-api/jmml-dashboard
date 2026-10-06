@@ -137,6 +137,9 @@ table.hm tr.dimmed { opacity: 0.15; }
 .rec-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #94a3b8; margin-bottom: 6px; }
 .rec-card .data-table td { font-size: 11.5px; padding: 5px 8px; }
 .rec-team { display: block; font-size: 11px; font-weight: 500; font-style: italic; color: #94a3b8; }
+.ot-owner { color: #fcd34d; }
+.ot-owner:empty { display: none; }
+.ot-owner::after { content: ' \00b7'; color: #475569; margin: 0 0.6em 0 0.2em; }
 .rec-new td { background: #1a1708; }
 .rec-new td:first-child { box-shadow: inset 3px 0 0 #fcd34d; }
 .rec-pill { display: inline-block; margin-left: 7px; padding: 0 6px; border-radius: 8px; background: #fcd34d; color: #3b2800; font-size: 9px; font-weight: 800; letter-spacing: 0.04em; vertical-align: 1px; }
@@ -367,19 +370,19 @@ table.hm tr.dimmed { opacity: 0.15; }
 
   <div class="section chart-row">
     <div>
-      <div class="section-title">Finish By Season</div>
+      <div class="section-title"><span class="ot-owner"></span>Finish By Season</div>
       <div class="chart-wrap" style="height:300px"><canvas id="owner-finish"></canvas></div>
       <p style="font-size:10px;color:#334155;margin-top:6px">Lower = better · gold = final finish · grey = regular-season finish</p>
     </div>
     <div>
-      <div class="section-title">Profit By Season <span id="owner-profit-note" style="font-weight:400;text-transform:none;font-size:10px;color:#334155"></span></div>
+      <div class="section-title"><span class="ot-owner"></span>Profit By Season <span id="owner-profit-note" style="font-weight:400;text-transform:none;font-size:10px;color:#334155"></span></div>
       <div class="chart-wrap" style="height:300px"><canvas id="owner-profit"></canvas></div>
       <p style="font-size:10px;color:#334155;margin-top:6px">Winnings minus buy-in · completed seasons only</p>
     </div>
   </div>
 
   <div class="section">
-    <div class="section-title">Top Teams <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">· ranked by final finish, then regular-season finish, then points</span></div>
+    <div class="section-title"><span class="ot-owner"></span>Top Teams <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">· ranked by final finish, then regular-season finish, then points</span></div>
     <table class="data-table" id="owner-top-teams">
       <thead><tr>
         <th>Season</th><th>Team</th><th class="num">Record</th><th class="num">PF</th>
@@ -390,7 +393,7 @@ table.hm tr.dimmed { opacity: 0.15; }
   </div>
 
   <div class="section">
-    <div class="section-title">Head-to-Head</div>
+    <div class="section-title"><span class="ot-owner"></span>Head-to-Head</div>
     <div class="chart-row" style="margin-bottom:20px">
       <div>
         <div class="section-title" style="color:#4ade80">Best Against <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">· min 5 games</span></div>
@@ -411,7 +414,7 @@ table.hm tr.dimmed { opacity: 0.15; }
   </div>
 
   <div class="section">
-    <div class="section-title">Every Season</div>
+    <div class="section-title"><span class="ot-owner"></span>Every Season</div>
     <table class="data-table" id="owner-seasons">
       <thead><tr>
         <th>Season</th><th>Team</th><th class="num">Record</th><th class="num">PF</th><th class="num">PA</th>
@@ -1173,6 +1176,7 @@ function selectOwner(o) {
 
 function renderOwner() {
   const owner = document.getElementById('owner-select').value;
+  document.querySelectorAll('#tab-owner .ot-owner').forEach(el => el.textContent = owner);
   const seasons = SEASONS.filter(s => s.owner === owner).sort((a, b) => a.season - b.season);
   const done = seasons.filter(s => s.finish != null);
   const agg = ownerAggregates().find(a => a.owner === owner);
@@ -1747,25 +1751,39 @@ function renderRecap(games, week) {
   renderMatchupGrid(wm, 'recap-grid');
 }
 
+// Weekly scores: dots only, green = won that week, grey = lost; selected owner gets a gold ring
+function weeklyDotStyle(ds, ao) {
+  const dim = !!ao && ds.ownerKey !== ao, active = ao === ds.ownerKey;
+  ds.pointBackgroundColor = ds.results.map(w => (w ? '#4ade80' : '#64748b') + (dim ? '33' : ''));
+  ds.pointBorderColor = active ? GOLD : (dim ? '#00000000' : '#0f1117');
+  ds.pointBorderWidth = active ? 2 : 1;
+  ds.pointRadius = active ? 6 : 4.5;
+  ds.order = active ? 0 : 1;
+}
 function renderWeeklyScores(games) {
   destroyChart('weekly-scores');
   const regMatchups = games.filter(m => m.game_type !== 'Playoffs' && m.week);
   const weeks = [...new Set(regMatchups.map(m => m.week))].sort((a, b) => a - b);
-  const datasets = META.current_owners.map(owner => ({
-    label: owner, ownerKey: owner,
-    data: weeks.map(w => regMatchups.find(m => m.owner === owner && m.week === w)?.score ?? null),
-    ...lineStyle(owner, activeOwner),
-    backgroundColor: 'transparent',
-    pointRadius: 2.5, pointHoverRadius: 5, tension: 0.3, spanGaps: false,
-  }));
+  const datasets = META.current_owners.map(owner => {
+    const rows = weeks.map(w => regMatchups.find(m => m.owner === owner && m.week === w));
+    const ds = {
+      label: owner, ownerKey: owner, showLine: false, borderWidth: 0, backgroundColor: 'transparent',
+      data: rows.map(r => r?.score ?? null),
+      results: rows.map(r => r?.result === 1),
+      pointHoverRadius: 7,
+    };
+    weeklyDotStyle(ds, activeOwner);
+    return ds;
+  });
   chartInstances['weekly-scores'] = new Chart(document.getElementById('weekly-scores'), {
     type: 'line',
     data: { labels: weeks.map(w => `Wk ${w}`), datasets },
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false },
-        tooltip: { mode: 'index', intersect: false, itemSort: (a, b) => b.raw - a.raw, callbacks: { label: ctx => `${ctx.dataset.label}: ${fmt1(ctx.raw)}` } } },
-      scales: { x: { grid: { color: '#1a2030' }, ticks: { color: '#475569' } }, y: { grid: { color: '#1a2030' }, ticks: { color: '#475569' } } },
+        tooltip: { mode: 'index', intersect: false, itemSort: (a, b) => b.raw - a.raw,
+          callbacks: { label: ctx => `${ctx.dataset.label}: ${fmt1(ctx.raw)} ${ctx.dataset.results[ctx.dataIndex] ? '(W)' : '(L)'}` } } },
+      scales: { x: { offset: true, grid: { color: '#1a2030' }, ticks: { color: '#475569' } }, y: { grid: { color: '#1a2030' }, ticks: { color: '#475569' } } },
       interaction: { mode: 'index', intersect: false },
     },
   });
@@ -1975,7 +1993,7 @@ function applyHighlight() {
   ['weekly-scores'].forEach(id => {
     const chart = chartInstances[id];
     if (!chart) return;
-    chart.data.datasets.forEach(ds => Object.assign(ds, lineStyle(ds.ownerKey, ao)));
+    chart.data.datasets.forEach(ds => weeklyDotStyle(ds, ao));
     chart.update('none');
   });
 
