@@ -180,6 +180,9 @@ table.hm tr.dimmed { opacity: 0.15; }
 .pv-prob span { background: #4ade80; } .pv-prob span + span { background: #f87171; }
 .pv-prob-lbl { display: flex; justify-content: space-between; font-size: 10.5px; font-weight: 700; margin: 4px 0 8px; font-variant-numeric: tabular-nums; }
 .pv-h2h { font-size: 10.5px; color: #64748b; line-height: 1.5; }
+.share-btn { margin-left: auto; background: #1e293b; border: 1px solid #334155; color: #e2e8f0; font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 6px; cursor: pointer; font-family: inherit; white-space: nowrap; }
+.share-btn:hover { background: #334155; }
+.share-btn + .nav-right { margin-left: 14px; }
 .hist-group { margin-bottom: 26px; }
 .hist-group-title { font-size: 13px; font-weight: 700; color: #94a3b8; margin-bottom: 10px; letter-spacing: 0.04em; }
 .streak-up { color: #4ade80; } .streak-down { color: #f87171; } .streak-flat { color: #475569; }
@@ -271,6 +274,7 @@ table.hm tr.dimmed { opacity: 0.15; }
     <button class="tab-btn" onclick="showTab('whohashim',this)">Who Has Him</button>
     <button class="tab-btn" id="season-tab-btn" onclick="showTab('season',this)">Season</button>
   </div>
+  <button class="share-btn" id="share-btn" onclick="copyShare()" title="Copy a link to this view that previews nicely when shared">Share</button>
   <span class="nav-right" id="updated-label"></span>
 </div>
 
@@ -1838,6 +1842,24 @@ function renderWhoHasHim() {
       });
       ctx.restore(); } }],
   });
+}
+// Shareable link for the current view: tab and owner links go through generated pages that carry their own preview card
+const SITE_URL = 'https://jmml.whohashim.com/';
+const shareSlug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+function shareUrl() {
+  const parts = location.hash.slice(1).split('/').map(decodeURIComponent), tab = parts[0] || 'alltime';
+  const q = o => encodeURIComponent(o);
+  if (tab === 'owner') return `${SITE_URL}owner/${shareSlug(parts[1] || document.getElementById('owner-select').value)}/`;
+  if (tab === 'rivalry') return `${SITE_URL}rivalry/?a=${q(rivA)}&b=${q(rivB)}`;
+  if (tab === 'whohashim') return `${SITE_URL}who-has-him/?p=${q(whSlug())}`;
+  const path = { alltime: 'all-time', history: 'team-history', records: 'records', season: 'season' }[tab];
+  return SITE_URL + (path ? path + '/' : '');
+}
+function copyShare() {
+  const url = shareUrl(), btn = document.getElementById('share-btn'), done = ok => {
+    btn.textContent = ok ? 'Link copied' : 'Copy failed'; setTimeout(() => btn.textContent = 'Share', 1600); };
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(url).then(() => done(true), () => { window.prompt('Copy this link:', url); done(false); });
+  else { window.prompt('Copy this link:', url); done(false); }
 }
 function openOwner(o) { setHash(['owner', o]); routeFromHash(); }
 
