@@ -136,6 +136,7 @@ table.hm tr.dimmed { opacity: 0.15; }
 .rec-card { background: #0d111a; border: 1px solid #1a2030; border-radius: 8px; padding: 12px 14px 6px; }
 .rec-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #94a3b8; margin-bottom: 6px; }
 .rec-card .data-table td { font-size: 11.5px; padding: 5px 8px; }
+.rec-team { display: block; font-size: 11px; font-weight: 500; font-style: italic; color: #94a3b8; }
 .rec-val { font-weight: 700; color: #fcd34d; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .rec-sub { font-size: 10px; color: #475569; }
 .odds-bar { position: relative; height: 18px; background: #111827; border-radius: 3px; min-width: 120px; overflow: hidden; }
@@ -1362,6 +1363,8 @@ function recCard(title, rows) {
   }</tbody></table></div>`;
 }
 const retiredTag = o => isCurrent(o) ? '' : ' <span style="font-size:9px;color:#334155">retired</span>';
+const teamOf = (o, y) => (SEASONS.find(s => s.owner === o && s.season === y) || {}).team_name || '';
+const teamTag = (o, y) => teamOf(o, y) ? `<span class="rec-team">${teamOf(o, y)}</span>` : '';
 
 function streakRecords() {
   const by = {};
@@ -1402,8 +1405,9 @@ function renderRecords() {
   // Single-game records (one row per game, winner's view)
   const G = PLAYED.filter(m => m.result === 1 && m.opp_score > 0).map(m => ({
     year: m.year, week: m.week, w: m.owner, l: m.opponent, ws: m.score, ls: m.opp_score, margin: m.score - m.opp_score }));
-  const game = (g, who, val) => ({ main: `${who === 'w' ? g.w : g.l}${retiredTag(who === 'w' ? g.w : g.l)}`,
-    sub: `${gk(g.year, g.week)} · ${g.w} ${fmt1(g.ws)}–${fmt1(g.ls)} ${g.l}`, val });
+  const game = (g, who, val) => { const me = who === 'w' ? g.w : g.l, other = who === 'w' ? g.l : g.w;
+    return { main: `${me}${retiredTag(me)}${teamTag(me, g.year)}`,
+      sub: `${gk(g.year, g.week)} · ${who === 'w' ? 'beat' : 'lost to'} ${other}${teamOf(other, g.year) ? ` (${teamOf(other, g.year)})` : ''} · ${fmt1(g.ws)}–${fmt1(g.ls)}`, val }; };
   const top = (arr, key, dir) => [...arr].sort((a, b) => dir * (a[key] - b[key])).slice(0, 5);
   document.getElementById('rec-games').innerHTML = [
     recCard('Highest score',        top(G, 'ws', -1).map(g => game(g, 'w', fmt1(g.ws)))),
@@ -1451,7 +1455,7 @@ function renderRecords() {
       <td class="num">${o.w}</td><td class="num">${fmt1(o.exp)}</td><td class="num ${cls}">${sgn(o.luck)}</td>
       <td class="num ${cls}">${sgn(o.luck / o.seasons, 2)}</td></tr>`; }).join('');
   const full = LR.filter(r => r.g >= 13);
-  const lRows = arr => arr.slice(0, 5).map(r => ({ main: r.owner + retiredTag(r.owner), sub: `${r.year} · ${r.w} wins vs ${fmt1(r.exp)} expected`, val: sgn(r.luck) }));
+  const lRows = arr => arr.slice(0, 5).map(r => ({ main: r.owner + retiredTag(r.owner) + teamTag(r.owner, r.year), sub: `${r.year} · ${r.w} wins vs ${fmt1(r.exp)} expected`, val: sgn(r.luck) }));
   document.getElementById('rec-luck').innerHTML =
     recCard('Luckiest seasons',   lRows([...full].sort((a, b) => b.luck - a.luck))) +
     recCard('Unluckiest seasons', lRows([...full].sort((a, b) => a.luck - b.luck)));
