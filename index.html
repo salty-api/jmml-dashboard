@@ -258,7 +258,7 @@ select.filter-select:focus { outline: none; border-color: #334155; }
       <div class="chart-wrap" style="height:340px">
         <canvas id="score-range"></canvas>
       </div>
-      <p style="font-size:10px;color:#334155;margin-top:6px">Weekly score min / avg / max for selected season(s)</p>
+      <p style="font-size:10px;color:#334155;margin-top:6px">Thin line = low to high · box = middle 50% of weeks (quartiles) · white tick = median</p>
     </div>
   </div>
 
@@ -885,13 +885,26 @@ function renderScoreRange(seasons, yr, activeOwners) {
     if (yr && m.year !== yr) continue;
     if (!META.current_owners.includes(m.owner)) continue;
     if (m.game_type === 'Playoffs') continue; // regular season only
-    if (m.score != null) matchupData[m.owner].push(m.score);
+    if (m.score > 0) matchupData[m.owner].push(m.score); // skip unplayed weeks (score 0)
   }
 
   const ownersSorted = owners.filter(o => matchupData[o].length > 0);
-  const mins  = ownersSorted.map(o => Math.min(...matchupData[o]));
-  const avgs  = ownersSorted.map(o => matchupData[o].reduce((a,b)=>a+b,0)/matchupData[o].length);
-  const maxes = ownersSorted.map(o => Math.max(...matchupData[o]));
+  const quant = (arr, q) => { const a = [...arr].sort((x, y) => x - y), p = (a.length - 1) * q, lo = Math.floor(p);
+    return a[lo] + (a[Math.min(lo + 1, a.length - 1)] - a[lo]) * (p - lo); };
+  const stats = ownersSorted.map(o => { const a = matchupData[o];
+    return { min: Math.min(...a), q1: quant(a, .25), med: quant(a, .5), q3: quant(a, .75), max: Math.max(...a), n: a.length }; });
+  const axisMin = Math.floor(Math.min(...stats.map(t => t.min)) / 10) * 10;
+
+  // Median tick drawn on top of the IQR box
+  const medianPlugin = { id: 'medianTick', afterDatasetsDraw(chart) {
+    const { ctx, scales: { x } } = chart, meta = chart.getDatasetMeta(1);
+    meta.data.forEach((bar, i) => {
+      const o = ownersSorted[i], dim = activeOwner && o !== activeOwner;
+      const px = x.getPixelForValue(stats[i].med);
+      ctx.save(); ctx.strokeStyle = dim ? '#ffffff22' : '#f8fafc'; ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.moveTo(px, bar.y - 9); ctx.lineTo(px, bar.y + 9); ctx.stroke(); ctx.restore();
+    });
+  } };
 
   chartInstances['score-range'] = new Chart(
     document.getElementById('score-range'),
@@ -900,9 +913,10 @@ function renderScoreRange(seasons, yr, activeOwners) {
       data: {
         labels: ownersSorted,
         datasets: [
-          { label: 'Min',  data: mins,  baseAlpha: '40', backgroundColor: ownersSorted.map(o => ownerColor(o) + '40'), borderWidth: 0 },
-          { label: 'Avg',  data: avgs.map((a, i) => a - mins[i]), baseAlpha: '99', backgroundColor: ownersSorted.map(o => ownerColor(o) + '99'), borderWidth: 0 },
-          { label: 'Max',  data: maxes.map((m, i) => m - avgs[i]), baseAlpha: 'dd', backgroundColor: ownersSorted.map(o => ownerColor(o) + 'dd'), borderWidth: 0 },
+          { label: 'Range', data: stats.map(t => [t.min, t.max]), baseAlpha: '66', grouped: false, barThickness: 4,
+            backgroundColor: ownersSorted.map(o => ownerColor(o) + '66'), borderWidth: 0 },
+          { label: 'Middle 50%', data: stats.map(t => [t.q1, t.q3]), baseAlpha: 'cc', grouped: false, barThickness: 16,
+            backgroundColor: ownersSorted.map(o => ownerColor(o) + 'cc'), borderWidth: 0 },
         ],
       },
       options: {
@@ -912,18 +926,21 @@ function renderScoreRange(seasons, yr, activeOwners) {
           legend: { display: false },
           tooltip: {
             callbacks: {
+              title: items => items[0].label,
               label: ctx => {
-                const i = ctx.dataIndex;
-                return `Min ${fmt1(mins[i])} · Avg ${fmt1(avgs[i])} · Max ${fmt1(maxes[i])}`;
+                if (ctx.datasetIndex === 0) return null;
+                const t = stats[ctx.dataIndex];
+                return [`Median ${fmt1(t.med)} (${t.n} games)`, `Middle 50%: ${fmt1(t.q1)} \u2013 ${fmt1(t.q3)}`, `Low ${fmt1(t.min)} \u00b7 High ${fmt1(t.max)}`];
               }
             }
           }
         },
         scales: {
-          x: { stacked: true, grid: { color: '#1a2030' }, ticks: { color: '#475569' } },
-          y: { stacked: true, grid: { color: '#1a2030' }, ticks: { color: ctx => ownerColor(ownersSorted[ctx.index]) } },
+          x: { min: axisMin, grid: { color: '#1a2030' }, ticks: { color: '#475569' } },
+          y: { grid: { color: '#1a2030' }, ticks: { color: ctx => ownerColor(ownersSorted[ctx.index]) } },
         },
-      }
+      },
+      plugins: [medianPlugin],
     }
   );
 }
