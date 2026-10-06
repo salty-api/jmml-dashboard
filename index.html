@@ -135,6 +135,18 @@ select.filter-select:focus { outline: none; border-color: #334155; }
 .mg-score { font-variant-numeric: tabular-nums; font-size: 12px; color: #94a3b8; }
 .mg-score.winner { color: #e2e8f0; }
 .mg-vs { font-size: 10px; color: #1e293b; }
+.scoreboard-stack { display: flex; flex-direction: column; gap: 18px; }
+.scoreboard { background: #07090c; border: 3px solid #e2e8f0; border-radius: 6px; box-shadow: 0 0 0 2px #07090c, 0 0 0 4px #475569, 0 6px 18px rgba(0,0,0,.5); padding: 12px 16px 14px; }
+.sb-head { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #1f2937; padding-bottom: 8px; margin-bottom: 10px; }
+.sb-week { font-family: 'Arial Black', Impact, sans-serif; font-size: 18px; letter-spacing: 0.18em; color: #f8fafc; text-transform: uppercase; }
+.sb-final { font-family: 'Courier New', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.25em; color: #ef4444; text-shadow: 0 0 6px #ef444488; }
+.sb-games { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 8px 24px; }
+.scoreboard .matchup-game { display: grid; grid-template-columns: 1fr auto auto 1fr; align-items: center; gap: 10px; background: transparent; border: none; border-bottom: 1px dashed #1f2937; border-radius: 0; padding: 6px 2px; }
+.sb-team { font-family: 'Arial Black', Impact, sans-serif; font-size: 11px; letter-spacing: 0.03em; line-height: 1.15; text-transform: uppercase; color: #cbd5e1; overflow-wrap: anywhere; }
+.sb-team.right { text-align: right; }
+.sb-team.win { color: #f8fafc; }
+.sb-score { font-family: 'Courier New', monospace; font-weight: 700; font-size: 20px; min-width: 74px; text-align: center; background: #120a02; border: 1px solid #2a1a08; border-radius: 3px; padding: 2px 6px; color: #7c4a14; font-variant-numeric: tabular-nums; letter-spacing: 0.06em; }
+.sb-score.win { color: #fbbf24; text-shadow: 0 0 8px #f59e0b, 0 0 2px #fde68a; }
 .playoff-badge { font-size: 9px; background: #3b2800; color: #fcd34d; padding: 1px 5px; border-radius: 3px; font-weight: 700; }
 
 /* ── MODAL ── */
@@ -1169,7 +1181,7 @@ function renderSeason() {
   renderLuck(table);
   renderRecap(games, lastWeek);
   renderWeeklyScores(games);
-  renderMatchupGrid(games, 'matchup-grid');
+  renderScoreboards(games, 'matchup-grid');
 }
 
 function streakInfo(owner, games) {
@@ -1368,6 +1380,33 @@ function renderMatchupGrid(matchups, elId) {
       <div class="matchup-games">${gamesHtml}</div>
     </div>`;
   }).join('');
+}
+
+// High-school scoreboard layout: most recent week on top, week 1 at the bottom
+function renderScoreboards(matchups, elId) {
+  const weeks = [...new Set(matchups.map(m => m.week))].sort((a, b) => b - a);
+  document.getElementById(elId).innerHTML = '<div class="scoreboard-stack">' + weeks.map(w => {
+    const wm = matchups.filter(m => m.week === w);
+    const isPlayoff = wm.some(m => m.game_type === 'Playoffs');
+    const seen = new Set(), rows = [];
+    for (const a of wm) {
+      const key = [a.owner, a.opponent].sort().join('||');
+      if (seen.has(key)) continue;
+      seen.add(key);
+      const b = wm.find(x => x.owner === a.opponent && x.opponent === a.owner);
+      const aWin = a.result === 1;
+      rows.push(`<div class="matchup-game" data-owners="${a.owner}||${a.opponent}">
+        <span class="sb-team right ${aWin ? 'win' : ''}">${a.owner}</span>
+        <span class="sb-score ${aWin ? 'win' : ''}">${fmt1(a.score)}</span>
+        <span class="sb-score ${!aWin ? 'win' : ''}">${fmt1(b?.score ?? a.opp_score)}</span>
+        <span class="sb-team ${!aWin ? 'win' : ''}">${a.opponent}</span>
+      </div>`);
+    }
+    return `<div class="scoreboard">
+      <div class="sb-head"><span class="sb-week">${isPlayoff ? 'Playoffs \u00b7 ' : ''}Week ${w}</span><span class="sb-final">FINAL</span></div>
+      <div class="sb-games">${rows.join('')}</div>
+    </div>`;
+  }).join('') + '</div>';
 }
 
 // ══════════════════════════════════════════════════════
