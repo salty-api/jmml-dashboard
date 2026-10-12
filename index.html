@@ -1135,6 +1135,34 @@ function toggleCardGroup() {
   document.getElementById('group-toggle').classList.toggle('on', cardGroup === 'owner');
   renderSeasonCards(lastCardSeasons);
 }
+let _lineups = null;
+// Starting lineup per season|owner from PLAYERS, ordered QB RB RB WR WR FLEX TE.
+// 2011-13 had 3 WR starters, so the 3rd WR is shown as FLEX.
+function lineupFor(s) {
+  if (!_lineups) {
+    _lineups = {};
+    const ix = Object.fromEntries(PLAYERS.cols.map((c, i) => [c, i]));
+    PLAYERS.rows.forEach(r => {
+      const slot = r[ix.lineup_slot];
+      if (!['QB', 'RB', 'WR', 'TE', 'FLEX'].includes(slot) || !r[ix.final_owner]) return;
+      ((_lineups[r[ix.season] + '|' + r[ix.final_owner]] ||= {})[slot] ||= []).push({ name: r[ix.player], pts: r[ix.season_points] || 0 });
+    });
+    Object.values(_lineups).forEach(l => Object.values(l).forEach(a => a.sort((x, y) => y.pts - x.pts)));
+  }
+  const l = _lineups[s.season + '|' + s.owner];
+  if (!l) return null;
+  const wr = (l.WR || []).slice(), flex = (l.FLEX || []).slice();
+  if (!flex.length && wr.length > 2) flex.push(wr.pop());
+  const rows = [['QB', (l.QB || [])[0]], ['RB', (l.RB || [])[0]], ['RB', (l.RB || [])[1]],
+                ['WR', wr[0]], ['WR', wr[1]], ['FLEX', flex[0]], ['TE', (l.TE || [])[0]]];
+  return rows.filter(r => r[1]);
+}
+function lineupHtml(s) {
+  const l = lineupFor(s);
+  if (l) return l.map(([pos, p]) => `<strong>${pos}</strong> ${p.name}`).join('<br>');
+  return [s.qb && `<strong>QB</strong> ${s.qb}`, s.top_rb && `<strong>RB</strong> ${s.top_rb}`,
+          s.top_wr && `<strong>WR</strong> ${s.top_wr}`, s.te && `<strong>TE</strong> ${s.te}`].filter(Boolean).join('<br>');
+}
 function seasonCardHtml(s) {
   const finish = s.finish || s.reg_season_finish;
   const isChamp = s.championships > 0 || s.finish === 1;
@@ -1148,13 +1176,8 @@ function seasonCardHtml(s) {
       <div class="card-owner" style="color:${color}">${s.owner} \u00b7 ${s.season}</div></div></div>
       <div class="card-wl">${s.wins??'\u2014'}\u2013${s.losses??'\u2014'}</div>
       <div class="card-pts">PF <span>${fmt1(s.points_for)}</span> &nbsp;\u00b7&nbsp; PA <span>${fmt1(s.points_against)}</span></div>
-      <div style="margin-bottom:8px"><span class="badge ${badge}">${badgeText}</span></div>
-      <div class="card-players">
-        ${s.qb     ? `<strong>QB</strong> ${s.qb}<br>`     : ''}
-        ${s.top_rb ? `<strong>RB</strong> ${s.top_rb}<br>` : ''}
-        ${s.top_wr ? `<strong>WR</strong> ${s.top_wr}<br>` : ''}
-        ${s.te     ? `<strong>TE</strong> ${s.te}`          : ''}
-      </div>
+      <div style="margin-bottom:8px"><span class="badge ${badge}">${badgeText}</span>${s.reg_season_finish === 1 ? ' <span class="badge badge-champ" title="First place, regular season">#1 Reg Season</span>' : ''}${s.reg_season_pts_rank === 1 ? ' <span class="badge badge-playoff" title="Most points scored, regular season">Most Pts</span>' : ''}</div>
+      <div class="card-players">${lineupHtml(s)}</div>
     </div>`;
 }
 function renderSeasonCards(seasons) {
@@ -2265,7 +2288,7 @@ function applyHighlight() {
 // INIT
 // ══════════════════════════════════════════════════════
 function init() {
-  const updated = '2026-10-06';
+  const updated = '2026-10-11';
   document.getElementById('updated-label').textContent = updated ? `Updated ${updated}` : '';
 
   // Tab 1
