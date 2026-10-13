@@ -2051,7 +2051,7 @@ function renderWeeklyScores(games) {
       label: owner, ownerKey: owner, showLine: false, borderWidth: 0, backgroundColor: 'transparent',
       data: rows.map(r => r?.score ?? null),
       results: rows.map(r => r?.result === 1),
-      pointHoverRadius: 7,
+      pointHoverRadius: 8, pointHitRadius: 6,
     };
     weeklyDotStyle(ds, activeOwner);
     return ds;
@@ -2062,10 +2062,10 @@ function renderWeeklyScores(games) {
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false },
-        tooltip: { mode: 'index', intersect: false, itemSort: (a, b) => b.raw - a.raw,
-          callbacks: { label: ctx => `${ctx.dataset.label}: ${fmt1(ctx.raw)} ${ctx.dataset.results[ctx.dataIndex] ? '(W)' : '(L)'}` } } },
+        tooltip: { mode: 'nearest', intersect: true,
+          callbacks: { title: () => '', label: ctx => `${ctx.dataset.label}: ${fmt1(ctx.raw)} ${ctx.dataset.results[ctx.dataIndex] ? '(W)' : '(L)'}` } } },
       scales: { x: { offset: true, grid: { color: '#1a2030' }, ticks: { color: '#475569' } }, y: { grid: { color: '#1a2030' }, ticks: { color: '#475569' } } },
-      interaction: { mode: 'index', intersect: false },
+      interaction: { mode: 'nearest', intersect: true },
     },
   });
 }
