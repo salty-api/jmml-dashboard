@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+"""
+Pull the in-progress week's live scores from ESPN (league 88024) -> data/processed/live.json
+  {year, week, updated, games: [{a, b, a_pts, b_pts, a_proj, b_proj}]}   (a/b are owner names)
+Rerun any time during the week, then rerun build_data.py.
+"""
+import json, re, sys
+from datetime import datetime
+from pathlib import Path
+import requests
+
+ROOT = Path(__file__).parent.parent
+YEAR = 2026
+API = f"https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/{YEAR}/segments/0/leagues/88024"
+norm = lambda s: re.sub(r'[^a-z0-9]', '', (s or '').lower())
+
+d = requests.get(API, params={"view": ["mMatchupScore", "mTeam"]}, timeout=60).json()
+week = d['status']['currentMatchupPeriod']
+seasons = json.load(open(ROOT / "data/processed/seasons.json"))
+matchups = json.load(open(ROOT / "data/processed/matchups.json"))
+sheet = {norm(r['team_name']): r['owner'] for r in seasons if r['season'] == YEAR}
+owner = {}
+for t in d['teams']:
+    n = norm(t.get('name'))
+    o = sheet.get(n) or next((v for k, v in sheet.items() if k and (k in n or n in k)), None)
+    if o: owner[t['id']] = o
+# unmatched teams: resolve by elimination against the sheet's schedule for this week
+sched = {frozenset((m['owner'], m['opponent'])) for m in matchups if m['year'] == YEAR and m['week'] == week and m['opponent']}
+games = []
+for s in d['schedule']:
+    if s['matchupPeriodId'] != week or 'away' not in s: continue
+    h, a = s['home'], s['away']
+    games.append((h, a))
+missing = [t['id'] for t in d['teams'] if t['id'] not in owner]
+if missing:
+    sys.exit(f"could not map ESPN teams to owners: {missing}")
+out = []
+for h, a in games:
+    pair = frozenset((owner[h['teamId']], owner[a['teamId']]))
+    if pair not in sched: sys.exit(f"ESPN pairing {sorted(pair)} not in sheet schedule for week {week}")
+    out.append({'a': owner[h['teamId']], 'b': owner[a['teamId']],
+                'a_pts': round(h.get('totalPointsLive', h.get('totalPoints', 0)), 2),
+                'b_pts': round(a.get('totalPointsLive', a.get('totalPoints', 0)), 2)})
+res = {'year': YEAR, 'week': week, 'updated': datetime.now().strftime('%Y-%m-%d %H:%M'), 'games': out}
+(ROOT / "data/processed/live.json").write_text(json.dumps(res, indent=2))
+print(f"week {week}: {len(out)} games"); [print(f"  {g['a']} {g['a_pts']} - {g['b_pts']} {g['b']}") for g in out]

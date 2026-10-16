@@ -1,0 +1,63 @@
+name: Live scores
+
+on:
+  schedule:
+    - cron: "5 * * * *"        # hourly; the gate step keeps only the slots below (Pacific time)
+    - cron: "15 16,17 * * 2"   # Tuesday 9:15am PT (covers PDT and PST)
+  workflow_dispatch:            # run by hand; skips the gate
+
+permissions:
+  contents: write
+
+concurrency:
+  group: live-scores
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Gate on Pacific-time slots
+        id: gate
+        env:
+          SCHEDULE: ${{ github.event.schedule }}
+        run: |
+          if [ -z "$SCHEDULE" ]; then echo "run=1" >> "$GITHUB_OUTPUT"; exit 0; fi
+          d=$(TZ=America/Los_Angeles date +%w); h=$(TZ=America/Los_Angeles date +%-H)
+          run=0
+          if [ "$SCHEDULE" = "15 16,17 * * 2" ]; then
+            [ "$d" = 2 ] && [ "$h" = 9 ] && run=1
+          else
+            [ "$d" = 0 ] && [ "$h" -ge 7 ] && [ "$h" -le 21 ] && run=1   # Sun 7am-9pm
+            [ "$d" = 4 ] && [ "$h" = 23 ] && run=1                       # Thu 11pm
+            [ "$d" = 1 ] && [ "$h" -ge 21 ] && [ "$h" -le 23 ] && run=1  # Mon 9-11pm
+          fi
+          echo "PT day=$d hour=$h run=$run"
+          echo "run=$run" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.run == '1'
+
+      - uses: actions/setup-python@v5
+        if: steps.gate.outputs.run == '1'
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: build/requirements.txt
+
+      - name: Fetch scores, rebuild, publish
+        if: steps.gate.outputs.run == '1'
+        run: |
+          pip install -r build/requirements.txt
+          cd build
+          ln -s ../logos dashboard/logos
+          python scripts/fetch_live.py
+          python scripts/build_data.py
+          cp dashboard/index.html ../index.html
+          cd ..
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html build/data/processed/live.json
+          git diff --cached --quiet && { echo "No change"; exit 0; }
+          git commit -m "Live scores $(TZ=America/Los_Angeles date '+%Y-%m-%d %H:%M')"
+          git push

@@ -1,0 +1,4 @@
+espn-api
+pandas
+requests
+openpyxl

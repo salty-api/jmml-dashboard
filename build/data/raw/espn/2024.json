@@ -1,0 +1,1186 @@
+{
+  "year": 2024,
+  "teams": [
+    {
+      "year": 2024,
+      "team_id": 1,
+      "team_name": "Puka Quakes",
+      "owner": "R Saltiel",
+      "wins": 9,
+      "losses": 5,
+      "points_for": 1404.3200000000002,
+      "points_against": 1305.48,
+      "final_standing": 3,
+      "standing": 4
+    },
+    {
+      "year": 2024,
+      "team_id": 2,
+      "team_name": "Whiteout",
+      "owner": "Kyle Ewert, brad starck",
+      "wins": 7,
+      "losses": 7,
+      "points_for": 1306.2400000000002,
+      "points_against": 1374.78,
+      "final_standing": 7,
+      "standing": 7
+    },
+    {
+      "year": 2024,
+      "team_id": 3,
+      "team_name": "Caleb's Year",
+      "owner": "matt  hudspeath",
+      "wins": 5,
+      "losses": 9,
+      "points_for": 1172.5,
+      "points_against": 1424.12,
+      "final_standing": 9,
+      "standing": 10
+    },
+    {
+      "year": 2024,
+      "team_id": 4,
+      "team_name": "Bhola Breece's Storm Surge",
+      "owner": "Jordan Shepherd",
+      "wins": 6,
+      "losses": 8,
+      "points_for": 1196.02,
+      "points_against": 1260.7,
+      "final_standing": 12,
+      "standing": 9
+    },
+    {
+      "year": 2024,
+      "team_id": 5,
+      "team_name": "Moodslide",
+      "owner": "Riley McElwain",
+      "wins": 9,
+      "losses": 5,
+      "points_for": 1454.46,
+      "points_against": 1264.72,
+      "final_standing": 4,
+      "standing": 2
+    },
+    {
+      "year": 2024,
+      "team_id": 6,
+      "team_name": "Mahomes Flooded",
+      "owner": "Stephen Rooney, Jackson Sattell",
+      "wins": 7,
+      "losses": 7,
+      "points_for": 1320.96,
+      "points_against": 1227.28,
+      "final_standing": 1,
+      "standing": 6
+    },
+    {
+      "year": 2024,
+      "team_id": 7,
+      "team_name": "Hurricane Andrews",
+      "owner": "Ed Buser",
+      "wins": 9,
+      "losses": 5,
+      "points_for": 1411.52,
+      "points_against": 1310.68,
+      "final_standing": 5,
+      "standing": 3
+    },
+    {
+      "year": 2024,
+      "team_id": 8,
+      "team_name": "Blizzard Boys",
+      "owner": "Pierson Curtis",
+      "wins": 4,
+      "losses": 10,
+      "points_for": 1350.1599999999999,
+      "points_against": 1487.5,
+      "final_standing": 11,
+      "standing": 11
+    },
+    {
+      "year": 2024,
+      "team_id": 9,
+      "team_name": "Chase'n Purdy Big Twisters",
+      "owner": "Chris Cochrane",
+      "wins": 3,
+      "losses": 11,
+      "points_for": 1138.2199999999998,
+      "points_against": 1335.92,
+      "final_standing": 10,
+      "standing": 12
+    },
+    {
+      "year": 2024,
+      "team_id": 10,
+      "team_name": "WeisFire",
+      "owner": "Taylor Weis",
+      "wins": 9,
+      "losses": 5,
+      "points_for": 1362.28,
+      "points_against": 1369.84,
+      "final_standing": 6,
+      "standing": 5
+    },
+    {
+      "year": 2024,
+      "team_id": 11,
+      "team_name": "NoMoore 4KDrought",
+      "owner": "Jack Reilly, Alex Kinniard",
+      "wins": 6,
+      "losses": 8,
+      "points_for": 1339.6,
+      "points_against": 1332.76,
+      "final_standing": 8,
+      "standing": 8
+    },
+    {
+      "year": 2024,
+      "team_id": 12,
+      "team_name": "Hurtswaves",
+      "owner": "Tyler Howard",
+      "wins": 10,
+      "losses": 4,
+      "points_for": 1407.0999999999997,
+      "points_against": 1169.6,
+      "final_standing": 2,
+      "standing": 1
+    }
+  ],
+  "matchups": [
+    {
+      "year": 2024,
+      "week": 1,
+      "home_team_name": "Caleb's Year",
+      "home_score": 114.86,
+      "away_team_name": "Mahomes Flooded",
+      "away_score": 86.94,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 1,
+      "home_team_name": "Hurtswaves",
+      "home_score": 73.82,
+      "away_team_name": "Chase'n Purdy Big Twisters",
+      "away_score": 70.84,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 1,
+      "home_team_name": "Whiteout",
+      "home_score": 81.08,
+      "away_team_name": "NoMoore 4KDrought",
+      "away_score": 84.32,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 1,
+      "home_team_name": "Hurricane Andrews",
+      "home_score": 101.7,
+      "away_team_name": "Blizzard Boys",
+      "away_score": 81.22,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 1,
+      "home_team_name": "WeisFire",
+      "home_score": 120.28,
+      "away_team_name": "Puka Quakes",
+      "away_score": 87.52,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 1,
+      "home_team_name": "Moodslide",
+      "home_score": 87.08,
+      "away_team_name": "Bhola Breece's Storm Surge",
+      "away_score": 82.66,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 2,
+      "home_team_name": "Mahomes Flooded",
+      "home_score": 81.94,
+      "away_team_name": "Chase'n Purdy Big Twisters",
+      "away_score": 88.96,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 2,
+      "home_team_name": "NoMoore 4KDrought",
+      "home_score": 102.38,
+      "away_team_name": "Caleb's Year",
+      "away_score": 58.58,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 2,
+      "home_team_name": "Blizzard Boys",
+      "home_score": 85.1,
+      "away_team_name": "Hurtswaves",
+      "away_score": 100.52,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 2,
+      "home_team_name": "Puka Quakes",
+      "home_score": 133.68,
+      "away_team_name": "Whiteout",
+      "away_score": 103.36,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 2,
+      "home_team_name": "Bhola Breece's Storm Surge",
+      "home_score": 75.2,
+      "away_team_name": "Hurricane Andrews",
+      "away_score": 101.72,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 2,
+      "home_team_name": "Moodslide",
+      "home_score": 125.24,
+      "away_team_name": "WeisFire",
+      "away_score": 62.46,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 3,
+      "home_team_name": "NoMoore 4KDrought",
+      "home_score": 84.86,
+      "away_team_name": "Mahomes Flooded",
+      "away_score": 93.78,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 3,
+      "home_team_name": "Chase'n Purdy Big Twisters",
+      "home_score": 107.18,
+      "away_team_name": "Blizzard Boys",
+      "away_score": 110.56,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 3,
+      "home_team_name": "Caleb's Year",
+      "home_score": 57.14,
+      "away_team_name": "Puka Quakes",
+      "away_score": 111.38,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 3,
+      "home_team_name": "Hurtswaves",
+      "home_score": 88.74,
+      "away_team_name": "Bhola Breece's Storm Surge",
+      "away_score": 77.0,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 3,
+      "home_team_name": "Whiteout",
+      "home_score": 92.48,
+      "away_team_name": "Moodslide",
+      "away_score": 67.48,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 3,
+      "home_team_name": "Hurricane Andrews",
+      "home_score": 84.36,
+      "away_team_name": "WeisFire",
+      "away_score": 94.32,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 4,
+      "home_team_name": "Mahomes Flooded",
+      "home_score": 129.02,
+      "away_team_name": "Blizzard Boys",
+      "away_score": 87.48,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 4,
+      "home_team_name": "Puka Quakes",
+      "home_score": 83.32,
+      "away_team_name": "NoMoore 4KDrought",
+      "away_score": 72.38,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 4,
+      "home_team_name": "Bhola Breece's Storm Surge",
+      "home_score": 100.9,
+      "away_team_name": "Chase'n Purdy Big Twisters",
+      "away_score": 78.22,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 4,
+      "home_team_name": "Moodslide",
+      "home_score": 75.58,
+      "away_team_name": "Caleb's Year",
+      "away_score": 87.98,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 4,
+      "home_team_name": "WeisFire",
+      "home_score": 76.3,
+      "away_team_name": "Hurtswaves",
+      "away_score": 91.02,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 4,
+      "home_team_name": "Hurricane Andrews",
+      "home_score": 80.04,
+      "away_team_name": "Whiteout",
+      "away_score": 131.1,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 5,
+      "home_team_name": "Puka Quakes",
+      "home_score": 99.62,
+      "away_team_name": "Mahomes Flooded",
+      "away_score": 97.32,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 5,
+      "home_team_name": "Blizzard Boys",
+      "home_score": 92.78,
+      "away_team_name": "Bhola Breece's Storm Surge",
+      "away_score": 80.64,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 5,
+      "home_team_name": "NoMoore 4KDrought",
+      "home_score": 112.36,
+      "away_team_name": "Moodslide",
+      "away_score": 142.4,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 5,
+      "home_team_name": "Chase'n Purdy Big Twisters",
+      "home_score": 56.96,
+      "away_team_name": "WeisFire",
+      "away_score": 82.14,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 5,
+      "home_team_name": "Caleb's Year",
+      "home_score": 94.54,
+      "away_team_name": "Hurricane Andrews",
+      "away_score": 99.86,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 5,
+      "home_team_name": "Hurtswaves",
+      "home_score": 91.7,
+      "away_team_name": "Whiteout",
+      "away_score": 101.16,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 6,
+      "home_team_name": "Mahomes Flooded",
+      "home_score": 90.16,
+      "away_team_name": "Bhola Breece's Storm Surge",
+      "away_score": 99.78,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 6,
+      "home_team_name": "Moodslide",
+      "home_score": 92.36,
+      "away_team_name": "Puka Quakes",
+      "away_score": 79.52,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 6,
+      "home_team_name": "WeisFire",
+      "home_score": 123.4,
+      "away_team_name": "Blizzard Boys",
+      "away_score": 94.82,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 6,
+      "home_team_name": "Hurricane Andrews",
+      "home_score": 103.22,
+      "away_team_name": "NoMoore 4KDrought",
+      "away_score": 78.54,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 6,
+      "home_team_name": "Whiteout",
+      "home_score": 84.98,
+      "away_team_name": "Chase'n Purdy Big Twisters",
+      "away_score": 128.3,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 6,
+      "home_team_name": "Hurtswaves",
+      "home_score": 136.26,
+      "away_team_name": "Caleb's Year",
+      "away_score": 66.7,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 7,
+      "home_team_name": "Moodslide",
+      "home_score": 95.2,
+      "away_team_name": "Mahomes Flooded",
+      "away_score": 92.04,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 7,
+      "home_team_name": "Bhola Breece's Storm Surge",
+      "home_score": 93.94,
+      "away_team_name": "WeisFire",
+      "away_score": 107.42,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 7,
+      "home_team_name": "Puka Quakes",
+      "home_score": 104.84,
+      "away_team_name": "Hurricane Andrews",
+      "away_score": 94.5,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 7,
+      "home_team_name": "Blizzard Boys",
+      "home_score": 94.24,
+      "away_team_name": "Whiteout",
+      "away_score": 96.38,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 7,
+      "home_team_name": "NoMoore 4KDrought",
+      "home_score": 92.08,
+      "away_team_name": "Hurtswaves",
+      "away_score": 86.76,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 7,
+      "home_team_name": "Chase'n Purdy Big Twisters",
+      "home_score": 64.68,
+      "away_team_name": "Caleb's Year",
+      "away_score": 87.0,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 8,
+      "home_team_name": "Mahomes Flooded",
+      "home_score": 106.64,
+      "away_team_name": "WeisFire",
+      "away_score": 103.12,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 8,
+      "home_team_name": "Hurricane Andrews",
+      "home_score": 121.24,
+      "away_team_name": "Moodslide",
+      "away_score": 118.38,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 8,
+      "home_team_name": "Whiteout",
+      "home_score": 84.78,
+      "away_team_name": "Bhola Breece's Storm Surge",
+      "away_score": 72.3,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 8,
+      "home_team_name": "Hurtswaves",
+      "home_score": 121.06,
+      "away_team_name": "Puka Quakes",
+      "away_score": 85.88,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 8,
+      "home_team_name": "Caleb's Year",
+      "home_score": 120.2,
+      "away_team_name": "Blizzard Boys",
+      "away_score": 118.86,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 8,
+      "home_team_name": "Chase'n Purdy Big Twisters",
+      "home_score": 117.0,
+      "away_team_name": "NoMoore 4KDrought",
+      "away_score": 73.14,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 9,
+      "home_team_name": "Hurricane Andrews",
+      "home_score": 87.32,
+      "away_team_name": "Mahomes Flooded",
+      "away_score": 101.66,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 9,
+      "home_team_name": "WeisFire",
+      "home_score": 101.4,
+      "away_team_name": "Whiteout",
+      "away_score": 99.16,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 9,
+      "home_team_name": "Moodslide",
+      "home_score": 74.46,
+      "away_team_name": "Hurtswaves",
+      "away_score": 91.6,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 9,
+      "home_team_name": "Bhola Breece's Storm Surge",
+      "home_score": 78.74,
+      "away_team_name": "Caleb's Year",
+      "away_score": 107.2,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 9,
+      "home_team_name": "Puka Quakes",
+      "home_score": 106.0,
+      "away_team_name": "Chase'n Purdy Big Twisters",
+      "away_score": 65.82,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 9,
+      "home_team_name": "Blizzard Boys",
+      "home_score": 101.64,
+      "away_team_name": "NoMoore 4KDrought",
+      "away_score": 125.28,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 10,
+      "home_team_name": "Mahomes Flooded",
+      "home_score": 70.38,
+      "away_team_name": "Whiteout",
+      "away_score": 86.76,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 10,
+      "home_team_name": "Hurtswaves",
+      "home_score": 100.48,
+      "away_team_name": "Hurricane Andrews",
+      "away_score": 100.54,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 10,
+      "home_team_name": "Caleb's Year",
+      "home_score": 64.14,
+      "away_team_name": "WeisFire",
+      "away_score": 88.9,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 10,
+      "home_team_name": "Chase'n Purdy Big Twisters",
+      "home_score": 78.42,
+      "away_team_name": "Moodslide",
+      "away_score": 142.84,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 10,
+      "home_team_name": "NoMoore 4KDrought",
+      "home_score": 51.94,
+      "away_team_name": "Bhola Breece's Storm Surge",
+      "away_score": 76.28,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 10,
+      "home_team_name": "Blizzard Boys",
+      "home_score": 106.22,
+      "away_team_name": "Puka Quakes",
+      "away_score": 87.5,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 11,
+      "home_team_name": "Hurtswaves",
+      "home_score": 108.24,
+      "away_team_name": "Mahomes Flooded",
+      "away_score": 60.34,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 11,
+      "home_team_name": "Whiteout",
+      "home_score": 90.08,
+      "away_team_name": "Caleb's Year",
+      "away_score": 72.8,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 11,
+      "home_team_name": "Hurricane Andrews",
+      "home_score": 108.54,
+      "away_team_name": "Chase'n Purdy Big Twisters",
+      "away_score": 64.16,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 11,
+      "home_team_name": "WeisFire",
+      "home_score": 120.48,
+      "away_team_name": "NoMoore 4KDrought",
+      "away_score": 116.82,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 11,
+      "home_team_name": "Moodslide",
+      "home_score": 94.48,
+      "away_team_name": "Blizzard Boys",
+      "away_score": 88.84,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 11,
+      "home_team_name": "Bhola Breece's Storm Surge",
+      "home_score": 127.8,
+      "away_team_name": "Puka Quakes",
+      "away_score": 108.18,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 12,
+      "home_team_name": "Mahomes Flooded",
+      "home_score": 122.1,
+      "away_team_name": "Caleb's Year",
+      "away_score": 61.96,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 12,
+      "home_team_name": "Chase'n Purdy Big Twisters",
+      "home_score": 94.52,
+      "away_team_name": "Hurtswaves",
+      "away_score": 101.36,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 12,
+      "home_team_name": "NoMoore 4KDrought",
+      "home_score": 133.2,
+      "away_team_name": "Whiteout",
+      "away_score": 82.12,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 12,
+      "home_team_name": "Blizzard Boys",
+      "home_score": 96.78,
+      "away_team_name": "Hurricane Andrews",
+      "away_score": 98.58,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 12,
+      "home_team_name": "Puka Quakes",
+      "home_score": 96.88,
+      "away_team_name": "WeisFire",
+      "away_score": 53.26,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 12,
+      "home_team_name": "Bhola Breece's Storm Surge",
+      "home_score": 85.38,
+      "away_team_name": "Moodslide",
+      "away_score": 72.0,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 13,
+      "home_team_name": "Chase'n Purdy Big Twisters",
+      "home_score": 36.86,
+      "away_team_name": "Mahomes Flooded",
+      "away_score": 81.14,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 13,
+      "home_team_name": "Caleb's Year",
+      "home_score": 78.6,
+      "away_team_name": "NoMoore 4KDrought",
+      "away_score": 140.04,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 13,
+      "home_team_name": "Hurtswaves",
+      "home_score": 136.32,
+      "away_team_name": "Blizzard Boys",
+      "away_score": 90.06,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 13,
+      "home_team_name": "Whiteout",
+      "home_score": 93.18,
+      "away_team_name": "Puka Quakes",
+      "away_score": 111.68,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 13,
+      "home_team_name": "Hurricane Andrews",
+      "home_score": 111.26,
+      "away_team_name": "Bhola Breece's Storm Surge",
+      "away_score": 50.78,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 13,
+      "home_team_name": "WeisFire",
+      "home_score": 110.12,
+      "away_team_name": "Moodslide",
+      "away_score": 133.7,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 14,
+      "home_team_name": "Mahomes Flooded",
+      "home_score": 107.5,
+      "away_team_name": "NoMoore 4KDrought",
+      "away_score": 72.26,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 14,
+      "home_team_name": "Blizzard Boys",
+      "home_score": 101.56,
+      "away_team_name": "Chase'n Purdy Big Twisters",
+      "away_score": 86.3,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 14,
+      "home_team_name": "Puka Quakes",
+      "home_score": 108.32,
+      "away_team_name": "Caleb's Year",
+      "away_score": 100.8,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 14,
+      "home_team_name": "Bhola Breece's Storm Surge",
+      "home_score": 94.62,
+      "away_team_name": "Hurtswaves",
+      "away_score": 79.22,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 14,
+      "home_team_name": "Moodslide",
+      "home_score": 133.26,
+      "away_team_name": "Whiteout",
+      "away_score": 79.62,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 14,
+      "home_team_name": "WeisFire",
+      "home_score": 118.68,
+      "away_team_name": "Hurricane Andrews",
+      "away_score": 118.64,
+      "is_playoff": false
+    },
+    {
+      "year": 2024,
+      "week": 15,
+      "home_team_name": "Hurtswaves",
+      "home_score": 95.7,
+      "away_team_name": null,
+      "away_score": 0,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 15,
+      "home_team_name": "Puka Quakes",
+      "home_score": 142.2,
+      "away_team_name": "WeisFire",
+      "away_score": 86.08,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 15,
+      "home_team_name": "Hurricane Andrews",
+      "home_score": 96.28,
+      "away_team_name": "Mahomes Flooded",
+      "away_score": 111.74,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 15,
+      "home_team_name": "Moodslide",
+      "home_score": 94.06,
+      "away_team_name": null,
+      "away_score": 0,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 15,
+      "home_team_name": "Whiteout",
+      "home_score": 98.7,
+      "away_team_name": "NoMoore 4KDrought",
+      "away_score": 84.74,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 15,
+      "home_team_name": "Bhola Breece's Storm Surge",
+      "home_score": 75.06,
+      "away_team_name": "Caleb's Year",
+      "away_score": 81.62,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 15,
+      "home_team_name": "Blizzard Boys",
+      "home_score": 64.04,
+      "away_team_name": "Chase'n Purdy Big Twisters",
+      "away_score": 59.98,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 16,
+      "home_team_name": "Hurtswaves",
+      "home_score": 77.94,
+      "away_team_name": "Puka Quakes",
+      "away_score": 71.48,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 16,
+      "home_team_name": "Moodslide",
+      "home_score": 115.68,
+      "away_team_name": "Mahomes Flooded",
+      "away_score": 126.02,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 16,
+      "home_team_name": "Hurricane Andrews",
+      "home_score": 135.84,
+      "away_team_name": "WeisFire",
+      "away_score": 111.16,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 16,
+      "home_team_name": "Whiteout",
+      "home_score": 134.16,
+      "away_team_name": "Caleb's Year",
+      "away_score": 68.52,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 16,
+      "home_team_name": "NoMoore 4KDrought",
+      "home_score": 126.26,
+      "away_team_name": "Blizzard Boys",
+      "away_score": 89.48,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 16,
+      "home_team_name": "Bhola Breece's Storm Surge",
+      "home_score": 78.96,
+      "away_team_name": "Chase'n Purdy Big Twisters",
+      "away_score": 97.82,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 17,
+      "home_team_name": "Hurtswaves",
+      "home_score": 113.38,
+      "away_team_name": "Mahomes Flooded",
+      "away_score": 135.28,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 17,
+      "home_team_name": "Moodslide",
+      "home_score": 90.84,
+      "away_team_name": "Puka Quakes",
+      "away_score": 118.62,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 17,
+      "home_team_name": "Hurricane Andrews",
+      "home_score": 105.1,
+      "away_team_name": "WeisFire",
+      "away_score": 69.38,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 17,
+      "home_team_name": "Whiteout",
+      "home_score": 133.84,
+      "away_team_name": "NoMoore 4KDrought",
+      "away_score": 77.78,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 17,
+      "home_team_name": "Caleb's Year",
+      "home_score": 109.76,
+      "away_team_name": "Chase'n Purdy Big Twisters",
+      "away_score": 86.48,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 17,
+      "home_team_name": "Bhola Breece's Storm Surge",
+      "home_score": 59.1,
+      "away_team_name": "Blizzard Boys",
+      "away_score": 68.28,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 18,
+      "home_team_name": "Hurtswaves",
+      "home_score": 113.38,
+      "away_team_name": "Mahomes Flooded",
+      "away_score": 135.28,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 18,
+      "home_team_name": "Moodslide",
+      "home_score": 90.84,
+      "away_team_name": "Puka Quakes",
+      "away_score": 118.62,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 18,
+      "home_team_name": "Hurricane Andrews",
+      "home_score": 105.1,
+      "away_team_name": "WeisFire",
+      "away_score": 69.38,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 18,
+      "home_team_name": "Whiteout",
+      "home_score": 133.84,
+      "away_team_name": "NoMoore 4KDrought",
+      "away_score": 77.78,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 18,
+      "home_team_name": "Caleb's Year",
+      "home_score": 109.76,
+      "away_team_name": "Chase'n Purdy Big Twisters",
+      "away_score": 86.48,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 18,
+      "home_team_name": "Bhola Breece's Storm Surge",
+      "home_score": 59.1,
+      "away_team_name": "Blizzard Boys",
+      "away_score": 68.28,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 19,
+      "home_team_name": "Hurtswaves",
+      "home_score": 113.38,
+      "away_team_name": "Mahomes Flooded",
+      "away_score": 135.28,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 19,
+      "home_team_name": "Moodslide",
+      "home_score": 90.84,
+      "away_team_name": "Puka Quakes",
+      "away_score": 118.62,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 19,
+      "home_team_name": "Hurricane Andrews",
+      "home_score": 105.1,
+      "away_team_name": "WeisFire",
+      "away_score": 69.38,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 19,
+      "home_team_name": "Whiteout",
+      "home_score": 133.84,
+      "away_team_name": "NoMoore 4KDrought",
+      "away_score": 77.78,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 19,
+      "home_team_name": "Caleb's Year",
+      "home_score": 109.76,
+      "away_team_name": "Chase'n Purdy Big Twisters",
+      "away_score": 86.48,
+      "is_playoff": true
+    },
+    {
+      "year": 2024,
+      "week": 19,
+      "home_team_name": "Bhola Breece's Storm Surge",
+      "home_score": 59.1,
+      "away_team_name": "Blizzard Boys",
+      "away_score": 68.28,
+      "is_playoff": true
+    }
+  ]
+}

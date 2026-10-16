@@ -1,0 +1,1186 @@
+{
+  "year": 2021,
+  "teams": [
+    {
+      "year": 2021,
+      "team_id": 1,
+      "team_name": "Wolf of Waller Street",
+      "owner": "R Saltiel",
+      "wins": 10,
+      "losses": 4,
+      "points_for": 1412.0,
+      "points_against": 1334.52,
+      "final_standing": 5,
+      "standing": 3
+    },
+    {
+      "year": 2021,
+      "team_id": 2,
+      "team_name": "Gallman Sachs",
+      "owner": "Michael Fellows",
+      "wins": 4,
+      "losses": 10,
+      "points_for": 1250.14,
+      "points_against": 1406.16,
+      "final_standing": 10,
+      "standing": 9
+    },
+    {
+      "year": 2021,
+      "team_id": 3,
+      "team_name": "The Big hErtz",
+      "owner": "matt  hudspeath",
+      "wins": 7,
+      "losses": 7,
+      "points_for": 1302.32,
+      "points_against": 1261.38,
+      "final_standing": 2,
+      "standing": 6
+    },
+    {
+      "year": 2021,
+      "team_id": 4,
+      "team_name": "Sony Discman Jr.",
+      "owner": "Jordan Shepherd",
+      "wins": 10,
+      "losses": 4,
+      "points_for": 1389.62,
+      "points_against": 1296.36,
+      "final_standing": 6,
+      "standing": 4
+    },
+    {
+      "year": 2021,
+      "team_id": 5,
+      "team_name": "NAS DAK",
+      "owner": "Riley McElwain",
+      "wins": 12,
+      "losses": 2,
+      "points_for": 1584.44,
+      "points_against": 1171.38,
+      "final_standing": 1,
+      "standing": 1
+    },
+    {
+      "year": 2021,
+      "team_id": 6,
+      "team_name": "C.H. Allen Robinson",
+      "owner": "Stephen Rooney, Jackson Sattell",
+      "wins": 7,
+      "losses": 7,
+      "points_for": 1217.04,
+      "points_against": 1246.78,
+      "final_standing": 8,
+      "standing": 7
+    },
+    {
+      "year": 2021,
+      "team_id": 7,
+      "team_name": "Booz Allen",
+      "owner": "Ed Buser",
+      "wins": 11,
+      "losses": 3,
+      "points_for": 1539.9599999999998,
+      "points_against": 1300.64,
+      "final_standing": 4,
+      "standing": 2
+    },
+    {
+      "year": 2021,
+      "team_id": 8,
+      "team_name": "Brady Petroleum And Gaskin",
+      "owner": "Pierson Curtis",
+      "wins": 8,
+      "losses": 6,
+      "points_for": 1345.6999999999998,
+      "points_against": 1288.02,
+      "final_standing": 3,
+      "standing": 5
+    },
+    {
+      "year": 2021,
+      "team_id": 9,
+      "team_name": "Thielen Musk",
+      "owner": "Chris Cochrane, Jack Babcock",
+      "wins": 2,
+      "losses": 12,
+      "points_for": 1084.52,
+      "points_against": 1498.64,
+      "final_standing": 11,
+      "standing": 12
+    },
+    {
+      "year": 2021,
+      "team_id": 10,
+      "team_name": "Hunt's or Heinz",
+      "owner": "Taylor Weis",
+      "wins": 4,
+      "losses": 10,
+      "points_for": 1215.04,
+      "points_against": 1333.62,
+      "final_standing": 12,
+      "standing": 10
+    },
+    {
+      "year": 2021,
+      "team_id": 11,
+      "team_name": "H+R Block 4 Dalvin ",
+      "owner": "Jack Reilly, Alex Kinniard",
+      "wins": 4,
+      "losses": 10,
+      "points_for": 1179.34,
+      "points_against": 1357.1,
+      "final_standing": 9,
+      "standing": 11
+    },
+    {
+      "year": 2021,
+      "team_id": 12,
+      "team_name": "ODell Technologies",
+      "owner": "Tyler Howard",
+      "wins": 5,
+      "losses": 9,
+      "points_for": 1361.8000000000002,
+      "points_against": 1387.32,
+      "final_standing": 7,
+      "standing": 8
+    }
+  ],
+  "matchups": [
+    {
+      "year": 2021,
+      "week": 1,
+      "home_team_name": "C.H. Allen Robinson",
+      "home_score": 93.56,
+      "away_team_name": "Wolf of Waller Street",
+      "away_score": 93.9,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 1,
+      "home_team_name": "Brady Petroleum And Gaskin",
+      "home_score": 104.4,
+      "away_team_name": "Booz Allen",
+      "away_score": 94.88,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 1,
+      "home_team_name": "H+R Block 4 Dalvin ",
+      "home_score": 93.66,
+      "away_team_name": "Gallman Sachs",
+      "away_score": 79.58,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 1,
+      "home_team_name": "NAS DAK",
+      "home_score": 116.92,
+      "away_team_name": "Hunt's or Heinz",
+      "away_score": 78.3,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 1,
+      "home_team_name": "Thielen Musk",
+      "home_score": 116.96,
+      "away_team_name": "Sony Discman Jr.",
+      "away_score": 108.54,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 1,
+      "home_team_name": "The Big hErtz",
+      "home_score": 78.82,
+      "away_team_name": "ODell Technologies",
+      "away_score": 123.28,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 2,
+      "home_team_name": "Wolf of Waller Street",
+      "home_score": 85.16,
+      "away_team_name": "Booz Allen",
+      "away_score": 95.22,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 2,
+      "home_team_name": "Gallman Sachs",
+      "home_score": 72.44,
+      "away_team_name": "C.H. Allen Robinson",
+      "away_score": 115.6,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 2,
+      "home_team_name": "Hunt's or Heinz",
+      "home_score": 100.96,
+      "away_team_name": "Brady Petroleum And Gaskin",
+      "away_score": 102.24,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 2,
+      "home_team_name": "Sony Discman Jr.",
+      "home_score": 87.02,
+      "away_team_name": "H+R Block 4 Dalvin ",
+      "away_score": 82.12,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 2,
+      "home_team_name": "ODell Technologies",
+      "home_score": 89.32,
+      "away_team_name": "NAS DAK",
+      "away_score": 102.48,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 2,
+      "home_team_name": "The Big hErtz",
+      "home_score": 145.2,
+      "away_team_name": "Thielen Musk",
+      "away_score": 106.5,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 3,
+      "home_team_name": "Gallman Sachs",
+      "home_score": 83.68,
+      "away_team_name": "Wolf of Waller Street",
+      "away_score": 107.62,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 3,
+      "home_team_name": "Booz Allen",
+      "home_score": 133.94,
+      "away_team_name": "Hunt's or Heinz",
+      "away_score": 80.82,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 3,
+      "home_team_name": "C.H. Allen Robinson",
+      "home_score": 63.44,
+      "away_team_name": "Sony Discman Jr.",
+      "away_score": 81.88,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 3,
+      "home_team_name": "Brady Petroleum And Gaskin",
+      "home_score": 109.48,
+      "away_team_name": "ODell Technologies",
+      "away_score": 99.6,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 3,
+      "home_team_name": "H+R Block 4 Dalvin ",
+      "home_score": 79.42,
+      "away_team_name": "The Big hErtz",
+      "away_score": 109.64,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 3,
+      "home_team_name": "NAS DAK",
+      "home_score": 120.32,
+      "away_team_name": "Thielen Musk",
+      "away_score": 95.64,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 4,
+      "home_team_name": "Wolf of Waller Street",
+      "home_score": 112.92,
+      "away_team_name": "Hunt's or Heinz",
+      "away_score": 108.0,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 4,
+      "home_team_name": "Sony Discman Jr.",
+      "home_score": 108.64,
+      "away_team_name": "Gallman Sachs",
+      "away_score": 96.42,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 4,
+      "home_team_name": "ODell Technologies",
+      "home_score": 141.42,
+      "away_team_name": "Booz Allen",
+      "away_score": 97.58,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 4,
+      "home_team_name": "The Big hErtz",
+      "home_score": 76.82,
+      "away_team_name": "C.H. Allen Robinson",
+      "away_score": 94.52,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 4,
+      "home_team_name": "Thielen Musk",
+      "home_score": 64.68,
+      "away_team_name": "Brady Petroleum And Gaskin",
+      "away_score": 89.66,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 4,
+      "home_team_name": "NAS DAK",
+      "home_score": 123.52,
+      "away_team_name": "H+R Block 4 Dalvin ",
+      "away_score": 71.86,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 5,
+      "home_team_name": "Sony Discman Jr.",
+      "home_score": 120.38,
+      "away_team_name": "Wolf of Waller Street",
+      "away_score": 113.2,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 5,
+      "home_team_name": "Hunt's or Heinz",
+      "home_score": 105.6,
+      "away_team_name": "ODell Technologies",
+      "away_score": 105.88,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 5,
+      "home_team_name": "Gallman Sachs",
+      "home_score": 110.08,
+      "away_team_name": "The Big hErtz",
+      "away_score": 91.26,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 5,
+      "home_team_name": "Booz Allen",
+      "home_score": 140.42,
+      "away_team_name": "Thielen Musk",
+      "away_score": 54.22,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 5,
+      "home_team_name": "C.H. Allen Robinson",
+      "home_score": 86.56,
+      "away_team_name": "NAS DAK",
+      "away_score": 122.58,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 5,
+      "home_team_name": "Brady Petroleum And Gaskin",
+      "home_score": 129.84,
+      "away_team_name": "H+R Block 4 Dalvin ",
+      "away_score": 88.78,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 6,
+      "home_team_name": "Wolf of Waller Street",
+      "home_score": 117.32,
+      "away_team_name": "ODell Technologies",
+      "away_score": 98.78,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 6,
+      "home_team_name": "The Big hErtz",
+      "home_score": 97.2,
+      "away_team_name": "Sony Discman Jr.",
+      "away_score": 72.58,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 6,
+      "home_team_name": "Thielen Musk",
+      "home_score": 64.3,
+      "away_team_name": "Hunt's or Heinz",
+      "away_score": 104.94,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 6,
+      "home_team_name": "NAS DAK",
+      "home_score": 121.8,
+      "away_team_name": "Gallman Sachs",
+      "away_score": 91.04,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 6,
+      "home_team_name": "H+R Block 4 Dalvin ",
+      "home_score": 112.46,
+      "away_team_name": "Booz Allen",
+      "away_score": 114.3,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 6,
+      "home_team_name": "Brady Petroleum And Gaskin",
+      "home_score": 71.38,
+      "away_team_name": "C.H. Allen Robinson",
+      "away_score": 95.26,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 7,
+      "home_team_name": "The Big hErtz",
+      "home_score": 72.26,
+      "away_team_name": "Wolf of Waller Street",
+      "away_score": 98.64,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 7,
+      "home_team_name": "ODell Technologies",
+      "home_score": 114.24,
+      "away_team_name": "Thielen Musk",
+      "away_score": 93.24,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 7,
+      "home_team_name": "Sony Discman Jr.",
+      "home_score": 100.98,
+      "away_team_name": "NAS DAK",
+      "away_score": 95.42,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 7,
+      "home_team_name": "Hunt's or Heinz",
+      "home_score": 95.76,
+      "away_team_name": "H+R Block 4 Dalvin ",
+      "away_score": 70.14,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 7,
+      "home_team_name": "Gallman Sachs",
+      "home_score": 95.6,
+      "away_team_name": "Brady Petroleum And Gaskin",
+      "away_score": 126.54,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 7,
+      "home_team_name": "Booz Allen",
+      "home_score": 70.78,
+      "away_team_name": "C.H. Allen Robinson",
+      "away_score": 99.64,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 8,
+      "home_team_name": "Wolf of Waller Street",
+      "home_score": 97.86,
+      "away_team_name": "Thielen Musk",
+      "away_score": 71.12,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 8,
+      "home_team_name": "NAS DAK",
+      "home_score": 89.68,
+      "away_team_name": "The Big hErtz",
+      "away_score": 86.56,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 8,
+      "home_team_name": "H+R Block 4 Dalvin ",
+      "home_score": 60.54,
+      "away_team_name": "ODell Technologies",
+      "away_score": 88.7,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 8,
+      "home_team_name": "Brady Petroleum And Gaskin",
+      "home_score": 83.6,
+      "away_team_name": "Sony Discman Jr.",
+      "away_score": 99.52,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 8,
+      "home_team_name": "C.H. Allen Robinson",
+      "home_score": 61.02,
+      "away_team_name": "Hunt's or Heinz",
+      "away_score": 89.0,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 8,
+      "home_team_name": "Booz Allen",
+      "home_score": 86.02,
+      "away_team_name": "Gallman Sachs",
+      "away_score": 75.9,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 9,
+      "home_team_name": "NAS DAK",
+      "home_score": 102.88,
+      "away_team_name": "Wolf of Waller Street",
+      "away_score": 65.66,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 9,
+      "home_team_name": "Thielen Musk",
+      "home_score": 58.28,
+      "away_team_name": "H+R Block 4 Dalvin ",
+      "away_score": 87.32,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 9,
+      "home_team_name": "The Big hErtz",
+      "home_score": 78.8,
+      "away_team_name": "Brady Petroleum And Gaskin",
+      "away_score": 69.4,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 9,
+      "home_team_name": "ODell Technologies",
+      "home_score": 69.04,
+      "away_team_name": "C.H. Allen Robinson",
+      "away_score": 72.54,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 9,
+      "home_team_name": "Sony Discman Jr.",
+      "home_score": 115.64,
+      "away_team_name": "Booz Allen",
+      "away_score": 129.34,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 9,
+      "home_team_name": "Hunt's or Heinz",
+      "home_score": 71.46,
+      "away_team_name": "Gallman Sachs",
+      "away_score": 60.32,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 10,
+      "home_team_name": "Wolf of Waller Street",
+      "home_score": 103.14,
+      "away_team_name": "H+R Block 4 Dalvin ",
+      "away_score": 89.44,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 10,
+      "home_team_name": "Brady Petroleum And Gaskin",
+      "home_score": 71.6,
+      "away_team_name": "NAS DAK",
+      "away_score": 99.84,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 10,
+      "home_team_name": "C.H. Allen Robinson",
+      "home_score": 101.14,
+      "away_team_name": "Thielen Musk",
+      "away_score": 69.52,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 10,
+      "home_team_name": "Booz Allen",
+      "home_score": 77.2,
+      "away_team_name": "The Big hErtz",
+      "away_score": 76.68,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 10,
+      "home_team_name": "Gallman Sachs",
+      "home_score": 112.48,
+      "away_team_name": "ODell Technologies",
+      "away_score": 103.44,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 10,
+      "home_team_name": "Hunt's or Heinz",
+      "home_score": 70.52,
+      "away_team_name": "Sony Discman Jr.",
+      "away_score": 100.52,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 11,
+      "home_team_name": "Brady Petroleum And Gaskin",
+      "home_score": 83.48,
+      "away_team_name": "Wolf of Waller Street",
+      "away_score": 94.26,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 11,
+      "home_team_name": "H+R Block 4 Dalvin ",
+      "home_score": 81.88,
+      "away_team_name": "C.H. Allen Robinson",
+      "away_score": 98.2,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 11,
+      "home_team_name": "NAS DAK",
+      "home_score": 104.14,
+      "away_team_name": "Booz Allen",
+      "away_score": 134.28,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 11,
+      "home_team_name": "Thielen Musk",
+      "home_score": 112.28,
+      "away_team_name": "Gallman Sachs",
+      "away_score": 79.72,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 11,
+      "home_team_name": "The Big hErtz",
+      "home_score": 97.1,
+      "away_team_name": "Hunt's or Heinz",
+      "away_score": 89.96,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 11,
+      "home_team_name": "ODell Technologies",
+      "home_score": 84.6,
+      "away_team_name": "Sony Discman Jr.",
+      "away_score": 93.22,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 12,
+      "home_team_name": "Wolf of Waller Street",
+      "home_score": 116.8,
+      "away_team_name": "C.H. Allen Robinson",
+      "away_score": 89.72,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 12,
+      "home_team_name": "Booz Allen",
+      "home_score": 118.02,
+      "away_team_name": "Brady Petroleum And Gaskin",
+      "away_score": 104.54,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 12,
+      "home_team_name": "Gallman Sachs",
+      "home_score": 62.52,
+      "away_team_name": "H+R Block 4 Dalvin ",
+      "away_score": 97.18,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 12,
+      "home_team_name": "Hunt's or Heinz",
+      "home_score": 39.94,
+      "away_team_name": "NAS DAK",
+      "away_score": 117.5,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 12,
+      "home_team_name": "Sony Discman Jr.",
+      "home_score": 102.2,
+      "away_team_name": "Thielen Musk",
+      "away_score": 46.96,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 12,
+      "home_team_name": "ODell Technologies",
+      "home_score": 79.12,
+      "away_team_name": "The Big hErtz",
+      "away_score": 104.88,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 13,
+      "home_team_name": "Booz Allen",
+      "home_score": 134.78,
+      "away_team_name": "Wolf of Waller Street",
+      "away_score": 85.6,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 13,
+      "home_team_name": "C.H. Allen Robinson",
+      "home_score": 85.82,
+      "away_team_name": "Gallman Sachs",
+      "away_score": 117.56,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 13,
+      "home_team_name": "Brady Petroleum And Gaskin",
+      "home_score": 94.72,
+      "away_team_name": "Hunt's or Heinz",
+      "away_score": 85.2,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 13,
+      "home_team_name": "H+R Block 4 Dalvin ",
+      "home_score": 68.44,
+      "away_team_name": "Sony Discman Jr.",
+      "away_score": 112.02,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 13,
+      "home_team_name": "NAS DAK",
+      "home_score": 119.22,
+      "away_team_name": "ODell Technologies",
+      "away_score": 73.16,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 13,
+      "home_team_name": "Thielen Musk",
+      "home_score": 58.2,
+      "away_team_name": "The Big hErtz",
+      "away_score": 102.26,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 14,
+      "home_team_name": "ODell Technologies",
+      "home_score": 91.22,
+      "away_team_name": "Wolf of Waller Street",
+      "away_score": 119.92,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 14,
+      "home_team_name": "H+R Block 4 Dalvin ",
+      "home_score": 96.1,
+      "away_team_name": "Hunt's or Heinz",
+      "away_score": 94.58,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 14,
+      "home_team_name": "NAS DAK",
+      "home_score": 148.14,
+      "away_team_name": "Sony Discman Jr.",
+      "away_score": 86.48,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 14,
+      "home_team_name": "C.H. Allen Robinson",
+      "home_score": 60.02,
+      "away_team_name": "Booz Allen",
+      "away_score": 113.2,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 14,
+      "home_team_name": "Brady Petroleum And Gaskin",
+      "home_score": 104.82,
+      "away_team_name": "Thielen Musk",
+      "away_score": 72.62,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 14,
+      "home_team_name": "Gallman Sachs",
+      "home_score": 112.8,
+      "away_team_name": "The Big hErtz",
+      "away_score": 84.84,
+      "is_playoff": false
+    },
+    {
+      "year": 2021,
+      "week": 15,
+      "home_team_name": "NAS DAK",
+      "home_score": 103.48,
+      "away_team_name": null,
+      "away_score": 0,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 15,
+      "home_team_name": "Sony Discman Jr.",
+      "home_score": 59.14,
+      "away_team_name": "Brady Petroleum And Gaskin",
+      "away_score": 67.76,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 15,
+      "home_team_name": "Wolf of Waller Street",
+      "home_score": 82.5,
+      "away_team_name": "The Big hErtz",
+      "away_score": 130.92,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 15,
+      "home_team_name": "Booz Allen",
+      "home_score": 89.74,
+      "away_team_name": null,
+      "away_score": 0,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 15,
+      "home_team_name": "C.H. Allen Robinson",
+      "home_score": 73.98,
+      "away_team_name": "ODell Technologies",
+      "away_score": 80.4,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 15,
+      "home_team_name": "Gallman Sachs",
+      "home_score": 82.76,
+      "away_team_name": "Hunt's or Heinz",
+      "away_score": 75.26,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 15,
+      "home_team_name": "H+R Block 4 Dalvin ",
+      "home_score": 47.64,
+      "away_team_name": "Thielen Musk",
+      "away_score": 63.08,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 16,
+      "home_team_name": "NAS DAK",
+      "home_score": 93.1,
+      "away_team_name": "Brady Petroleum And Gaskin",
+      "away_score": 92.38,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 16,
+      "home_team_name": "Booz Allen",
+      "home_score": 76.04,
+      "away_team_name": "The Big hErtz",
+      "away_score": 110.68,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 16,
+      "home_team_name": "Wolf of Waller Street",
+      "home_score": 114.46,
+      "away_team_name": "Sony Discman Jr.",
+      "away_score": 88.82,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 16,
+      "home_team_name": "ODell Technologies",
+      "home_score": 90.92,
+      "away_team_name": "Gallman Sachs",
+      "away_score": 75.7,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 16,
+      "home_team_name": "C.H. Allen Robinson",
+      "home_score": 103.5,
+      "away_team_name": "Thielen Musk",
+      "away_score": 59.4,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 16,
+      "home_team_name": "Hunt's or Heinz",
+      "home_score": 57.98,
+      "away_team_name": "H+R Block 4 Dalvin ",
+      "away_score": 77.74,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 17,
+      "home_team_name": "NAS DAK",
+      "home_score": 106.14,
+      "away_team_name": "The Big hErtz",
+      "away_score": 97.72,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 17,
+      "home_team_name": "Booz Allen",
+      "home_score": 93.18,
+      "away_team_name": "Brady Petroleum And Gaskin",
+      "away_score": 132.2,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 17,
+      "home_team_name": "Wolf of Waller Street",
+      "home_score": 109.0,
+      "away_team_name": "Sony Discman Jr.",
+      "away_score": 59.6,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 17,
+      "home_team_name": "C.H. Allen Robinson",
+      "home_score": 97.56,
+      "away_team_name": "ODell Technologies",
+      "away_score": 121.96,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 17,
+      "home_team_name": "Gallman Sachs",
+      "home_score": 71.48,
+      "away_team_name": "H+R Block 4 Dalvin ",
+      "away_score": 116.34,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 17,
+      "home_team_name": "Hunt's or Heinz",
+      "home_score": 65.76,
+      "away_team_name": "Thielen Musk",
+      "away_score": 88.74,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 18,
+      "home_team_name": "NAS DAK",
+      "home_score": 106.14,
+      "away_team_name": "The Big hErtz",
+      "away_score": 97.72,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 18,
+      "home_team_name": "Booz Allen",
+      "home_score": 93.18,
+      "away_team_name": "Brady Petroleum And Gaskin",
+      "away_score": 132.2,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 18,
+      "home_team_name": "Wolf of Waller Street",
+      "home_score": 109.0,
+      "away_team_name": "Sony Discman Jr.",
+      "away_score": 59.6,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 18,
+      "home_team_name": "C.H. Allen Robinson",
+      "home_score": 97.56,
+      "away_team_name": "ODell Technologies",
+      "away_score": 121.96,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 18,
+      "home_team_name": "Gallman Sachs",
+      "home_score": 71.48,
+      "away_team_name": "H+R Block 4 Dalvin ",
+      "away_score": 116.34,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 18,
+      "home_team_name": "Hunt's or Heinz",
+      "home_score": 65.76,
+      "away_team_name": "Thielen Musk",
+      "away_score": 88.74,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 19,
+      "home_team_name": "NAS DAK",
+      "home_score": 106.14,
+      "away_team_name": "The Big hErtz",
+      "away_score": 97.72,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 19,
+      "home_team_name": "Booz Allen",
+      "home_score": 93.18,
+      "away_team_name": "Brady Petroleum And Gaskin",
+      "away_score": 132.2,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 19,
+      "home_team_name": "Wolf of Waller Street",
+      "home_score": 109.0,
+      "away_team_name": "Sony Discman Jr.",
+      "away_score": 59.6,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 19,
+      "home_team_name": "C.H. Allen Robinson",
+      "home_score": 97.56,
+      "away_team_name": "ODell Technologies",
+      "away_score": 121.96,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 19,
+      "home_team_name": "Gallman Sachs",
+      "home_score": 71.48,
+      "away_team_name": "H+R Block 4 Dalvin ",
+      "away_score": 116.34,
+      "is_playoff": true
+    },
+    {
+      "year": 2021,
+      "week": 19,
+      "home_team_name": "Hunt's or Heinz",
+      "home_score": 65.76,
+      "away_team_name": "Thielen Musk",
+      "away_score": 88.74,
+      "is_playoff": true
+    }
+  ]
+}

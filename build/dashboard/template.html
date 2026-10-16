@@ -1,0 +1,2320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JMML Fantasy Football</title>
+<meta name="description" content="JMML league history: all-time standings, owner profiles, records, rivalries, and live 2026 playoff odds.">
+<meta name="theme-color" content="#0c0f18">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JMML Fantasy Football">
+<meta property="og:description" content="All-time standings, owner profiles, records, rivalries, and live 2026 playoff odds.">
+<meta property="og:url" content="https://jmml.whohashim.com/">
+<meta property="og:image" content="https://jmml.whohashim.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c0f18'/%3E%3Ctext x='16' y='23' font-family='Arial Black,Arial' font-size='17' font-weight='900' text-anchor='middle' fill='%23fcd34d'%3EJ%3C/text%3E%3C/svg%3E">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0f1117; color: #e2e8f0; min-height: 100vh; }
+
+/* ── TAB NAV ── */
+.tab-nav { position: sticky; top: 0; z-index: 100; background: #0c0f18; border-bottom: 1px solid #1e293b; padding: 0 32px; display: flex; align-items: center; gap: 24px; height: 48px; }
+.tab-nav-title { font-size: 13px; font-weight: 700; color: #64748b; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+.tab-buttons { display: flex; gap: 2px; }
+.tab-btn { background: none; border: none; color: #475569; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 6px; cursor: pointer; transition: color .15s, background .15s; font-family: inherit; }
+.tab-btn:hover { color: #94a3b8; background: #1e293b; }
+.tab-btn.active { color: #e2e8f0; background: #1e293b; font-weight: 600; }
+.nav-right { margin-left: auto; font-size: 11px; color: #334155; }
+
+/* ── LAYOUT ── */
+.tab-panel { display: none; padding: 36px 32px 80px; max-width: 1300px; margin: 0 auto; }
+.tab-panel.active { display: block; }
+h1 { font-size: 20px; font-weight: 600; color: #f8fafc; margin-bottom: 4px; }
+.subtitle { font-size: 12px; color: #475569; margin-bottom: 36px; }
+.section { margin-bottom: 48px; }
+.section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #334155; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid #1a2030; }
+
+/* ── TABLES ── */
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th { text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #475569; padding: 6px 10px; border-bottom: 1px solid #1e293b; cursor: pointer; white-space: nowrap; user-select: none; }
+.data-table th:hover { color: #94a3b8; }
+.data-table th.sorted { color: #e2e8f0; }
+.data-table th .sort-arrow { margin-left: 4px; opacity: 0.5; }
+.data-table th.sorted .sort-arrow { opacity: 1; }
+.data-table td { padding: 6px 10px; border-bottom: 1px solid #0f1420; color: #cbd5e1; vertical-align: middle; font-size: 12px; }
+.data-table tr:hover td { background: #111827; }
+.data-table tr.retired td { color: #334155; }
+.data-table tr { transition: opacity .18s; cursor: default; }
+.data-table tr[data-owner] { cursor: pointer; }
+.data-table tr.dimmed { opacity: 0.1; }
+.season-card { transition: opacity .18s; }
+.season-card.dimmed { opacity: 0.1; }
+.matchup-game { transition: opacity .18s; }
+.matchup-game.dimmed { opacity: 0.1; }
+.table-scroll { overflow-y: auto; max-height: 300px; }
+.table-scroll thead th { position: sticky; top: 0; background: #111520; z-index: 1; }
+.data-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.data-table td.owner-name { font-weight: 600; }
+.owner-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 7px; flex-shrink: 0; }
+
+/* ── KPI CARDS ── */
+.kpi-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 36px; }
+.kpi { background: #111520; border: 1px solid #1a2030; border-radius: 8px; padding: 12px 16px; min-width: 120px; flex: 1 1 120px; }
+.kpi-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #475569; margin-bottom: 6px; }
+.kpi-value { font-size: 20px; font-weight: 600; color: #f8fafc; font-variant-numeric: tabular-nums; }
+.kpi-sub { font-size: 10px; color: #475569; margin-top: 3px; }
+.kpi.gold .kpi-value { color: #fcd34d; }
+
+/* ── BADGES ── */
+.badge { display: inline-block; border-radius: 3px; padding: 2px 7px; font-size: 10px; font-weight: 700; letter-spacing: 0.03em; }
+.badge-champ  { background: #3b2800; color: #fcd34d; }
+.badge-playoff { background: #1a2a1a; color: #4ade80; }
+.badge-reg    { background: #1e2433; color: #475569; }
+.badge-win    { background: #14532d; color: #86efac; }
+.badge-loss   { background: #450a0a; color: #f87171; }
+.luck-pos  { color: #4ade80; font-weight: 600; }
+.luck-neg  { color: #f87171; font-weight: 600; }
+.luck-zero { color: #475569; }
+
+/* ── CHART CONTAINERS ── */
+.chart-wrap { background: #111520; border: 1px solid #1e293b; border-radius: 10px; padding: 24px; position: relative; }
+.chart-wrap canvas { display: block; }
+.chart-row { display: grid; gap: 20px; grid-template-columns: 1fr 1fr; }
+.chart-label { font-size: 11px; color: #475569; margin-bottom: 10px; }
+
+/* ── SCATTER QUADRANT LABELS ── */
+.scatter-wrap { position: relative; }
+.q-label { position: absolute; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.25; pointer-events: none; }
+
+/* ── H2H MATRIX ── */
+.h2h-scroll { overflow-x: auto; }
+.h2h-table { border-collapse: collapse; font-size: 11.5px; white-space: nowrap; }
+.h2h-table th, .h2h-table td { padding: 5px 8px; text-align: center; border: 1px solid #1a2030; }
+.h2h-table th { background: #0c0f18; color: #475569; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+.h2h-table td { min-width: 52px; cursor: pointer; transition: filter .1s; font-variant-numeric: tabular-nums; }
+.h2h-table td:hover { filter: brightness(1.3); }
+.h2h-table td.h2h-self { background: #0c0f18; color: #1e293b; cursor: default; }
+.h2h-table td.h2h-na { background: #111520; color: #1e293b; cursor: default; }
+
+/* ── SEASON CARDS ── */
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.season-card { background: #111520; border: 1px solid #1e293b; border-radius: 8px; padding: 14px; transition: border-color .15s; }
+.season-card:hover { border-color: #334155; }
+.logo { width: var(--s, 28px); height: var(--s, 28px); border-radius: 6px; object-fit: contain; background: #0c0f18; flex-shrink: 0; vertical-align: middle; }
+.logo-fb { display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: calc(var(--s, 28px) * 0.38); color: #0c0f18; font-family: inherit; }
+.card-head { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
+.card-head .card-team, .card-head .card-owner { margin-bottom: 0; }
+.owner-header { display: flex; gap: 16px; align-items: center; margin-bottom: 26px; }
+.owner-header .oh-name { font-size: 22px; font-weight: 700; color: #f8fafc; }
+.owner-header .oh-team { font-size: 13px; font-style: italic; color: #94a3b8; margin-top: 2px; }
+.owner-header .oh-sub { font-size: 11px; color: #475569; margin-top: 3px; }
+.logo-cell { display: inline-flex; align-items: center; gap: 8px; }
+.card-team { font-size: 13.5px; font-weight: 700; color: #e2e8f0; margin-bottom: 2px; line-height: 1.3; }
+.card-owner { font-size: 11px; color: #475569; margin-bottom: 8px; }
+.card-wl { font-size: 20px; font-weight: 700; color: #e2e8f0; margin-bottom: 6px; }
+.card-pts { font-size: 11px; color: #64748b; margin-bottom: 8px; }
+.card-pts span { color: #94a3b8; }
+.card-players { font-size: 10.5px; color: #334155; line-height: 1.7; }
+.card-players strong { color: #475569; }
+
+/* ── FILTERS ── */
+.filters { display: flex; gap: 12px; align-items: center; margin-bottom: 24px; flex-wrap: wrap; }
+.filter-label { font-size: 11px; color: #475569; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+select.filter-select { background: #111520; border: 1px solid #1e293b; color: #cbd5e1; font-size: 12px; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+select.filter-select:focus { outline: none; border-color: #334155; }
+.owner-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px; width: 100%; }
+.owner-card { background: #111520; border: 1px solid #1e293b; border-radius: 8px; padding: 9px 11px; cursor: pointer; transition: border-color .15s, background .15s; }
+.owner-card:hover { border-color: #334155; }
+.owner-card.selected { border-color: #fcd34d; background: #1a1708; }
+.owner-card-name { font-size: 12.5px; font-weight: 700; color: #e2e8f0; }
+.owner-card-sub { font-size: 10px; color: #475569; margin-top: 2px; }
+.owner-card.selected .owner-card-sub { color: #94a3b8; }
+.hm-wrap { overflow-x: auto; padding-top: 4px; }
+table.hm { border-collapse: separate; border-spacing: 2px; width: 100%; }
+table.hm th { font-size: 9px; font-weight: 600; color: #475569; text-align: center; padding: 0 0 3px; }
+table.hm td.hm-name { font-size: 11.5px; font-weight: 700; padding-right: 8px; white-space: nowrap; }
+table.hm td.hm-avg { font-size: 10.5px; color: #94a3b8; text-align: right; padding-left: 8px; font-variant-numeric: tabular-nums; }
+table.hm td.hm-cell { height: 25px; min-width: 22px; text-align: center; font-size: 10px; font-weight: 700; border-radius: 3px; }
+table.hm tr[data-owner] { cursor: pointer; transition: opacity .18s; }
+table.hm tr.dimmed { opacity: 0.15; }
+.wh-search { position: relative; max-width: 560px; margin-bottom: 14px; }
+.wh-search input { width: 100%; background: #111520; border: 1px solid #1e293b; border-radius: 8px; color: #e2e8f0; font-size: 15px; padding: 12px 14px; font-family: inherit; }
+.wh-search input:focus { outline: none; border-color: #fcd34d; }
+.wh-results { position: absolute; left: 0; right: 0; top: calc(100% + 4px); background: #111520; border: 1px solid #334155; border-radius: 8px; max-height: 340px; overflow-y: auto; z-index: 60; display: none; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
+.wh-results.open { display: block; }
+.wh-item { padding: 8px 14px; cursor: pointer; display: flex; justify-content: space-between; gap: 12px; font-size: 13px; }
+.wh-item:hover, .wh-item.hl { background: #1e293b; }
+.wh-item small { color: #475569; font-size: 11px; white-space: nowrap; }
+.wh-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 26px; }
+.wh-chip { padding: 4px 11px; border-radius: 14px; font-size: 11px; font-weight: 600; cursor: pointer; background: #111520; border: 1px solid #1e293b; color: #94a3b8; }
+.wh-chip:hover { border-color: #334155; color: #e2e8f0; }
+.wh-chip b { color: #fcd34d; font-weight: 700; margin-left: 4px; }
+.wh-tag { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 1px 6px; border-radius: 3px; background: #1e2433; color: #64748b; margin-left: 6px; vertical-align: 1px; }
+.wh-tag.moved { background: #3b2800; color: #fcd34d; }
+.owner-card.selected-b { border-color: #60a5fa; background: #0b1424; }
+.owner-card.sm { padding: 6px 10px; } .owner-card.sm .owner-card-name { font-size: 11.5px; }
+.owner-card.retired .owner-card-name { color: #64748b; }
+.rec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr)); gap: 18px; }
+.rec-card { background: #0d111a; border: 1px solid #1a2030; border-radius: 8px; padding: 12px 14px 6px; }
+.rec-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #94a3b8; margin-bottom: 6px; }
+.rec-card .data-table td { font-size: 11.5px; padding: 5px 8px; }
+.rec-team { display: block; font-size: 11px; font-weight: 500; font-style: italic; color: #94a3b8; }
+.ot-owner { color: #fcd34d; }
+.ot-owner:empty { display: none; }
+.ot-owner::after { content: ' \00b7'; color: #475569; margin: 0 0.6em 0 0.2em; }
+.rec-new td { background: #1a1708; }
+.rec-new td:first-child { box-shadow: inset 3px 0 0 #fcd34d; }
+.rec-pill { display: inline-block; margin-left: 7px; padding: 0 6px; border-radius: 8px; background: #fcd34d; color: #3b2800; font-size: 9px; font-weight: 800; letter-spacing: 0.04em; vertical-align: 1px; }
+.rec-val { font-weight: 700; color: #fcd34d; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.rec-sub { font-size: 10px; color: #475569; }
+.odds-bar { position: relative; height: 18px; background: #111827; border-radius: 3px; min-width: 120px; overflow: hidden; }
+.odds-bar span { position: absolute; left: 0; top: 0; bottom: 0; background: #166534; }
+.odds-bar b { position: relative; font-size: 11px; line-height: 18px; padding-left: 7px; color: #e2e8f0; }
+.preview-card { background: #111520; border: 1px solid #1e293b; border-radius: 8px; padding: 12px 14px; cursor: pointer; }
+.preview-card:hover { border-color: #334155; }
+.pv-teams { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center; margin-bottom: 8px; }
+.pv-team { font-size: 13px; font-weight: 700; } .pv-team small { display: block; font-size: 10px; font-weight: 500; color: #475569; margin-top: 2px; }
+.pv-team.r { text-align: right; } .pv-vs { font-size: 10px; color: #334155; }
+.pv-prob { display: flex; height: 8px; border-radius: 4px; overflow: hidden; background: #1e293b; }
+.pv-prob span { background: #4ade80; } .pv-prob span + span { background: #f87171; }
+.pv-prob-lbl { display: flex; justify-content: space-between; font-size: 10.5px; font-weight: 700; margin: 4px 0 8px; font-variant-numeric: tabular-nums; }
+.pv-live { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums; margin: 2px 0 8px; } .pv-live span:last-child { text-align: right; } .pv-live .lead { color: #4ade80; } .pv-live .trail { color: #94a3b8; }
+.live-badge { display: inline-block; background: #7f1d1d; color: #fca5a5; font-size: 9px; font-weight: 700; letter-spacing: .06em; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+.pv-h2h { font-size: 10.5px; color: #64748b; line-height: 1.5; }
+.share-btn { margin-left: auto; background: #1e293b; border: 1px solid #334155; color: #e2e8f0; font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 6px; cursor: pointer; font-family: inherit; white-space: nowrap; }
+.share-btn:hover { background: #334155; }
+.share-btn + .nav-right { margin-left: 14px; }
+.hist-group { margin-bottom: 26px; }
+.hist-group-title { font-size: 13px; font-weight: 700; color: #94a3b8; margin-bottom: 10px; letter-spacing: 0.04em; }
+.streak-up { color: #4ade80; } .streak-down { color: #f87171; } .streak-flat { color: #475569; }
+.filter-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip { padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; cursor: pointer; border: 1.5px solid transparent; transition: opacity .15s; }
+.chip.off { opacity: 0.3; }
+.toggle-pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; border: 1px solid #1e293b; background: #111520; color: #475569; transition: background .15s, color .15s; user-select: none; margin-left: 10px; }
+.toggle-pill:hover { background: #1a2030; color: #94a3b8; }
+.toggle-pill.on { background: #1e293b; color: #e2e8f0; border-color: #334155; }
+.toggle-pill .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.7; }
+
+/* ── MATCHUP GRID ── */
+.matchup-grid { display: flex; flex-direction: column; gap: 6px; }
+.matchup-week-row { display: flex; gap: 8px; align-items: center; }
+.week-label { font-size: 10px; font-weight: 700; text-transform: uppercase; color: #334155; width: 56px; flex-shrink: 0; letter-spacing: 0.06em; }
+.matchup-games { display: flex; gap: 6px; flex-wrap: wrap; }
+.matchup-game { background: #111520; border: 1px solid #1e293b; border-radius: 6px; padding: 6px 10px; font-size: 11.5px; display: flex; align-items: center; gap: 8px; }
+.mg-team { font-weight: 600; }
+.mg-team.winner { color: #4ade80; }
+.mg-team.loser { color: #475569; }
+.mg-score { font-variant-numeric: tabular-nums; font-size: 12px; color: #94a3b8; }
+.mg-score.winner { color: #e2e8f0; }
+.mg-vs { font-size: 10px; color: #1e293b; }
+.scoreboard-stack { display: flex; flex-direction: column; gap: 18px; }
+.scoreboard { background: #07090c; border: 3px solid #e2e8f0; border-radius: 6px; box-shadow: 0 0 0 2px #07090c, 0 0 0 4px #475569, 0 6px 18px rgba(0,0,0,.5); padding: 12px 16px 14px; }
+.sb-head { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #1f2937; padding-bottom: 8px; margin-bottom: 10px; }
+.sb-week { font-family: 'Arial Black', Impact, sans-serif; font-size: 18px; letter-spacing: 0.18em; color: #f8fafc; text-transform: uppercase; }
+.sb-final { font-family: 'Courier New', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.25em; color: #ef4444; text-shadow: 0 0 6px #ef444488; }
+.sb-games { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 8px 24px; }
+.scoreboard .matchup-game { display: grid; grid-template-columns: 1fr auto auto 1fr; align-items: center; gap: 10px; background: transparent; border: none; border-bottom: 1px dashed #1f2937; border-radius: 0; padding: 6px 2px; }
+.sb-team { font-family: 'Arial Black', Impact, sans-serif; font-size: 11px; letter-spacing: 0.03em; line-height: 1.15; text-transform: uppercase; color: #cbd5e1; overflow-wrap: anywhere; }
+.sb-team { display: flex; align-items: center; gap: 7px; }
+.sb-team.right { justify-content: flex-end; text-align: right; }
+.sb-team.win { color: #f8fafc; }
+.sb-score { font-family: 'Courier New', monospace; font-weight: 700; font-size: 20px; min-width: 74px; text-align: center; background: #120a02; border: 1px solid #2a1a08; border-radius: 3px; padding: 2px 6px; color: #7c4a14; font-variant-numeric: tabular-nums; letter-spacing: 0.06em; }
+.sb-score.win { color: #fbbf24; text-shadow: 0 0 8px #f59e0b, 0 0 2px #fde68a; }
+.playoff-badge { font-size: 9px; background: #3b2800; color: #fcd34d; padding: 1px 5px; border-radius: 3px; font-weight: 700; }
+
+/* ── MODAL ── */
+.modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; align-items: center; justify-content: center; }
+.modal-bg.open { display: flex; }
+.modal { background: #111520; border: 1px solid #1e293b; border-radius: 10px; padding: 28px; max-width: 480px; width: 90%; max-height: 80vh; overflow-y: auto; }
+.modal-title { font-size: 15px; font-weight: 700; color: #e2e8f0; margin-bottom: 4px; }
+.modal-sub { font-size: 11px; color: #475569; margin-bottom: 20px; }
+.modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; color: #475569; font-size: 18px; cursor: pointer; }
+.about { max-width: 1300px; margin: 0 auto; padding: 0 32px 70px; }
+.about details { border-top: 1px solid #1a2030; padding-top: 14px; }
+.about summary { cursor: pointer; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #475569; }
+.about summary:hover { color: #94a3b8; }
+.about dl { display: grid; grid-template-columns: 170px 1fr; gap: 10px 20px; margin-top: 14px; font-size: 12px; line-height: 1.55; }
+.about dt { color: #94a3b8; font-weight: 600; } .about dd { color: #64748b; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) { .chart-row { grid-template-columns: minmax(0, 1fr); } .chart-row > * { min-width: 0; overflow-x: auto; } }
+@media (max-width: 700px) {
+  .tab-nav { padding: 0 10px; gap: 8px; }
+  .tab-nav-title, .nav-right { display: none; }
+  .tab-buttons { overflow-x: auto; scrollbar-width: none; flex: 1; }
+  .tab-buttons::-webkit-scrollbar { display: none; }
+  .tab-btn { white-space: nowrap; padding: 6px 10px; }
+  .tab-panel { padding: 22px 14px 56px; }
+  .subtitle { margin-bottom: 22px; }
+  .section { margin-bottom: 34px; overflow-x: auto; }
+  .data-table { min-width: 520px; }
+  .rec-card .data-table { min-width: 0; }
+  .chart-wrap { padding: 12px; }
+  .sb-games { grid-template-columns: 1fr; }
+  .sb-score { min-width: 60px; font-size: 17px; padding: 2px 4px; }
+  .sb-team { font-size: 10px; gap: 5px; }
+  .sb-team .logo { --s: 18px !important; }
+  .sb-week { font-size: 15px; }
+  .kpi { min-width: 100px; padding: 10px 12px; }
+  .cards-grid, #preview-cards { grid-template-columns: 1fr !important; }
+  .owner-cards { grid-template-columns: repeat(3, 1fr); }
+  .about { padding: 0 14px 50px; } .about dl { grid-template-columns: 1fr; gap: 2px; } .about dd { margin-bottom: 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="tab-nav">
+  <span class="tab-nav-title">JMML</span>
+  <div class="tab-buttons">
+    <button class="tab-btn active" onclick="showTab('alltime',this)">All-Time</button>
+    <button class="tab-btn" onclick="showTab('history',this)">Team History</button>
+    <button class="tab-btn" onclick="showTab('owner',this)">Owner History</button>
+    <button class="tab-btn" onclick="showTab('records',this)">Records</button>
+    <button class="tab-btn" onclick="showTab('rivalry',this)">Rivalry</button>
+    <button class="tab-btn" onclick="showTab('whohashim',this)">Who Has Him</button>
+    <button class="tab-btn" id="season-tab-btn" onclick="showTab('season',this)">Season</button>
+  </div>
+  <button class="share-btn" id="share-btn" onclick="copyShare()" title="Copy a link to this view that previews nicely when shared">Share</button>
+  <span class="nav-right" id="updated-label"></span>
+</div>
+
+<!-- ══════════ TAB 1: ALL-TIME ══════════ -->
+<div class="tab-panel active" id="tab-alltime">
+  <h1>All-Time Standings</h1>
+  <p class="subtitle">Aggregated across all seasons · 2009–2025</p>
+
+  <div class="section">
+    <div class="section-title" style="display:flex;align-items:center">
+      Owner Leaderboard
+      <span class="toggle-pill on" id="retired-toggle" onclick="toggleRetired()">
+        <span class="pill-dot"></span>Hide Retired
+      </span>
+    </div>
+    <div class="table-scroll">
+      <table class="data-table" id="leaderboard">
+        <thead>
+          <tr>
+            <th onclick="sortLeaderboard('championships')" class="num sorted">Champ <span class="sort-arrow">↓</span></th>
+            <th onclick="sortLeaderboard('owner')">Owner <span class="sort-arrow">↕</span></th>
+            <th onclick="sortLeaderboard('wins')" class="num">W <span class="sort-arrow">↕</span></th>
+            <th onclick="sortLeaderboard('losses')" class="num">L <span class="sort-arrow">↕</span></th>
+            <th onclick="sortLeaderboard('winpct')" class="num">Win% <span class="sort-arrow">↕</span></th>
+            <th onclick="sortLeaderboard('playoff_appearances')" class="num">Playoffs <span class="sort-arrow">↕</span></th>
+            <th onclick="sortLeaderboard('avg_finish')" class="num">Avg Finish <span class="sort-arrow">↕</span></th>
+            <th onclick="sortLeaderboard('avg_pf')" class="num">Avg PF/Game <span class="sort-arrow">↕</span></th>
+            <th onclick="sortLeaderboard('avg_pf_index')" class="num">PF Index <span class="sort-arrow">↕</span></th>
+            <th onclick="sortLeaderboard('avg_pa_index')" class="num">PA Index <span class="sort-arrow">↕</span></th>
+            <th onclick="sortLeaderboard('seasons')" class="num">Seasons <span class="sort-arrow">↕</span></th>
+            <th onclick="sortLeaderboard('profit')" class="num">Profit <span class="sort-arrow">↕</span></th>
+          </tr>
+        </thead>
+        <tbody id="leaderboard-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section chart-row">
+    <div>
+      <div class="section-title">Scoring Landscape — All-Time</div>
+      <div class="chart-wrap scatter-wrap" style="height:360px">
+        <canvas id="scatter-alltime"></canvas>
+      </div>
+      <p style="font-size:10px;color:#334155;margin-top:6px">X = avg Points For index · Y = avg Points Against index · size = seasons played · indexed to season average (1.0 = average)</p>
+    </div>
+    <div>
+      <div class="section-title"><span id="finish-title">Playoff Finish History</span>
+        <span class="toggle-pill" id="finish-toggle" onclick="toggleFinishMode()"><span class="pill-dot"></span><span id="finish-toggle-label">Final finish</span></span></div>
+      <div class="hm-wrap" id="finish-heatmap"></div>
+      <p style="font-size:10px;color:#334155;margin-top:6px"><span id="finish-note">Final finish after the playoffs (1 = champion)</span> · gold = 1st · green = top 4 · red = bottom 4 · click a row to highlight</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Head-to-Head Matrix <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">· current owners · click a cell for year-by-year detail</span></div>
+    <div class="h2h-scroll">
+      <table class="h2h-table" id="h2h-matrix"></table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ TAB 2: TEAM HISTORY ══════════ -->
+<div class="tab-panel" id="tab-history">
+  <h1>Team History</h1>
+  <p class="subtitle">Season-by-season team performance</p>
+
+  <div class="filters">
+    <span class="filter-label">Season</span>
+    <select class="filter-select" id="hist-year" onchange="renderHistory()">
+      <option value="all">All Years</option>
+    </select>
+    <span class="filter-label" style="margin-left:12px">Owners</span>
+    <div class="filter-chips" id="owner-chips"></div>
+  </div>
+
+  <div class="section chart-row">
+    <div>
+      <div class="section-title" id="scatter-hist-title">Scoring Landscape</div>
+      <div class="chart-wrap" style="height:340px">
+        <canvas id="scatter-history"></canvas>
+      </div>
+      <p style="font-size:10px;color:#334155;margin-top:6px" id="scatter-hist-note"></p>
+    </div>
+    <div>
+      <div class="section-title">Score Range by Owner</div>
+      <div class="chart-wrap" style="height:340px">
+        <canvas id="score-range"></canvas>
+      </div>
+      <p style="font-size:10px;color:#334155;margin-top:6px">Thin line = low to high · box = middle 50% of weeks (quartiles) · white tick = median</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Season Cards <span id="card-count" style="font-weight:400;text-transform:none;font-size:10px;color:#334155"></span>
+      <span class="toggle-pill" id="group-toggle" onclick="toggleCardGroup()"><span class="pill-dot"></span><span id="group-toggle-label">Grouped by year</span></span></div>
+    <div id="season-cards"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Bad Luck All-Time <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">· top-3 in points, finished outside top 4</span></div>
+    <table class="data-table" id="bad-luck-table">
+      <thead><tr>
+        <th>Season</th><th>Owner</th><th>Team</th>
+        <th class="num">Points Rank</th><th class="num">Actual Finish</th><th class="num">Luck Gap</th>
+      </tr></thead>
+      <tbody id="bad-luck-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════ TAB 3: OWNER HISTORY ══════════ -->
+<div class="tab-panel" id="tab-owner">
+  <h1>Owner History</h1>
+  <p class="subtitle">Pick an owner to see their best teams, who they beat, and what they earned</p>
+
+  <div class="filters">
+    <input type="hidden" id="owner-select">
+    <div class="owner-cards" id="owner-cards"></div>
+  </div>
+
+  <div class="owner-header" id="owner-header"></div>
+
+  <div class="kpi-row" id="owner-kpis"></div>
+
+  <div class="section chart-row">
+    <div>
+      <div class="section-title"><span class="ot-owner"></span>Finish By Season</div>
+      <div class="chart-wrap" style="height:300px"><canvas id="owner-finish"></canvas></div>
+      <p style="font-size:10px;color:#334155;margin-top:6px">Lower = better · gold = final finish · grey = regular-season finish</p>
+    </div>
+    <div>
+      <div class="section-title"><span class="ot-owner"></span>Profit By Season <span id="owner-profit-note" style="font-weight:400;text-transform:none;font-size:10px;color:#334155"></span></div>
+      <div class="chart-wrap" style="height:300px"><canvas id="owner-profit"></canvas></div>
+      <p style="font-size:10px;color:#334155;margin-top:6px">Winnings minus buy-in · completed seasons only</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="ot-owner"></span>Top Teams <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">· ranked by final finish, then regular-season finish, then points</span></div>
+    <table class="data-table" id="owner-top-teams">
+      <thead><tr>
+        <th>Season</th><th>Team</th><th class="num">Record</th><th class="num">PF</th>
+        <th class="num">PF Rank</th><th class="num">Reg Season</th><th>Final</th><th class="num">Profit</th>
+      </tr></thead>
+      <tbody id="owner-top-body"></tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="ot-owner"></span>Head-to-Head</div>
+    <div class="chart-row" style="margin-bottom:20px">
+      <div>
+        <div class="section-title" style="color:#4ade80">Best Against <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">· min 5 games</span></div>
+        <table class="data-table"><tbody id="owner-best-body"></tbody></table>
+      </div>
+      <div>
+        <div class="section-title" style="color:#f87171">Toughest Opponents <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">· min 5 games</span></div>
+        <table class="data-table"><tbody id="owner-worst-body"></tbody></table>
+      </div>
+    </div>
+    <table class="data-table" id="owner-h2h">
+      <thead><tr>
+        <th>Opponent</th><th class="num">W</th><th class="num">L</th><th class="num">Win%</th>
+        <th class="num">Avg PF</th><th class="num">Avg PA</th><th class="num">Avg Margin</th>
+      </tr></thead>
+      <tbody id="owner-h2h-body"></tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="ot-owner"></span>Every Season</div>
+    <table class="data-table" id="owner-seasons">
+      <thead><tr>
+        <th>Season</th><th>Team</th><th class="num">Record</th><th class="num">PF</th><th class="num">PA</th>
+        <th class="num">Reg Season</th><th>Final</th><th class="num">Won</th><th class="num">Profit</th>
+      </tr></thead>
+      <tbody id="owner-seasons-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════ TAB: RECORDS ══════════ -->
+<div class="tab-panel" id="tab-records">
+  <h1>Records</h1>
+  <p class="subtitle">Single-game bests and worsts, streaks, all-time luck and playoff performance &middot; <span style="color:#fcd34d">gold rows</span> are from the current season</p>
+  <div class="section"><div class="section-title">Single-Game Records <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; all owners, all games</span></div><div class="rec-grid" id="rec-games"></div></div>
+  <div class="section"><div class="section-title">Streaks <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; consecutive games, carrying across seasons</span></div><div class="rec-grid" id="rec-streaks"></div></div>
+  <div class="section">
+    <div class="section-title">Luck All-Time <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; actual wins vs. expected wins if every team played every other team each week (regular season)</span></div>
+    <div class="chart-row">
+      <div><div class="chart-wrap" style="height:380px"><canvas id="luck-alltime"></canvas></div>
+        <p style="font-size:10px;color:#334155;margin-top:6px">Green = lucky &middot; red = unlucky &middot; current owners</p></div>
+      <div><table class="data-table"><thead><tr><th>Owner</th><th class="num">Actual W</th><th class="num">Expected W</th><th class="num">Luck</th><th class="num">Per season</th></tr></thead><tbody id="luck-alltime-body"></tbody></table></div>
+    </div>
+    <div class="rec-grid" id="rec-luck" style="margin-top:20px"></div>
+  </div>
+  <div class="section">
+    <div class="section-title">Playoff Performance <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; completed seasons &middot; "vs seed" = regular-season finish minus final finish (+ = beat their seed)</span></div>
+    <table class="data-table" id="finish-table">
+      <thead><tr><th>Owner</th><th class="num">Titles</th><th class="num">Runner-up</th><th class="num">Playoffs</th><th class="num">Title rate</th><th class="num">Reg Season #1</th><th class="num">Avg vs seed</th><th class="num">Last place</th></tr></thead>
+      <tbody id="finish-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════ TAB: RIVALRY ══════════ -->
+<div class="tab-panel" id="tab-rivalry">
+  <h1>Rivalry</h1>
+  <p class="subtitle">Pick any two owners to see their full head-to-head history</p>
+  <div class="section-title" style="margin-bottom:8px">Owner A <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">(gold)</span></div>
+  <div class="owner-cards" id="riv-a" style="margin-bottom:14px"></div>
+  <div class="section-title" style="margin-bottom:8px">Owner B <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">(blue)</span></div>
+  <div class="owner-cards" id="riv-b" style="margin-bottom:28px"></div>
+  <div id="riv-body"></div>
+</div>
+
+<!-- ══════════ TAB: WHO HAS HIM ══════════ -->
+<div class="tab-panel" id="tab-whohashim">
+  <h1>Who Has Him</h1>
+  <p class="subtitle" id="wh-sub">Pick any player to see who drafted him, for how much, and who finished the season with him</p>
+  <div class="wh-search">
+    <input id="wh-input" type="text" autocomplete="off" placeholder="Search players (try Mike Evans)..." oninput="whSearch()" onfocus="whSearch()" onkeydown="whKey(event)">
+    <div class="wh-results" id="wh-results"></div>
+  </div>
+  <div class="wh-chips" id="wh-chips"></div>
+  <div id="wh-body"></div>
+</div>
+
+<!-- ══════════ TAB 4: CURRENT SEASON ══════════ -->
+<div class="tab-panel" id="tab-season">
+  <h1 id="season-h1">Season</h1>
+  <p class="subtitle" id="season-sub"></p>
+
+  <div class="section chart-row">
+    <div>
+      <div class="section-title">Standings <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">· by wins, then points for · arrow = rank change vs. last week</span></div>
+      <table class="data-table" id="standings-2025">
+        <thead><tr>
+          <th class="num">#</th><th>Owner</th><th>Team</th>
+          <th class="num">W</th><th class="num">L</th>
+          <th class="num">PF</th><th class="num">PA</th><th class="num">PF/G</th>
+          <th>Streak</th>
+        </tr></thead>
+        <tbody id="standings-body"></tbody>
+      </table>
+    </div>
+    <div>
+      <div class="section-title">Points For vs Against</div>
+      <div class="chart-wrap" style="height:340px">
+        <canvas id="scatter-2025"></canvas>
+      </div>
+      <p style="font-size:10px;color:#334155;margin-top:6px">X = points per game · Y = points against per game · lines at league averages</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Playoff Odds <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; 10,000 simulated seasons &middot; top 6 make the playoffs &middot; ranked by wins, then points for</span></div>
+    <table class="data-table" id="odds-table">
+      <thead><tr><th>Owner</th><th class="num">Record</th><th>Playoff %</th><th>#1 Seed %</th><th class="num">Proj. Wins</th><th class="num">Range (10-90%)</th></tr></thead>
+      <tbody id="odds-body"></tbody>
+    </table>
+    <p style="font-size:10px;color:#334155;margin-top:6px">Each team's weekly score is drawn around its season average (pulled toward the league average early in the year) with the league's historical week-to-week spread. A simple model, not a forecast.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title" id="preview-title">Next Week Preview</div>
+    <div class="cards-grid" id="preview-cards" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Luck <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">· actual wins vs. expected wins if every team played every other team each week</span></div>
+    <div class="chart-row">
+      <div>
+        <div class="chart-wrap" style="height:360px"><canvas id="luck-chart"></canvas></div>
+        <p style="font-size:10px;color:#334155;margin-top:6px">Actual wins minus expected wins · green = lucky · red = unlucky</p>
+      </div>
+      <div>
+        <table class="data-table" id="win-diff-table">
+          <thead><tr>
+            <th>Owner</th>
+            <th class="num">Actual W</th><th class="num">Expected W</th>
+            <th class="num">Luck</th><th class="num">PF/G</th><th class="num">PA/G</th>
+          </tr></thead>
+          <tbody id="win-diff-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title" id="recap-title">Latest Week</div>
+    <div class="kpi-row" id="recap-cards"></div>
+    <div class="matchup-grid" id="recap-grid"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Weekly Scores</div>
+    <div class="chart-wrap" style="height:300px">
+      <canvas id="weekly-scores"></canvas>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">All Matchups</div>
+    <div class="matchup-grid" id="matchup-grid"></div>
+  </div>
+</div>
+
+<!-- ══════════ H2H MODAL ══════════ -->
+<div class="modal-bg" id="h2h-modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal" style="position:relative">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-title" id="modal-title"></div>
+    <div class="modal-sub" id="modal-sub"></div>
+    <table class="data-table" id="modal-table">
+      <thead><tr><th>Season</th><th>Week</th><th class="num">Score</th><th class="num">Opp Score</th><th>Result</th><th>Type</th></tr></thead>
+      <tbody id="modal-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="about"><details>
+  <summary>About these numbers</summary>
+  <dl>
+    <dt>PF / PA Index</dt><dd>Points for (or against) relative to that season's league average, so 1.00 is average and 1.10 is 10% above. It lets seasons with different scoring levels be compared.</dd>
+    <dt>Luck</dt><dd>Actual wins minus expected wins. Expected wins give each team credit each week for the share of other teams it outscored, as if it had played all of them. Regular season only.</dd>
+    <dt>Playoff odds</dt><dd>10,000 simulated seasons. Each remaining game draws both scores around the team's season average (pulled toward the league average early in the year) with the league's historical weekly spread. The top 6 by wins, then points for, make the playoffs. A simple model, not a forecast.</dd>
+    <dt>Win % (preview)</dt><dd>Same scoring model applied to a single game.</dd>
+    <dt>Streak arrow</dt><dd>How many spots a team moved in the standings versus the week before.</dd>
+    <dt>Records</dt><dd>Include every played game, regular season and playoff brackets, for all current and retired owners. Streaks carry across seasons.</dd>
+    <dt>Profit</dt><dd>Winnings minus buy-in, completed seasons only.</dd>
+    <dt>Data</dt><dd>League history sheet, 2009 to present. Game-level results start in 2011.</dd>
+  </dl>
+</details></div>
+
+<script>
+// ══════════════════════════════════════════════════════
+// DATA — injected by build_data.py
+// ══════════════════════════════════════════════════════
+const SEASONS  = __SEASONS__;
+const MATCHUPS = __MATCHUPS__;
+const H2H      = __H2H__;
+const META     = __META__;
+const LIVE     = __LIVE__;   // in-progress week's live ESPN scores (or null)
+const PLAYERS  = __PLAYERS__;   // {cols, rows} one row per player per season
+const LOGOS    = __LOGOS__;   // 'year|owner' -> image path
+
+// ══════════════════════════════════════════════════════
+// CONFIG
+// ══════════════════════════════════════════════════════
+const OWNER_COLORS = {
+  'Salty':           '#3b82f6',
+  'Hudspeath':       '#22c55e',
+  'Tayski':          '#f59e0b',
+  'Buser':           '#a78bfa',
+  'Cock':            '#ef4444',
+  'Ewert':           '#06b6d4',
+  'KnardDawg':       '#f97316',
+  'Pierson':         '#ec4899',
+  'Riley':           '#84cc16',
+  'Rooney/Jackson':  '#14b8a6',
+  'Shep':            '#8b5cf6',
+  'T-How':           '#eab308',
+};
+const RETIRED_COLOR = '#334155';
+
+function ownerColor(name) { return OWNER_COLORS[name] || RETIRED_COLOR; }
+const GOLD = '#fcd34d';
+const GREYS = ['#64748b','#94a3b8','#475569','#7c8aa0','#a8b3c4','#5b6678'];
+function greyFor(name) { return GREYS[Math.max(0, META.owners.indexOf(name)) % GREYS.length]; }
+// All-Time charts: grey by default, gold for the selected owner
+function bubbleStyle(owner, ao) {
+  const active = ao === owner, dim = !!ao && !active;
+  const g = greyFor(owner), a = isCurrent(owner) ? '99' : '55';
+  return {
+    backgroundColor: active ? GOLD + 'dd' : g + (dim ? '22' : a),
+    borderColor:     active ? GOLD : g + (dim ? '33' : 'cc'),
+    borderWidth:     active ? 2 : 1,
+    order:           active ? 0 : 1,
+  };
+}
+function lineStyle(owner, ao) {
+  const active = ao === owner, dim = !!ao && !active;
+  const c = active ? GOLD : greyFor(owner) + (dim ? '33' : 'cc');
+  return { borderColor: c, pointBackgroundColor: c, pointBorderColor: c,
+           borderWidth: active ? 2.5 : 1.5, order: active ? 0 : 1 };
+}
+function isCurrent(name)  { return META.current_owners.includes(name); }
+function fmt1(n)  { return n == null ? '—' : n.toFixed(1); }
+function fmt2(n)  { return n == null ? '—' : n.toFixed(2); }
+function fmtPct(n){ return n == null ? '—' : (n*100).toFixed(1)+'%'; }
+function fmtMoney(n){ return n == null ? '—' : (n<0?'-':n>0?'+':'')+`$${Math.abs(n).toFixed(0)}`; }
+
+// Chart.js global defaults
+Chart.defaults.color = '#475569';
+Chart.defaults.borderColor = '#1a2030';
+Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+Chart.defaults.font.size = 11;
+
+const chartInstances = {};
+function destroyChart(id) { if (chartInstances[id]) { chartInstances[id].destroy(); delete chartInstances[id]; } }
+
+// ══════════════════════════════════════════════════════
+// TAB NAVIGATION
+// ══════════════════════════════════════════════════════
+const tabInitialized = {};
+
+function showTab(name, btn, fromHash) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+  if (!tabInitialized[name]) {
+    tabInitialized[name] = true;
+    if (name === 'history') renderHistory();
+    if (name === 'owner')   renderOwner();
+    if (name === 'season')  renderSeason();
+    if (name === 'records') renderRecords();
+    if (name === 'rivalry') renderRivalry();
+    if (name === 'whohashim') renderWhoHasHim();
+  }
+  if (!fromHash) setHash(name === 'owner' ? ['owner', document.getElementById('owner-select').value] : name === 'rivalry' ? ['rivalry', rivA, rivB] : name === 'whohashim' ? ['whohashim', whSlug()] : [name]);
+}
+
+// Shareable URLs: #alltime, #history, #owner/Buser, #records, #rivalry/Buser/Salty, #season
+function setHash(parts) {
+  parts = [].concat(parts);
+  const h = parts.map(encodeURIComponent).join('/');
+  if (location.hash.slice(1) !== h) location.hash = h;
+}
+function routeFromHash() {
+  const parts = location.hash.slice(1).split('/').map(decodeURIComponent);
+  const name = parts[0];
+  const btn = document.querySelector(`.tab-btn[onclick*="'${name}'"]`);
+  if (!btn) return;
+  if (name === 'owner' && META.current_owners.includes(parts[1])) {
+    document.getElementById('owner-select').value = parts[1];
+    renderOwnerCards();
+    if (tabInitialized.owner) renderOwner();
+  }
+  if (name === 'rivalry' && META.owners.includes(parts[1]) && META.owners.includes(parts[2])) {
+    rivA = parts[1]; rivB = parts[2];
+    if (tabInitialized.rivalry) renderRivalry();
+  }
+  if (name === 'whohashim' && parts[1]) {
+    whSelect(parts[1]);
+    if (tabInitialized.whohashim) renderWhoHasHim();
+  }
+  showTab(name, btn, true);
+}
+window.addEventListener('hashchange', routeFromHash);
+
+// ══════════════════════════════════════════════════════
+// AGGREGATION HELPERS
+// ══════════════════════════════════════════════════════
+function ownerAggregates() {
+  const map = {};
+  for (const s of SEASONS) {
+    if (!map[s.owner]) map[s.owner] = {
+      owner: s.owner, seasons: 0, wins: 0, losses: 0,
+      championships: 0, playoff_appearances: 0, reg_season_1s: 0,
+      finish_sum: 0, finish_count: 0,
+      pf_index_sum: 0, pa_index_sum: 0, index_count: 0,
+      pf_sum: 0, pf_games: 0,
+      profit: 0, won: 0, buy_in: 0,
+    };
+    const a = map[s.owner];
+    a.seasons++;
+    a.wins   += s.wins   || 0;
+    a.losses += s.losses || 0;
+    const done = s.finish != null;   // in-progress season has no final finish yet
+    if (done) { a.championships += s.championships || 0; a.playoff_appearances += s.playoff_appearances || 0; a.reg_season_1s += s.reg_season_1s || 0; }
+    if (done && s.reg_season_finish) { a.finish_sum += s.reg_season_finish; a.finish_count++; }
+    if (s.points_for) { a.pf_sum += s.points_for; a.pf_games += (s.wins || 0) + (s.losses || 0); }
+    if (s.pts_for_index)  { a.pf_index_sum += s.pts_for_index;  a.index_count++; }
+    if (s.pts_against_index) { a.pa_index_sum += s.pts_against_index; }
+    if (done) {
+      a.profit  += s.profit  || 0;
+      a.won     += s.won     || 0;
+      a.buy_in  += s.buy_in  || 0;
+    }
+  }
+  return Object.values(map).map(a => ({
+    ...a,
+    winpct:       a.wins / (a.wins + a.losses || 1),
+    avg_finish:   a.finish_count ? a.finish_sum / a.finish_count : null,
+    avg_pf:       a.pf_games ? a.pf_sum / a.pf_games : null,
+    avg_pf_index: a.index_count  ? a.pf_index_sum / a.index_count : null,
+    avg_pa_index: a.index_count  ? a.pa_index_sum / a.index_count : null,
+  }));
+}
+
+// ══════════════════════════════════════════════════════
+// TAB 1 — ALL-TIME
+// ══════════════════════════════════════════════════════
+let lbSortCol = 'championships', lbSortDir = -1;
+let hideRetired = true;
+
+function toggleRetired() {
+  hideRetired = !hideRetired;
+  const pill = document.getElementById('retired-toggle');
+  pill.classList.toggle('on', hideRetired);
+  renderLeaderboard();
+}
+
+function sortLeaderboard(col) {
+  if (lbSortCol === col) lbSortDir *= -1;
+  else { lbSortCol = col; lbSortDir = -1; }
+  renderLeaderboard();
+}
+
+function renderLeaderboard() {
+  let aggs = ownerAggregates();
+  if (hideRetired) aggs = aggs.filter(a => isCurrent(a.owner));
+  aggs.sort((a, b) => {
+    const av = a[lbSortCol], bv = b[lbSortCol];
+    if (av == null && bv == null) return 0;
+    if (av == null) return 1;
+    if (bv == null) return -1;
+    const d = lbSortDir * (typeof av === 'string' ? av.localeCompare(bv) : av - bv);
+    return d || ((b.profit || 0) - (a.profit || 0));
+  });
+
+  // Update header arrows
+  document.querySelectorAll('#leaderboard th').forEach(th => {
+    th.classList.remove('sorted');
+    const arrow = th.querySelector('.sort-arrow');
+    if (arrow) arrow.textContent = '↕';
+  });
+  const allTh = document.querySelectorAll('#leaderboard th');
+  const colNames = ['championships','owner','wins','losses','winpct','playoff_appearances','avg_finish','avg_pf','avg_pf_index','avg_pa_index','seasons','profit'];
+  const idx = colNames.indexOf(lbSortCol);
+  if (idx >= 0 && allTh[idx]) {
+    allTh[idx].classList.add('sorted');
+    const arrow = allTh[idx].querySelector('.sort-arrow');
+    if (arrow) arrow.textContent = lbSortDir > 0 ? '↑' : '↓';
+  }
+
+  const body = document.getElementById('leaderboard-body');
+  body.innerHTML = aggs.map(a => {
+    const dot = `<span class="owner-dot" style="background:${ownerColor(a.owner)}"></span>`;
+    const retired = !isCurrent(a.owner);
+    return `<tr class="${retired ? 'retired' : ''}" data-owner="${a.owner}" onclick="setActiveOwner('${a.owner}')">
+      <td class="num">${a.championships > 0 ? `<strong style="color:#fcd34d">${a.championships}</strong>` : '0'}</td>
+      <td class="owner-name">${dot}${a.owner}${retired ? ' <span style="font-size:9px;color:#334155">retired</span>' : ''}</td>
+      <td class="num">${a.wins}</td>
+      <td class="num">${a.losses}</td>
+      <td class="num">${fmtPct(a.winpct)}</td>
+      <td class="num">${a.playoff_appearances}</td>
+      <td class="num">${a.avg_finish ? fmt1(a.avg_finish) : '—'}</td>
+      <td class="num">${a.avg_pf ? fmt1(a.avg_pf) : '—'}</td>
+      <td class="num">${a.avg_pf_index ? fmt2(a.avg_pf_index) : '—'}</td>
+      <td class="num">${a.avg_pa_index ? fmt2(a.avg_pa_index) : '—'}</td>
+      <td class="num">${a.seasons}</td>
+      <td class="num" style="color:${(a.profit||0)>=0?'#4ade80':'#f87171'}">${fmtMoney(a.profit)}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderAllTimeScatter() {
+  destroyChart('scatter-alltime');
+  const aggs = ownerAggregates().filter(a => isCurrent(a.owner) && a.avg_pf_index && a.avg_pa_index);
+  const datasets = aggs.map(a => ({
+    label: a.owner, ownerKey: a.owner,
+    data: [{ x: a.avg_pf_index, y: a.avg_pa_index, r: Math.sqrt(a.seasons) * 3.6 }],
+    ...bubbleStyle(a.owner, activeOwner),
+  }));
+
+  const pfVals = aggs.map(a => a.avg_pf_index);
+  const paVals = aggs.map(a => a.avg_pa_index);
+  const xMid = 1.0, yMid = 1.0;
+  const xMin = Math.min(...pfVals, 1) - 0.025, xMax = Math.max(...pfVals, 1) + 0.025;
+  const yMin = Math.min(...paVals, 1) - 0.012, yMax = Math.max(...paVals, 1) + 0.012;
+
+  chartInstances['scatter-alltime'] = new Chart(
+    document.getElementById('scatter-alltime'),
+    {
+      type: 'bubble',
+      data: { datasets },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => {
+                const a = aggs.find(x => x.owner === ctx.dataset.label);
+                return `${ctx.dataset.label}: PF ${fmt2(ctx.raw.x)} · PA ${fmt2(ctx.raw.y)} · ${a.seasons} seasons`;
+              }
+            }
+          },
+          quadrantLines: { xMid, yMid, labels: ['Dominant','Unlucky','Lucky','Struggling'] },
+          ownerLabels: { mode: 'bubble' }
+        },
+        scales: {
+          x: { min: xMin, max: xMax, title: { display: true, text: 'Points For Index', color: '#334155' }, grid: { color: '#1a2030' }, ticks: { color: '#475569' } },
+          y: { title: { display: true, text: 'Points Against Index', color: '#334155' }, grid: { color: '#1a2030' }, ticks: { color: '#475569' }, reverse: true, min: yMin, max: yMax },
+        },
+      },
+      plugins: [quadrantPlugin, ownerLabelPlugin],
+    }
+  );
+}
+
+let finishMode = 'final';
+function toggleFinishMode() {
+  finishMode = finishMode === 'final' ? 'reg' : 'final';
+  const fin = finishMode === 'final';
+  document.getElementById('finish-title').textContent = fin ? 'Playoff Finish History' : 'Regular Season Finish History';
+  document.getElementById('finish-toggle-label').textContent = fin ? 'Final finish' : 'Regular season';
+  document.getElementById('finish-toggle').classList.toggle('on', !fin);
+  document.getElementById('finish-note').textContent = fin ? 'Final finish after the playoffs (1 = champion)' : 'Regular-season finish (1 = best record)';
+  renderFinishHistory();
+}
+function renderFinishHistory() {
+  const fin = finishMode === 'final';
+  const years = META.years.filter(y => y >= 2009 && SEASONS.filter(s => s.season === y).every(s => s.finish != null));
+  const val = (o, y) => { const s = SEASONS.find(s => s.owner === o && s.season === y);
+    return s && s.finish != null ? (fin ? s.finish : s.reg_season_finish) ?? null : null; };
+  const rows = META.current_owners.map(o => {
+    const v = years.map(y => val(o, y)).filter(x => x != null);
+    return { o, avg: v.length ? v.reduce((a, b) => a + b, 0) / v.length : null };
+  }).sort((a, b) => (a.avg ?? 99) - (b.avg ?? 99));
+  const cellStyle = f => f === 1 ? 'background:#fcd34d;color:#3b2800'
+    : f <= 4 ? `background:${['#15803d', '#16a34a', '#22c55e'][f - 2]};color:#052e16`
+    : f <= 8 ? 'background:#1e293b;color:#94a3b8'
+    : `background:${['#7f1d1d', '#991b1b', '#b91c1c', '#dc2626'][Math.min(f - 9, 3)]};color:#fecaca`;
+  document.getElementById('finish-heatmap').innerHTML = `<table class="hm"><thead><tr><th></th>${
+    years.map(y => `<th>\u2019${String(y).slice(2)}</th>`).join('')}<th style="text-align:right">AVG</th></tr></thead><tbody>${
+    rows.map(r => `<tr data-owner="${r.o}" onclick="setActiveOwner('${r.o}')"><td class="hm-name" style="color:${ownerColor(r.o)}">${r.o.split('/')[0]}</td>${
+      years.map(y => { const f = val(r.o, y);
+        return f == null ? '<td class="hm-cell" style="background:#0f1420;color:#1e293b">\u00b7</td>' : `<td class="hm-cell" style="${cellStyle(f)}" title="${r.o} ${y}: #${f}">${f}</td>`; }).join('')
+      }<td class="hm-avg">${r.avg == null ? '\u2014' : r.avg.toFixed(1)}</td></tr>`).join('')}</tbody></table>`;
+  applyHighlight();
+}
+
+function renderH2HMatrix() {
+  const owners = META.current_owners;
+  const h2hMap = {};
+  for (const r of H2H) { h2hMap[`${r.owner}||${r.opponent}`] = r; }
+
+  let html = '<tr><th></th>' + owners.map(o =>
+    `<th style="color:${ownerColor(o)}">${o.split('/')[0]}</th>`
+  ).join('') + '</tr>';
+
+  for (const rowOwner of owners) {
+    html += `<tr data-owner="${rowOwner}" onclick="setActiveOwner('${rowOwner}')"><th style="text-align:left;color:${ownerColor(rowOwner)};padding-right:12px;cursor:pointer">${rowOwner}</th>`;
+    for (const colOwner of owners) {
+      if (rowOwner === colOwner) { html += '<td class="h2h-self">—</td>'; continue; }
+      const r = h2hMap[`${rowOwner}||${colOwner}`];
+      if (!r) { html += '<td class="h2h-na">—</td>'; continue; }
+      const total = r.wins + r.losses;
+      const pct   = total ? r.wins / total : 0.5;
+      const g = Math.round(pct * 180);
+      const bg = `hsl(${pct >= 0.5 ? 120 : 0},${Math.round(Math.abs(pct - 0.5) * 140)}%,${12 + Math.round(Math.abs(pct-0.5)*18)}%)`;
+      const fg = Math.abs(pct - 0.5) > 0.15 ? '#e2e8f0' : '#94a3b8';
+      html += `<td style="background:${bg};color:${fg}" onclick="showH2H('${rowOwner}','${colOwner}')">${r.wins}-${r.losses}</td>`;
+    }
+    html += '</tr>';
+  }
+  document.getElementById('h2h-matrix').innerHTML = html;
+}
+
+function showH2H(owner, opponent) {
+  const games = MATCHUPS.filter(m => m.owner === owner && m.opponent === opponent && m.score > 0)
+    .sort((a, b) => a.year - b.year || a.week - b.week);
+  const wins = games.filter(g => g.result === 1).length;
+  document.getElementById('modal-title').textContent = `${owner} vs ${opponent}`;
+  document.getElementById('modal-sub').textContent = `All-time record: ${wins}–${games.length - wins}`;
+  document.getElementById('modal-body').innerHTML = games.map(g =>
+    `<tr>
+      <td>${g.year}</td><td>Wk ${g.week}</td>
+      <td class="num">${fmt1(g.score)}</td>
+      <td class="num">${fmt1(g.opp_score)}</td>
+      <td>${g.result ? '<span class="badge badge-win">W</span>' : '<span class="badge badge-loss">L</span>'}</td>
+      <td><span style="font-size:10px;color:#334155">${g.game_type || ''}</span></td>
+    </tr>`
+  ).join('');
+  document.getElementById('h2h-modal').classList.add('open');
+}
+
+function closeModal() { document.getElementById('h2h-modal').classList.remove('open'); }
+
+// ══════════════════════════════════════════════════════
+// TAB 2 — TEAM HISTORY
+// ══════════════════════════════════════════════════════
+const histOwnerState = {};
+META.current_owners.forEach(o => histOwnerState[o] = true);
+
+function buildHistFilters() {
+  const yearSel = document.getElementById('hist-year');
+  META.years.slice().reverse().forEach(y => {
+    const opt = document.createElement('option');
+    opt.value = y; opt.textContent = y; yearSel.appendChild(opt);
+  });
+
+  const chips = document.getElementById('owner-chips');
+  META.current_owners.forEach(owner => {
+    const btn = document.createElement('button');
+    btn.className = 'chip';
+    btn.textContent = owner;
+    btn.style.background = ownerColor(owner) + '33';
+    btn.style.borderColor = ownerColor(owner);
+    btn.style.color = ownerColor(owner);
+    btn.dataset.owner = owner;
+    btn.onclick = () => {
+      histOwnerState[owner] = !histOwnerState[owner];
+      btn.classList.toggle('off', !histOwnerState[owner]);
+      renderHistory();
+    };
+    chips.appendChild(btn);
+  });
+}
+
+function renderHistory() {
+  const year = document.getElementById('hist-year').value;
+  const yr   = year === 'all' ? null : parseInt(year);
+  const activeOwners = META.current_owners.filter(o => histOwnerState[o]);
+
+  let seasons = SEASONS.filter(s => activeOwners.includes(s.owner));
+  if (yr) seasons = seasons.filter(s => s.season === yr);
+
+  renderHistScatter(seasons, yr);
+  renderScoreRange(seasons, yr, activeOwners);
+  renderSeasonCards(seasons);
+  renderBadLuck();
+}
+
+function renderHistScatter(seasons, yr) {
+  destroyChart('scatter-history');
+  const indexed = !yr;
+  const useX = s => indexed ? s.pts_for_index  : (s.wins + s.losses ? s.points_for  / (s.wins + s.losses) : null);
+  const useY = s => indexed ? s.pts_against_index : (s.wins + s.losses ? s.points_against / (s.wins + s.losses) : null);
+
+  document.getElementById('scatter-hist-title').textContent = indexed
+    ? 'Scoring Landscape — All Seasons (Indexed)'
+    : `Scoring Landscape — ${yr}`;
+  document.getElementById('scatter-hist-note').textContent = indexed
+    ? 'X = PF index · Y = PA index · normalized to season average (1.0 = average)'
+    : 'X = points per game · Y = points against per game · lines at season averages';
+
+  const datasets = seasons.filter(s => useX(s) && useY(s)).map(s => ({
+    label: `${s.owner} ${s.season}`, ownerKey: s.owner,
+    data: [{ x: useX(s), y: useY(s), season: s.season, owner: s.owner, team: s.team_name, wins: s.wins, losses: s.losses }],
+    backgroundColor: ownerColor(s.owner) + 'bb',
+    borderColor: ownerColor(s.owner),
+    borderWidth: 1.5,
+    _baseAlphas: { bg: 'bb', border: 'ff' },
+  }));
+
+  const xVals = datasets.map(d => d.data[0].x);
+  const yVals = datasets.map(d => d.data[0].y);
+  const xMid = indexed ? 1.0 : (xVals.reduce((a,b)=>a+b,0)/xVals.length||0);
+  const yMid = indexed ? 1.0 : (yVals.reduce((a,b)=>a+b,0)/yVals.length||0);
+
+  chartInstances['scatter-history'] = new Chart(
+    document.getElementById('scatter-history'),
+    {
+      type: 'scatter',
+      data: { datasets },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: {
+            label: ctx => `${ctx.raw.owner} ${ctx.raw.season} — ${ctx.raw.team} | ${ctx.raw.wins}W-${ctx.raw.losses}L`
+          }},
+          quadrantLines: { xMid, yMid, labels: ['Dominant','Unlucky','Lucky','Struggling'] }
+        },
+        scales: {
+          x: { title: { display: true, text: indexed ? 'PF Index' : 'PPG', color: '#334155' }, grid: { color: '#1a2030' }, ticks: { color: '#475569' } },
+          y: { title: { display: true, text: indexed ? 'PA Index' : 'PAPG', color: '#334155' }, grid: { color: '#1a2030' }, ticks: { color: '#475569' }, reverse: true },
+        },
+      },
+      plugins: [quadrantPlugin],
+    }
+  );
+}
+
+function renderScoreRange(seasons, yr, activeOwners) {
+  destroyChart('score-range');
+  const owners = (activeOwners || META.current_owners).filter(o =>
+    seasons.some(s => s.owner === o)
+  );
+
+  // Get weekly scores from matchups
+  const matchupData = {};
+  owners.forEach(o => matchupData[o] = []);
+  for (const m of MATCHUPS) {
+    if (!owners.includes(m.owner)) continue;
+    if (yr && m.year !== yr) continue;
+    if (!META.current_owners.includes(m.owner)) continue;
+    if (m.game_type === 'Playoffs') continue; // regular season only
+    if (m.score > 0) matchupData[m.owner].push(m.score); // skip unplayed weeks (score 0)
+  }
+
+  const ownersSorted = owners.filter(o => matchupData[o].length > 0);
+  const quant = (arr, q) => { const a = [...arr].sort((x, y) => x - y), p = (a.length - 1) * q, lo = Math.floor(p);
+    return a[lo] + (a[Math.min(lo + 1, a.length - 1)] - a[lo]) * (p - lo); };
+  const stats = ownersSorted.map(o => { const a = matchupData[o];
+    return { min: Math.min(...a), q1: quant(a, .25), med: quant(a, .5), q3: quant(a, .75), max: Math.max(...a), n: a.length }; });
+  const axisMin = Math.floor(Math.min(...stats.map(t => t.min)) / 10) * 10;
+
+  // Median tick drawn on top of the IQR box
+  const medianPlugin = { id: 'medianTick', afterDatasetsDraw(chart) {
+    const { ctx, scales: { x } } = chart, meta = chart.getDatasetMeta(1);
+    meta.data.forEach((bar, i) => {
+      const o = ownersSorted[i], dim = activeOwner && o !== activeOwner;
+      const px = x.getPixelForValue(stats[i].med);
+      ctx.save(); ctx.strokeStyle = dim ? '#ffffff22' : '#f8fafc'; ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.moveTo(px, bar.y - 9); ctx.lineTo(px, bar.y + 9); ctx.stroke(); ctx.restore();
+    });
+  } };
+
+  chartInstances['score-range'] = new Chart(
+    document.getElementById('score-range'),
+    {
+      type: 'bar',
+      data: {
+        labels: ownersSorted,
+        datasets: [
+          { label: 'Range', data: stats.map(t => [t.min, t.max]), baseAlpha: '66', grouped: false, barThickness: 4,
+            backgroundColor: ownersSorted.map(o => ownerColor(o) + '66'), borderWidth: 0 },
+          { label: 'Middle 50%', data: stats.map(t => [t.q1, t.q3]), baseAlpha: 'cc', grouped: false, barThickness: 16,
+            backgroundColor: ownersSorted.map(o => ownerColor(o) + 'cc'), borderWidth: 0 },
+        ],
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        indexAxis: 'y',
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              title: items => items[0].label,
+              label: ctx => {
+                if (ctx.datasetIndex === 0) return null;
+                const t = stats[ctx.dataIndex];
+                return [`Median ${fmt1(t.med)} (${t.n} games)`, `Middle 50%: ${fmt1(t.q1)} \u2013 ${fmt1(t.q3)}`, `Low ${fmt1(t.min)} \u00b7 High ${fmt1(t.max)}`];
+              }
+            }
+          }
+        },
+        scales: {
+          x: { min: axisMin, grid: { color: '#1a2030' }, ticks: { color: '#475569' } },
+          y: { grid: { color: '#1a2030' }, ticks: { color: ctx => ownerColor(ownersSorted[ctx.index]) } },
+        },
+      },
+      plugins: [medianPlugin],
+    }
+  );
+}
+
+let cardGroup = 'year', lastCardSeasons = [];
+function toggleCardGroup() {
+  cardGroup = cardGroup === 'year' ? 'owner' : 'year';
+  document.getElementById('group-toggle-label').textContent = cardGroup === 'year' ? 'Grouped by year' : 'Grouped by owner';
+  document.getElementById('group-toggle').classList.toggle('on', cardGroup === 'owner');
+  renderSeasonCards(lastCardSeasons);
+}
+let _lineups = null;
+// Starting lineup per season|owner from PLAYERS, ordered QB RB RB WR WR FLEX TE.
+// 2011-13 had 3 WR starters, so the 3rd WR is shown as FLEX.
+function lineupFor(s) {
+  if (!_lineups) {
+    _lineups = {};
+    const ix = Object.fromEntries(PLAYERS.cols.map((c, i) => [c, i]));
+    PLAYERS.rows.forEach(r => {
+      const slot = r[ix.lineup_slot];
+      if (!['QB', 'RB', 'WR', 'TE', 'FLEX'].includes(slot) || !r[ix.final_owner]) return;
+      ((_lineups[r[ix.season] + '|' + r[ix.final_owner]] ||= {})[slot] ||= []).push({ name: r[ix.player], pts: r[ix.season_points] || 0 });
+    });
+    Object.values(_lineups).forEach(l => Object.values(l).forEach(a => a.sort((x, y) => y.pts - x.pts)));
+  }
+  const l = _lineups[s.season + '|' + s.owner];
+  if (!l) return null;
+  const wr = (l.WR || []).slice(), flex = (l.FLEX || []).slice();
+  if (!flex.length && wr.length > 2) flex.push(wr.pop());
+  const rows = [['QB', (l.QB || [])[0]], ['RB', (l.RB || [])[0]], ['RB', (l.RB || [])[1]],
+                ['WR', wr[0]], ['WR', wr[1]], ['FLEX', flex[0]], ['TE', (l.TE || [])[0]]];
+  return rows.filter(r => r[1]);
+}
+function lineupHtml(s) {
+  const l = lineupFor(s);
+  if (l) return l.map(([pos, p]) => `<strong>${pos}</strong> ${p.name}`).join('<br>');
+  return [s.qb && `<strong>QB</strong> ${s.qb}`, s.top_rb && `<strong>RB</strong> ${s.top_rb}`,
+          s.top_wr && `<strong>WR</strong> ${s.top_wr}`, s.te && `<strong>TE</strong> ${s.te}`].filter(Boolean).join('<br>');
+}
+function seasonCardHtml(s) {
+  const finish = s.finish || s.reg_season_finish;
+  const isChamp = s.championships > 0 || s.finish === 1;
+  const isPlayoff = s.playoff_appearances > 0 || (s.finish && s.finish <= 4);
+  const inProgress = s.finish == null;
+  const badge = inProgress ? 'badge-reg' : isChamp ? 'badge-champ' : isPlayoff ? 'badge-playoff' : 'badge-reg';
+  const badgeText = inProgress ? 'In progress' : isChamp ? 'Champion' : isPlayoff ? 'Playoffs' : `#${finish}`;
+  const color = ownerColor(s.owner);
+  return `<div class="season-card" data-owner="${s.owner}" onclick="setActiveOwner('${s.owner}')" style="border-top: 2px solid ${color}40;cursor:pointer">
+      <div class="card-head">${logo(s.owner, s.season, 40)}<div><div class="card-team">${s.team_name || '\u2014'}</div>
+      <div class="card-owner" style="color:${color}">${s.owner} \u00b7 ${s.season}</div></div></div>
+      <div class="card-wl">${s.wins??'\u2014'}\u2013${s.losses??'\u2014'}</div>
+      <div class="card-pts">PF <span>${fmt1(s.points_for)}</span> &nbsp;\u00b7&nbsp; PA <span>${fmt1(s.points_against)}</span></div>
+      <div style="margin-bottom:8px"><span class="badge ${badge}">${badgeText}</span>${s.reg_season_finish === 1 ? ' <span class="badge badge-champ" title="First place, regular season">#1 Reg Season</span>' : ''}${s.reg_season_pts_rank === 1 ? ' <span class="badge badge-playoff" title="Most points scored, regular season">Most Pts</span>' : ''}</div>
+      <div class="card-players">${lineupHtml(s)}</div>
+    </div>`;
+}
+function renderSeasonCards(seasons) {
+  lastCardSeasons = seasons;
+  document.getElementById('card-count').textContent = `\u00b7 ${seasons.length} seasons`;
+  const byYear = cardGroup === 'year';
+  const keyOf = s => byYear ? s.season : s.owner;
+  const keys = [...new Set(seasons.map(keyOf))].sort(byYear ? (a, b) => b - a : (a, b) => a.localeCompare(b));
+  document.getElementById('season-cards').innerHTML = keys.map(k => {
+    const group = seasons.filter(s => keyOf(s) === k)
+      .sort(byYear ? (a, b) => (a.reg_season_finish || 99) - (b.reg_season_finish || 99) : (a, b) => b.season - a.season);
+    return `<div class="hist-group"><div class="hist-group-title">${k}</div><div class="cards-grid">${group.map(seasonCardHtml).join('')}</div></div>`;
+  }).join('');
+}
+
+function renderBadLuck() {
+  // Teams that ranked top-3 in PF but finished outside top 4
+  const unlucky = SEASONS.filter(s =>
+    s.finish != null && s.reg_season_pts_rank != null && s.reg_season_pts_rank <= 3 &&
+    s.reg_season_finish   != null && s.reg_season_finish   >  4
+  ).sort((a,b) => a.season - b.season);
+
+  document.getElementById('bad-luck-body').innerHTML = unlucky.map(s => {
+    const gap = s.reg_season_finish - s.reg_season_pts_rank;
+    return `<tr data-owner="${s.owner}" onclick="setActiveOwner('${s.owner}')">
+      <td>${s.season}</td>
+      <td><span class="owner-dot" style="background:${ownerColor(s.owner)}"></span>${s.owner}</td>
+      <td style="color:#94a3b8">${s.team_name}</td>
+      <td class="num">#${s.reg_season_pts_rank}</td>
+      <td class="num">#${s.reg_season_finish}</td>
+      <td class="num luck-neg">+${gap}</td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="6" style="color:#334155;text-align:center;padding:20px">No data</td></tr>';
+}
+
+// ══════════════════════════════════════════════════════
+// TAB 3 — OWNER HISTORY
+// ══════════════════════════════════════════════════════
+function fmtUsd(n) { return n == null ? '—' : (n < 0 ? '-' : '') + '$' + Math.abs(Math.round(n)).toLocaleString(); }
+function finishBadge(s) {
+  if (s.finish == null) return '<span style="color:#334155">in progress</span>';
+  if (s.finish === 1) return '<span class="badge badge-champ">Champion</span>';
+  if (s.finish <= 4)  return `<span class="badge badge-playoff">#${s.finish}</span>`;
+  return `<span class="badge badge-reg">#${s.finish}</span>`;
+}
+const ordinal = n => n + (['th','st','nd','rd'][(n % 100 >> 3 ^ 1 && n % 10 < 4) ? n % 10 : 0]);
+
+function buildOwnerSelect() {
+  const cur = [...META.current_owners].sort();
+  document.getElementById('owner-select').value = cur.includes('Buser') ? 'Buser' : cur[0];
+  renderOwnerCards();
+}
+function renderOwnerCards() {
+  const sel = document.getElementById('owner-select').value;
+  const agg = Object.fromEntries(ownerAggregates().map(a => [a.owner, a]));
+  document.getElementById('owner-cards').innerHTML = [...META.current_owners].sort().map(o => {
+    const a = agg[o];
+    return `<div class="owner-card ${o === sel ? 'selected' : ''}" onclick="selectOwner('${o}')">
+      <div class="owner-card-name">${o}</div>
+      <div class="owner-card-sub">${a.wins}\u2013${a.losses} \u00b7 ${a.championships} title${a.championships === 1 ? '' : 's'}</div>
+    </div>`;
+  }).join('');
+}
+function selectOwner(o) {
+  document.getElementById('owner-select').value = o;
+  renderOwnerCards();
+  renderOwner();
+  setHash(['owner', o]);
+}
+
+function renderOwner() {
+  const owner = document.getElementById('owner-select').value;
+  document.querySelectorAll('#tab-owner .ot-owner').forEach(el => el.textContent = owner);
+  const seasons = SEASONS.filter(s => s.owner === owner).sort((a, b) => a.season - b.season);
+  const done = seasons.filter(s => s.finish != null);
+  const agg = ownerAggregates().find(a => a.owner === owner);
+  {
+    const cur = seasons[seasons.length - 1];   // header uses the most recent season's logo
+    document.getElementById('owner-header').innerHTML = `${logo(owner, cur.season, 64)}<div>
+      <div class="oh-name">${owner}</div>
+      <div class="oh-team">${cur.team_name || ''}</div>
+      <div class="oh-sub">${cur.season} team \u00b7 in the league since ${seasons[0].season}</div></div>`;
+  }
+
+  // KPIs
+  const kpi = (label, value, sub, gold) =>
+    `<div class="kpi ${gold ? 'gold' : ''}"><div class="kpi-label">${label}</div><div class="kpi-value">${value}</div>${sub ? `<div class="kpi-sub">${sub}</div>` : ''}</div>`;
+  document.getElementById('owner-kpis').innerHTML = [
+    kpi('Seasons', agg.seasons, `${seasons[0].season}–${seasons[seasons.length-1].season}`),
+    kpi('Record', `${agg.wins}–${agg.losses}`, fmtPct(agg.winpct) + ' win'),
+    kpi('Championships', agg.championships, '', agg.championships > 0),
+    kpi('Reg Season #1', agg.reg_season_1s, 'earns a prize', agg.reg_season_1s > 0),
+    kpi('Playoffs', agg.playoff_appearances, `${done.length} completed seasons`),
+    kpi('Avg Finish', agg.avg_finish ? fmt1(agg.avg_finish) : '—', 'regular season'),
+    kpi('Avg PF/Game', agg.avg_pf ? fmt1(agg.avg_pf) : '—', agg.avg_pf_index ? `${fmt2(agg.avg_pf_index)} index` : ''),
+    kpi('Career Earnings', fmtUsd(agg.won), `${fmtUsd(agg.buy_in)} in buy-ins`),
+    kpi('Career Profit', fmtUsd(agg.profit), '', false),
+  ].join('');
+
+  // Finish chart
+  destroyChart('owner-finish');
+  const finSeasons = seasons.filter(s => s.finish != null);
+  const years = finSeasons.map(s => s.season);
+  chartInstances['owner-finish'] = new Chart(document.getElementById('owner-finish'), {
+    type: 'line',
+    data: { labels: years, datasets: [
+      { label: 'Regular season', data: finSeasons.map(s => s.reg_season_finish),
+        borderColor: '#64748b', backgroundColor: '#64748b', borderWidth: 1.5, pointRadius: 3, tension: 0.2, spanGaps: true },
+      { label: 'Final', data: finSeasons.map(s => s.finish),
+        borderColor: GOLD, backgroundColor: GOLD, borderWidth: 2.5, pointRadius: 4, tension: 0.2, spanGaps: true },
+    ]},
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: true, labels: { color: '#64748b', boxWidth: 10 } },
+        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: #${ctx.raw}` } } },
+      scales: {
+        x: { grid: { color: '#1a2030' }, ticks: { color: '#475569' } },
+        y: { reverse: true, min: 0, max: 13, grid: { color: '#1a2030' }, ticks: { color: '#64748b', stepSize: 1, autoSkip: false, callback: v => v >= 1 && v <= 12 ? v : '' }, title: { display: true, text: 'Finish (1 = 1st)', color: '#334155' } },
+      },
+    },
+  });
+
+  // Profit chart (seasons where profit is recorded)
+  destroyChart('owner-profit');
+  const pSeasons = done.filter(s => s.profit != null);
+  const missing = done.length - pSeasons.length;
+  document.getElementById('owner-profit-note').textContent = missing ? `· ${missing} season(s) with no payout data not shown` : '';
+  chartInstances['owner-profit'] = new Chart(document.getElementById('owner-profit'), {
+    type: 'bar',
+    data: { labels: pSeasons.map(s => s.season), datasets: [{
+      data: pSeasons.map(s => s.profit),
+      backgroundColor: pSeasons.map(s => s.profit >= 0 ? '#4ade80aa' : '#f87171aa'),
+      borderRadius: 2,
+    }]},
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => fmtUsd(ctx.raw) } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: '#475569' } },
+        y: { grid: { color: '#1a2030' }, ticks: { color: '#475569', callback: v => fmtUsd(v) } },
+      },
+    },
+  });
+
+  // Top teams
+  const ranked = [...done].sort((a, b) =>
+    a.finish - b.finish || (a.reg_season_finish || 99) - (b.reg_season_finish || 99) || (b.points_for || 0) - (a.points_for || 0)
+  ).slice(0, 5);
+  document.getElementById('owner-top-body').innerHTML = ranked.map(s => `<tr>
+    <td>${s.season}</td>
+    <td style="color:#94a3b8">${s.team_name || '—'}</td>
+    <td class="num">${s.wins ?? '—'}–${s.losses ?? '—'}</td>
+    <td class="num">${fmt1(s.points_for)}</td>
+    <td class="num">${s.reg_season_pts_rank ? '#' + s.reg_season_pts_rank : '—'}</td>
+    <td class="num">${s.reg_season_finish ? '#' + s.reg_season_finish : '—'}</td>
+    <td>${finishBadge(s)}</td>
+    <td class="num" style="color:${(s.profit||0) >= 0 ? '#4ade80' : '#f87171'}">${s.profit == null ? '—' : fmtUsd(s.profit)}</td>
+  </tr>`).join('');
+
+  // Head-to-head
+  const rows = H2H.filter(r => r.owner === owner && r.wins + r.losses > 0).map(r => {
+    const g = r.wins + r.losses;
+    return { ...r, g, pct: r.wins / g, apf: r.pf / g, apa: r.pa / g };
+  });
+  const byPct = (a, b) => b.pct - a.pct || b.g - a.g;
+  const eligible = rows.filter(r => r.g >= 5);
+  const miniRow = r => `<tr><td>${r.opponent}${isCurrent(r.opponent) ? '' : ' <span style="font-size:9px;color:#334155">retired</span>'}</td>
+    <td class="num">${r.wins}–${r.losses}</td><td class="num">${fmtPct(r.pct)}</td></tr>`;
+  document.getElementById('owner-best-body').innerHTML  = [...eligible].sort(byPct).slice(0, 3).map(miniRow).join('') || '<tr><td style="color:#334155">Not enough games</td></tr>';
+  document.getElementById('owner-worst-body').innerHTML = [...eligible].sort((a, b) => -byPct(a, b)).slice(0, 3).map(miniRow).join('') || '<tr><td style="color:#334155">Not enough games</td></tr>';
+  document.getElementById('owner-h2h-body').innerHTML = [...rows].sort(byPct).map(r => {
+    const m = r.apf - r.apa;
+    return `<tr>
+      <td>${r.opponent}${isCurrent(r.opponent) ? '' : ' <span style="font-size:9px;color:#334155">retired</span>'}</td>
+      <td class="num">${r.wins}</td><td class="num">${r.losses}</td>
+      <td class="num">${fmtPct(r.pct)}</td>
+      <td class="num">${fmt1(r.apf)}</td><td class="num">${fmt1(r.apa)}</td>
+      <td class="num" style="color:${m >= 0 ? '#4ade80' : '#f87171'}">${m >= 0 ? '+' : ''}${fmt1(m)}</td>
+    </tr>`;
+  }).join('');
+
+  // Every season
+  document.getElementById('owner-seasons-body').innerHTML = [...seasons].reverse().map(s => `<tr>
+    <td>${s.season}</td>
+    <td style="color:#94a3b8">${s.team_name || '—'}</td>
+    <td class="num">${s.wins ?? '—'}–${s.losses ?? '—'}</td>
+    <td class="num">${fmt1(s.points_for)}</td><td class="num">${fmt1(s.points_against)}</td>
+    <td class="num">${s.finish != null && s.reg_season_finish ? '#' + s.reg_season_finish : '—'}</td>
+    <td>${finishBadge(s)}</td>
+    <td class="num">${s.finish != null ? fmtUsd(s.won || 0) : '—'}</td>
+    <td class="num" style="color:${(s.profit||0) >= 0 ? '#4ade80' : '#f87171'}">${s.finish != null && s.profit != null ? fmtUsd(s.profit) : '—'}</td>
+  </tr>`).join('');
+}
+
+// ══════════════════════════════════════════════════════
+// TAB 4 — CURRENT SEASON
+// ══════════════════════════════════════════════════════
+// Season = latest year with any scored game. Only played games (score > 0) are used,
+// and standings are computed from games rather than the spreadsheet's in-progress columns.
+const SEASON_YEAR = Math.max(...MATCHUPS.filter(m => m.score > 0).map(m => m.year));
+
+function seasonGames() { return MATCHUPS.filter(m => m.year === SEASON_YEAR && m.score > 0 && m.opponent); }
+
+function seasonTable(games) {
+  const teamName = o => (SEASONS.find(s => s.season === SEASON_YEAR && s.owner === o) || {}).team_name || '';
+  const reg = games.filter(m => m.game_type !== 'Playoffs');
+  const weeks = [...new Set(reg.map(m => m.week))];
+  const rows = {};
+  META.current_owners.forEach(o => rows[o] = { owner: o, team: teamName(o), w: 0, l: 0, pf: 0, pa: 0, g: 0, exp: 0 });
+  for (const wk of weeks) {
+    const wm = reg.filter(m => m.week === wk);
+    wm.forEach(m => {
+      const r = rows[m.owner]; if (!r) return;
+      r.g++; r.pf += m.score; r.pa += m.opp_score;
+      if (m.result === 1) r.w++; else r.l++;
+      const lower = wm.filter(x => x.score < m.score).length;
+      const ties  = wm.filter(x => x !== m && x.score === m.score).length;
+      r.exp += (lower + 0.5 * ties) / (wm.length - 1);
+    });
+  }
+  return Object.values(rows).filter(r => r.g > 0).map(r => ({ ...r, ppg: r.pf / r.g, papg: r.pa / r.g, luck: r.w - r.exp }))
+    .sort((a, b) => b.w - a.w || b.pf - a.pf);
+}
+
+function renderSeason() {
+  const games = seasonGames();
+  const table = seasonTable(games);
+  const lastWeek = Math.max(...games.map(m => m.week));
+  document.getElementById('season-h1').textContent = `${SEASON_YEAR} Season`;
+  document.getElementById('season-sub').textContent = `Through Week ${lastWeek} · standings, luck, and weekly recap`;
+
+  renderSeasonStandings(table, games, lastWeek);
+  renderOdds(games, table);
+  renderPreview(games, table, lastWeek);
+  renderSeasonScatter(table);
+  renderLuck(table);
+  renderRecap(games, lastWeek);
+  renderWeeklyScores(games);
+  renderScoreboards(games, 'matchup-grid');
+}
+
+
+// ══════════════════════════════════════════════════════
+// TEAM LOGOS (self-hosted; falls back to a colored initial badge)
+// ══════════════════════════════════════════════════════
+function logoPath(owner, year) { return LOGOS[`${year}|${owner}`] || null; }
+function latestLogoYear(owner) {
+  const ys = Object.keys(LOGOS).filter(k => k.endsWith('|' + owner)).map(k => +k.split('|')[0]);
+  return ys.length ? Math.max(...ys) : null;
+}
+function logo(owner, year, size = 28) {
+  const src = logoPath(owner, year);
+  if (src) return `<img class="logo" src="${src}" alt="" loading="lazy" style="--s:${size}px" onerror="this.style.visibility='hidden'">`;
+  const ini = owner.split('/')[0].slice(0, 2);
+  return `<span class="logo logo-fb" style="--s:${size}px;background:${ownerColor(owner)}">${ini}</span>`;
+}
+
+// ══════════════════════════════════════════════════════
+// SHARED GAME HELPERS
+// ══════════════════════════════════════════════════════
+const PLAYED = MATCHUPS.filter(m => m.score > 0 && m.opponent);          // one row per owner per played game
+const REG_GAMES = PLAYED.filter(m => m.game_type !== 'Playoffs');
+const gameOrder = m => m.year * 100 + m.week;
+const mean = a => a.reduce((x, y) => x + y, 0) / (a.length || 1);
+const sd = a => { const m = mean(a); return Math.sqrt(mean(a.map(x => (x - m) ** 2))); };
+const LEAGUE_SD = sd(REG_GAMES.map(m => m.score));
+const PLAYOFF_TEAMS = 6;
+function uniquePairs(rows) {
+  const seen = new Set(), out = [];
+  for (const m of rows) {
+    const k = m.week + '|' + [m.owner, m.opponent].sort().join('||');
+    if (seen.has(k)) continue; seen.add(k);
+    out.push({ week: m.week, a: m.owner, b: m.opponent });
+  }
+  return out;
+}
+const sgn = (n, d = 1) => (n >= 0 ? '+' : '−') + Math.abs(n).toFixed(d);
+const gk = (y, w) => `${y} Wk ${w}`;
+
+// ══════════════════════════════════════════════════════
+// RECORDS TAB
+// ══════════════════════════════════════════════════════
+function recCard(title, rows) {
+  return `<div class="rec-card"><div class="rec-title">${title}</div><table class="data-table"><tbody>${
+    rows.map((r, i) => `<tr class="${r.cur ? 'rec-new' : ''}"><td class="num" style="color:#334155;width:18px">${i + 1}</td><td>${r.main}${r.cur ? `<span class="rec-pill">${SEASON_YEAR}</span>` : ''}<div class="rec-sub">${r.sub}</div></td><td class="num rec-val">${r.val}</td></tr>`).join('')
+  }</tbody></table></div>`;
+}
+const retiredTag = o => isCurrent(o) ? '' : ' <span style="font-size:9px;color:#334155">retired</span>';
+const teamOf = (o, y) => (SEASONS.find(s => s.owner === o && s.season === y) || {}).team_name || '';
+const teamTag = (o, y) => teamOf(o, y) ? `<span class="rec-team">${teamOf(o, y)}</span>` : '';
+
+function streakRecords() {
+  const by = {};
+  PLAYED.forEach(m => (by[m.owner] = by[m.owner] || []).push(m));
+  const out = { W: [], L: [] };
+  for (const [o, gs] of Object.entries(by)) {
+    gs.sort((a, b) => gameOrder(a) - gameOrder(b));
+    let cur = null, len = 0, start = null, prev = null;
+    const flush = () => { if (cur) out[cur].push({ owner: o, len, start, end: prev }); };
+    for (const g of gs) {
+      const t = g.result === 1 ? 'W' : 'L';
+      if (t === cur) len++; else { flush(); cur = t; len = 1; start = g; }
+      prev = g;
+    }
+    flush();
+  }
+  return out;
+}
+
+function luckRows() {
+  const byYW = {};
+  REG_GAMES.forEach(m => (byYW[m.year + '|' + m.week] = byYW[m.year + '|' + m.week] || []).push(m));
+  const rows = {};
+  Object.values(byYW).forEach(wm => {
+    const n = wm.length; if (n < 2) return;
+    wm.forEach(m => {
+      const lower = wm.filter(x => x.score < m.score).length;
+      const ties  = wm.filter(x => x !== m && x.score === m.score).length;
+      const k = m.owner + '||' + m.year;
+      const r = rows[k] = rows[k] || { owner: m.owner, year: m.year, g: 0, w: 0, exp: 0 };
+      r.g++; r.w += m.result === 1 ? 1 : 0; r.exp += (lower + 0.5 * ties) / (n - 1);
+    });
+  });
+  return Object.values(rows).map(r => ({ ...r, luck: r.w - r.exp }));
+}
+
+function renderRecords() {
+  // Single-game records (one row per game, winner's view)
+  const G = PLAYED.filter(m => m.result === 1 && m.opp_score > 0).map(m => ({
+    year: m.year, week: m.week, w: m.owner, l: m.opponent, ws: m.score, ls: m.opp_score, margin: m.score - m.opp_score }));
+  const game = (g, who, val) => { const me = who === 'w' ? g.w : g.l, other = who === 'w' ? g.l : g.w;
+    return { main: `${me}${retiredTag(me)}${teamTag(me, g.year)}`,
+      sub: `${gk(g.year, g.week)} · ${who === 'w' ? 'beat' : 'lost to'} ${other}${teamOf(other, g.year) ? ` (${teamOf(other, g.year)})` : ''} · ${fmt1(g.ws)}–${fmt1(g.ls)}`, val, cur: g.year === SEASON_YEAR }; };
+  const top = (arr, key, dir) => [...arr].sort((a, b) => dir * (a[key] - b[key])).slice(0, 5);
+  document.getElementById('rec-games').innerHTML = [
+    recCard('Highest score',        top(G, 'ws', -1).map(g => game(g, 'w', fmt1(g.ws)))),
+    recCard('Lowest score',         top(G, 'ls',  1).map(g => game(g, 'l', fmt1(g.ls)))),
+    recCard('Biggest blowout',      top(G, 'margin', -1).map(g => game(g, 'w', '+' + fmt1(g.margin)))),
+    recCard('Closest game',         top(G, 'margin',  1).map(g => game(g, 'w', fmt2(g.margin)))),
+    recCard('Most points in a loss',top(G, 'ls', -1).map(g => game(g, 'l', fmt1(g.ls)))),
+    recCard('Fewest points in a win',top(G, 'ws',  1).map(g => game(g, 'w', fmt1(g.ws)))),
+  ].join('');
+
+  // Streaks
+  const st = streakRecords();
+  const sRows = arr => arr.sort((a, b) => b.len - a.len || gameOrder(b.end) - gameOrder(a.end)).slice(0, 5).map(r => ({
+    main: r.owner + retiredTag(r.owner), sub: `${gk(r.start.year, r.start.week)} – ${gk(r.end.year, r.end.week)}`, val: r.len, cur: r.end.year === SEASON_YEAR }));
+  const active = Object.values(
+    [...st.W, ...st.L].reduce((acc, r) => { const o = r.owner; if (!acc[o] || gameOrder(r.end) > gameOrder(acc[o].end)) acc[o] = { ...r, type: st.W.includes(r) ? 'W' : 'L' }; return acc; }, {})
+  ).filter(r => isCurrent(r.owner)).sort((a, b) => b.len - a.len).slice(0, 5);
+  document.getElementById('rec-streaks').innerHTML = [
+    recCard('Longest winning streaks', sRows(st.W)),
+    recCard('Longest losing streaks',  sRows(st.L)),
+    recCard('Active streaks (current owners)', active.map(r => ({ main: r.owner, sub: `since ${gk(r.start.year, r.start.week)}`, val: (r.type) + r.len }))),
+  ].join('');
+
+  // Luck all-time
+  const LR = luckRows();
+  const per = {};
+  LR.forEach(r => { const a = per[r.owner] = per[r.owner] || { owner: r.owner, w: 0, exp: 0, seasons: 0 };
+    a.w += r.w; a.exp += r.exp; a.seasons += r.g >= 13 ? 1 : 0.0001 * r.g; });
+  const owners = META.current_owners.map(o => per[o]).filter(Boolean).map(a => ({ ...a, luck: a.w - a.exp, seasons: Math.max(1, Math.round(a.seasons)) }))
+    .sort((a, b) => b.luck - a.luck);
+  destroyChart('luck-alltime');
+  chartInstances['luck-alltime'] = new Chart(document.getElementById('luck-alltime'), {
+    type: 'bar',
+    data: { labels: owners.map(o => o.owner), datasets: [{ data: owners.map(o => +o.luck.toFixed(1)), borderRadius: 2,
+      backgroundColor: owners.map(o => o.luck >= 0 ? '#4ade80aa' : '#f87171aa') }] },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => { const o = owners[c.dataIndex];
+        return `Luck ${sgn(o.luck)} (${o.w} actual vs ${fmt1(o.exp)} expected)`; } } } },
+      scales: { x: { grid: { color: '#1a2030' }, ticks: { color: '#475569' }, title: { display: true, text: 'Actual wins − expected wins', color: '#334155' } },
+                y: { grid: { display: false }, ticks: { color: '#94a3b8' } } } },
+  });
+  document.getElementById('luck-alltime-body').innerHTML = owners.map(o => {
+    const cls = o.luck > 1 ? 'luck-pos' : o.luck < -1 ? 'luck-neg' : 'luck-zero';
+    return `<tr><td><span class="owner-dot" style="background:${greyFor(o.owner)}"></span>${o.owner}</td>
+      <td class="num">${o.w}</td><td class="num">${fmt1(o.exp)}</td><td class="num ${cls}">${sgn(o.luck)}</td>
+      <td class="num ${cls}">${sgn(o.luck / o.seasons, 2)}</td></tr>`; }).join('');
+  const full = LR.filter(r => r.g >= 13);
+  const lRows = arr => arr.slice(0, 5).map(r => ({ main: r.owner + retiredTag(r.owner) + teamTag(r.owner, r.year), sub: `${r.year} · ${r.w} wins vs ${fmt1(r.exp)} expected`, val: sgn(r.luck), cur: r.year === SEASON_YEAR }));
+  document.getElementById('rec-luck').innerHTML =
+    recCard('Luckiest seasons',   lRows([...full].sort((a, b) => b.luck - a.luck))) +
+    recCard('Unluckiest seasons', lRows([...full].sort((a, b) => a.luck - b.luck)));
+
+  // Playoff performance from final finishes
+  const teamsIn = y => SEASONS.filter(s => s.season === y).length;
+  const rows = META.current_owners.map(o => {
+    const ss = SEASONS.filter(s => s.owner === o && s.finish != null);
+    const titles = ss.filter(s => s.finish === 1).length, runner = ss.filter(s => s.finish === 2).length;
+    const po = ss.reduce((a, s) => a + (s.playoff_appearances || 0), 0);
+    const vs = ss.filter(s => s.reg_season_finish != null).map(s => s.reg_season_finish - s.finish);
+    return { o, titles, runner, po, rate: po ? titles / po : null, r1: ss.reduce((a, s) => a + (s.reg_season_1s || 0), 0),
+      vs: vs.length ? mean(vs) : null, last: ss.filter(s => s.finish === teamsIn(s.season)).length };
+  }).sort((a, b) => b.titles - a.titles || b.runner - a.runner || b.po - a.po);
+  document.getElementById('finish-body').innerHTML = rows.map(r => `<tr data-owner="${r.o}" onclick="setActiveOwner('${r.o}')">
+    <td><span class="owner-dot" style="background:${greyFor(r.o)}"></span>${r.o}</td>
+    <td class="num" style="${r.titles ? 'color:#fcd34d;font-weight:700' : ''}">${r.titles}</td><td class="num">${r.runner}</td><td class="num">${r.po}</td>
+    <td class="num">${r.rate == null ? '—' : Math.round(r.rate * 100) + '%'}</td><td class="num">${r.r1}</td>
+    <td class="num ${r.vs > 0.25 ? 'luck-pos' : r.vs < -0.25 ? 'luck-neg' : ''}">${r.vs == null ? '—' : sgn(r.vs)}</td>
+    <td class="num" style="${r.last ? 'color:#f87171' : ''}">${r.last}</td></tr>`).join('');
+}
+
+// ══════════════════════════════════════════════════════
+// RIVALRY TAB
+// ══════════════════════════════════════════════════════
+let rivA = 'Buser', rivB = 'Salty';
+function pickRiv(which, o) {
+  if (which === 'a') rivA = o; else rivB = o;
+  setHash(['rivalry', rivA, rivB]);
+  renderRivalry();
+}
+function openRivalry(a, b) { rivA = a; rivB = b; setHash(['rivalry', rivA, rivB]); routeFromHash(); }
+
+function renderRivalry() {
+  const all = [...[...META.current_owners].sort(), ...META.owners.filter(o => !isCurrent(o)).sort()];
+  const chips = (which, sel, cls) => all.map(o =>
+    `<div class="owner-card sm ${o === sel ? cls : ''} ${isCurrent(o) ? '' : 'retired'}" onclick="pickRiv('${which}','${o}')"><div class="owner-card-name">${o}</div></div>`).join('');
+  document.getElementById('riv-a').innerHTML = chips('a', rivA, 'selected');
+  document.getElementById('riv-b').innerHTML = chips('b', rivB, 'selected-b');
+  const body = document.getElementById('riv-body');
+  destroyChart('riv-margin');
+  if (rivA === rivB) { body.innerHTML = '<p class="subtitle">Pick two different owners.</p>'; return; }
+  const gs = PLAYED.filter(m => m.owner === rivA && m.opponent === rivB).sort((a, b) => gameOrder(a) - gameOrder(b));
+  if (!gs.length) { body.innerHTML = `<p class="subtitle">${rivA} and ${rivB} have never played each other.</p>`; return; }
+  const wa = gs.filter(g => g.result === 1).length, wb = gs.length - wa;
+  const kpi = (label, value, sub, gold) => `<div class="kpi ${gold ? 'gold' : ''}"><div class="kpi-label">${label}</div><div class="kpi-value">${value}</div>${sub ? `<div class="kpi-sub">${sub}</div>` : ''}</div>`;
+  const margins = gs.map(g => g.score - g.opp_score);
+  const bigA = gs.reduce((b, g) => (g.score - g.opp_score > (b ? b.score - b.opp_score : 0) ? g : b), null);
+  const bigB = gs.reduce((b, g) => (g.opp_score - g.score > (b ? b.opp_score - b.score : 0) ? g : b), null);
+  let run = 0, runWho = null;
+  for (let i = gs.length - 1; i >= 0; i--) { const w = gs[i].result === 1 ? rivA : rivB; if (!runWho) runWho = w; if (w === runWho) run++; else break; }
+  const last = gs[gs.length - 1];
+  body.innerHTML = `<div class="kpi-row">
+      ${kpi('Series', `${wa}–${wb}`, wa === wb ? 'dead even' : `${wa > wb ? rivA : rivB} leads`, true)}
+      ${kpi('Meetings', gs.length, `${gs[0].year}–${last.year}`)}
+      ${kpi(`${rivA} avg`, fmt1(mean(gs.map(g => g.score))), 'points per meeting')}
+      ${kpi(`${rivB} avg`, fmt1(mean(gs.map(g => g.opp_score))), 'points per meeting')}
+      ${kpi('Avg margin', sgn(mean(margins)), `for ${mean(margins) >= 0 ? rivA : rivB}`)}
+      ${kpi('Current streak', `${runWho.split('/')[0]} ${run}`, run === 1 ? 'won last meeting' : 'straight wins')}
+      ${kpi(`${rivA} biggest win`, bigA ? '+' + fmt1(bigA.score - bigA.opp_score) : '—', bigA ? gk(bigA.year, bigA.week) : '')}
+      ${kpi(`${rivB} biggest win`, bigB ? '+' + fmt1(bigB.opp_score - bigB.score) : '—', bigB ? gk(bigB.year, bigB.week) : '')}
+    </div>
+    <div class="section"><div class="section-title">Margin By Meeting <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; above zero = ${rivA} won &middot; below = ${rivB} won</span></div>
+      <div class="chart-wrap" style="height:260px"><canvas id="riv-margin"></canvas></div></div>
+    <div class="section"><div class="section-title">Every Meeting</div>
+      <table class="data-table"><thead><tr><th>Season</th><th>Week</th><th class="num">${rivA}</th><th class="num">${rivB}</th><th>Winner</th><th>Type</th></tr></thead><tbody>${
+        [...gs].reverse().map(g => `<tr><td>${g.year}</td><td>Wk ${g.week}</td>
+          <td class="num" style="${g.result === 1 ? 'color:#fcd34d;font-weight:700' : ''}">${fmt1(g.score)}</td>
+          <td class="num" style="${g.result !== 1 ? 'color:#60a5fa;font-weight:700' : ''}">${fmt1(g.opp_score)}</td>
+          <td>${g.result === 1 ? rivA : rivB}</td><td><span style="font-size:10px;color:#475569">${g.game_type || ''}</span></td></tr>`).join('')
+      }</tbody></table></div>`;
+  chartInstances['riv-margin'] = new Chart(document.getElementById('riv-margin'), {
+    type: 'bar',
+    data: { labels: gs.map(g => `${String(g.year).slice(2)} W${g.week}`), datasets: [{ data: margins.map(m => +m.toFixed(1)), borderRadius: 2,
+      backgroundColor: margins.map(m => m >= 0 ? '#fcd34dcc' : '#60a5facc') }] },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { title: i => { const g = gs[i[0].dataIndex]; return gk(g.year, g.week); },
+        label: c => { const g = gs[c.dataIndex]; return `${rivA} ${fmt1(g.score)} – ${fmt1(g.opp_score)} ${rivB}`; } } } },
+      scales: { x: { grid: { display: false }, ticks: { color: '#475569', maxRotation: 60, autoSkip: true } },
+                y: { grid: { color: '#1a2030' }, ticks: { color: '#475569' }, title: { display: true, text: 'Margin (points)', color: '#334155' } } } },
+  });
+}
+
+// ══════════════════════════════════════════════════════
+// SEASON TAB: ODDS + PREVIEW
+// ══════════════════════════════════════════════════════
+function normCdf(z) {
+  const t = 1 / (1 + 0.2316419 * Math.abs(z)), d = 0.3989423 * Math.exp(-z * z / 2);
+  const p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274))));
+  return z > 0 ? 1 - p : p;
+}
+function randn() { let u = 0, v = 0; while (!u) u = Math.random(); while (!v) v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+
+// Expected weekly score per owner: season average, pulled toward the league average early in the year
+function seasonModel(games) {
+  const reg = games.filter(g => g.game_type !== 'Playoffs'), K = 4, lg = mean(reg.map(g => g.score));
+  const mu = {};
+  META.current_owners.forEach(o => { const sc = reg.filter(g => g.owner === o).map(g => g.score);
+    mu[o] = (sc.reduce((a, b) => a + b, 0) + K * lg) / (sc.length + K); });
+  return mu;
+}
+const seasonRegular = () => MATCHUPS.filter(m => m.year === SEASON_YEAR && m.game_type !== 'Playoffs' && m.opponent);
+
+function renderOdds(games, table) {
+  const mu = seasonModel(games);
+  const remaining = uniquePairs(seasonRegular().filter(m => !(m.score > 0))).filter(g => mu[g.a] != null && mu[g.b] != null);
+  const N = 10000, owners = table.map(r => r.owner);
+  const base = Object.fromEntries(table.map(r => [r.owner, { w: r.w, pf: r.pf }]));
+  const res = Object.fromEntries(owners.map(o => [o, { po: 0, s1: 0, wsum: 0, wins: [] }]));
+  for (let n = 0; n < N; n++) {
+    const cur = {}; owners.forEach(o => cur[o] = { w: base[o].w, pf: base[o].pf });
+    for (const g of remaining) {
+      const sa = mu[g.a] + LEAGUE_SD * randn(), sb = mu[g.b] + LEAGUE_SD * randn();
+      cur[g.a].pf += sa; cur[g.b].pf += sb; (sa > sb ? cur[g.a] : cur[g.b]).w++;
+    }
+    const rank = [...owners].sort((x, y) => cur[y].w - cur[x].w || cur[y].pf - cur[x].pf);
+    rank.forEach((o, i) => { if (i < PLAYOFF_TEAMS) res[o].po++; if (i === 0) res[o].s1++; });
+    owners.forEach(o => { res[o].wsum += cur[o].w; res[o].wins.push(cur[o].w); });
+  }
+  const pct = x => x / N * 100;
+  const label = p => p >= 99.95 ? 'Clinched' : p <= 0.05 ? 'Out' : (p < 1 ? '<1' : p > 99 ? '>99' : Math.round(p)) + '%';
+  const rows = owners.map(o => { const r = res[o]; r.wins.sort((a, b) => a - b);
+    return { o, rec: table.find(t => t.owner === o), po: pct(r.po), s1: pct(r.s1), pw: r.wsum / N, lo: r.wins[Math.floor(N * .1)], hi: r.wins[Math.floor(N * .9)] }; })
+    .sort((a, b) => b.po - a.po || b.pw - a.pw);
+  document.getElementById('odds-body').innerHTML = rows.map(r => `<tr data-owner="${r.o}" onclick="setActiveOwner('${r.o}')">
+    <td><span class="owner-dot" style="background:${greyFor(r.o)}"></span>${r.o}</td>
+    <td class="num">${r.rec.w}–${r.rec.l}</td>
+    <td><div class="odds-bar"><span style="width:${r.po}%"></span><b>${label(r.po)}</b></div></td>
+    <td><div class="odds-bar"><span style="width:${r.s1}%;background:#854d0e"></span><b>${r.s1 <= 0.05 ? '0%' : label(r.s1)}</b></div></td>
+    <td class="num">${fmt1(r.pw)}</td><td class="num">${r.lo}–${r.hi}</td></tr>`).join('');
+}
+
+function renderPreview(games, table, lastWeek) {
+  const mu = seasonModel(games);
+  const maxWeek = Math.max(...seasonRegular().map(m => m.week));
+  const next = lastWeek + 1, host = document.getElementById('preview-cards');
+  if (next > maxWeek) { document.getElementById('preview-title').textContent = 'Regular Season Complete'; host.innerHTML = ''; return; }
+  const live = LIVE && LIVE.year === SEASON_YEAR && LIVE.week === next ? LIVE : null;
+  const liveOf = (a, b) => { const g = live && live.games.find(x => (x.a === a && x.b === b) || (x.a === b && x.b === a)); return g ? (g.a === a ? [g.a_pts, g.b_pts] : [g.b_pts, g.a_pts]) : null; };
+  document.getElementById('preview-title').innerHTML = live
+    ? `Week ${next} &middot; In Progress <span class="live-badge">LIVE</span> <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; scores as of ${live.updated} &middot; win % is the pre-game scoring model</span>`
+    : `Week ${next} Preview <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; click a game for the full rivalry &middot; win % from a simple scoring model</span>`;
+  const rec = o => table.find(t => t.owner === o);
+  host.innerHTML = uniquePairs(seasonRegular().filter(m => m.week === next)).map(({ a, b }) => {
+    const pa = normCdf((mu[a] - mu[b]) / (LEAGUE_SD * Math.SQRT2)), pb = 1 - pa;
+    const h = PLAYED.filter(m => m.owner === a && m.opponent === b).sort((x, y) => gameOrder(x) - gameOrder(y));
+    const wa = h.filter(g => g.result === 1).length, lm = h[h.length - 1];
+    const side = (o, cls) => `<div class="pv-team ${cls}" style="color:${ownerColor(o)}">${o.split('/')[0]}<small>${rec(o).w}–${rec(o).l} · ${fmt1(rec(o).ppg)} PF/G</small></div>`;
+    return `<div class="preview-card" onclick="openRivalry('${a}','${b}')">
+      <div class="pv-teams">${side(a, '')}<span class="pv-vs">VS</span>${side(b, 'r')}</div>
+      ${(() => { const l = liveOf(a, b); return l ? `<div class="pv-live"><span class="${l[0] >= l[1] ? 'lead' : 'trail'}">${fmt1(l[0])}</span><span class="${l[1] > l[0] ? 'lead' : 'trail'}">${fmt1(l[1])}</span></div>` : ''; })()}
+      <div class="pv-prob"><span style="width:${pa * 100}%"></span><span style="width:${pb * 100}%"></span></div>
+      <div class="pv-prob-lbl"><span style="color:#4ade80">${Math.round(pa * 100)}%</span><span style="color:#f87171">${Math.round(pb * 100)}%</span></div>
+      <div class="pv-h2h">${h.length ? `All-time: ${wa === h.length - wa ? 'tied' : (wa > h.length - wa ? a : b) + ' leads'} ${Math.max(wa, h.length - wa)}–${Math.min(wa, h.length - wa)}<br>Last: ${gk(lm.year, lm.week)}, ${lm.result === 1 ? a : b} won ${fmt1(Math.max(lm.score, lm.opp_score))}–${fmt1(Math.min(lm.score, lm.opp_score))}` : 'First-ever meeting'}</div>
+    </div>`; }).join('');
+}
+
+
+// ══════════════════════════════════════════════════════
+// WHO HAS HIM (player history)
+// ══════════════════════════════════════════════════════
+let whIndex = null, whSel = null, whHl = 0, whMatches = [];
+const whMoney = n => n == null || n === '' ? '—' : '$' + n;
+
+function whBuild() {
+  if (whIndex) return;
+  const byId = {};
+  PLAYERS.rows.forEach(r => {
+    const o = Object.fromEntries(PLAYERS.cols.map((c, i) => [c, r[i]]));
+    (byId[o.espn_player_id] = byId[o.espn_player_id] || { id: o.espn_player_id, name: o.player, rows: [] }).rows.push(o);
+  });
+  const list = Object.values(byId).map(p => {
+    p.rows.sort((a, b) => a.season - b.season);
+    const last = p.rows[p.rows.length - 1];
+    p.pos = last.position; p.nfl = last.nfl_team;
+    return p;
+  }).sort((a, b) => a.name.localeCompare(b.name));
+  const nameCount = {}; list.forEach(p => nameCount[p.name] = (nameCount[p.name] || 0) + 1);
+  list.forEach(p => p.slug = nameCount[p.name] > 1 ? `${p.name}~${p.id}` : p.name);
+  whIndex = { byId, list, bySlug: Object.fromEntries(list.map(p => [p.slug.toLowerCase(), p])) };
+  const evans = whIndex.bySlug['mike evans'];
+  if (!whSel) whSel = (evans || list.reduce((b, p) => (p.rows.length > (b ? b.rows.length : 0) ? p : b), null) || {}).id;
+}
+const WH_PALETTE = ['#38bdf8', '#3b82f6', '#6366f1', '#8b5cf6', '#a855f7', '#d946ef', '#ec4899', '#22d3ee', '#94a3b8', '#c4b5fd', '#f9a8d4', '#a5f3fc', '#64748b', '#f1f5f9'];
+let whOwners = null;
+function whColor(o) {
+  if (!whOwners) whOwners = [...new Set(PLAYERS.rows.flatMap(r => [r[5], r[9]]).filter(Boolean))].sort();
+  const i = whOwners.indexOf(o);
+  return i < 0 ? '#475569' : WH_PALETTE[i % WH_PALETTE.length];
+}
+function whSlug() { whBuild(); const p = whIndex.byId[whSel]; return p ? p.slug : ''; }
+function whSelect(slug) { whBuild(); const p = whIndex.bySlug[String(slug).toLowerCase()]; if (p) whSel = p.id; }
+function whPick(id) {
+  whSel = id; whIndex.byId[id] && (document.getElementById('wh-input').value = '');
+  document.getElementById('wh-results').classList.remove('open');
+  setHash(['whohashim', whSlug()]); renderWhoHasHim();
+}
+function whSearch() {
+  whBuild();
+  const q = document.getElementById('wh-input').value.trim().toLowerCase(), box = document.getElementById('wh-results');
+  if (!q) { box.classList.remove('open'); return; }
+  whMatches = whIndex.list.filter(p => p.name.toLowerCase().includes(q))
+    .sort((a, b) => (b.name.toLowerCase().startsWith(q)) - (a.name.toLowerCase().startsWith(q)) || b.rows.length - a.rows.length).slice(0, 12);
+  whHl = 0;
+  box.innerHTML = whMatches.length ? whMatches.map((p, i) => `<div class="wh-item ${i === 0 ? 'hl' : ''}" onmousedown="whPick(${p.id})"><span>${p.name}</span><small>${p.pos} · ${p.nfl} · ${p.rows.length} season${p.rows.length === 1 ? '' : 's'}</small></div>`).join('')
+    : '<div class="wh-item"><span style="color:#475569">No players found</span></div>';
+  box.classList.add('open');
+}
+function whKey(e) {
+  const items = [...document.querySelectorAll('#wh-results .wh-item')];
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    e.preventDefault(); whHl = Math.max(0, Math.min(items.length - 1, whHl + (e.key === 'ArrowDown' ? 1 : -1)));
+    items.forEach((el, i) => el.classList.toggle('hl', i === whHl));
+  } else if (e.key === 'Enter' && whMatches[whHl]) whPick(whMatches[whHl].id);
+  else if (e.key === 'Escape') document.getElementById('wh-results').classList.remove('open');
+}
+document.addEventListener('click', e => { if (!e.target.closest('.wh-search')) { const b = document.getElementById('wh-results'); b && b.classList.remove('open'); } });
+
+function renderWhoHasHim() {
+  whBuild();
+  { const ys = PLAYERS.rows.map(r => r[0]); if (ys.length) document.getElementById('wh-sub').innerHTML = `Pick any player to see who drafted him, for how much, and who finished the season with him &middot; every season ${Math.min(...ys)}\u2013${Math.max(...ys)}`; }
+  if (!whIndex.list.length) { document.getElementById('wh-body').innerHTML = '<p class="subtitle">No roster data in this build.</p>'; return; }
+  // shortlist: this season's priciest bids + longest-tenured players on this season's rosters
+  const cur = Math.max(...PLAYERS.rows.map(r => r[0]));
+  const pool = whIndex.list.map(p => ({ p, now: p.rows.find(r => r.season === cur) })).filter(x => x.now);
+  const priciest = pool.filter(x => x.now.draft_price != null).sort((a, b) => b.now.draft_price - a.now.draft_price).slice(0, 6);
+  const taken = new Set(priciest.map(x => x.p.id));
+  const vets = pool.filter(x => !taken.has(x.p.id) && x.p.pos !== 'D/ST' && x.p.pos !== 'K');
+  const maxT = Math.max(...vets.map(x => x.p.rows.length));
+  const cheapest = (n, len) => vets.filter(x => x.p.rows.length === len).sort((a, b) => (a.now.draft_price ?? 0) - (b.now.draft_price ?? 0) || a.p.name.localeCompare(b.p.name)).slice(0, n);
+  const tenured = [];   // longest tenure first; within a tenure, the cheapest 2026 price first
+  for (let len = maxT; len >= 1 && tenured.length < 10; len--) tenured.push(...cheapest(10 - tenured.length, len));
+  const chip = (x, tag) => `<span class="wh-chip" onclick="whPick(${x.p.id})">${x.p.name}<b>${tag}</b></span>`;
+  const lbl = s => `<span class="filter-label" style="align-self:center;margin:0 4px 0 0">${s}</span>`;
+  document.getElementById('wh-chips').innerHTML =
+    lbl(`${cur} priciest`) + priciest.map(x => chip(x, '$' + x.now.draft_price)).join('') +
+    `<span style="flex-basis:100%;height:0"></span>` +
+    lbl('Long-time players') + tenured.map(x => chip(x, x.p.rows.length + ' yrs')).join('');
+
+  const p = whIndex.byId[whSel], rows = p.rows, body = document.getElementById('wh-body');
+  const drafted = rows.filter(r => r.draft_price != null);
+  const spent = drafted.reduce((a, r) => a + r.draft_price, 0);
+  const pts = rows.reduce((a, r) => a + (r.season_points || 0), 0);
+  const games = rows.reduce((a, r) => a + (r.points_per_game ? (r.season_points || 0) / r.points_per_game : 0), 0);
+  const hi = drafted.reduce((b, r) => (!b || r.draft_price > b.draft_price ? r : b), null);
+  const lo = drafted.reduce((b, r) => (!b || r.draft_price < b.draft_price ? r : b), null);
+  const withOwner = {};
+  rows.forEach(r => new Set([r.drafted_by, r.final_owner].filter(Boolean)).forEach(o => {
+    const w = withOwner[o] = withOwner[o] || { owner: o, seasons: 0, spent: 0, drafts: 0, pts: 0 };
+    w.seasons++; if (r.drafted_by === o && r.draft_price != null) { w.spent += r.draft_price; w.drafts++; }
+    if (r.final_owner === o) w.pts += r.season_points || 0;
+  }));
+  const owners = Object.values(withOwner).sort((a, b) => b.seasons - a.seasons || b.spent - a.spent);
+  const kpi = (label, value, sub, gold) => `<div class="kpi ${gold ? 'gold' : ''}"><div class="kpi-label">${label}</div><div class="kpi-value">${value}</div>${sub ? `<div class="kpi-sub">${sub}</div>` : ''}</div>`;
+  const ownerLink = (o, y) => o ? `<span class="logo-cell" style="cursor:pointer" onclick="openOwner('${o}')">${logo(o, y, 22)}${o}</span>` : '';
+
+  body.innerHTML = `
+    <div class="owner-header"><div>
+      <div class="oh-name">${p.name}</div>
+      <div class="oh-sub">${p.pos} · ${p.nfl} · on a league roster in ${rows.length} season${rows.length === 1 ? '' : 's'} (${rows[0].season}–${rows[rows.length - 1].season})</div></div></div>
+    <div class="kpi-row">
+      ${kpi('Times drafted', drafted.length, drafted.length ? `avg ${whMoney(Math.round(spent / drafted.length))}` : 'never drafted', true)}
+      ${kpi('Total spent', whMoney(spent), 'across all drafts')}
+      ${kpi('Highest bid', hi ? whMoney(hi.draft_price) : '—', hi ? `${hi.season} · ${hi.drafted_by}` : '')}
+      ${kpi('Lowest bid', lo ? whMoney(lo.draft_price) : '—', lo ? `${lo.season} · ${lo.drafted_by}` : '')}
+      ${kpi('Owners', owners.length, 'different teams had him')}
+      ${kpi('Points per game', games ? fmt1(pts / games) : '—', `${fmt1(pts)} total points`)}
+    </div>
+    <div class="section chart-row">
+      <div><div class="section-title">${p.name} · Draft Price By Season</div>
+        <div class="chart-wrap" style="height:300px"><canvas id="wh-chart"></canvas></div>
+        <p style="font-size:10px;color:#334155;margin-top:6px">Auction price paid &middot; labeled with the owner who drafted him</p></div>
+      <div><div class="section-title">${p.name} · By Owner</div>
+        <table class="data-table"><thead><tr><th>Owner</th><th class="num">Seasons</th><th class="num">Spent</th><th class="num">Avg bid</th><th class="num">Points</th></tr></thead><tbody>${
+          owners.map(w => `<tr><td>${ownerLink(w.owner, rows[rows.length - 1].season)}</td><td class="num">${w.seasons}</td><td class="num">${w.drafts ? whMoney(w.spent) : '—'}</td>
+            <td class="num">${w.drafts ? whMoney(Math.round(w.spent / w.drafts)) : '—'}</td><td class="num">${w.pts ? fmt1(w.pts) : '—'}</td></tr>`).join('')}</tbody></table></div>
+    </div>
+    <div class="section"><div class="section-title">${p.name} · Season By Season</div>
+      <table class="data-table"><thead><tr><th>Season</th><th>Drafted by</th><th class="num">Price</th><th class="num">Pick</th><th>Finished with</th><th>NFL team</th><th class="num">Points</th><th class="num">PPG</th></tr></thead><tbody>${
+        [...rows].reverse().map(r => {
+          const same = r.final_owner && r.final_owner === r.drafted_by;
+          const fin = !r.final_owner ? '<span style="color:#475569">Dropped &middot; not on a final roster</span>'
+            : same ? `${ownerLink(r.final_owner, r.season)}<span class="wh-tag">kept</span>`
+            : `${ownerLink(r.final_owner, r.season)}<span class="wh-tag moved">${r.acquired === 'TRADE' ? 'via trade' : r.acquired === 'ADD' ? 'waivers / FA' : (r.acquired || '').toLowerCase()}</span>`;
+          return `<tr><td>${r.season}</td>
+            <td>${r.drafted_by ? `${ownerLink(r.drafted_by, r.season)}<div class="rec-sub" style="font-style:italic">${r.drafted_team || ''}</div>` : '<span style="color:#475569">Undrafted</span>'}</td>
+            <td class="num" style="${r.draft_price != null ? 'color:#fcd34d;font-weight:700' : ''}">${whMoney(r.draft_price)}</td>
+            <td class="num">${r.draft_pick ?? '—'}</td>
+            <td>${fin}${r.final_team ? `<div class="rec-sub" style="font-style:italic">${r.final_team}</div>` : ''}</td>
+            <td>${r.nfl_team || ''}</td><td class="num">${r.season_points != null ? fmt1(r.season_points) : '—'}</td><td class="num">${r.points_per_game != null ? fmt1(r.points_per_game) : '—'}</td></tr>`; }).join('')}</tbody></table></div>`;
+
+  destroyChart('wh-chart');
+  const seasons = rows.map(r => r.season);
+  chartInstances['wh-chart'] = new Chart(document.getElementById('wh-chart'), {
+    type: 'bar',
+    data: { labels: seasons, datasets: [{ data: rows.map(r => r.draft_price), borderRadius: 3,
+      backgroundColor: rows.map(r => r.drafted_by ? whColor(r.drafted_by) + 'dd' : '#33415588') }] },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: {
+        title: i => String(seasons[i[0].dataIndex]),
+        label: c => { const r = rows[c.dataIndex]; return r.draft_price == null ? 'Not drafted' : `${r.drafted_by} (${r.drafted_team}) paid $${r.draft_price}`; } } } },
+      scales: { x: { grid: { display: false }, ticks: { color: '#475569' } },
+                y: { beginAtZero: true, grace: '14%', grid: { color: '#1a2030' }, ticks: { color: '#475569', callback: v => '$' + v } } } },
+    plugins: [{ id: 'whLabels', afterDatasetsDraw(chart) {   // owner name above each bar, price inside it
+      const { ctx, chartArea } = chart; ctx.save(); ctx.textAlign = 'center';
+      chart.getDatasetMeta(0).data.forEach((bar, i) => {
+        const r = rows[i], x = bar.x;
+        if (r.draft_price == null) { ctx.fillStyle = '#475569'; ctx.font = '10px system-ui'; ctx.fillText('undrafted', x, chartArea.bottom - 6); return; }
+        ctx.fillStyle = '#e2e8f0'; ctx.font = '600 10px system-ui'; ctx.fillText(r.drafted_by.split('/')[0], x, bar.y - 6);
+        if (bar.base - bar.y > 20) { ctx.fillStyle = '#0c0f18'; ctx.font = '700 11px system-ui'; ctx.fillText('$' + r.draft_price, x, bar.y + 14); }
+      });
+      ctx.restore(); } }],
+  });
+}
+// Shareable link for the current view: tab and owner links go through generated pages that carry their own preview card
+const SITE_URL = 'https://jmml.whohashim.com/';
+const shareSlug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+function shareUrl() {
+  const parts = location.hash.slice(1).split('/').map(decodeURIComponent), tab = parts[0] || 'alltime';
+  const q = o => encodeURIComponent(o);
+  if (tab === 'owner') return `${SITE_URL}owner/${shareSlug(parts[1] || document.getElementById('owner-select').value)}/`;
+  if (tab === 'rivalry') return `${SITE_URL}rivalry/?a=${q(rivA)}&b=${q(rivB)}`;
+  if (tab === 'whohashim') return `${SITE_URL}who-has-him/?p=${q(whSlug())}`;
+  const path = { alltime: 'all-time', history: 'team-history', records: 'records', season: 'season' }[tab];
+  return SITE_URL + (path ? path + '/' : '');
+}
+function copyShare() {
+  const url = shareUrl(), btn = document.getElementById('share-btn'), done = ok => {
+    btn.textContent = ok ? 'Link copied' : 'Copy failed'; setTimeout(() => btn.textContent = 'Share', 1600); };
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(url).then(() => done(true), () => { window.prompt('Copy this link:', url); done(false); });
+  else { window.prompt('Copy this link:', url); done(false); }
+}
+function openOwner(o) { setHash(['owner', o]); routeFromHash(); }
+
+function streakInfo(owner, games) {
+  const rs = games.filter(m => m.owner === owner && m.game_type !== 'Playoffs').sort((a, b) => a.week - b.week);
+  if (!rs.length) return null;
+  const last = rs[rs.length - 1].result === 1; let n = 0;
+  for (let i = rs.length - 1; i >= 0 && (rs[i].result === 1) === last; i--) n++;
+  return { label: (last ? 'W' : 'L') + n, win: last };
+}
+function renderSeasonStandings(table, games, lastWeek) {
+  const prev = seasonTable(games.filter(m => m.week < lastWeek)).map(r => r.owner);
+  document.getElementById('standings-body').innerHTML = table.map((r, i) => `<tr data-owner="${r.owner}" onclick="setActiveOwner('${r.owner}')">
+      <td class="num" style="color:#334155">${i + 1}</td>
+      <td><span class="logo-cell">${logo(r.owner, SEASON_YEAR, 24)}${r.owner}</span></td>
+      <td style="color:#94a3b8;font-size:11px">${r.team}</td>
+      <td class="num" style="color:#4ade80">${r.w}</td>
+      <td class="num" style="color:#f87171">${r.l}</td>
+      <td class="num">${fmt1(r.pf)}</td>
+      <td class="num">${fmt1(r.pa)}</td>
+      <td class="num">${fmt1(r.ppg)}</td>
+      <td>${(() => {
+        const st = streakInfo(r.owner, games); if (!st) return '';
+        const pi = prev.indexOf(r.owner), d = pi < 0 ? 0 : pi - i;
+        const arrow = d > 0 ? `<span class="streak-up">\u25b2${d}</span>` : d < 0 ? `<span class="streak-down">\u25bc${-d}</span>` : '<span class="streak-flat">\u2013</span>';
+        return `<span class="${st.win ? 'streak-up' : 'streak-down'}" style="font-weight:700">${st.label}</span> ${arrow}`;
+      })()}</td>
+    </tr>`).join('');
+}
+
+function renderSeasonScatter(table) {
+  destroyChart('scatter-2025');
+  const xMid = table.reduce((a, r) => a + r.ppg, 0) / table.length;
+  const yMid = table.reduce((a, r) => a + r.papg, 0) / table.length;
+  chartInstances['scatter-2025'] = new Chart(document.getElementById('scatter-2025'), {
+    type: 'scatter',
+    data: { datasets: table.map(r => ({
+      label: r.owner, ownerKey: r.owner,
+      data: [{ x: r.ppg, y: r.papg, owner: r.owner, team: r.team }],
+      pointRadius: 7, pointHoverRadius: 9,
+      ...bubbleStyle(r.owner, activeOwner),
+    })) },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => `${ctx.raw.owner} (${ctx.raw.team}) — PPG ${fmt1(ctx.raw.x)} · PAPG ${fmt1(ctx.raw.y)}` } },
+        quadrantLines: { xMid, yMid, labels: ['Dominant', 'Unlucky', 'Lucky', 'Struggling'] },
+        ownerLabels: { mode: 'bubble' },
+      },
+      scales: {
+        x: { title: { display: true, text: 'Points Per Game', color: '#334155' }, grid: { color: '#1a2030' }, ticks: { color: '#475569' } },
+        y: { title: { display: true, text: 'Points Against Per Game', color: '#334155' }, grid: { color: '#1a2030' }, ticks: { color: '#475569' }, reverse: true },
+      },
+    },
+    plugins: [quadrantPlugin, ownerLabelPlugin],
+  });
+}
+
+function luckColors(chart, ao) {
+  const owners = chart.data.labels;
+  const lucks = chart.data.datasets[0].data;
+  return owners.map((o, i) => {
+    if (o === ao) return GOLD;
+    const c = lucks[i] >= 0 ? '#4ade80' : '#f87171';
+    return c + (ao ? '30' : 'aa');
+  });
+}
+
+function renderLuck(table) {
+  destroyChart('luck-chart');
+  const rows = [...table].sort((a, b) => b.luck - a.luck);
+  const chart = new Chart(document.getElementById('luck-chart'), {
+    type: 'bar',
+    data: { labels: rows.map(r => r.owner), datasets: [{ data: rows.map(r => +r.luck.toFixed(2)), borderRadius: 2 }] },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: {
+        label: ctx => { const r = rows[ctx.dataIndex]; return `Luck ${r.luck >= 0 ? '+' : ''}${fmt1(r.luck)} (${r.w} actual vs ${fmt1(r.exp)} expected)`; }
+      } } },
+      scales: {
+        x: { grid: { color: '#1a2030' }, ticks: { color: '#475569' }, title: { display: true, text: 'Actual wins − expected wins', color: '#334155' } },
+        y: { grid: { display: false }, ticks: { color: '#94a3b8' } },
+      },
+      onClick: (e, els, c) => { if (els.length) setActiveOwner(c.data.labels[els[0].index]); },
+    },
+  });
+  chartInstances['luck-chart'] = chart;
+  chart.data.datasets[0].backgroundColor = luckColors(chart, activeOwner);
+  chart.update('none');
+
+  document.getElementById('win-diff-body').innerHTML = rows.map(r => {
+    const cls = r.luck > 0.5 ? 'luck-pos' : r.luck < -0.5 ? 'luck-neg' : 'luck-zero';
+    return `<tr data-owner="${r.owner}" onclick="setActiveOwner('${r.owner}')">
+      <td><span class="owner-dot" style="background:${greyFor(r.owner)}"></span>${r.owner}</td>
+      <td class="num">${r.w}</td>
+      <td class="num">${fmt1(r.exp)}</td>
+      <td class="num ${cls}">${r.luck >= 0 ? '+' : ''}${fmt1(r.luck)}</td>
+      <td class="num">${fmt1(r.ppg)}</td>
+      <td class="num">${fmt1(r.papg)}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderRecap(games, week) {
+  const wm = games.filter(m => m.week === week);
+  document.getElementById('recap-title').textContent = `Week ${week} Recap`;
+  // one row per game
+  const seen = new Set(), pairs = [];
+  for (const m of wm) {
+    const key = [m.owner, m.opponent].sort().join('||');
+    if (seen.has(key)) continue; seen.add(key);
+    pairs.push({ w: m.result === 1 ? m.owner : m.opponent, l: m.result === 1 ? m.opponent : m.owner,
+                 ws: m.result === 1 ? m.score : m.opp_score, ls: m.result === 1 ? m.opp_score : m.score });
+  }
+  const high = [...wm].sort((a, b) => b.score - a.score)[0];
+  const low  = [...wm].sort((a, b) => a.score - b.score)[0];
+  const close = [...pairs].sort((a, b) => (a.ws - a.ls) - (b.ws - b.ls))[0];
+  const blow  = [...pairs].sort((a, b) => (b.ws - b.ls) - (a.ws - a.ls))[0];
+  const avg = wm.reduce((a, m) => a + m.score, 0) / wm.length;
+  // unlucky: lost despite a top-half score; lucky: won despite a bottom-half score
+  const ranked = [...wm].sort((a, b) => b.score - a.score);
+  const rankOf = m => ranked.indexOf(m) + 1;
+  const unlucky = wm.filter(m => m.result !== 1).sort((a, b) => b.score - a.score)[0];
+  const lucky   = wm.filter(m => m.result === 1).sort((a, b) => a.score - b.score)[0];
+  const card = (label, value, sub, gold) =>
+    `<div class="kpi ${gold ? 'gold' : ''}"><div class="kpi-label">${label}</div><div class="kpi-value">${value}</div><div class="kpi-sub">${sub}</div></div>`;
+  document.getElementById('recap-cards').innerHTML = [
+    card('High Score', fmt1(high.score), high.owner, true),
+    card('Low Score', fmt1(low.score), low.owner),
+    card('League Avg', fmt1(avg), 'points per team'),
+    card('Closest Game', fmt1(close.ws - close.ls), `${close.w} over ${close.l}`),
+    card('Biggest Blowout', fmt1(blow.ws - blow.ls), `${blow.w} over ${blow.l}`),
+    card('Unluckiest Loss', fmt1(unlucky.score), `${unlucky.owner} · ${ordinal(rankOf(unlucky))} highest score, lost`),
+    card('Luckiest Win', fmt1(lucky.score), `${lucky.owner} · ${ordinal(rankOf(lucky))} highest score, won`),
+  ].join('');
+  renderMatchupGrid(wm, 'recap-grid');
+}
+
+// Weekly scores: dots only, green = won that week, grey = lost; selected owner gets a gold ring
+function weeklyDotStyle(ds, ao) {
+  const dim = !!ao && ds.ownerKey !== ao, active = ao === ds.ownerKey;
+  ds.pointBackgroundColor = ds.results.map(w => (w ? '#4ade80' : '#64748b') + (dim ? '33' : ''));
+  ds.pointBorderColor = active ? GOLD : (dim ? '#00000000' : '#0f1117');
+  ds.pointBorderWidth = active ? 2 : 1;
+  ds.pointRadius = active ? 6 : 4.5;
+  ds.order = active ? 0 : 1;
+}
+function renderWeeklyScores(games) {
+  destroyChart('weekly-scores');
+  const regMatchups = games.filter(m => m.game_type !== 'Playoffs' && m.week);
+  const weeks = [...new Set(regMatchups.map(m => m.week))].sort((a, b) => a - b);
+  const datasets = META.current_owners.map(owner => {
+    const rows = weeks.map(w => regMatchups.find(m => m.owner === owner && m.week === w));
+    const ds = {
+      label: owner, ownerKey: owner, showLine: false, borderWidth: 0, backgroundColor: 'transparent',
+      data: rows.map(r => r?.score ?? null),
+      results: rows.map(r => r?.result === 1),
+      pointHoverRadius: 8, pointHitRadius: 6,
+    };
+    weeklyDotStyle(ds, activeOwner);
+    return ds;
+  });
+  chartInstances['weekly-scores'] = new Chart(document.getElementById('weekly-scores'), {
+    type: 'line',
+    data: { labels: weeks.map(w => `Wk ${w}`), datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false },
+        tooltip: { mode: 'nearest', intersect: true,
+          callbacks: { title: () => '', label: ctx => `${ctx.dataset.label}: ${fmt1(ctx.raw)} ${ctx.dataset.results[ctx.dataIndex] ? '(W)' : '(L)'}` } } },
+      scales: { x: { offset: true, grid: { color: '#1a2030' }, ticks: { color: '#475569' } }, y: { grid: { color: '#1a2030' }, ticks: { color: '#475569' } } },
+      interaction: { mode: 'nearest', intersect: true },
+    },
+  });
+}
+
+function renderMatchupGrid(matchups, elId) {
+  const weeks = [...new Set(matchups.map(m => m.week))].sort((a, b) => a - b);
+  const grid  = document.getElementById(elId);
+
+  grid.innerHTML = weeks.map(w => {
+    const wm = matchups.filter(m => m.week === w);
+    const isPlayoff = wm.some(m => m.game_type === 'Playoffs');
+    // De-duplicate: each game appears twice (once per team)
+    const seen = new Set();
+    const games = [];
+    for (const m of wm) {
+      const key = [m.owner, m.opponent].sort().join('||');
+      if (seen.has(key)) continue;
+      seen.add(key);
+      const opp = wm.find(x => x.owner === m.opponent && x.opponent === m.owner);
+      games.push({ a: m, b: opp });
+    }
+
+    const gamesHtml = games.map(({a, b}) => {
+      const aWin = a.result === 1;
+      const playoff = a.game_type === 'Playoffs' ? '<span class="playoff-badge">PO</span> ' : '';
+      return `<div class="matchup-game" data-owners="${a.owner}||${a.opponent}">
+        ${playoff}
+        <span class="mg-team ${aWin ? 'winner' : 'loser'}">${a.owner}</span>
+        <span class="mg-score ${aWin ? 'winner' : ''}">${fmt1(a.score)}</span>
+        <span class="mg-vs">vs</span>
+        <span class="mg-score ${!aWin ? 'winner' : ''}">${fmt1(b?.score ?? a.opp_score)}</span>
+        <span class="mg-team ${!aWin ? 'winner' : 'loser'}">${a.opponent}</span>
+      </div>`;
+    }).join('');
+
+    return `<div class="matchup-week-row">
+      <span class="week-label">${isPlayoff ? 'PO Wk' : 'Wk'} ${w}</span>
+      <div class="matchup-games">${gamesHtml}</div>
+    </div>`;
+  }).join('');
+}
+
+// High-school scoreboard layout: most recent week on top, week 1 at the bottom
+function renderScoreboards(matchups, elId) {
+  const weeks = [...new Set(matchups.map(m => m.week))].sort((a, b) => b - a);
+  document.getElementById(elId).innerHTML = '<div class="scoreboard-stack">' + weeks.map(w => {
+    const wm = matchups.filter(m => m.week === w);
+    const isPlayoff = wm.some(m => m.game_type === 'Playoffs');
+    const seen = new Set(), rows = [];
+    for (const a of wm) {
+      const key = [a.owner, a.opponent].sort().join('||');
+      if (seen.has(key)) continue;
+      seen.add(key);
+      const b = wm.find(x => x.owner === a.opponent && x.opponent === a.owner);
+      const aWin = a.result === 1;
+      rows.push(`<div class="matchup-game" data-owners="${a.owner}||${a.opponent}">
+        <span class="sb-team right ${aWin ? 'win' : ''}"><span>${a.owner}</span>${logo(a.owner, a.year, 24)}</span>
+        <span class="sb-score ${aWin ? 'win' : ''}">${fmt1(a.score)}</span>
+        <span class="sb-score ${!aWin ? 'win' : ''}">${fmt1(b?.score ?? a.opp_score)}</span>
+        <span class="sb-team ${!aWin ? 'win' : ''}">${logo(a.opponent, a.year, 24)}<span>${a.opponent}</span></span>
+      </div>`);
+    }
+    return `<div class="scoreboard">
+      <div class="sb-head"><span class="sb-week">${isPlayoff ? 'Playoffs \u00b7 ' : ''}Week ${w}</span><span class="sb-final">FINAL</span></div>
+      <div class="sb-games">${rows.join('')}</div>
+    </div>`;
+  }).join('') + '</div>';
+}
+
+// ══════════════════════════════════════════════════════
+// QUADRANT PLUGIN (Chart.js custom plugin)
+// ══════════════════════════════════════════════════════
+const quadrantPlugin = {
+  id: 'quadrantLines',
+  afterDatasetsDraw(chart, args, opts) {
+    if (!opts.xMid) return;
+    const { ctx, scales: { x, y } } = chart;
+    const mx = x.getPixelForValue(opts.xMid);
+    const my = y.getPixelForValue(opts.yMid);
+    ctx.save();
+    ctx.setLineDash([5, 4]);
+    ctx.strokeStyle = 'rgba(100,116,139,0.25)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(mx, y.top); ctx.lineTo(mx, y.bottom); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x.left, my); ctx.lineTo(x.right, my); ctx.stroke();
+    ctx.setLineDash([]);
+
+    if (opts.labels) {
+      ctx.font = '700 9px system-ui';
+      ctx.fillStyle = 'rgba(148,163,184,0.3)';
+      const pad = 6;
+      // With Y reversed: top of chart = low Y value = good PA
+      ctx.textAlign = 'right';  ctx.fillText(opts.labels[0], x.right - pad, y.top + 14);  // Dominant (high PF, low PA)
+      ctx.textAlign = 'left';   ctx.fillText(opts.labels[2], x.left + pad,  y.top + 14);  // Lucky (low PF, low PA)
+      ctx.textAlign = 'right';  ctx.fillText(opts.labels[1], x.right - pad, y.bottom - 6);// Unlucky (high PF, high PA)
+      ctx.textAlign = 'left';   ctx.fillText(opts.labels[3], x.left + pad,  y.bottom - 6);// Struggling
+    }
+    ctx.restore();
+  }
+};
+
+// Owner-name labels: next to each bubble, or at the end of each line
+const ownerLabelPlugin = {
+  id: 'ownerLabels',
+  afterDatasetsDraw(chart, args, opts) {
+    if (!opts || !opts.mode) return;
+    const { ctx, chartArea } = chart, ao = chart._hoverOwner || activeOwner;
+    const items = [];
+    chart.data.datasets.forEach((ds, i) => {
+      const meta = chart.getDatasetMeta(i);
+      if (meta.hidden) return;
+      let idx = 0;
+      if (opts.mode === 'end') {
+        idx = -1;
+        for (let k = ds.data.length - 1; k >= 0; k--) if (ds.data[k] != null) { idx = k; break; }
+      }
+      const el = idx >= 0 && meta.data[idx];
+      if (!el) return;
+      items.push({ owner: ds.ownerKey, x: el.x, y: el.y, r: opts.mode === 'bubble' ? (el.options.radius || 4) : 4 });
+    });
+    if (opts.mode === 'end') {
+      items.sort((a, b) => a.y - b.y);
+      for (let i = 1; i < items.length; i++) if (items[i].y - items[i-1].y < 11) items[i].y = items[i-1].y + 11;
+    }
+    items.sort((a, b) => (a.owner === ao) - (b.owner === ao));  // selected owner drawn last
+    ctx.save();
+    ctx.font = '600 10px system-ui';
+    ctx.textBaseline = 'middle';
+    items.forEach(it => {
+      const active = it.owner === ao, dim = !!ao && !active;
+      const text = it.owner.split('/')[0];
+      ctx.fillStyle = active ? GOLD : (dim ? '#47556955' : '#94a3b8');
+      const w = ctx.measureText(text).width;
+      if (opts.mode === 'bubble' && it.x + it.r + 4 + w > chartArea.right) {
+        ctx.textAlign = 'right'; ctx.fillText(text, it.x - it.r - 4, it.y);
+      } else {
+        ctx.textAlign = 'left'; ctx.fillText(text, it.x + it.r + 4, it.y);
+      }
+    });
+    ctx.restore();
+  }
+};
+
+// ══════════════════════════════════════════════════════
+// OWNER HIGHLIGHT
+// ══════════════════════════════════════════════════════
+let activeOwner = null;
+
+function setActiveOwner(name) {
+  activeOwner = activeOwner === name ? null : name;
+  applyHighlight();
+}
+
+function restyleFinishHistory() {
+  const chart = chartInstances['finish-history'];
+  if (!chart) return;
+  const ao = chart._hoverOwner || activeOwner;
+  chart.data.datasets.forEach(ds => Object.assign(ds, lineStyle(ds.ownerKey, ao)));
+  chart.update('none');
+}
+
+function applyHighlight() {
+  const ao = activeOwner;
+
+  // ── Table rows ──────────────────────────────────────
+  document.querySelectorAll('tr[data-owner]').forEach(tr => {
+    tr.classList.toggle('dimmed', !!ao && tr.dataset.owner !== ao);
+  });
+
+  // ── Season cards ────────────────────────────────────
+  document.querySelectorAll('.season-card[data-owner]').forEach(el => {
+    el.classList.toggle('dimmed', !!ao && el.dataset.owner !== ao);
+  });
+
+  // ── Matchup games ────────────────────────────────────
+  document.querySelectorAll('.matchup-game[data-owners]').forEach(el => {
+    const owners = el.dataset.owners.split('||');
+    el.classList.toggle('dimmed', !!ao && !owners.includes(ao));
+  });
+
+  // ── Scatter / bubble charts (one dataset per owner) ──
+  ['scatter-history'].forEach(id => {
+    const chart = chartInstances[id];
+    if (!chart) return;
+    chart.data.datasets.forEach(ds => {
+      const isActive = !ao || ds.ownerKey === ao;
+      const base = ds._baseAlphas || { bg: 'cc', border: 'ff' };
+      ds.backgroundColor = ownerColor(ds.ownerKey) + (isActive ? base.bg : '18');
+      ds.borderColor     = ownerColor(ds.ownerKey) + (isActive ? 'ff' : '22');
+    });
+    chart.update('none');
+  });
+
+  // ── All-Time + Season charts: grey, gold for selected ─
+  ['scatter-alltime', 'scatter-2025'].forEach(id => {
+    const c = chartInstances[id];
+    if (!c) return;
+    c.data.datasets.forEach(ds => Object.assign(ds, bubbleStyle(ds.ownerKey, ao)));
+    c.update('none');
+  });
+  const luck = chartInstances['luck-chart'];
+  if (luck) { luck.data.datasets[0].backgroundColor = luckColors(luck, ao); luck.update('none'); }
+  restyleFinishHistory();
+
+  // ── Line charts ──────────────────────────────────────
+  ['weekly-scores'].forEach(id => {
+    const chart = chartInstances[id];
+    if (!chart) return;
+    chart.data.datasets.forEach(ds => weeklyDotStyle(ds, ao));
+    chart.update('none');
+  });
+
+  // ── Score range (bar — per-owner colors in arrays) ───
+  const rangeChart = chartInstances['score-range'];
+  if (rangeChart) {
+    const labels = rangeChart.data.labels;
+    rangeChart.data.datasets.forEach(ds => {
+      ds.backgroundColor = labels.map(o => {
+        const isActive = !ao || o === ao;
+        return ownerColor(o) + (isActive ? (ds.baseAlpha || 'aa') : '14');
+      });
+    });
+    rangeChart.update('none');
+  }
+}
+
+// ══════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════
+function init() {
+  const updated = '__UPDATED__';
+  document.getElementById('updated-label').textContent = updated ? `Updated ${updated}` : '';
+
+  // Tab 1
+  renderLeaderboard();
+  renderAllTimeScatter();
+  renderFinishHistory();
+  renderH2HMatrix();
+
+  // Tab 2 — filters only (charts deferred until tab is opened)
+  buildHistFilters();
+
+  // Tabs 3 + 4 — charts deferred until tab is opened
+  buildOwnerSelect();
+  document.getElementById('season-tab-btn').textContent = `${SEASON_YEAR} Season`;
+  routeFromHash();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

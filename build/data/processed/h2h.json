@@ -1,0 +1,1434 @@
+[
+  {
+    "owner": "Hudspeath",
+    "opponent": "Salty",
+    "wins": 15,
+    "losses": 10,
+    "pf": 2431.32,
+    "pa": 2447.5200000000004
+  },
+  {
+    "owner": "Hudspeath",
+    "opponent": "Shep",
+    "wins": 17,
+    "losses": 5,
+    "pf": 2205.9,
+    "pa": 1977.5399999999995
+  },
+  {
+    "owner": "Hudspeath",
+    "opponent": "Rooney/Jackson",
+    "wins": 9,
+    "losses": 13,
+    "pf": 2076.4,
+    "pa": 2117.5399999999995
+  },
+  {
+    "owner": "Hudspeath",
+    "opponent": "KnardDawg",
+    "wins": 14,
+    "losses": 6,
+    "pf": 1889.4799999999998,
+    "pa": 1776.56
+  },
+  {
+    "owner": "Hudspeath",
+    "opponent": "Tayski",
+    "wins": 10,
+    "losses": 13,
+    "pf": 1959.1600000000003,
+    "pa": 2079.3999999999996
+  },
+  {
+    "owner": "Hudspeath",
+    "opponent": "Cock",
+    "wins": 15,
+    "losses": 8,
+    "pf": 2272.3799999999997,
+    "pa": 2084.08
+  },
+  {
+    "owner": "Hudspeath",
+    "opponent": "Pierson",
+    "wins": 11,
+    "losses": 9,
+    "pf": 1958.2400000000002,
+    "pa": 1986.32
+  },
+  {
+    "owner": "Hudspeath",
+    "opponent": "Guckien",
+    "wins": 2,
+    "losses": 1,
+    "pf": 302.4,
+    "pa": 311.6
+  },
+  {
+    "owner": "Hudspeath",
+    "opponent": "Fellows",
+    "wins": 11,
+    "losses": 6,
+    "pf": 1568.12,
+    "pa": 1502.6599999999999
+  },
+  {
+    "owner": "Hudspeath",
+    "opponent": "Buser",
+    "wins": 7,
+    "losses": 14,
+    "pf": 1924.72,
+    "pa": 1998.4599999999998
+  },
+  {
+    "owner": "Hudspeath",
+    "opponent": "T-How",
+    "wins": 12,
+    "losses": 12,
+    "pf": 2087.8399999999997,
+    "pa": 2175.2599999999998
+  },
+  {
+    "owner": "Hudspeath",
+    "opponent": "Riley",
+    "wins": 12,
+    "losses": 4,
+    "pf": 1642.0800000000002,
+    "pa": 1460.52
+  },
+  {
+    "owner": "Hudspeath",
+    "opponent": "Ewert",
+    "wins": 3,
+    "losses": 2,
+    "pf": 441.82,
+    "pa": 459.74
+  },
+  {
+    "owner": "Salty",
+    "opponent": "Hudspeath",
+    "wins": 10,
+    "losses": 15,
+    "pf": 2447.5200000000004,
+    "pa": 2431.32
+  },
+  {
+    "owner": "Salty",
+    "opponent": "Buser",
+    "wins": 10,
+    "losses": 13,
+    "pf": 2188.94,
+    "pa": 2290.16
+  },
+  {
+    "owner": "Salty",
+    "opponent": "Pierson",
+    "wins": 14,
+    "losses": 7,
+    "pf": 2126.46,
+    "pa": 1863.2999999999997
+  },
+  {
+    "owner": "Salty",
+    "opponent": "Fellows",
+    "wins": 12,
+    "losses": 5,
+    "pf": 1722.02,
+    "pa": 1415.02
+  },
+  {
+    "owner": "Salty",
+    "opponent": "Cock",
+    "wins": 11,
+    "losses": 6,
+    "pf": 1712.9799999999998,
+    "pa": 1468.3599999999997
+  },
+  {
+    "owner": "Salty",
+    "opponent": "T-How",
+    "wins": 17,
+    "losses": 10,
+    "pf": 2715.8199999999997,
+    "pa": 2409.84
+  },
+  {
+    "owner": "Salty",
+    "opponent": "Shep",
+    "wins": 7,
+    "losses": 14,
+    "pf": 2034.1200000000001,
+    "pa": 2126.2199999999993
+  },
+  {
+    "owner": "Salty",
+    "opponent": "Guckien",
+    "wins": 3,
+    "losses": 0,
+    "pf": 337.3,
+    "pa": 259.4
+  },
+  {
+    "owner": "Salty",
+    "opponent": "Rooney/Jackson",
+    "wins": 13,
+    "losses": 8,
+    "pf": 2005.6000000000001,
+    "pa": 1884.76
+  },
+  {
+    "owner": "Salty",
+    "opponent": "KnardDawg",
+    "wins": 13,
+    "losses": 7,
+    "pf": 1898.3199999999995,
+    "pa": 1764.58
+  },
+  {
+    "owner": "Salty",
+    "opponent": "Tayski",
+    "wins": 13,
+    "losses": 6,
+    "pf": 1795.1599999999999,
+    "pa": 1626.12
+  },
+  {
+    "owner": "Salty",
+    "opponent": "Riley",
+    "wins": 9,
+    "losses": 13,
+    "pf": 2231.5,
+    "pa": 2217.64
+  },
+  {
+    "owner": "Salty",
+    "opponent": "BYE",
+    "wins": 0,
+    "losses": 1,
+    "pf": 88.5,
+    "pa": 0.0
+  },
+  {
+    "owner": "Salty",
+    "opponent": "Ewert",
+    "wins": 4,
+    "losses": 1,
+    "pf": 555.8000000000001,
+    "pa": 540.98
+  },
+  {
+    "owner": "Fellows",
+    "opponent": "Tayski",
+    "wins": 8,
+    "losses": 8,
+    "pf": 1483.1599999999999,
+    "pa": 1607.5200000000002
+  },
+  {
+    "owner": "Fellows",
+    "opponent": "Cock",
+    "wins": 10,
+    "losses": 5,
+    "pf": 1386.9,
+    "pa": 1325.8
+  },
+  {
+    "owner": "Fellows",
+    "opponent": "Rooney/Jackson",
+    "wins": 9,
+    "losses": 9,
+    "pf": 1713.46,
+    "pa": 1712.6599999999999
+  },
+  {
+    "owner": "Fellows",
+    "opponent": "Salty",
+    "wins": 5,
+    "losses": 12,
+    "pf": 1415.02,
+    "pa": 1722.02
+  },
+  {
+    "owner": "Fellows",
+    "opponent": "Pierson",
+    "wins": 8,
+    "losses": 11,
+    "pf": 1657.1599999999996,
+    "pa": 1904.3399999999997
+  },
+  {
+    "owner": "Fellows",
+    "opponent": "Buser",
+    "wins": 7,
+    "losses": 13,
+    "pf": 1794.18,
+    "pa": 1928.4599999999998
+  },
+  {
+    "owner": "Fellows",
+    "opponent": "Shep",
+    "wins": 9,
+    "losses": 9,
+    "pf": 1601.3400000000001,
+    "pa": 1634.18
+  },
+  {
+    "owner": "Fellows",
+    "opponent": "Hudspeath",
+    "wins": 6,
+    "losses": 11,
+    "pf": 1502.6599999999999,
+    "pa": 1568.12
+  },
+  {
+    "owner": "Fellows",
+    "opponent": "Guckien",
+    "wins": 1,
+    "losses": 1,
+    "pf": 143.6,
+    "pa": 177.8
+  },
+  {
+    "owner": "Fellows",
+    "opponent": "T-How",
+    "wins": 6,
+    "losses": 11,
+    "pf": 1481.1800000000003,
+    "pa": 1509.9800000000002
+  },
+  {
+    "owner": "Fellows",
+    "opponent": "KnardDawg",
+    "wins": 9,
+    "losses": 8,
+    "pf": 1508.44,
+    "pa": 1491.2800000000002
+  },
+  {
+    "owner": "Fellows",
+    "opponent": "Riley",
+    "wins": 6,
+    "losses": 7,
+    "pf": 1301.46,
+    "pa": 1302.3799999999999
+  },
+  {
+    "owner": "Shep",
+    "opponent": "T-How",
+    "wins": 12,
+    "losses": 9,
+    "pf": 1938.7600000000002,
+    "pa": 1746.98
+  },
+  {
+    "owner": "Shep",
+    "opponent": "Hudspeath",
+    "wins": 5,
+    "losses": 17,
+    "pf": 1977.5399999999995,
+    "pa": 2205.9
+  },
+  {
+    "owner": "Shep",
+    "opponent": "Guckien",
+    "wins": 1,
+    "losses": 1,
+    "pf": 212.89999999999998,
+    "pa": 203.5
+  },
+  {
+    "owner": "Shep",
+    "opponent": "KnardDawg",
+    "wins": 13,
+    "losses": 9,
+    "pf": 2036.54,
+    "pa": 1990.3799999999999
+  },
+  {
+    "owner": "Shep",
+    "opponent": "Tayski",
+    "wins": 10,
+    "losses": 13,
+    "pf": 2212.42,
+    "pa": 2205.6600000000003
+  },
+  {
+    "owner": "Shep",
+    "opponent": "Cock",
+    "wins": 15,
+    "losses": 12,
+    "pf": 2574.3199999999993,
+    "pa": 2482.4999999999995
+  },
+  {
+    "owner": "Shep",
+    "opponent": "Fellows",
+    "wins": 9,
+    "losses": 9,
+    "pf": 1634.18,
+    "pa": 1601.3400000000001
+  },
+  {
+    "owner": "Shep",
+    "opponent": "Salty",
+    "wins": 14,
+    "losses": 7,
+    "pf": 2126.2199999999993,
+    "pa": 2034.1200000000001
+  },
+  {
+    "owner": "Shep",
+    "opponent": "Rooney/Jackson",
+    "wins": 11,
+    "losses": 8,
+    "pf": 1723.6599999999999,
+    "pa": 1671.0600000000002
+  },
+  {
+    "owner": "Shep",
+    "opponent": "Pierson",
+    "wins": 8,
+    "losses": 15,
+    "pf": 2134.4399999999996,
+    "pa": 2195.8199999999997
+  },
+  {
+    "owner": "Shep",
+    "opponent": "Buser",
+    "wins": 7,
+    "losses": 14,
+    "pf": 1836.4999999999998,
+    "pa": 2085.32
+  },
+  {
+    "owner": "Shep",
+    "opponent": "Riley",
+    "wins": 9,
+    "losses": 8,
+    "pf": 1636.2000000000003,
+    "pa": 1603.9599999999996
+  },
+  {
+    "owner": "Shep",
+    "opponent": "Ewert",
+    "wins": 3,
+    "losses": 3,
+    "pf": 583.4,
+    "pa": 510.32
+  },
+  {
+    "owner": "Guckien",
+    "opponent": "KnardDawg",
+    "wins": 2,
+    "losses": 4,
+    "pf": 497.2,
+    "pa": 542.8
+  },
+  {
+    "owner": "Guckien",
+    "opponent": "Rooney/Jackson",
+    "wins": 2,
+    "losses": 1,
+    "pf": 320.9,
+    "pa": 297.2
+  },
+  {
+    "owner": "Guckien",
+    "opponent": "Shep",
+    "wins": 1,
+    "losses": 1,
+    "pf": 203.5,
+    "pa": 212.89999999999998
+  },
+  {
+    "owner": "Guckien",
+    "opponent": "Buser",
+    "wins": 2,
+    "losses": 0,
+    "pf": 170.7,
+    "pa": 159.7
+  },
+  {
+    "owner": "Guckien",
+    "opponent": "T-How",
+    "wins": 0,
+    "losses": 3,
+    "pf": 239.39999999999998,
+    "pa": 305.5
+  },
+  {
+    "owner": "Guckien",
+    "opponent": "Tayski",
+    "wins": 3,
+    "losses": 1,
+    "pf": 379.9,
+    "pa": 276.3
+  },
+  {
+    "owner": "Guckien",
+    "opponent": "Hudspeath",
+    "wins": 1,
+    "losses": 2,
+    "pf": 311.6,
+    "pa": 302.4
+  },
+  {
+    "owner": "Guckien",
+    "opponent": "Salty",
+    "wins": 0,
+    "losses": 3,
+    "pf": 259.4,
+    "pa": 337.3
+  },
+  {
+    "owner": "Guckien",
+    "opponent": "Fellows",
+    "wins": 1,
+    "losses": 1,
+    "pf": 177.8,
+    "pa": 143.6
+  },
+  {
+    "owner": "Guckien",
+    "opponent": "Cock",
+    "wins": 1,
+    "losses": 1,
+    "pf": 212.7,
+    "pa": 206.6
+  },
+  {
+    "owner": "Guckien",
+    "opponent": "Pierson",
+    "wins": 1,
+    "losses": 1,
+    "pf": 182.6,
+    "pa": 207.2
+  },
+  {
+    "owner": "Rooney/Jackson",
+    "opponent": "Cock",
+    "wins": 16,
+    "losses": 13,
+    "pf": 2622.7000000000007,
+    "pa": 2556.4399999999996
+  },
+  {
+    "owner": "Rooney/Jackson",
+    "opponent": "Guckien",
+    "wins": 1,
+    "losses": 2,
+    "pf": 297.2,
+    "pa": 320.9
+  },
+  {
+    "owner": "Rooney/Jackson",
+    "opponent": "Fellows",
+    "wins": 9,
+    "losses": 9,
+    "pf": 1712.6599999999999,
+    "pa": 1713.46
+  },
+  {
+    "owner": "Rooney/Jackson",
+    "opponent": "Hudspeath",
+    "wins": 13,
+    "losses": 9,
+    "pf": 2117.5399999999995,
+    "pa": 2076.4
+  },
+  {
+    "owner": "Rooney/Jackson",
+    "opponent": "Pierson",
+    "wins": 10,
+    "losses": 10,
+    "pf": 1904.7199999999998,
+    "pa": 2016.7199999999998
+  },
+  {
+    "owner": "Rooney/Jackson",
+    "opponent": "Buser",
+    "wins": 13,
+    "losses": 14,
+    "pf": 2606.8999999999996,
+    "pa": 2502.36
+  },
+  {
+    "owner": "Rooney/Jackson",
+    "opponent": "T-How",
+    "wins": 10,
+    "losses": 13,
+    "pf": 2228.18,
+    "pa": 2288.4200000000005
+  },
+  {
+    "owner": "Rooney/Jackson",
+    "opponent": "KnardDawg",
+    "wins": 14,
+    "losses": 7,
+    "pf": 2029.6000000000001,
+    "pa": 1809.7400000000002
+  },
+  {
+    "owner": "Rooney/Jackson",
+    "opponent": "Shep",
+    "wins": 8,
+    "losses": 11,
+    "pf": 1671.0600000000002,
+    "pa": 1723.6599999999999
+  },
+  {
+    "owner": "Rooney/Jackson",
+    "opponent": "Salty",
+    "wins": 8,
+    "losses": 13,
+    "pf": 1884.76,
+    "pa": 2005.6000000000001
+  },
+  {
+    "owner": "Rooney/Jackson",
+    "opponent": "Tayski",
+    "wins": 10,
+    "losses": 11,
+    "pf": 1902.8799999999999,
+    "pa": 2060.0199999999995
+  },
+  {
+    "owner": "Rooney/Jackson",
+    "opponent": "Riley",
+    "wins": 6,
+    "losses": 10,
+    "pf": 1552.88,
+    "pa": 1664.44
+  },
+  {
+    "owner": "Rooney/Jackson",
+    "opponent": "Ewert",
+    "wins": 0,
+    "losses": 4,
+    "pf": 358.3,
+    "pa": 438.38
+  },
+  {
+    "owner": "Cock",
+    "opponent": "Rooney/Jackson",
+    "wins": 13,
+    "losses": 16,
+    "pf": 2556.4399999999996,
+    "pa": 2622.7000000000007
+  },
+  {
+    "owner": "Cock",
+    "opponent": "Fellows",
+    "wins": 5,
+    "losses": 10,
+    "pf": 1325.8,
+    "pa": 1386.9
+  },
+  {
+    "owner": "Cock",
+    "opponent": "Tayski",
+    "wins": 10,
+    "losses": 11,
+    "pf": 1818.0400000000002,
+    "pa": 1945.3400000000001
+  },
+  {
+    "owner": "Cock",
+    "opponent": "T-How",
+    "wins": 6,
+    "losses": 13,
+    "pf": 1607.58,
+    "pa": 1710.3199999999995
+  },
+  {
+    "owner": "Cock",
+    "opponent": "Salty",
+    "wins": 6,
+    "losses": 11,
+    "pf": 1468.3599999999997,
+    "pa": 1712.9799999999998
+  },
+  {
+    "owner": "Cock",
+    "opponent": "Hudspeath",
+    "wins": 8,
+    "losses": 15,
+    "pf": 2084.08,
+    "pa": 2272.3799999999997
+  },
+  {
+    "owner": "Cock",
+    "opponent": "Shep",
+    "wins": 12,
+    "losses": 15,
+    "pf": 2482.4999999999995,
+    "pa": 2574.3199999999993
+  },
+  {
+    "owner": "Cock",
+    "opponent": "Buser",
+    "wins": 6,
+    "losses": 11,
+    "pf": 1478.4,
+    "pa": 1660.92
+  },
+  {
+    "owner": "Cock",
+    "opponent": "KnardDawg",
+    "wins": 12,
+    "losses": 13,
+    "pf": 2189.5599999999995,
+    "pa": 2262.5600000000004
+  },
+  {
+    "owner": "Cock",
+    "opponent": "Pierson",
+    "wins": 7,
+    "losses": 18,
+    "pf": 2187.7999999999997,
+    "pa": 2533.58
+  },
+  {
+    "owner": "Cock",
+    "opponent": "Guckien",
+    "wins": 1,
+    "losses": 1,
+    "pf": 206.6,
+    "pa": 212.7
+  },
+  {
+    "owner": "Cock",
+    "opponent": "Riley",
+    "wins": 8,
+    "losses": 14,
+    "pf": 2009.12,
+    "pa": 2301.6400000000003
+  },
+  {
+    "owner": "Cock",
+    "opponent": "Ewert",
+    "wins": 2,
+    "losses": 1,
+    "pf": 329.52,
+    "pa": 297.1
+  },
+  {
+    "owner": "Tayski",
+    "opponent": "Fellows",
+    "wins": 8,
+    "losses": 8,
+    "pf": 1607.5200000000002,
+    "pa": 1483.1599999999999
+  },
+  {
+    "owner": "Tayski",
+    "opponent": "KnardDawg",
+    "wins": 10,
+    "losses": 13,
+    "pf": 2080.6600000000003,
+    "pa": 2276.7599999999998
+  },
+  {
+    "owner": "Tayski",
+    "opponent": "Cock",
+    "wins": 11,
+    "losses": 10,
+    "pf": 1945.3400000000001,
+    "pa": 1818.0400000000002
+  },
+  {
+    "owner": "Tayski",
+    "opponent": "Hudspeath",
+    "wins": 13,
+    "losses": 10,
+    "pf": 2079.3999999999996,
+    "pa": 1959.1600000000003
+  },
+  {
+    "owner": "Tayski",
+    "opponent": "Shep",
+    "wins": 13,
+    "losses": 10,
+    "pf": 2205.6600000000003,
+    "pa": 2212.42
+  },
+  {
+    "owner": "Tayski",
+    "opponent": "Guckien",
+    "wins": 1,
+    "losses": 3,
+    "pf": 276.3,
+    "pa": 379.9
+  },
+  {
+    "owner": "Tayski",
+    "opponent": "Pierson",
+    "wins": 11,
+    "losses": 10,
+    "pf": 1910.14,
+    "pa": 1835.16
+  },
+  {
+    "owner": "Tayski",
+    "opponent": "Buser",
+    "wins": 9,
+    "losses": 17,
+    "pf": 2335.9599999999996,
+    "pa": 2660.4400000000005
+  },
+  {
+    "owner": "Tayski",
+    "opponent": "T-How",
+    "wins": 7,
+    "losses": 14,
+    "pf": 1859.4199999999996,
+    "pa": 2017.3400000000004
+  },
+  {
+    "owner": "Tayski",
+    "opponent": "Rooney/Jackson",
+    "wins": 11,
+    "losses": 10,
+    "pf": 2060.0199999999995,
+    "pa": 1902.8799999999999
+  },
+  {
+    "owner": "Tayski",
+    "opponent": "Salty",
+    "wins": 7,
+    "losses": 13,
+    "pf": 1712.1999999999998,
+    "pa": 1795.1599999999999
+  },
+  {
+    "owner": "Tayski",
+    "opponent": "Riley",
+    "wins": 8,
+    "losses": 14,
+    "pf": 1891.34,
+    "pa": 2342.3199999999997
+  },
+  {
+    "owner": "Tayski",
+    "opponent": "Ewert",
+    "wins": 2,
+    "losses": 1,
+    "pf": 288.6,
+    "pa": 228.7
+  },
+  {
+    "owner": "KnardDawg",
+    "opponent": "Guckien",
+    "wins": 4,
+    "losses": 2,
+    "pf": 542.8,
+    "pa": 497.2
+  },
+  {
+    "owner": "KnardDawg",
+    "opponent": "Tayski",
+    "wins": 13,
+    "losses": 10,
+    "pf": 2276.7599999999998,
+    "pa": 2080.6600000000003
+  },
+  {
+    "owner": "KnardDawg",
+    "opponent": "Hudspeath",
+    "wins": 6,
+    "losses": 14,
+    "pf": 1776.56,
+    "pa": 1889.4799999999998
+  },
+  {
+    "owner": "KnardDawg",
+    "opponent": "Shep",
+    "wins": 9,
+    "losses": 13,
+    "pf": 1990.3799999999999,
+    "pa": 2036.54
+  },
+  {
+    "owner": "KnardDawg",
+    "opponent": "Rooney/Jackson",
+    "wins": 7,
+    "losses": 14,
+    "pf": 1809.7400000000002,
+    "pa": 2029.6000000000001
+  },
+  {
+    "owner": "KnardDawg",
+    "opponent": "T-How",
+    "wins": 12,
+    "losses": 8,
+    "pf": 1901.3999999999999,
+    "pa": 1752.9799999999996
+  },
+  {
+    "owner": "KnardDawg",
+    "opponent": "Cock",
+    "wins": 13,
+    "losses": 12,
+    "pf": 2262.5600000000004,
+    "pa": 2189.5599999999995
+  },
+  {
+    "owner": "KnardDawg",
+    "opponent": "Buser",
+    "wins": 11,
+    "losses": 10,
+    "pf": 1971.0000000000005,
+    "pa": 1905.2999999999997
+  },
+  {
+    "owner": "KnardDawg",
+    "opponent": "Pierson",
+    "wins": 11,
+    "losses": 12,
+    "pf": 2302.08,
+    "pa": 2299.16
+  },
+  {
+    "owner": "KnardDawg",
+    "opponent": "Salty",
+    "wins": 7,
+    "losses": 13,
+    "pf": 1764.58,
+    "pa": 1898.3199999999995
+  },
+  {
+    "owner": "KnardDawg",
+    "opponent": "Fellows",
+    "wins": 8,
+    "losses": 9,
+    "pf": 1491.2800000000002,
+    "pa": 1508.44
+  },
+  {
+    "owner": "KnardDawg",
+    "opponent": "Riley",
+    "wins": 5,
+    "losses": 12,
+    "pf": 1569.2599999999995,
+    "pa": 1816.02
+  },
+  {
+    "owner": "KnardDawg",
+    "opponent": "Ewert",
+    "wins": 3,
+    "losses": 6,
+    "pf": 827.24,
+    "pa": 924.46
+  },
+  {
+    "owner": "T-How",
+    "opponent": "Shep",
+    "wins": 9,
+    "losses": 12,
+    "pf": 1746.98,
+    "pa": 1938.7600000000002
+  },
+  {
+    "owner": "T-How",
+    "opponent": "Pierson",
+    "wins": 12,
+    "losses": 10,
+    "pf": 2258.96,
+    "pa": 2267.86
+  },
+  {
+    "owner": "T-How",
+    "opponent": "Buser",
+    "wins": 10,
+    "losses": 10,
+    "pf": 1903.2800000000002,
+    "pa": 1889.4599999999998
+  },
+  {
+    "owner": "T-How",
+    "opponent": "Cock",
+    "wins": 13,
+    "losses": 6,
+    "pf": 1710.3199999999995,
+    "pa": 1607.58
+  },
+  {
+    "owner": "T-How",
+    "opponent": "Guckien",
+    "wins": 3,
+    "losses": 0,
+    "pf": 305.5,
+    "pa": 239.39999999999998
+  },
+  {
+    "owner": "T-How",
+    "opponent": "Rooney/Jackson",
+    "wins": 13,
+    "losses": 10,
+    "pf": 2288.4200000000005,
+    "pa": 2228.18
+  },
+  {
+    "owner": "T-How",
+    "opponent": "Salty",
+    "wins": 10,
+    "losses": 16,
+    "pf": 2313.14,
+    "pa": 2614.4199999999996
+  },
+  {
+    "owner": "T-How",
+    "opponent": "KnardDawg",
+    "wins": 8,
+    "losses": 12,
+    "pf": 1752.9799999999996,
+    "pa": 1901.3999999999999
+  },
+  {
+    "owner": "T-How",
+    "opponent": "Tayski",
+    "wins": 14,
+    "losses": 7,
+    "pf": 2017.3400000000004,
+    "pa": 1859.4199999999996
+  },
+  {
+    "owner": "T-How",
+    "opponent": "Fellows",
+    "wins": 11,
+    "losses": 7,
+    "pf": 1606.6800000000003,
+    "pa": 1582.5800000000004
+  },
+  {
+    "owner": "T-How",
+    "opponent": "Hudspeath",
+    "wins": 12,
+    "losses": 11,
+    "pf": 2086.06,
+    "pa": 1978.04
+  },
+  {
+    "owner": "T-How",
+    "opponent": "Riley",
+    "wins": 11,
+    "losses": 10,
+    "pf": 1938.52,
+    "pa": 2040.6599999999999
+  },
+  {
+    "owner": "T-How",
+    "opponent": "BYE",
+    "wins": 0,
+    "losses": 1,
+    "pf": 88.9,
+    "pa": 0.0
+  },
+  {
+    "owner": "T-How",
+    "opponent": "T-How",
+    "wins": 0,
+    "losses": 1,
+    "pf": 89.2,
+    "pa": 109.8
+  },
+  {
+    "owner": "T-How",
+    "opponent": "Ewert",
+    "wins": 2,
+    "losses": 2,
+    "pf": 360.78,
+    "pa": 369.91999999999996
+  },
+  {
+    "owner": "Buser",
+    "opponent": "Salty",
+    "wins": 13,
+    "losses": 10,
+    "pf": 2290.16,
+    "pa": 2188.94
+  },
+  {
+    "owner": "Buser",
+    "opponent": "T-How",
+    "wins": 10,
+    "losses": 10,
+    "pf": 1889.4599999999998,
+    "pa": 1903.2800000000002
+  },
+  {
+    "owner": "Buser",
+    "opponent": "Pierson",
+    "wins": 8,
+    "losses": 14,
+    "pf": 2054.94,
+    "pa": 2222.5800000000004
+  },
+  {
+    "owner": "Buser",
+    "opponent": "Guckien",
+    "wins": 0,
+    "losses": 2,
+    "pf": 159.7,
+    "pa": 170.7
+  },
+  {
+    "owner": "Buser",
+    "opponent": "Rooney/Jackson",
+    "wins": 14,
+    "losses": 13,
+    "pf": 2502.36,
+    "pa": 2606.8999999999996
+  },
+  {
+    "owner": "Buser",
+    "opponent": "Fellows",
+    "wins": 13,
+    "losses": 7,
+    "pf": 1928.4599999999998,
+    "pa": 1794.18
+  },
+  {
+    "owner": "Buser",
+    "opponent": "Cock",
+    "wins": 11,
+    "losses": 6,
+    "pf": 1660.92,
+    "pa": 1478.4
+  },
+  {
+    "owner": "Buser",
+    "opponent": "Tayski",
+    "wins": 17,
+    "losses": 9,
+    "pf": 2660.4400000000005,
+    "pa": 2335.9599999999996
+  },
+  {
+    "owner": "Buser",
+    "opponent": "KnardDawg",
+    "wins": 10,
+    "losses": 11,
+    "pf": 1905.2999999999997,
+    "pa": 1971.0000000000005
+  },
+  {
+    "owner": "Buser",
+    "opponent": "Hudspeath",
+    "wins": 14,
+    "losses": 7,
+    "pf": 1998.4599999999998,
+    "pa": 1924.72
+  },
+  {
+    "owner": "Buser",
+    "opponent": "Shep",
+    "wins": 14,
+    "losses": 7,
+    "pf": 2085.32,
+    "pa": 1836.4999999999998
+  },
+  {
+    "owner": "Buser",
+    "opponent": "Riley",
+    "wins": 9,
+    "losses": 7,
+    "pf": 1575.8999999999999,
+    "pa": 1648.1
+  },
+  {
+    "owner": "Buser",
+    "opponent": "Ewert",
+    "wins": 3,
+    "losses": 3,
+    "pf": 649.38,
+    "pa": 654.36
+  },
+  {
+    "owner": "Pierson",
+    "opponent": "T-How",
+    "wins": 10,
+    "losses": 12,
+    "pf": 2267.86,
+    "pa": 2258.96
+  },
+  {
+    "owner": "Pierson",
+    "opponent": "Salty",
+    "wins": 7,
+    "losses": 14,
+    "pf": 1863.2999999999997,
+    "pa": 2126.46
+  },
+  {
+    "owner": "Pierson",
+    "opponent": "Buser",
+    "wins": 14,
+    "losses": 8,
+    "pf": 2222.5800000000004,
+    "pa": 2054.94
+  },
+  {
+    "owner": "Pierson",
+    "opponent": "Rooney/Jackson",
+    "wins": 10,
+    "losses": 10,
+    "pf": 2016.7199999999998,
+    "pa": 1904.7199999999998
+  },
+  {
+    "owner": "Pierson",
+    "opponent": "Fellows",
+    "wins": 11,
+    "losses": 8,
+    "pf": 1904.3399999999997,
+    "pa": 1657.1599999999996
+  },
+  {
+    "owner": "Pierson",
+    "opponent": "Hudspeath",
+    "wins": 9,
+    "losses": 11,
+    "pf": 1986.32,
+    "pa": 1958.2400000000002
+  },
+  {
+    "owner": "Pierson",
+    "opponent": "Tayski",
+    "wins": 10,
+    "losses": 11,
+    "pf": 1835.16,
+    "pa": 1910.14
+  },
+  {
+    "owner": "Pierson",
+    "opponent": "Cock",
+    "wins": 18,
+    "losses": 7,
+    "pf": 2533.58,
+    "pa": 2187.7999999999997
+  },
+  {
+    "owner": "Pierson",
+    "opponent": "KnardDawg",
+    "wins": 12,
+    "losses": 11,
+    "pf": 2299.16,
+    "pa": 2302.08
+  },
+  {
+    "owner": "Pierson",
+    "opponent": "Shep",
+    "wins": 15,
+    "losses": 8,
+    "pf": 2195.8199999999997,
+    "pa": 2134.4399999999996
+  },
+  {
+    "owner": "Pierson",
+    "opponent": "Guckien",
+    "wins": 1,
+    "losses": 1,
+    "pf": 207.2,
+    "pa": 182.6
+  },
+  {
+    "owner": "Pierson",
+    "opponent": "Riley",
+    "wins": 14,
+    "losses": 8,
+    "pf": 2282.9599999999996,
+    "pa": 2084.08
+  },
+  {
+    "owner": "Pierson",
+    "opponent": "Ewert",
+    "wins": 3,
+    "losses": 1,
+    "pf": 461.93999999999994,
+    "pa": 405.00000000000006
+  },
+  {
+    "owner": "Riley",
+    "opponent": "Buser",
+    "wins": 7,
+    "losses": 9,
+    "pf": 1648.1,
+    "pa": 1575.8999999999999
+  },
+  {
+    "owner": "Riley",
+    "opponent": "Cock",
+    "wins": 14,
+    "losses": 8,
+    "pf": 2301.6400000000003,
+    "pa": 2009.12
+  },
+  {
+    "owner": "Riley",
+    "opponent": "Tayski",
+    "wins": 14,
+    "losses": 8,
+    "pf": 2342.3199999999997,
+    "pa": 1891.34
+  },
+  {
+    "owner": "Riley",
+    "opponent": "Rooney/Jackson",
+    "wins": 10,
+    "losses": 6,
+    "pf": 1664.44,
+    "pa": 1552.88
+  },
+  {
+    "owner": "Riley",
+    "opponent": "Pierson",
+    "wins": 8,
+    "losses": 14,
+    "pf": 2084.08,
+    "pa": 2282.9599999999996
+  },
+  {
+    "owner": "Riley",
+    "opponent": "T-How",
+    "wins": 10,
+    "losses": 11,
+    "pf": 2040.6599999999999,
+    "pa": 1938.52
+  },
+  {
+    "owner": "Riley",
+    "opponent": "Hudspeath",
+    "wins": 4,
+    "losses": 12,
+    "pf": 1460.52,
+    "pa": 1642.0800000000002
+  },
+  {
+    "owner": "Riley",
+    "opponent": "Salty",
+    "wins": 13,
+    "losses": 9,
+    "pf": 2217.64,
+    "pa": 2231.5
+  },
+  {
+    "owner": "Riley",
+    "opponent": "KnardDawg",
+    "wins": 12,
+    "losses": 5,
+    "pf": 1816.02,
+    "pa": 1569.2599999999995
+  },
+  {
+    "owner": "Riley",
+    "opponent": "Fellows",
+    "wins": 7,
+    "losses": 6,
+    "pf": 1302.3799999999999,
+    "pa": 1301.46
+  },
+  {
+    "owner": "Riley",
+    "opponent": "Shep",
+    "wins": 8,
+    "losses": 9,
+    "pf": 1603.9599999999996,
+    "pa": 1636.2000000000003
+  },
+  {
+    "owner": "Riley",
+    "opponent": "Ewert",
+    "wins": 3,
+    "losses": 3,
+    "pf": 581.02,
+    "pa": 525.5799999999999
+  },
+  {
+    "owner": "Ewert",
+    "opponent": "Rooney/Jackson",
+    "wins": 4,
+    "losses": 0,
+    "pf": 438.38,
+    "pa": 358.3
+  },
+  {
+    "owner": "Ewert",
+    "opponent": "Buser",
+    "wins": 3,
+    "losses": 3,
+    "pf": 654.36,
+    "pa": 649.38
+  },
+  {
+    "owner": "Ewert",
+    "opponent": "Shep",
+    "wins": 4,
+    "losses": 3,
+    "pf": 622.98,
+    "pa": 583.4
+  },
+  {
+    "owner": "Ewert",
+    "opponent": "Pierson",
+    "wins": 1,
+    "losses": 3,
+    "pf": 405.00000000000006,
+    "pa": 461.93999999999994
+  },
+  {
+    "owner": "Ewert",
+    "opponent": "KnardDawg",
+    "wins": 6,
+    "losses": 3,
+    "pf": 924.46,
+    "pa": 827.24
+  },
+  {
+    "owner": "Ewert",
+    "opponent": "Riley",
+    "wins": 3,
+    "losses": 3,
+    "pf": 525.5799999999999,
+    "pa": 581.02
+  },
+  {
+    "owner": "Ewert",
+    "opponent": "Hudspeath",
+    "wins": 2,
+    "losses": 3,
+    "pf": 459.74,
+    "pa": 441.82
+  },
+  {
+    "owner": "Ewert",
+    "opponent": "Tayski",
+    "wins": 1,
+    "losses": 2,
+    "pf": 228.7,
+    "pa": 288.6
+  },
+  {
+    "owner": "Ewert",
+    "opponent": "Salty",
+    "wins": 1,
+    "losses": 4,
+    "pf": 540.98,
+    "pa": 555.8000000000001
+  },
+  {
+    "owner": "Ewert",
+    "opponent": "T-How",
+    "wins": 2,
+    "losses": 2,
+    "pf": 369.91999999999996,
+    "pa": 360.78
+  },
+  {
+    "owner": "Ewert",
+    "opponent": "Cock",
+    "wins": 1,
+    "losses": 2,
+    "pf": 297.1,
+    "pa": 329.52
+  }
+]

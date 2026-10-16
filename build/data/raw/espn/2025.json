@@ -1,0 +1,1186 @@
+{
+  "year": 2025,
+  "teams": [
+    {
+      "year": 2025,
+      "team_id": 1,
+      "team_name": "Eiffel Bowers",
+      "owner": "R Saltiel",
+      "wins": 7,
+      "losses": 7,
+      "points_for": 1437.36,
+      "points_against": 1526.16,
+      "final_standing": 11,
+      "standing": 8
+    },
+    {
+      "year": 2025,
+      "team_id": 2,
+      "team_name": "Merci Bo-coup",
+      "owner": "Kyle Ewert, brad starck",
+      "wins": 8,
+      "losses": 6,
+      "points_for": 1511.0800000000002,
+      "points_against": 1418.2,
+      "final_standing": 4,
+      "standing": 4
+    },
+    {
+      "year": 2025,
+      "team_id": 3,
+      "team_name": "CamemBear Down",
+      "owner": "matt  hudspeath",
+      "wins": 12,
+      "losses": 2,
+      "points_for": 1549.26,
+      "points_against": 1309.6,
+      "final_standing": 1,
+      "standing": 1
+    },
+    {
+      "year": 2025,
+      "team_id": 4,
+      "team_name": "Jeanty d'Arc",
+      "owner": "Jordan Shepherd",
+      "wins": 8,
+      "losses": 6,
+      "points_for": 1489.8399999999997,
+      "points_against": 1464.92,
+      "final_standing": 5,
+      "standing": 5
+    },
+    {
+      "year": 2025,
+      "team_id": 5,
+      "team_name": "Louis Suitton",
+      "owner": "Riley McElwain",
+      "wins": 4,
+      "losses": 10,
+      "points_for": 1336.2600000000002,
+      "points_against": 1431.02,
+      "final_standing": 8,
+      "standing": 11
+    },
+    {
+      "year": 2025,
+      "team_id": 6,
+      "team_name": "RJ Hau Revoir",
+      "owner": "Stephen Rooney, Jackson Sattell",
+      "wins": 7,
+      "losses": 7,
+      "points_for": 1552.8400000000001,
+      "points_against": 1588.64,
+      "final_standing": 2,
+      "standing": 6
+    },
+    {
+      "year": 2025,
+      "team_id": 7,
+      "team_name": "Drake Frites",
+      "owner": "Ed Buser",
+      "wins": 8,
+      "losses": 6,
+      "points_for": 1633.5000000000002,
+      "points_against": 1502.9,
+      "final_standing": 3,
+      "standing": 2
+    },
+    {
+      "year": 2025,
+      "team_id": 8,
+      "team_name": "Bijon Mustard ",
+      "owner": "Pierson Curtis",
+      "wins": 5,
+      "losses": 9,
+      "points_for": 1486.1199999999997,
+      "points_against": 1533.92,
+      "final_standing": 7,
+      "standing": 10
+    },
+    {
+      "year": 2025,
+      "team_id": 9,
+      "team_name": "Coch_Au Vin",
+      "owner": "Chris Cochrane",
+      "wins": 8,
+      "losses": 6,
+      "points_for": 1542.18,
+      "points_against": 1381.16,
+      "final_standing": 6,
+      "standing": 3
+    },
+    {
+      "year": 2025,
+      "team_id": 10,
+      "team_name": "Tour de Weis",
+      "owner": "Taylor Weis",
+      "wins": 3,
+      "losses": 11,
+      "points_for": 1221.4599999999998,
+      "points_against": 1582.14,
+      "final_standing": 12,
+      "standing": 12
+    },
+    {
+      "year": 2025,
+      "team_id": 11,
+      "team_name": "Je Ne Saquon",
+      "owner": "Jack Reilly, Alex Kinniard",
+      "wins": 7,
+      "losses": 7,
+      "points_for": 1426.8600000000001,
+      "points_against": 1432.12,
+      "final_standing": 10,
+      "standing": 9
+    },
+    {
+      "year": 2025,
+      "team_id": 12,
+      "team_name": "Oui How",
+      "owner": "Tyler Howard",
+      "wins": 7,
+      "losses": 7,
+      "points_for": 1441.0,
+      "points_against": 1456.98,
+      "final_standing": 9,
+      "standing": 7
+    }
+  ],
+  "matchups": [
+    {
+      "year": 2025,
+      "week": 1,
+      "home_team_name": "Tour de Weis",
+      "home_score": 109.76,
+      "away_team_name": "Jeanty d'Arc",
+      "away_score": 99.28,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 1,
+      "home_team_name": "RJ Hau Revoir",
+      "home_score": 79.58,
+      "away_team_name": "Coch_Au Vin",
+      "away_score": 101.72,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 1,
+      "home_team_name": "Louis Suitton",
+      "home_score": 87.72,
+      "away_team_name": "CamemBear Down",
+      "away_score": 91.92,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 1,
+      "home_team_name": "Je Ne Saquon",
+      "home_score": 115.22,
+      "away_team_name": "Bijon Mustard ",
+      "away_score": 97.08,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 1,
+      "home_team_name": "Merci Bo-coup",
+      "home_score": 87.44,
+      "away_team_name": "Eiffel Bowers",
+      "away_score": 106.86,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 1,
+      "home_team_name": "Oui How",
+      "home_score": 111.52,
+      "away_team_name": "Drake Frites",
+      "away_score": 93.52,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 2,
+      "home_team_name": "Jeanty d'Arc",
+      "home_score": 124.7,
+      "away_team_name": "Coch_Au Vin",
+      "away_score": 116.88,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 2,
+      "home_team_name": "CamemBear Down",
+      "home_score": 147.44,
+      "away_team_name": "Tour de Weis",
+      "away_score": 94.72,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 2,
+      "home_team_name": "Bijon Mustard ",
+      "home_score": 115.54,
+      "away_team_name": "RJ Hau Revoir",
+      "away_score": 126.54,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 2,
+      "home_team_name": "Eiffel Bowers",
+      "home_score": 77.7,
+      "away_team_name": "Louis Suitton",
+      "away_score": 103.58,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 2,
+      "home_team_name": "Drake Frites",
+      "home_score": 85.1,
+      "away_team_name": "Je Ne Saquon",
+      "away_score": 86.48,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 2,
+      "home_team_name": "Oui How",
+      "home_score": 90.1,
+      "away_team_name": "Merci Bo-coup",
+      "away_score": 116.14,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 3,
+      "home_team_name": "CamemBear Down",
+      "home_score": 115.22,
+      "away_team_name": "Jeanty d'Arc",
+      "away_score": 100.52,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 3,
+      "home_team_name": "Coch_Au Vin",
+      "home_score": 101.96,
+      "away_team_name": "Bijon Mustard ",
+      "away_score": 123.44,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 3,
+      "home_team_name": "Tour de Weis",
+      "home_score": 70.42,
+      "away_team_name": "Eiffel Bowers",
+      "away_score": 106.12,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 3,
+      "home_team_name": "RJ Hau Revoir",
+      "home_score": 122.04,
+      "away_team_name": "Drake Frites",
+      "away_score": 143.56,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 3,
+      "home_team_name": "Louis Suitton",
+      "home_score": 83.4,
+      "away_team_name": "Oui How",
+      "away_score": 84.88,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 3,
+      "home_team_name": "Je Ne Saquon",
+      "home_score": 86.68,
+      "away_team_name": "Merci Bo-coup",
+      "away_score": 109.02,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 4,
+      "home_team_name": "Jeanty d'Arc",
+      "home_score": 135.36,
+      "away_team_name": "Bijon Mustard ",
+      "away_score": 111.6,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 4,
+      "home_team_name": "Eiffel Bowers",
+      "home_score": 81.28,
+      "away_team_name": "CamemBear Down",
+      "away_score": 112.48,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 4,
+      "home_team_name": "Drake Frites",
+      "home_score": 111.2,
+      "away_team_name": "Coch_Au Vin",
+      "away_score": 124.7,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 4,
+      "home_team_name": "Oui How",
+      "home_score": 120.94,
+      "away_team_name": "Tour de Weis",
+      "away_score": 97.26,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 4,
+      "home_team_name": "Merci Bo-coup",
+      "home_score": 150.18,
+      "away_team_name": "RJ Hau Revoir",
+      "away_score": 113.12,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 4,
+      "home_team_name": "Je Ne Saquon",
+      "home_score": 133.54,
+      "away_team_name": "Louis Suitton",
+      "away_score": 85.52,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 5,
+      "home_team_name": "Eiffel Bowers",
+      "home_score": 111.98,
+      "away_team_name": "Jeanty d'Arc",
+      "away_score": 137.46,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 5,
+      "home_team_name": "Bijon Mustard ",
+      "home_score": 80.8,
+      "away_team_name": "Drake Frites",
+      "away_score": 107.7,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 5,
+      "home_team_name": "CamemBear Down",
+      "home_score": 125.88,
+      "away_team_name": "Oui How",
+      "away_score": 107.04,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 5,
+      "home_team_name": "Coch_Au Vin",
+      "home_score": 120.72,
+      "away_team_name": "Merci Bo-coup",
+      "away_score": 99.28,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 5,
+      "home_team_name": "Tour de Weis",
+      "home_score": 81.52,
+      "away_team_name": "Je Ne Saquon",
+      "away_score": 134.12,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 5,
+      "home_team_name": "RJ Hau Revoir",
+      "home_score": 98.24,
+      "away_team_name": "Louis Suitton",
+      "away_score": 110.34,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 6,
+      "home_team_name": "Jeanty d'Arc",
+      "home_score": 90.24,
+      "away_team_name": "Drake Frites",
+      "away_score": 135.54,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 6,
+      "home_team_name": "Oui How",
+      "home_score": 108.0,
+      "away_team_name": "Eiffel Bowers",
+      "away_score": 108.24,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 6,
+      "home_team_name": "Merci Bo-coup",
+      "home_score": 109.18,
+      "away_team_name": "Bijon Mustard ",
+      "away_score": 134.92,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 6,
+      "home_team_name": "Je Ne Saquon",
+      "home_score": 98.1,
+      "away_team_name": "CamemBear Down",
+      "away_score": 74.86,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 6,
+      "home_team_name": "Louis Suitton",
+      "home_score": 74.06,
+      "away_team_name": "Coch_Au Vin",
+      "away_score": 99.38,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 6,
+      "home_team_name": "RJ Hau Revoir",
+      "home_score": 113.86,
+      "away_team_name": "Tour de Weis",
+      "away_score": 101.74,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 7,
+      "home_team_name": "Oui How",
+      "home_score": 74.08,
+      "away_team_name": "Jeanty d'Arc",
+      "away_score": 94.92,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 7,
+      "home_team_name": "Drake Frites",
+      "home_score": 139.96,
+      "away_team_name": "Merci Bo-coup",
+      "away_score": 103.98,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 7,
+      "home_team_name": "Eiffel Bowers",
+      "home_score": 108.78,
+      "away_team_name": "Je Ne Saquon",
+      "away_score": 83.54,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 7,
+      "home_team_name": "Bijon Mustard ",
+      "home_score": 111.54,
+      "away_team_name": "Louis Suitton",
+      "away_score": 110.7,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 7,
+      "home_team_name": "CamemBear Down",
+      "home_score": 113.82,
+      "away_team_name": "RJ Hau Revoir",
+      "away_score": 69.28,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 7,
+      "home_team_name": "Coch_Au Vin",
+      "home_score": 171.24,
+      "away_team_name": "Tour de Weis",
+      "away_score": 90.34,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 8,
+      "home_team_name": "Jeanty d'Arc",
+      "home_score": 77.88,
+      "away_team_name": "Merci Bo-coup",
+      "away_score": 111.18,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 8,
+      "home_team_name": "Je Ne Saquon",
+      "home_score": 127.02,
+      "away_team_name": "Oui How",
+      "away_score": 103.32,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 8,
+      "home_team_name": "Louis Suitton",
+      "home_score": 138.48,
+      "away_team_name": "Drake Frites",
+      "away_score": 108.08,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 8,
+      "home_team_name": "RJ Hau Revoir",
+      "home_score": 144.78,
+      "away_team_name": "Eiffel Bowers",
+      "away_score": 90.76,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 8,
+      "home_team_name": "Tour de Weis",
+      "home_score": 50.52,
+      "away_team_name": "Bijon Mustard ",
+      "away_score": 89.46,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 8,
+      "home_team_name": "Coch_Au Vin",
+      "home_score": 100.96,
+      "away_team_name": "CamemBear Down",
+      "away_score": 140.98,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 9,
+      "home_team_name": "Je Ne Saquon",
+      "home_score": 101.1,
+      "away_team_name": "Jeanty d'Arc",
+      "away_score": 121.6,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 9,
+      "home_team_name": "Merci Bo-coup",
+      "home_score": 112.6,
+      "away_team_name": "Louis Suitton",
+      "away_score": 97.5,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 9,
+      "home_team_name": "Oui How",
+      "home_score": 101.32,
+      "away_team_name": "RJ Hau Revoir",
+      "away_score": 104.06,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 9,
+      "home_team_name": "Drake Frites",
+      "home_score": 124.4,
+      "away_team_name": "Tour de Weis",
+      "away_score": 125.72,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 9,
+      "home_team_name": "Eiffel Bowers",
+      "home_score": 124.06,
+      "away_team_name": "Coch_Au Vin",
+      "away_score": 94.04,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 9,
+      "home_team_name": "Bijon Mustard ",
+      "home_score": 84.4,
+      "away_team_name": "CamemBear Down",
+      "away_score": 106.58,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 10,
+      "home_team_name": "Jeanty d'Arc",
+      "home_score": 117.62,
+      "away_team_name": "Louis Suitton",
+      "away_score": 87.8,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 10,
+      "home_team_name": "RJ Hau Revoir",
+      "home_score": 136.4,
+      "away_team_name": "Je Ne Saquon",
+      "away_score": 91.2,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 10,
+      "home_team_name": "Tour de Weis",
+      "home_score": 79.52,
+      "away_team_name": "Merci Bo-coup",
+      "away_score": 80.8,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 10,
+      "home_team_name": "Coch_Au Vin",
+      "home_score": 101.42,
+      "away_team_name": "Oui How",
+      "away_score": 107.44,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 10,
+      "home_team_name": "CamemBear Down",
+      "home_score": 104.3,
+      "away_team_name": "Drake Frites",
+      "away_score": 109.72,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 10,
+      "home_team_name": "Bijon Mustard ",
+      "home_score": 129.48,
+      "away_team_name": "Eiffel Bowers",
+      "away_score": 132.54,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 11,
+      "home_team_name": "RJ Hau Revoir",
+      "home_score": 99.64,
+      "away_team_name": "Jeanty d'Arc",
+      "away_score": 126.22,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 11,
+      "home_team_name": "Louis Suitton",
+      "home_score": 74.74,
+      "away_team_name": "Tour de Weis",
+      "away_score": 77.3,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 11,
+      "home_team_name": "Je Ne Saquon",
+      "home_score": 92.5,
+      "away_team_name": "Coch_Au Vin",
+      "away_score": 93.1,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 11,
+      "home_team_name": "Merci Bo-coup",
+      "home_score": 88.82,
+      "away_team_name": "CamemBear Down",
+      "away_score": 89.24,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 11,
+      "home_team_name": "Oui How",
+      "home_score": 120.78,
+      "away_team_name": "Bijon Mustard ",
+      "away_score": 108.34,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 11,
+      "home_team_name": "Drake Frites",
+      "home_score": 126.52,
+      "away_team_name": "Eiffel Bowers",
+      "away_score": 88.52,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 12,
+      "home_team_name": "Jeanty d'Arc",
+      "home_score": 92.34,
+      "away_team_name": "Tour de Weis",
+      "away_score": 86.78,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 12,
+      "home_team_name": "Coch_Au Vin",
+      "home_score": 142.96,
+      "away_team_name": "RJ Hau Revoir",
+      "away_score": 60.76,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 12,
+      "home_team_name": "CamemBear Down",
+      "home_score": 107.54,
+      "away_team_name": "Louis Suitton",
+      "away_score": 87.42,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 12,
+      "home_team_name": "Bijon Mustard ",
+      "home_score": 89.08,
+      "away_team_name": "Je Ne Saquon",
+      "away_score": 105.26,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 12,
+      "home_team_name": "Eiffel Bowers",
+      "home_score": 102.52,
+      "away_team_name": "Merci Bo-coup",
+      "away_score": 168.46,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 12,
+      "home_team_name": "Drake Frites",
+      "home_score": 140.66,
+      "away_team_name": "Oui How",
+      "away_score": 103.02,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 13,
+      "home_team_name": "Coch_Au Vin",
+      "home_score": 97.1,
+      "away_team_name": "Jeanty d'Arc",
+      "away_score": 74.12,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 13,
+      "home_team_name": "Tour de Weis",
+      "home_score": 102.04,
+      "away_team_name": "CamemBear Down",
+      "away_score": 112.74,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 13,
+      "home_team_name": "RJ Hau Revoir",
+      "home_score": 135.58,
+      "away_team_name": "Bijon Mustard ",
+      "away_score": 131.74,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 13,
+      "home_team_name": "Louis Suitton",
+      "home_score": 106.14,
+      "away_team_name": "Eiffel Bowers",
+      "away_score": 83.34,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 13,
+      "home_team_name": "Je Ne Saquon",
+      "home_score": 74.14,
+      "away_team_name": "Drake Frites",
+      "away_score": 140.0,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 13,
+      "home_team_name": "Merci Bo-coup",
+      "home_score": 67.26,
+      "away_team_name": "Oui How",
+      "away_score": 81.22,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 14,
+      "home_team_name": "Jeanty d'Arc",
+      "home_score": 97.58,
+      "away_team_name": "CamemBear Down",
+      "away_score": 106.26,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 14,
+      "home_team_name": "Bijon Mustard ",
+      "home_score": 78.7,
+      "away_team_name": "Coch_Au Vin",
+      "away_score": 76.0,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 14,
+      "home_team_name": "Eiffel Bowers",
+      "home_score": 114.66,
+      "away_team_name": "Tour de Weis",
+      "away_score": 53.82,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 14,
+      "home_team_name": "Drake Frites",
+      "home_score": 67.54,
+      "away_team_name": "RJ Hau Revoir",
+      "away_score": 148.96,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 14,
+      "home_team_name": "Oui How",
+      "home_score": 127.34,
+      "away_team_name": "Louis Suitton",
+      "away_score": 88.86,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 14,
+      "home_team_name": "Merci Bo-coup",
+      "home_score": 106.74,
+      "away_team_name": "Je Ne Saquon",
+      "away_score": 97.96,
+      "is_playoff": false
+    },
+    {
+      "year": 2025,
+      "week": 15,
+      "home_team_name": "CamemBear Down",
+      "home_score": 144.0,
+      "away_team_name": null,
+      "away_score": 0,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 15,
+      "home_team_name": "Merci Bo-coup",
+      "home_score": 128.38,
+      "away_team_name": "Jeanty d'Arc",
+      "away_score": 97.68,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 15,
+      "home_team_name": "Coch_Au Vin",
+      "home_score": 96.1,
+      "away_team_name": "RJ Hau Revoir",
+      "away_score": 157.3,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 15,
+      "home_team_name": "Drake Frites",
+      "home_score": 102.86,
+      "away_team_name": null,
+      "away_score": 0,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 15,
+      "home_team_name": "Oui How",
+      "home_score": 118.82,
+      "away_team_name": "Eiffel Bowers",
+      "away_score": 112.7,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 15,
+      "home_team_name": "Je Ne Saquon",
+      "home_score": 109.62,
+      "away_team_name": "Bijon Mustard ",
+      "away_score": 132.74,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 15,
+      "home_team_name": "Louis Suitton",
+      "home_score": 98.7,
+      "away_team_name": "Tour de Weis",
+      "away_score": 65.74,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 16,
+      "home_team_name": "CamemBear Down",
+      "home_score": 119.56,
+      "away_team_name": "Merci Bo-coup",
+      "away_score": 86.3,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 16,
+      "home_team_name": "Drake Frites",
+      "home_score": 100.72,
+      "away_team_name": "RJ Hau Revoir",
+      "away_score": 159.0,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 16,
+      "home_team_name": "Coch_Au Vin",
+      "home_score": 90.7,
+      "away_team_name": "Jeanty d'Arc",
+      "away_score": 109.8,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 16,
+      "home_team_name": "Oui How",
+      "home_score": 86.7,
+      "away_team_name": "Bijon Mustard ",
+      "away_score": 93.82,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 16,
+      "home_team_name": "Eiffel Bowers",
+      "home_score": 102.74,
+      "away_team_name": "Louis Suitton",
+      "away_score": 143.9,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 16,
+      "home_team_name": "Je Ne Saquon",
+      "home_score": 104.06,
+      "away_team_name": "Tour de Weis",
+      "away_score": 52.3,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 17,
+      "home_team_name": "CamemBear Down",
+      "home_score": 123.0,
+      "away_team_name": "RJ Hau Revoir",
+      "away_score": 122.34,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 17,
+      "home_team_name": "Drake Frites",
+      "home_score": 112.38,
+      "away_team_name": "Merci Bo-coup",
+      "away_score": 101.8,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 17,
+      "home_team_name": "Coch_Au Vin",
+      "home_score": 73.1,
+      "away_team_name": "Jeanty d'Arc",
+      "away_score": 96.24,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 17,
+      "home_team_name": "Bijon Mustard ",
+      "home_score": 134.18,
+      "away_team_name": "Louis Suitton",
+      "away_score": 114.02,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 17,
+      "home_team_name": "Oui How",
+      "home_score": 104.78,
+      "away_team_name": "Je Ne Saquon",
+      "away_score": 70.48,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 17,
+      "home_team_name": "Eiffel Bowers",
+      "home_score": 66.7,
+      "away_team_name": "Tour de Weis",
+      "away_score": 45.1,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 18,
+      "home_team_name": "CamemBear Down",
+      "home_score": 123.0,
+      "away_team_name": "RJ Hau Revoir",
+      "away_score": 122.34,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 18,
+      "home_team_name": "Drake Frites",
+      "home_score": 112.38,
+      "away_team_name": "Merci Bo-coup",
+      "away_score": 101.8,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 18,
+      "home_team_name": "Coch_Au Vin",
+      "home_score": 73.1,
+      "away_team_name": "Jeanty d'Arc",
+      "away_score": 96.24,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 18,
+      "home_team_name": "Bijon Mustard ",
+      "home_score": 134.18,
+      "away_team_name": "Louis Suitton",
+      "away_score": 114.02,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 18,
+      "home_team_name": "Oui How",
+      "home_score": 104.78,
+      "away_team_name": "Je Ne Saquon",
+      "away_score": 70.48,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 18,
+      "home_team_name": "Eiffel Bowers",
+      "home_score": 66.7,
+      "away_team_name": "Tour de Weis",
+      "away_score": 45.1,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 19,
+      "home_team_name": "CamemBear Down",
+      "home_score": 123.0,
+      "away_team_name": "RJ Hau Revoir",
+      "away_score": 122.34,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 19,
+      "home_team_name": "Drake Frites",
+      "home_score": 112.38,
+      "away_team_name": "Merci Bo-coup",
+      "away_score": 101.8,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 19,
+      "home_team_name": "Coch_Au Vin",
+      "home_score": 73.1,
+      "away_team_name": "Jeanty d'Arc",
+      "away_score": 96.24,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 19,
+      "home_team_name": "Bijon Mustard ",
+      "home_score": 134.18,
+      "away_team_name": "Louis Suitton",
+      "away_score": 114.02,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 19,
+      "home_team_name": "Oui How",
+      "home_score": 104.78,
+      "away_team_name": "Je Ne Saquon",
+      "away_score": 70.48,
+      "is_playoff": true
+    },
+    {
+      "year": 2025,
+      "week": 19,
+      "home_team_name": "Eiffel Bowers",
+      "home_score": 66.7,
+      "away_team_name": "Tour de Weis",
+      "away_score": 45.1,
+      "is_playoff": true
+    }
+  ]
+}

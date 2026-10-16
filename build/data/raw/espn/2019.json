@@ -1,0 +1,1186 @@
+{
+  "year": 2019,
+  "teams": [
+    {
+      "year": 2019,
+      "team_id": 1,
+      "team_name": " Chubbruckers !",
+      "owner": "R Saltiel",
+      "wins": 6,
+      "losses": 7,
+      "points_for": 1211.7600000000002,
+      "points_against": 1163.66,
+      "final_standing": 8,
+      "standing": 7
+    },
+    {
+      "year": 2019,
+      "team_id": 2,
+      "team_name": "OutDak Steakhouse",
+      "owner": "Michael Fellows",
+      "wins": 5,
+      "losses": 8,
+      "points_for": 1099.58,
+      "points_against": 1276.96,
+      "final_standing": 11,
+      "standing": 11
+    },
+    {
+      "year": 2019,
+      "team_id": 3,
+      "team_name": "Goulden Nugget",
+      "owner": "matt hudspeath",
+      "wins": 8,
+      "losses": 5,
+      "points_for": 1245.1200000000003,
+      "points_against": 1125.36,
+      "final_standing": 1,
+      "standing": 2
+    },
+    {
+      "year": 2019,
+      "team_id": 4,
+      "team_name": "Brandin Cooks  Briskets",
+      "owner": "Jordan Shepherd",
+      "wins": 3,
+      "losses": 10,
+      "points_for": 969.4799999999999,
+      "points_against": 1103.84,
+      "final_standing": 10,
+      "standing": 12
+    },
+    {
+      "year": 2019,
+      "team_id": 5,
+      "team_name": "Big Boyd",
+      "owner": "Riley McElwain",
+      "wins": 5,
+      "losses": 8,
+      "points_for": 1165.16,
+      "points_against": 1362.88,
+      "final_standing": 7,
+      "standing": 10
+    },
+    {
+      "year": 2019,
+      "team_id": 6,
+      "team_name": "90 Miles Sanders",
+      "owner": "Stephen Rooney, Jackson Sattell",
+      "wins": 7,
+      "losses": 6,
+      "points_for": 1271.0600000000002,
+      "points_against": 1265.3,
+      "final_standing": 6,
+      "standing": 5
+    },
+    {
+      "year": 2019,
+      "team_id": 7,
+      "team_name": "Odell Country Buffet",
+      "owner": "Ed Buser",
+      "wins": 6,
+      "losses": 7,
+      "points_for": 1255.7800000000002,
+      "points_against": 1299.72,
+      "final_standing": 5,
+      "standing": 6
+    },
+    {
+      "year": 2019,
+      "team_id": 8,
+      "team_name": "Buffa Lamar\u2019s",
+      "owner": "Pierson Curtis",
+      "wins": 11,
+      "losses": 2,
+      "points_for": 1498.1799999999998,
+      "points_against": 1211.1,
+      "final_standing": 2,
+      "standing": 1
+    },
+    {
+      "year": 2019,
+      "team_id": 9,
+      "team_name": "Jack and The Cochs",
+      "owner": "Chris Cochrane, Jack Babcock",
+      "wins": 6,
+      "losses": 7,
+      "points_for": 1140.68,
+      "points_against": 1172.5,
+      "final_standing": 9,
+      "standing": 8
+    },
+    {
+      "year": 2019,
+      "team_id": 10,
+      "team_name": "Chicken Fried Weis",
+      "owner": "Taylor Weis",
+      "wins": 8,
+      "losses": 5,
+      "points_for": 1232.22,
+      "points_against": 1152.52,
+      "final_standing": 4,
+      "standing": 3
+    },
+    {
+      "year": 2019,
+      "team_id": 11,
+      "team_name": "Courtland Sutton\u2019s Garage",
+      "owner": "Jack Reilly, Alex Kinniard",
+      "wins": 5,
+      "losses": 8,
+      "points_for": 1286.02,
+      "points_against": 1243.82,
+      "final_standing": 12,
+      "standing": 9
+    },
+    {
+      "year": 2019,
+      "team_id": 12,
+      "team_name": "White WR Castle",
+      "owner": "Tyler Howard",
+      "wins": 8,
+      "losses": 5,
+      "points_for": 1228.32,
+      "points_against": 1225.7,
+      "final_standing": 3,
+      "standing": 4
+    }
+  ],
+  "matchups": [
+    {
+      "year": 2019,
+      "week": 1,
+      "home_team_name": "Courtland Sutton\u2019s Garage",
+      "home_score": 108.22,
+      "away_team_name": "Jack and The Cochs",
+      "away_score": 141.84,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 1,
+      "home_team_name": "Big Boyd",
+      "home_score": 72.9,
+      "away_team_name": "Buffa Lamar\u2019s",
+      "away_score": 120.66,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 1,
+      "home_team_name": "Goulden Nugget",
+      "home_score": 122.2,
+      "away_team_name": " Chubbruckers !",
+      "away_score": 99.52,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 1,
+      "home_team_name": "OutDak Steakhouse",
+      "home_score": 114.2,
+      "away_team_name": "Brandin Cooks  Briskets",
+      "away_score": 72.46,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 1,
+      "home_team_name": "White WR Castle",
+      "home_score": 95.94,
+      "away_team_name": "90 Miles Sanders",
+      "away_score": 97.72,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 1,
+      "home_team_name": "Chicken Fried Weis",
+      "home_score": 96.52,
+      "away_team_name": "Odell Country Buffet",
+      "away_score": 133.7,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 2,
+      "home_team_name": "Jack and The Cochs",
+      "home_score": 76.46,
+      "away_team_name": "Buffa Lamar\u2019s",
+      "away_score": 131.78,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 2,
+      "home_team_name": " Chubbruckers !",
+      "home_score": 69.36,
+      "away_team_name": "Courtland Sutton\u2019s Garage",
+      "away_score": 90.72,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 2,
+      "home_team_name": "Brandin Cooks  Briskets",
+      "home_score": 107.7,
+      "away_team_name": "Big Boyd",
+      "away_score": 117.76,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 2,
+      "home_team_name": "90 Miles Sanders",
+      "home_score": 80.72,
+      "away_team_name": "Goulden Nugget",
+      "away_score": 107.64,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 2,
+      "home_team_name": "Odell Country Buffet",
+      "home_score": 109.4,
+      "away_team_name": "OutDak Steakhouse",
+      "away_score": 78.76,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 2,
+      "home_team_name": "Chicken Fried Weis",
+      "home_score": 86.56,
+      "away_team_name": "White WR Castle",
+      "away_score": 90.72,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 3,
+      "home_team_name": " Chubbruckers !",
+      "home_score": 56.2,
+      "away_team_name": "Jack and The Cochs",
+      "away_score": 92.64,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 3,
+      "home_team_name": "Buffa Lamar\u2019s",
+      "home_score": 134.88,
+      "away_team_name": "Brandin Cooks  Briskets",
+      "away_score": 96.16,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 3,
+      "home_team_name": "Courtland Sutton\u2019s Garage",
+      "home_score": 144.16,
+      "away_team_name": "90 Miles Sanders",
+      "away_score": 108.22,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 3,
+      "home_team_name": "Big Boyd",
+      "home_score": 97.72,
+      "away_team_name": "Odell Country Buffet",
+      "away_score": 129.14,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 3,
+      "home_team_name": "Goulden Nugget",
+      "home_score": 61.86,
+      "away_team_name": "Chicken Fried Weis",
+      "away_score": 76.24,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 3,
+      "home_team_name": "OutDak Steakhouse",
+      "home_score": 89.94,
+      "away_team_name": "White WR Castle",
+      "away_score": 129.92,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 4,
+      "home_team_name": "Jack and The Cochs",
+      "home_score": 32.8,
+      "away_team_name": "Brandin Cooks  Briskets",
+      "away_score": 84.98,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 4,
+      "home_team_name": "90 Miles Sanders",
+      "home_score": 60.4,
+      "away_team_name": " Chubbruckers !",
+      "away_score": 120.28,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 4,
+      "home_team_name": "Odell Country Buffet",
+      "home_score": 75.8,
+      "away_team_name": "Buffa Lamar\u2019s",
+      "away_score": 106.38,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 4,
+      "home_team_name": "Chicken Fried Weis",
+      "home_score": 104.4,
+      "away_team_name": "Courtland Sutton\u2019s Garage",
+      "away_score": 82.1,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 4,
+      "home_team_name": "White WR Castle",
+      "home_score": 101.28,
+      "away_team_name": "Big Boyd",
+      "away_score": 70.14,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 4,
+      "home_team_name": "OutDak Steakhouse",
+      "home_score": 65.52,
+      "away_team_name": "Goulden Nugget",
+      "away_score": 139.4,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 5,
+      "home_team_name": "90 Miles Sanders",
+      "home_score": 112.44,
+      "away_team_name": "Jack and The Cochs",
+      "away_score": 89.62,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 5,
+      "home_team_name": "Brandin Cooks  Briskets",
+      "home_score": 93.6,
+      "away_team_name": "Odell Country Buffet",
+      "away_score": 82.32,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 5,
+      "home_team_name": " Chubbruckers !",
+      "home_score": 108.72,
+      "away_team_name": "Chicken Fried Weis",
+      "away_score": 154.04,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 5,
+      "home_team_name": "Buffa Lamar\u2019s",
+      "home_score": 111.34,
+      "away_team_name": "White WR Castle",
+      "away_score": 127.8,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 5,
+      "home_team_name": "Courtland Sutton\u2019s Garage",
+      "home_score": 68.64,
+      "away_team_name": "OutDak Steakhouse",
+      "away_score": 107.12,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 5,
+      "home_team_name": "Big Boyd",
+      "home_score": 134.14,
+      "away_team_name": "Goulden Nugget",
+      "away_score": 94.56,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 6,
+      "home_team_name": "Jack and The Cochs",
+      "home_score": 81.16,
+      "away_team_name": "Odell Country Buffet",
+      "away_score": 88.4,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 6,
+      "home_team_name": "Chicken Fried Weis",
+      "home_score": 87.0,
+      "away_team_name": "90 Miles Sanders",
+      "away_score": 67.42,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 6,
+      "home_team_name": "White WR Castle",
+      "home_score": 58.22,
+      "away_team_name": "Brandin Cooks  Briskets",
+      "away_score": 136.54,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 6,
+      "home_team_name": "OutDak Steakhouse",
+      "home_score": 99.82,
+      "away_team_name": " Chubbruckers !",
+      "away_score": 84.52,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 6,
+      "home_team_name": "Goulden Nugget",
+      "home_score": 102.7,
+      "away_team_name": "Buffa Lamar\u2019s",
+      "away_score": 110.54,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 6,
+      "home_team_name": "Big Boyd",
+      "home_score": 76.7,
+      "away_team_name": "Courtland Sutton\u2019s Garage",
+      "away_score": 126.32,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 7,
+      "home_team_name": "Chicken Fried Weis",
+      "home_score": 80.52,
+      "away_team_name": "Jack and The Cochs",
+      "away_score": 98.76,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 7,
+      "home_team_name": "Odell Country Buffet",
+      "home_score": 67.54,
+      "away_team_name": "White WR Castle",
+      "away_score": 99.92,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 7,
+      "home_team_name": "90 Miles Sanders",
+      "home_score": 76.38,
+      "away_team_name": "OutDak Steakhouse",
+      "away_score": 63.66,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 7,
+      "home_team_name": "Brandin Cooks  Briskets",
+      "home_score": 47.96,
+      "away_team_name": "Goulden Nugget",
+      "away_score": 83.94,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 7,
+      "home_team_name": " Chubbruckers !",
+      "home_score": 109.86,
+      "away_team_name": "Big Boyd",
+      "away_score": 61.36,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 7,
+      "home_team_name": "Buffa Lamar\u2019s",
+      "home_score": 94.72,
+      "away_team_name": "Courtland Sutton\u2019s Garage",
+      "away_score": 84.34,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 8,
+      "home_team_name": "Jack and The Cochs",
+      "home_score": 84.46,
+      "away_team_name": "White WR Castle",
+      "away_score": 94.98,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 8,
+      "home_team_name": "OutDak Steakhouse",
+      "home_score": 64.36,
+      "away_team_name": "Chicken Fried Weis",
+      "away_score": 127.66,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 8,
+      "home_team_name": "Goulden Nugget",
+      "home_score": 106.14,
+      "away_team_name": "Odell Country Buffet",
+      "away_score": 91.78,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 8,
+      "home_team_name": "Big Boyd",
+      "home_score": 112.8,
+      "away_team_name": "90 Miles Sanders",
+      "away_score": 102.36,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 8,
+      "home_team_name": "Courtland Sutton\u2019s Garage",
+      "home_score": 124.78,
+      "away_team_name": "Brandin Cooks  Briskets",
+      "away_score": 76.78,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 8,
+      "home_team_name": "Buffa Lamar\u2019s",
+      "home_score": 109.2,
+      "away_team_name": " Chubbruckers !",
+      "away_score": 97.9,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 9,
+      "home_team_name": "OutDak Steakhouse",
+      "home_score": 102.28,
+      "away_team_name": "Jack and The Cochs",
+      "away_score": 90.0,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 9,
+      "home_team_name": "White WR Castle",
+      "home_score": 83.26,
+      "away_team_name": "Goulden Nugget",
+      "away_score": 70.7,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 9,
+      "home_team_name": "Chicken Fried Weis",
+      "home_score": 97.14,
+      "away_team_name": "Big Boyd",
+      "away_score": 77.86,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 9,
+      "home_team_name": "Odell Country Buffet",
+      "home_score": 125.72,
+      "away_team_name": "Courtland Sutton\u2019s Garage",
+      "away_score": 111.94,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 9,
+      "home_team_name": "90 Miles Sanders",
+      "home_score": 139.3,
+      "away_team_name": "Buffa Lamar\u2019s",
+      "away_score": 112.62,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 9,
+      "home_team_name": "Brandin Cooks  Briskets",
+      "home_score": 51.46,
+      "away_team_name": " Chubbruckers !",
+      "away_score": 69.64,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 10,
+      "home_team_name": "Jack and The Cochs",
+      "home_score": 86.7,
+      "away_team_name": "Goulden Nugget",
+      "away_score": 73.82,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 10,
+      "home_team_name": "Big Boyd",
+      "home_score": 124.56,
+      "away_team_name": "OutDak Steakhouse",
+      "away_score": 96.58,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 10,
+      "home_team_name": "Courtland Sutton\u2019s Garage",
+      "home_score": 121.74,
+      "away_team_name": "White WR Castle",
+      "away_score": 73.12,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 10,
+      "home_team_name": "Buffa Lamar\u2019s",
+      "home_score": 116.52,
+      "away_team_name": "Chicken Fried Weis",
+      "away_score": 71.68,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 10,
+      "home_team_name": " Chubbruckers !",
+      "home_score": 105.22,
+      "away_team_name": "Odell Country Buffet",
+      "away_score": 88.68,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 10,
+      "home_team_name": "Brandin Cooks  Briskets",
+      "home_score": 57.28,
+      "away_team_name": "90 Miles Sanders",
+      "away_score": 112.14,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 11,
+      "home_team_name": "Big Boyd",
+      "home_score": 75.3,
+      "away_team_name": "Jack and The Cochs",
+      "away_score": 94.84,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 11,
+      "home_team_name": "Goulden Nugget",
+      "home_score": 96.12,
+      "away_team_name": "Courtland Sutton\u2019s Garage",
+      "away_score": 81.68,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 11,
+      "home_team_name": "OutDak Steakhouse",
+      "home_score": 93.56,
+      "away_team_name": "Buffa Lamar\u2019s",
+      "away_score": 119.68,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 11,
+      "home_team_name": "White WR Castle",
+      "home_score": 55.12,
+      "away_team_name": " Chubbruckers !",
+      "away_score": 118.76,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 11,
+      "home_team_name": "Chicken Fried Weis",
+      "home_score": 52.66,
+      "away_team_name": "Brandin Cooks  Briskets",
+      "away_score": 50.54,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 11,
+      "home_team_name": "Odell Country Buffet",
+      "home_score": 86.0,
+      "away_team_name": "90 Miles Sanders",
+      "away_score": 119.84,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 12,
+      "home_team_name": "Jack and The Cochs",
+      "home_score": 77.6,
+      "away_team_name": "Courtland Sutton\u2019s Garage",
+      "away_score": 61.58,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 12,
+      "home_team_name": "Buffa Lamar\u2019s",
+      "home_score": 127.86,
+      "away_team_name": "Big Boyd",
+      "away_score": 78.7,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 12,
+      "home_team_name": " Chubbruckers !",
+      "home_score": 79.66,
+      "away_team_name": "Goulden Nugget",
+      "away_score": 98.22,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 12,
+      "home_team_name": "Brandin Cooks  Briskets",
+      "home_score": 39.44,
+      "away_team_name": "OutDak Steakhouse",
+      "away_score": 55.28,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 12,
+      "home_team_name": "90 Miles Sanders",
+      "home_score": 106.48,
+      "away_team_name": "White WR Castle",
+      "away_score": 100.48,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 12,
+      "home_team_name": "Odell Country Buffet",
+      "home_score": 82.4,
+      "away_team_name": "Chicken Fried Weis",
+      "away_score": 134.02,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 13,
+      "home_team_name": "Buffa Lamar\u2019s",
+      "home_score": 102.0,
+      "away_team_name": "Jack and The Cochs",
+      "away_score": 93.8,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 13,
+      "home_team_name": "Courtland Sutton\u2019s Garage",
+      "home_score": 79.8,
+      "away_team_name": " Chubbruckers !",
+      "away_score": 92.12,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 13,
+      "home_team_name": "Big Boyd",
+      "home_score": 65.22,
+      "away_team_name": "Brandin Cooks  Briskets",
+      "away_score": 54.58,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 13,
+      "home_team_name": "Goulden Nugget",
+      "home_score": 87.82,
+      "away_team_name": "90 Miles Sanders",
+      "away_score": 87.64,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 13,
+      "home_team_name": "OutDak Steakhouse",
+      "home_score": 68.5,
+      "away_team_name": "Odell Country Buffet",
+      "away_score": 94.9,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 13,
+      "home_team_name": "White WR Castle",
+      "home_score": 117.56,
+      "away_team_name": "Chicken Fried Weis",
+      "away_score": 63.78,
+      "is_playoff": false
+    },
+    {
+      "year": 2019,
+      "week": 14,
+      "home_team_name": "Buffa Lamar\u2019s",
+      "home_score": 83.9,
+      "away_team_name": null,
+      "away_score": 0,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 14,
+      "home_team_name": "White WR Castle",
+      "home_score": 122.32,
+      "away_team_name": "90 Miles Sanders",
+      "away_score": 119.28,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 14,
+      "home_team_name": "Chicken Fried Weis",
+      "home_score": 94.58,
+      "away_team_name": "Odell Country Buffet",
+      "away_score": 80.9,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 14,
+      "home_team_name": "Goulden Nugget",
+      "home_score": 92.9,
+      "away_team_name": null,
+      "away_score": 0,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 14,
+      "home_team_name": " Chubbruckers !",
+      "home_score": 74.4,
+      "away_team_name": "Jack and The Cochs",
+      "away_score": 81.46,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 14,
+      "home_team_name": "Courtland Sutton\u2019s Garage",
+      "home_score": 75.52,
+      "away_team_name": "Big Boyd",
+      "away_score": 93.26,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 14,
+      "home_team_name": "OutDak Steakhouse",
+      "home_score": 82.86,
+      "away_team_name": "Brandin Cooks  Briskets",
+      "away_score": 36.42,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 15,
+      "home_team_name": "Buffa Lamar\u2019s",
+      "home_score": 158.38,
+      "away_team_name": "White WR Castle",
+      "away_score": 104.16,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 15,
+      "home_team_name": "Goulden Nugget",
+      "home_score": 128.02,
+      "away_team_name": "Chicken Fried Weis",
+      "away_score": 80.02,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 15,
+      "home_team_name": "90 Miles Sanders",
+      "home_score": 114.58,
+      "away_team_name": "Odell Country Buffet",
+      "away_score": 86.94,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 15,
+      "home_team_name": "Jack and The Cochs",
+      "home_score": 55.52,
+      "away_team_name": "Big Boyd",
+      "away_score": 88.96,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 15,
+      "home_team_name": " Chubbruckers !",
+      "home_score": 161.12,
+      "away_team_name": "OutDak Steakhouse",
+      "away_score": 61.38,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 15,
+      "home_team_name": "Courtland Sutton\u2019s Garage",
+      "home_score": 69.6,
+      "away_team_name": "Brandin Cooks  Briskets",
+      "away_score": 75.0,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 16,
+      "home_team_name": "Buffa Lamar\u2019s",
+      "home_score": 124.02,
+      "away_team_name": "Goulden Nugget",
+      "away_score": 132.6,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 16,
+      "home_team_name": "Chicken Fried Weis",
+      "home_score": 72.26,
+      "away_team_name": "White WR Castle",
+      "away_score": 84.36,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 16,
+      "home_team_name": "90 Miles Sanders",
+      "home_score": 78.42,
+      "away_team_name": "Odell Country Buffet",
+      "away_score": 85.16,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 16,
+      "home_team_name": " Chubbruckers !",
+      "home_score": 90.64,
+      "away_team_name": "Big Boyd",
+      "away_score": 111.22,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 16,
+      "home_team_name": "Jack and The Cochs",
+      "home_score": 91.04,
+      "away_team_name": "Brandin Cooks  Briskets",
+      "away_score": 76.86,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 16,
+      "home_team_name": "Courtland Sutton\u2019s Garage",
+      "home_score": 66.84,
+      "away_team_name": "OutDak Steakhouse",
+      "away_score": 70.7,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 17,
+      "home_team_name": "Buffa Lamar\u2019s",
+      "home_score": 124.02,
+      "away_team_name": "Goulden Nugget",
+      "away_score": 132.6,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 17,
+      "home_team_name": "Chicken Fried Weis",
+      "home_score": 72.26,
+      "away_team_name": "White WR Castle",
+      "away_score": 84.36,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 17,
+      "home_team_name": "90 Miles Sanders",
+      "home_score": 78.42,
+      "away_team_name": "Odell Country Buffet",
+      "away_score": 85.16,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 17,
+      "home_team_name": " Chubbruckers !",
+      "home_score": 90.64,
+      "away_team_name": "Big Boyd",
+      "away_score": 111.22,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 17,
+      "home_team_name": "Jack and The Cochs",
+      "home_score": 91.04,
+      "away_team_name": "Brandin Cooks  Briskets",
+      "away_score": 76.86,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 17,
+      "home_team_name": "Courtland Sutton\u2019s Garage",
+      "home_score": 66.84,
+      "away_team_name": "OutDak Steakhouse",
+      "away_score": 70.7,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 18,
+      "home_team_name": "Buffa Lamar\u2019s",
+      "home_score": 124.02,
+      "away_team_name": "Goulden Nugget",
+      "away_score": 132.6,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 18,
+      "home_team_name": "Chicken Fried Weis",
+      "home_score": 72.26,
+      "away_team_name": "White WR Castle",
+      "away_score": 84.36,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 18,
+      "home_team_name": "90 Miles Sanders",
+      "home_score": 78.42,
+      "away_team_name": "Odell Country Buffet",
+      "away_score": 85.16,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 18,
+      "home_team_name": " Chubbruckers !",
+      "home_score": 90.64,
+      "away_team_name": "Big Boyd",
+      "away_score": 111.22,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 18,
+      "home_team_name": "Jack and The Cochs",
+      "home_score": 91.04,
+      "away_team_name": "Brandin Cooks  Briskets",
+      "away_score": 76.86,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 18,
+      "home_team_name": "Courtland Sutton\u2019s Garage",
+      "home_score": 66.84,
+      "away_team_name": "OutDak Steakhouse",
+      "away_score": 70.7,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 19,
+      "home_team_name": "Buffa Lamar\u2019s",
+      "home_score": 124.02,
+      "away_team_name": "Goulden Nugget",
+      "away_score": 132.6,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 19,
+      "home_team_name": "Chicken Fried Weis",
+      "home_score": 72.26,
+      "away_team_name": "White WR Castle",
+      "away_score": 84.36,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 19,
+      "home_team_name": "90 Miles Sanders",
+      "home_score": 78.42,
+      "away_team_name": "Odell Country Buffet",
+      "away_score": 85.16,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 19,
+      "home_team_name": " Chubbruckers !",
+      "home_score": 90.64,
+      "away_team_name": "Big Boyd",
+      "away_score": 111.22,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 19,
+      "home_team_name": "Jack and The Cochs",
+      "home_score": 91.04,
+      "away_team_name": "Brandin Cooks  Briskets",
+      "away_score": 76.86,
+      "is_playoff": true
+    },
+    {
+      "year": 2019,
+      "week": 19,
+      "home_team_name": "Courtland Sutton\u2019s Garage",
+      "home_score": 66.84,
+      "away_team_name": "OutDak Steakhouse",
+      "away_score": 70.7,
+      "is_playoff": true
+    }
+  ]
+}
