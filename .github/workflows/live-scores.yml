@@ -34,6 +34,7 @@ jobs:
           else
             [ "$d" = 0 ] && [ "$h" -ge 7 ] && [ "$h" -le 21 ] && run=1   # Sun 7am-9pm
             [ "$d" = 4 ] && [ "$h" = 23 ] && run=1                       # Thu 11pm
+            [ "$d" = 2 ] && [ "$h" = 2 ] && run=1                        # Tue 2am PT
             [ "$d" = 1 ] && [ "$h" -ge 21 ] && [ "$h" -le 23 ] && run=1  # Mon 9-11pm
           fi
           echo "PT day=$d hour=$h run=$run"
