@@ -528,6 +528,7 @@ table.hm tr.dimmed { opacity: 0.15; }
         <thead><tr>
           <th class="num">#</th><th>Owner</th><th>Team</th>
           <th class="num">W</th><th class="num">L</th>
+          <th class="num" title="Power ranking record: each week vs. all other teams">PW</th><th class="num" title="Power ranking record: each week vs. all other teams">PL</th>
           <th class="num">PF</th><th class="num">PA</th><th class="num">PF/G</th>
           <th>Streak</th>
         </tr></thead>
@@ -1400,7 +1401,7 @@ function seasonTable(games) {
   const reg = games.filter(m => m.game_type !== 'Playoffs');
   const weeks = [...new Set(reg.map(m => m.week))];
   const rows = {};
-  META.current_owners.forEach(o => rows[o] = { owner: o, team: teamName(o), w: 0, l: 0, pf: 0, pa: 0, g: 0, exp: 0 });
+  META.current_owners.forEach(o => rows[o] = { owner: o, team: teamName(o), w: 0, l: 0, pf: 0, pa: 0, g: 0, exp: 0, pw: 0, pl: 0 });
   for (const wk of weeks) {
     const wm = reg.filter(m => m.week === wk);
     wm.forEach(m => {
@@ -1410,6 +1411,7 @@ function seasonTable(games) {
       const lower = wm.filter(x => x.score < m.score).length;
       const ties  = wm.filter(x => x !== m && x.score === m.score).length;
       r.exp += (lower + 0.5 * ties) / (wm.length - 1);
+      r.pw += lower + 0.5 * ties; r.pl += (wm.length - 1) - lower - 0.5 * ties;
     });
   }
   return Object.values(rows).filter(r => r.g > 0).map(r => ({ ...r, ppg: r.pf / r.g, papg: r.pa / r.g, luck: r.w - r.exp }))
@@ -1922,6 +1924,8 @@ function renderSeasonStandings(table, games, lastWeek) {
       <td style="color:#94a3b8;font-size:11px">${r.team}</td>
       <td class="num" style="color:#4ade80">${r.w}</td>
       <td class="num" style="color:#f87171">${r.l}</td>
+      <td class="num" style="color:#4ade80">${r.pw}</td>
+      <td class="num" style="color:#f87171">${r.pl}</td>
       <td class="num">${fmt1(r.pf)}</td>
       <td class="num">${fmt1(r.pa)}</td>
       <td class="num">${fmt1(r.ppg)}</td>
