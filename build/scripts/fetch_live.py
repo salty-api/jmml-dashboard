@@ -42,5 +42,15 @@ for h, a in games:
                 'a_pts': round(h.get('totalPointsLive', h.get('totalPoints', 0)), 2),
                 'b_pts': round(a.get('totalPointsLive', a.get('totalPoints', 0)), 2)})
 res = {'year': YEAR, 'week': week, 'updated': datetime.now().strftime('%Y-%m-%d %H:%M'), 'games': out}
+# Last week's final scores: ESPN rolls to the next matchup period Monday night, so if the sheet
+# hasn't been filled in for week-1 yet, carry ESPN's final scores so the recap can show it.
+prev = week - 1
+prev_rows = [m for m in matchups if m['year'] == YEAR and m['week'] == prev]
+if prev_rows and not any((m['score'] or 0) or (m['opp_score'] or 0) for m in prev_rows):
+    pg = [s for s in d['schedule'] if s['matchupPeriodId'] == prev and 'away' in s]
+    if pg and all(s.get('winner') in ('HOME', 'AWAY', 'TIE') for s in pg):
+        res['prev_final'] = {'week': prev, 'games': [
+            {'a': owner[s['home']['teamId']], 'b': owner[s['away']['teamId']],
+             'a_pts': round(s['home'].get('totalPoints', 0), 2), 'b_pts': round(s['away'].get('totalPoints', 0), 2)} for s in pg]}
 (ROOT / "data/processed/live.json").write_text(json.dumps(res, indent=2))
 print(f"week {week}: {len(out)} games"); [print(f"  {g['a']} {g['a_pts']} - {g['b_pts']} {g['b']}") for g in out]

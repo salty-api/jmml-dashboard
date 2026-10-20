@@ -229,6 +229,8 @@ def apply_final_live(matchups):
     f = OUT_DIR / "live.json"
     if not f.exists(): return
     live = json.load(open(f))
+    if live.get("prev_final"):
+        live = {"year": live["year"], "final": True, **live["prev_final"]}
     if not live.get("final"): return
     rows = [m for m in matchups if m["year"] == live["year"] and m["week"] == live["week"]]
     if not rows or any((m["score"] or 0) or (m["opp_score"] or 0) for m in rows): return
