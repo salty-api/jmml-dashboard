@@ -528,7 +528,7 @@ table.hm tr.dimmed { opacity: 0.15; }
         <thead><tr>
           <th class="num">#</th><th>Owner</th><th>Team</th>
           <th class="num">W</th><th class="num">L</th>
-          <th class="num" title="Power ranking record: each week vs. all other teams">PW</th><th class="num" title="Power ranking record: each week vs. all other teams">PL</th>
+          <th class="num">Win %</th>
           <th class="num">PF</th><th class="num">PA</th><th class="num">PF/G</th>
           <th>Streak</th>
         </tr></thead>
@@ -570,6 +570,7 @@ table.hm tr.dimmed { opacity: 0.15; }
           <thead><tr>
             <th>Owner</th>
             <th class="num">Actual W</th><th class="num">Expected W</th>
+            <th class="num" title="Win % if the team had played every other team each week">Power Rank Win %</th>
             <th class="num">Luck</th><th class="num">PF/G</th><th class="num">PA/G</th>
           </tr></thead>
           <tbody id="win-diff-body"></tbody>
@@ -589,6 +590,14 @@ table.hm tr.dimmed { opacity: 0.15; }
     <div class="chart-wrap" style="height:300px">
       <canvas id="weekly-scores"></canvas>
     </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Finish Position Odds <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; chance each team ends the regular season in each spot &middot; same 10,000 simulated seasons &middot; top 6 make the playoffs</span></div>
+    <div style="overflow-x:auto"><table class="data-table" id="pos-table">
+      <thead id="pos-head"></thead>
+      <tbody id="pos-body"></tbody>
+    </table></div>
   </div>
 
   <div class="section">
@@ -1683,7 +1692,7 @@ function renderOdds(games, table) {
   const remaining = uniquePairs(seasonRegular().filter(m => !(m.score > 0))).filter(g => mu[g.a] != null && mu[g.b] != null);
   const N = 10000, owners = table.map(r => r.owner);
   const base = Object.fromEntries(table.map(r => [r.owner, { w: r.w, pf: r.pf }]));
-  const res = Object.fromEntries(owners.map(o => [o, { po: 0, s1: 0, wsum: 0, wins: [] }]));
+  const res = Object.fromEntries(owners.map(o => [o, { po: 0, s1: 0, wsum: 0, wins: [], pos: owners.map(() => 0) }]));
   for (let n = 0; n < N; n++) {
     const cur = {}; owners.forEach(o => cur[o] = { w: base[o].w, pf: base[o].pf });
     for (const g of remaining) {
@@ -1691,7 +1700,7 @@ function renderOdds(games, table) {
       cur[g.a].pf += sa; cur[g.b].pf += sb; (sa > sb ? cur[g.a] : cur[g.b]).w++;
     }
     const rank = [...owners].sort((x, y) => cur[y].w - cur[x].w || cur[y].pf - cur[x].pf);
-    rank.forEach((o, i) => { if (i < PLAYOFF_TEAMS) res[o].po++; if (i === 0) res[o].s1++; });
+    rank.forEach((o, i) => { if (i < PLAYOFF_TEAMS) res[o].po++; if (i === 0) res[o].s1++; res[o].pos[i]++; });
     owners.forEach(o => { res[o].wsum += cur[o].w; res[o].wins.push(cur[o].w); });
   }
   const pct = x => x / N * 100;
@@ -1705,6 +1714,16 @@ function renderOdds(games, table) {
     <td><div class="odds-bar"><span style="width:${r.po}%"></span><b>${label(r.po)}</b></div></td>
     <td><div class="odds-bar"><span style="width:${r.s1}%;background:#854d0e"></span><b>${r.s1 <= 0.05 ? '0%' : label(r.s1)}</b></div></td>
     <td class="num">${fmt1(r.pw)}</td><td class="num">${r.lo}–${r.hi}</td></tr>`).join('');
+
+  // Finish-position matrix: rows sorted by expected finish, cells shaded by probability
+  const ev = o => res[o].pos.reduce((a, c, i) => a + c * (i + 1), 0) / N;
+  const prows = [...owners].sort((a, b) => ev(a) - ev(b));
+  document.getElementById('pos-head').innerHTML = `<tr><th>Owner</th>${owners.map((_, i) => `<th class="num"${i === PLAYOFF_TEAMS - 1 ? ' style="border-right:2px solid #475569"' : ''}>${i + 1}</th>`).join('')}<th class="num">Avg</th></tr>`;
+  document.getElementById('pos-body').innerHTML = prows.map(o => `<tr data-owner="${o}" onclick="setActiveOwner('${o}')">
+    <td><span class="owner-dot" style="background:${greyFor(o)}"></span>${o}</td>
+    ${res[o].pos.map((c, i) => { const p = c / N * 100;
+      return `<td class="num" style="${p >= 0.5 ? `background:rgba(74,222,128,${Math.min(0.75, p / 40).toFixed(2)});` : 'color:#334155;'}${i === PLAYOFF_TEAMS - 1 ? 'border-right:2px solid #475569;' : ''}">${p < 0.5 ? (p > 0 ? '<1' : '–') : Math.round(p)}</td>`; }).join('')}
+    <td class="num">${fmt1(ev(o))}</td></tr>`).join('');
 }
 
 function renderPreview(games, table, lastWeek) {
@@ -1896,7 +1915,12 @@ function shareUrl() {
   const parts = location.hash.slice(1).split('/').map(decodeURIComponent), tab = parts[0] || 'alltime';
   const q = o => encodeURIComponent(o);
   if (tab === 'owner') return `${SITE_URL}owner/${shareSlug(parts[1] || document.getElementById('owner-select').value)}/`;
-  if (tab === 'rivalry') return `${SITE_URL}rivalry/?a=${q(rivA)}&b=${q(rivB)}`;
+  if (tab === 'rivalry') {
+    const ok = META.current_owners.includes(rivA) && META.current_owners.includes(rivB) && rivA !== rivB;
+    if (!ok) return `${SITE_URL}rivalry/?a=${q(rivA)}&b=${q(rivB)}`;
+    const [x, y] = [rivA, rivB].sort((m, n) => shareSlug(m) < shareSlug(n) ? -1 : 1);
+    return `${SITE_URL}rivalry/${shareSlug(x)}/${shareSlug(y)}/`;
+  }
   if (tab === 'whohashim') return `${SITE_URL}who-has-him/?p=${q(whSlug())}`;
   const path = { alltime: 'all-time', history: 'team-history', records: 'records', season: 'season' }[tab];
   return SITE_URL + (path ? path + '/' : '');
@@ -1924,8 +1948,7 @@ function renderSeasonStandings(table, games, lastWeek) {
       <td style="color:#94a3b8;font-size:11px">${r.team}</td>
       <td class="num" style="color:#4ade80">${r.w}</td>
       <td class="num" style="color:#f87171">${r.l}</td>
-      <td class="num" style="color:#4ade80">${r.pw}</td>
-      <td class="num" style="color:#f87171">${r.pl}</td>
+      <td class="num">${(r.w / ((r.w + r.l) || 1) * 100).toFixed(1)}%</td>
       <td class="num">${fmt1(r.pf)}</td>
       <td class="num">${fmt1(r.pa)}</td>
       <td class="num">${fmt1(r.ppg)}</td>
@@ -2005,6 +2028,7 @@ function renderLuck(table) {
       <td><span class="owner-dot" style="background:${greyFor(r.owner)}"></span>${r.owner}</td>
       <td class="num">${r.w}</td>
       <td class="num">${fmt1(r.exp)}</td>
+      <td class="num">${(r.pw / ((r.pw + r.pl) || 1) * 100).toFixed(1)}%</td>
       <td class="num ${cls}">${r.luck >= 0 ? '+' : ''}${fmt1(r.luck)}</td>
       <td class="num">${fmt1(r.ppg)}</td>
       <td class="num">${fmt1(r.papg)}</td>
