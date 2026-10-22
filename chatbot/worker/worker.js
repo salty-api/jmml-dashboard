@@ -28,6 +28,7 @@ How to answer:
 * Be conversational and keep simple answers to a few sentences. For broader questions (a full roster, an owner's history, comparing owners, rankings) give a complete answer as a short bulleted list, up to about 15 lines. Do not pad.
 * Format as plain text only. The chat window shows text exactly as written, so never use tables, pipe characters, asterisks for bold or italics, headers, or code blocks. Use short sentences, and for lists put each item on its own line starting with "- ". Leave a blank line between sections only when it helps.
 * When you give current season numbers, mention the data time from the tool result when there is one.
+* Luck questions (luckiest, unluckiest, schedule luck, points against) use get_luck. Points by position, bench points and best starters use get_weekly_players (2019 onward only; say so for earlier seasons).
 * Games with no score yet are upcoming or in progress; say so. Live scores are not final.
 * If the data does not contain the answer, say you don't have it rather than inventing it.
 * Only answer questions about this league, its owners, players, and NFL fantasy football context. Politely decline anything else.
@@ -76,10 +77,37 @@ const TOOLS = [
     input_schema: {
       type: "object",
       properties: {
-        kind: { type: "string", enum: ["high_scores", "low_scores", "blowouts", "closest", "best_seasons", "worst_seasons"] },
+        kind: { type: "string", enum: ["high_scores", "low_scores", "blowouts", "closest", "best_seasons", "worst_seasons", "most_points_against", "fewest_points_against"] },
         owner: { type: "string" }, limit: { type: "integer", description: "Max 20, default 10" },
       },
       required: ["kind"],
+    },
+  },
+  {
+    name: "get_luck",
+    description: "Luck and points against. For each owner: actual wins vs expected wins from all-play (each week, how many other teams you would have beaten), luck (actual minus expected wins), points for, points against, and points against rank. For one season or all time (regular season, 2011 onward). Use for who was luckiest or unluckiest, schedule luck, who faced the toughest schedule, most points against.",
+    input_schema: {
+      type: "object",
+      properties: {
+        season: { type: "integer", description: "Year. Omit for all time (one row per owner)." },
+        owner: { type: "string", description: "With no season, returns this owner's season by season luck." },
+        sort: { type: "string", enum: ["luck", "unluck", "points_against", "points_for"], description: "Default luck (luckiest first)." },
+        limit: { type: "integer", description: "Max 25" },
+      },
+    },
+  },
+  {
+    name: "get_weekly_players",
+    description: "Player level weekly scoring for each team, 2019 onward (which players scored what each week, started or benched). Summaries: by_position (started points by QB, RB, WR, TE, K, D/ST per owner, plus bench points), best_weeks (top individual started player games), bench_left (points left on the bench), lineup (one owner's full lineup for one week). Use for points by position, best starter of the week, bench mistakes.",
+    input_schema: {
+      type: "object",
+      properties: {
+        season: { type: "integer", description: "2019 or later" },
+        summary: { type: "string", enum: ["by_position", "best_weeks", "bench_left", "lineup"] },
+        owner: { type: "string" }, week: { type: "integer" }, position: { type: "string", description: "QB, RB, WR, TE, K or D/ST" },
+        limit: { type: "integer", description: "Max 25, default 10" },
+      },
+      required: ["season", "summary"],
     },
   },
   {
@@ -115,6 +143,59 @@ async function loadData() {
   if (!res.ok) throw new Error("data.json fetch failed: " + res.status);
   cache = { data: await res.json(), at: Date.now() };
   return cache.data;
+}
+
+// Weekly player scores: one static file per season at /weekly/<year>.json
+const weeklyCache = {};
+async function weeklyPlayers(input) {
+  const year = input.season;
+  if (!year || year < 2019) return { error: "Weekly player data starts in 2019.", available_seasons: "2019 to latest" };
+  const c = weeklyCache[year];
+  let w = c && Date.now() - c.at < DATA_TTL_MS ? c.data : null;
+  if (!w) {
+    const res = await fetch(SITE + "/weekly/" + year + ".json", { cf: { cacheTtl: 300, cacheEverything: true } });
+    if (!res.ok) return { error: "No weekly data for " + year };
+    w = await res.json();
+    weeklyCache[year] = { data: w, at: Date.now() };
+  }
+  const d = await loadData();
+  const o = input.owner ? findOwner(d, input.owner) : null;
+  if (input.owner && !o) return { error: "Unknown owner", owners: d.meta.owners };
+  const limit = Math.min(Math.max(input.limit || 10, 1), 25);
+  const R = w.rows.map((r) => ({ week: r[0], owner: r[1], player: r[2], position: r[3], slot: r[4], started: !!r[5], points: r[6], nfl_team: r[7] }));
+  let rows = R;
+  if (o) rows = rows.filter((r) => r.owner === o);
+  if (input.week) rows = rows.filter((r) => r.week === input.week);
+  if (input.position) rows = rows.filter((r) => norm(r.position) === norm(input.position));
+  const meta = { season: year, weeks_in_data: w.weeks.length ? w.weeks[0] + "-" + w.weeks[w.weeks.length - 1] : "none", data_as_of: w.generated_utc };
+  const r1 = (x) => Math.round(x * 100) / 100;
+
+  if (input.summary === "by_position") {
+    const by = {};
+    for (const r of rows) {
+      const b = (by[r.owner] = by[r.owner] || { started: {}, bench: 0, total_started: 0 });
+      if (r.started) { b.started[r.position] = r1((b.started[r.position] || 0) + r.points); b.total_started = r1(b.total_started + r.points); }
+      else b.bench = r1(b.bench + r.points);
+    }
+    const out = Object.entries(by).map(([owner, b]) => ({ owner, started_points_by_position: b.started, total_started_points: b.total_started, bench_points: b.bench }));
+    out.sort((x, y) => y.total_started_points - x.total_started_points);
+    return { ...meta, note: "Started points are the points that counted toward the team score. Includes the regular season and winners bracket playoffs.", owners: out };
+  }
+  if (input.summary === "best_weeks") {
+    const best = rows.filter((r) => r.started).sort((x, y) => y.points - x.points).slice(0, limit);
+    return { ...meta, players: best };
+  }
+  if (input.summary === "bench_left") {
+    const by = {};
+    for (const r of rows) if (!r.started) by[r.owner] = r1((by[r.owner] || 0) + r.points);
+    const top = rows.filter((r) => !r.started).sort((x, y) => y.points - x.points).slice(0, limit);
+    return { ...meta, bench_points_by_owner: Object.entries(by).map(([owner, pts]) => ({ owner, bench_points: pts })).sort((x, y) => y.bench_points - x.bench_points), biggest_bench_games: top };
+  }
+  if (input.summary === "lineup") {
+    if (!o || !input.week) return { ...meta, error: "lineup needs owner and week" };
+    return { ...meta, owner: o, week: input.week, lineup: rows.sort((x, y) => Number(y.started) - Number(x.started)) };
+  }
+  return { ...meta, error: "Unknown summary" };
 }
 
 // ---------- helpers ----------
@@ -212,7 +293,7 @@ function runTool(d, name, input) {
       const sum = (k) => rows.reduce((t, r) => t + (r[k] || 0), 0);
       return {
         ...meta, owner: o, current_member: d.meta.current_owners.includes(o),
-        totals: { seasons: rows.length, wins: sum("wins"), losses: sum("losses"), titles: sum("championships"), playoff_appearances: sum("playoff_appearances"), regular_season_firsts: sum("reg_season_1s"), total_profit: Math.round(sum("profit")) },
+        totals: { seasons: rows.length, wins: sum("wins"), losses: sum("losses"), titles: sum("championships"), playoff_appearances: sum("playoff_appearances"), regular_season_firsts: sum("reg_season_1s"), total_profit: Math.round(sum("profit")), points_for: Math.round(sum("points_for")), points_against: Math.round(sum("points_against")) },
         seasons: rows.map((r) => ({
           season: r.season, team: r.team_name, record: r.wins + "-" + r.losses, points_for: r.points_for, points_against: r.points_against,
           reg_season_finish: r.reg_season_finish, overall_finish: r.finish, champion: r.championships > 0, buy_in: r.buy_in, profit: r.profit,
@@ -232,6 +313,12 @@ function runTool(d, name, input) {
       const limit = Math.min(Math.max(input.limit || 10, 1), 20);
       const o = input.owner ? findOwner(d, input.owner) : null;
       if (input.owner && !o) return { ...meta, error: "Unknown owner", owners: d.meta.owners };
+      if (input.kind === "most_points_against" || input.kind === "fewest_points_against") {
+        let rows = d.seasons.filter((s) => s.finish || s.season < latestSeason(d));
+        if (o) rows = rows.filter((s) => s.owner === o);
+        rows = rows.slice().sort((x, y) => (input.kind === "most_points_against" ? y.points_against - x.points_against : x.points_against - y.points_against));
+        return { ...meta, kind: input.kind, note: "Full completed seasons only.", seasons: rows.slice(0, limit).map((r) => ({ season: r.season, owner: r.owner, team: r.team_name, points_against: r.points_against, points_for: r.points_for, record: r.wins + "-" + r.losses })) };
+      }
       if (input.kind === "best_seasons" || input.kind === "worst_seasons") {
         let rows = d.seasons.filter((s) => s.finish || s.season < latestSeason(d));
         if (o) rows = rows.filter((s) => s.owner === o);
@@ -246,6 +333,61 @@ function runTool(d, name, input) {
       else if (input.kind === "blowouts") out = rows.filter((m) => m.score > m.opp_score).sort((x, y) => (y.score - y.opp_score) - (x.score - x.opp_score)).map((m) => ({ ...fmtGame(m), margin: Math.round((m.score - m.opp_score) * 100) / 100 }));
       else out = rows.filter((m) => m.score > m.opp_score).sort((x, y) => (x.score - x.opp_score) - (y.score - y.opp_score)).map((m) => ({ ...fmtGame(m), margin: Math.round((m.score - m.opp_score) * 100) / 100 }));
       return { ...meta, kind: input.kind, games: out.slice(0, limit), note: "Game by game data starts in 2011." };
+    }
+
+    case "get_luck": {
+      const limit = Math.min(Math.max(input.limit || 12, 1), 25);
+      const o = input.owner ? findOwner(d, input.owner) : null;
+      if (input.owner && !o) return { ...meta, error: "Unknown owner", owners: d.meta.owners };
+      // regular season games with scores, grouped by season and week (each game is stored once per side)
+      const reg = d.matchups.filter((m) => m.game_type === "Regular Season" && m.opponent && played(m));
+      const byWeek = {};
+      for (const m of reg) (byWeek[m.year + "|" + m.week] = byWeek[m.year + "|" + m.week] || []).push(m);
+      const stat = {}; // key season|owner
+      for (const [k, ms] of Object.entries(byWeek)) {
+        const year = Number(k.split("|")[0]);
+        const n = ms.length;
+        if (n < 4) continue;
+        for (const m of ms) {
+          const key = year + "|" + m.owner;
+          const s = (stat[key] = stat[key] || { season: year, owner: m.owner, games: 0, wins: 0, allplay_wins: 0, allplay_games: 0, pf: 0, pa: 0 });
+          s.games++; s.wins += m.score > m.opp_score ? 1 : m.score === m.opp_score ? 0.5 : 0;
+          s.pf += m.score; s.pa += m.opp_score;
+          for (const x of ms) if (x !== m) { s.allplay_games++; s.allplay_wins += m.score > x.score ? 1 : m.score === x.score ? 0.5 : 0; }
+        }
+      }
+      const fin = (s) => {
+        const expected = s.allplay_games ? (s.allplay_wins / s.allplay_games) * s.games : 0;
+        return {
+          ...(s.season ? { season: s.season } : {}), owner: s.owner, games: s.games, wins: s.wins, losses: s.games - s.wins,
+          expected_wins: Math.round(expected * 100) / 100, luck_wins: Math.round((s.wins - expected) * 100) / 100,
+          all_play_record: s.allplay_wins + "-" + (s.allplay_games - s.allplay_wins),
+          points_for: Math.round(s.pf * 100) / 100, points_against: Math.round(s.pa * 100) / 100,
+          avg_points_against: Math.round((s.pa / s.games) * 100) / 100,
+        };
+      };
+      let rows;
+      if (input.season) {
+        rows = Object.values(stat).filter((s) => s.season === input.season).map(fin);
+        if (o) rows = rows.filter((r) => r.owner === o);
+        rows.forEach((r, _, a) => (r.points_against_rank = a.filter((x) => x.points_against > r.points_against).length + 1));
+      } else if (o) {
+        rows = Object.values(stat).filter((s) => s.owner === o).sort((a, b) => a.season - b.season).map(fin);
+      } else {
+        const all = {};
+        for (const s of Object.values(stat)) {
+          const t = (all[s.owner] = all[s.owner] || { owner: s.owner, games: 0, wins: 0, allplay_wins: 0, allplay_games: 0, pf: 0, pa: 0, expected: 0 });
+          t.games += s.games; t.wins += s.wins; t.allplay_wins += s.allplay_wins; t.allplay_games += s.allplay_games; t.pf += s.pf; t.pa += s.pa;
+        }
+        rows = Object.values(all).map(fin);
+      }
+      const sorters = { luck: (a, b) => b.luck_wins - a.luck_wins, unluck: (a, b) => a.luck_wins - b.luck_wins, points_against: (a, b) => b.points_against - a.points_against, points_for: (a, b) => b.points_for - a.points_for };
+      rows.sort(sorters[input.sort] || sorters.luck);
+      return {
+        ...meta, scope: input.season ? "season " + input.season : o ? o + " by season" : "all time",
+        note: "Regular season only, 2011 onward. luck_wins = actual wins minus expected wins from all-play (how many other teams the score would have beaten each week). Positive means lucky.",
+        rows: rows.slice(0, limit),
+      };
     }
 
     case "get_roster": {
@@ -328,7 +470,7 @@ async function converse(env, d, system, messages, evidence) {
           let out;
           const input = c.input || {};
           try {
-            out = runTool(d, c.name, input);
+            out = c.name === "get_weekly_players" ? await weeklyPlayers(input) : runTool(d, c.name, input);
           } catch (e) { out = { error: String(e.message || e) }; }
           const text = JSON.stringify(out);
           evidence.push({ tool: c.name, input, result: text.slice(0, 12000) });
