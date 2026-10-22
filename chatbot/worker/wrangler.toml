@@ -1,0 +1,12 @@
+# Cloudflare Worker config for Jim Murphy, the JMML league chatbot.
+# Deploy from this folder:  npx wrangler deploy
+# Set the key once:          pbpaste | npx wrangler secret put ANTHROPIC_API_KEY
+name = "jmml-bot"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+# Optional per visitor rate limit (20 questions per minute per IP).
+# [[ratelimits]]
+# name = "RATE_LIMITER"
+# namespace_id = "1002"
+# simple = { limit = 20, period = 60 }
