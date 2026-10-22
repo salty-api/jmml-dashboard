@@ -20,7 +20,7 @@ import json
 import re
 import statistics
 from collections import defaultdict
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 import openpyxl
@@ -210,6 +210,28 @@ def load_players():
     return {"cols": PLAYER_COLS, "rows": rows}
 
 
+# ── Combined readable JSON (for the chatbot and other tools) ──────────────────
+
+def export_data_json(seasons, matchups, h2h, meta):
+    live_f = OUT_DIR / "live.json"
+    out = {
+        "about": "JMML fantasy football league (ESPN, since 2009), rebuilt on every refresh. Owners are people, team names change each year. "
+                 "seasons = one row per owner per year; matchups = one row per owner per week (each game appears twice, once per side); "
+                 "h2h = all-time record of owner vs opponent; player_seasons = every rostered player per season with drafter, auction price, "
+                 "final owner and season points (columns listed in player_seasons.cols).",
+        "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "meta": meta,
+        "seasons": seasons,
+        "matchups": matchups,
+        "h2h": h2h,
+        "live": json.load(open(live_f)) if live_f.exists() else None,
+        "player_seasons": load_players(),
+    }
+    path = DASHBOARD.parent / "data.json"
+    path.write_text(json.dumps(out, separators=(",", ":"), default=str))
+    print(f"  → dashboard/data.json ({path.stat().st_size // 1024} KB)")
+
+
 # ── Team logos ────────────────────────────────────────────────────────────────
 
 def build_logos(owners):
@@ -296,6 +318,7 @@ def main():
         print(f"  → dashboard/index.html ({DASHBOARD.stat().st_size // 1024} KB)")
     else:
         print(f"  WARNING: template not found at {TEMPLATE}")
+    export_data_json(seasons, matchups, h2h, meta)
 
 
 if __name__ == "__main__":
