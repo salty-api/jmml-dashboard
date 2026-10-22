@@ -9,7 +9,7 @@
 const SITE = "https://jmml.whohashim.com";
 const DATA_URL = SITE + "/data.json";
 const ALLOWED_ORIGINS = [SITE];
-const MODEL = "claude-haiku-5-5";
+const MODEL = "claude-sonnet-5-5"; // answers and the fact check; haiku-5-5 is cheaper but made too many mistakes
 const MAX_QUESTION_CHARS = 500;
 const MAX_HISTORY_TURNS = 6;
 const MAX_TOOL_ROUNDS = 6;
@@ -286,46 +286,89 @@ function runTool(d, name, input) {
 }
 
 // ---------- Claude call with a small tool loop ----------
-async function askClaude(env, messages) {
-  const d = await loadData();
-  for (let round = 0; round <= MAX_TOOL_ROUNDS; round++) {
-    const res = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "x-api-key": env.ANTHROPIC_API_KEY,
-        "anthropic-version": "2023-06-01",
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        max_tokens: 1500,
-        system: [{ type: "text", text: SYSTEM_PROMPT, cache_control: { type: "ephemeral" } }],
-        tools: TOOLS,
-        messages,
-      }),
-    });
-    if (!res.ok) throw new Error("Anthropic API " + res.status + ": " + (await res.text()).slice(0, 300));
-    const msg = await res.json();
+const VERIFY_PROMPT = `You are the fact checker for a fantasy league chatbot. You receive the user's question, the raw tool results the assistant looked up (the evidence), and the assistant's DRAFT answer.
 
+Check the draft line by line against the evidence:
+* Every name, number, record, score, rank, date and owner must match the evidence exactly. Recompute any sums, differences, averages, counts and "last N" claims yourself.
+* The answer must address what was asked: the right season, owner, player, week, stat and sort order, and the right number of items when "top N" was requested.
+* Remove or fix anything the evidence does not support. Never add guesses. If the evidence cannot answer the question, say plainly that the data does not have it.
+* If the evidence looks incomplete for the question (wrong filter, wrong season, missing owner), call a tool to fetch the right data before answering.
+* Keep the plain text format: no tables, pipes, asterisks, headers or code blocks; list items start with "- ". Keep the same tone and length, and keep any "as of" data time.
+
+Reply with ONLY the final answer for the user inside <answer></answer> tags. Do not mention the check, the draft, or any corrections.`;
+
+async function callClaude(env, system, messages, withTools) {
+  const res = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "x-api-key": env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "content-type": "application/json" },
+    body: JSON.stringify({
+      model: MODEL,
+      max_tokens: 1500,
+      system: [{ type: "text", text: system, cache_control: { type: "ephemeral" } }],
+      ...(withTools ? { tools: TOOLS } : {}),
+      messages,
+    }),
+  });
+  if (!res.ok) throw new Error("Anthropic API " + res.status + ": " + (await res.text()).slice(0, 300));
+  return res.json();
+}
+
+// Runs one model conversation with the lookup tools; every tool result is appended to `evidence`.
+async function converse(env, d, system, messages, evidence) {
+  for (let round = 0; round <= MAX_TOOL_ROUNDS; round++) {
+    const msg = await callClaude(env, system, messages, true);
     if (msg.stop_reason !== "tool_use" || round === MAX_TOOL_ROUNDS) {
       return msg.content.filter((c) => c.type === "text").map((c) => c.text).join("\n").trim();
     }
-
     messages.push({ role: "assistant", content: msg.content });
     const results = await Promise.all(
       msg.content
         .filter((c) => c.type === "tool_use")
         .map(async (c) => {
           let out;
+          const input = c.input || {};
           try {
-            out = runTool(d, c.name, c.input || {});
+            out = runTool(d, c.name, input);
           } catch (e) { out = { error: String(e.message || e) }; }
-          return { type: "tool_result", tool_use_id: c.id, content: JSON.stringify(out) };
+          const text = JSON.stringify(out);
+          evidence.push({ tool: c.name, input, result: text.slice(0, 12000) });
+          return { type: "tool_result", tool_use_id: c.id, content: text };
         })
     );
     messages.push({ role: "user", content: results });
   }
-  return "Sorry, I couldn't work that one out.";
+  return "";
+}
+
+// The chat window shows text as written, so strip any markdown the model slips in.
+const plain = (t) =>
+  String(t || "")
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/__(.+?)__/g, "$1")
+    .replace(/^\s*[*•]\s+/gm, "- ")
+    .replace(/^#{1,6}\s+/gm, "")
+    .replace(/`/g, "");
+
+// Answer, then always run a second pass that checks the draft against the tool results.
+async function askClaude(env, messages) {
+  const d = await loadData();
+  const question = messages[messages.length - 1].content;
+  const evidence = [];
+  const draft = await converse(env, d, SYSTEM_PROMPT, messages, evidence);
+  if (!draft) return "Sorry, I couldn't work that one out.";
+  try {
+    const recent = messages.slice(0, -1).slice(-4).map((m) => m.role + ": " + (typeof m.content === "string" ? m.content : "")).join("\n");
+    const input = "Earlier conversation:\n" + (recent || "(none)") + "\n\nQuestion: " + question +
+      "\n\nEvidence (tool results):\n" + (evidence.length ? evidence.map((e) => e.tool + " " + JSON.stringify(e.input) + " ->\n" + e.result).join("\n\n") : "(no tools were used)") +
+      "\n\nDRAFT answer:\n" + draft;
+    const checked = await converse(env, d, VERIFY_PROMPT, [{ role: "user", content: input }], evidence);
+    const m = checked.match(/<answer>([\s\S]*?)<\/answer>/);
+    const final = (m ? m[1] : "").trim();
+    return plain(final || draft);
+  } catch (e) {
+    console.error("verify failed", e);
+    return plain(draft); // a failed check never blocks the answer
+  }
 }
 
 // ---------- HTTP handling ----------
