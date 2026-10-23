@@ -229,6 +229,30 @@ table.hm tr.dimmed { opacity: 0.15; }
 .modal { background: #111520; border: 1px solid #1e293b; border-radius: 10px; padding: 28px; max-width: 480px; width: 90%; max-height: 80vh; overflow-y: auto; }
 .modal-title { font-size: 15px; font-weight: 700; color: #e2e8f0; margin-bottom: 4px; }
 .modal-sub { font-size: 11px; color: #475569; margin-bottom: 20px; }
+.modal.wide { max-width: 640px; }
+.modal.xwide { max-width: 880px; }
+.gm-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.gm-col { border: 1px solid #1e293b; border-radius: 8px; padding: 12px; min-width: 0; }
+.gm-col.focus { border-color: #fcd34d80; }
+.gm-team { font-size: 13px; font-weight: 700; color: #e2e8f0; }
+.gm-owner { font-size: 11px; color: #64748b; margin-bottom: 4px; }
+.gm-score { font-size: 22px; font-weight: 700; color: #e2e8f0; margin-bottom: 8px; }
+.gm-col.focus .gm-score { color: #fcd34d; }
+.gm-note { font-size: 11px; color: #475569; margin-top: 10px; }
+@media (max-width: 700px) { .gm-cols { grid-template-columns: 1fr; } }
+.rec-card tr[onclick]:hover td { background: #161c2b; }
+.roster-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
+.roster-tile { display: flex; gap: 10px; align-items: center; background: #111520; border: 1px solid #1e293b; border-radius: 8px; padding: 10px 12px; cursor: pointer; }
+.roster-tile:hover { border-color: #475569; }
+.roster-tile .rt-year { font-size: 14px; font-weight: 700; color: #e2e8f0; }
+.roster-tile .rt-team { font-size: 11px; font-style: italic; color: #94a3b8; }
+.roster-tile .rt-sub { font-size: 10px; color: #475569; }
+tr.clickable { cursor: pointer; }
+tr.clickable:hover td { background: #161b2a; }
+.rm-head { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; }
+.rm-head .modal-sub { margin-bottom: 0; }
+tr.rm-bench td { color: #64748b; }
+tr.rm-sep td { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: #334155; padding-top: 14px; }
 .modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; color: #475569; font-size: 18px; cursor: pointer; }
 .about { max-width: 1300px; margin: 0 auto; padding: 0 32px 70px; }
 .about details { border-top: 1px solid #1a2030; padding-top: 14px; }
@@ -459,7 +483,7 @@ table.hm tr.dimmed { opacity: 0.15; }
   </div>
 
   <div class="section">
-    <div class="section-title"><span class="ot-owner"></span>Every Season</div>
+    <div class="section-title"><span class="ot-owner"></span>Every Season <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; click a season to see the roster and scores</span></div>
     <table class="data-table" id="owner-seasons">
       <thead><tr>
         <th>Season</th><th>Team</th><th class="num">Record</th><th class="num">PF</th><th class="num">PA</th>
@@ -467,6 +491,11 @@ table.hm tr.dimmed { opacity: 0.15; }
       </tr></thead>
       <tbody id="owner-seasons-body"></tbody>
     </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="ot-owner"></span>Team Rosters <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; click a team to see its final roster and player scores</span></div>
+    <div class="roster-grid" id="owner-roster-grid"></div>
   </div>
 </div>
 
@@ -620,6 +649,29 @@ table.hm tr.dimmed { opacity: 0.15; }
   </div>
 </div>
 
+<!-- ══════════ ROSTER MODAL ══════════ -->
+<div class="modal-bg" id="roster-modal" onclick="if(event.target===this)closeRosterModal()">
+  <div class="modal wide" style="position:relative">
+    <button class="modal-close" onclick="closeRosterModal()">✕</button>
+    <div class="rm-head" id="rm-head"></div>
+    <table class="data-table">
+      <thead><tr><th>Slot</th><th>Player</th><th>Pos</th><th>NFL</th><th class="num">Pts</th><th class="num">PPG</th><th class="num">Draft $</th></tr></thead>
+      <tbody id="rm-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════ GAME MODAL ══════════ -->
+<div class="modal-bg" id="game-modal" onclick="if(event.target===this)closeGameModal()">
+  <div class="modal xwide" style="position:relative">
+    <button class="modal-close" onclick="closeGameModal()">✕</button>
+    <div class="modal-title" id="gm-title"></div>
+    <div class="modal-sub" id="gm-sub"></div>
+    <div class="gm-cols" id="gm-cols"></div>
+    <div class="gm-note" id="gm-note"></div>
+  </div>
+</div>
+
 <div class="about"><details>
   <summary>About these numbers</summary>
   <dl>
@@ -630,7 +682,7 @@ table.hm tr.dimmed { opacity: 0.15; }
     <dt>Streak arrow</dt><dd>How many spots a team moved in the standings versus the week before.</dd>
     <dt>Records</dt><dd>Include every played game, regular season and playoff brackets, for all current and retired owners. Streaks carry across seasons.</dd>
     <dt>Profit</dt><dd>Winnings minus buy-in, completed seasons only.</dd>
-    <dt>Data</dt><dd>League history sheet, 2009 to present. Game-level results start in 2011.</dd>
+    <dt>Data</dt><dd>League history sheet, 2009 to present. Game-level results start in 2011. Weekly lineups (Records pop-ups) start in 2019.</dd>
   </dl>
 </details></div>
 
@@ -643,6 +695,22 @@ const MATCHUPS = __MATCHUPS__;
 const H2H      = __H2H__;
 const META     = __META__;
 const LIVE     = __LIVE__;   // in-progress week's live ESPN scores (or null)
+const WEEKLY = {};   // year -> {cols, rows} from /weekly/<year>.json, loaded when a record game is opened
+async function loadWeekly(year) {
+  if (!(year in WEEKLY)) {
+    try { const r = await fetch(`/weekly/${year}.json`); WEEKLY[year] = r.ok ? await r.json() : null; } catch (e) { WEEKLY[year] = null; }
+  }
+  return WEEKLY[year];
+}
+function weeklyLineup(year, week, owner) {
+  const w = WEEKLY[year]; if (!w) return null;
+  const ix = Object.fromEntries(w.cols.map((c, i) => [c, i]));
+  const rows = w.rows.filter(r => r[ix.week] === week && r[ix.owner] === owner);
+  if (!rows.length) return null;
+  const o = s => { const i = SLOT_ORDER.indexOf(s); return i < 0 ? 99 : i; };
+  return rows.map(r => [r[ix.slot], r[ix.player], r[ix.position], r[ix.nfl_team], r[ix.points]])
+    .sort((a, b) => o(a[0]) - o(b[0]) || (b[4] || 0) - (a[4] || 0));
+}
 const PLAYERS  = __PLAYERS__;   // {cols, rows} one row per player per season
 const LOGOS    = __LOGOS__;   // 'year|owner' -> image path
 
@@ -1385,7 +1453,16 @@ function renderOwner() {
   }).join('');
 
   // Every season
-  document.getElementById('owner-seasons-body').innerHTML = [...seasons].reverse().map(s => `<tr>
+
+  // Team rosters
+  document.getElementById('owner-roster-grid').innerHTML = [...seasons].reverse().filter(s => rosterFor(s.season, owner)).map(s => `
+    <div class="roster-tile" onclick="openRosterModal(${s.season},'${owner.replace(/'/g, "\\'")}')">${logo(owner, s.season, 36)}<div>
+      <div class="rt-year">${s.season}</div><div class="rt-team">${s.team_name || ''}</div>
+      <div class="rt-sub">${s.wins ?? '\u2014'}\u2013${s.losses ?? '\u2014'} \u00b7 ${s.finish === 1 ? 'Champion' : s.finish != null ? '#' + s.finish : 'in progress'}</div></div></div>`).join('')
+    || '<p class="subtitle">No roster data for this owner.</p>';
+
+  // Every season
+  document.getElementById('owner-seasons-body').innerHTML = [...seasons].reverse().map(s => `<tr${rosterFor(s.season, owner) ? ` class="clickable" onclick="openRosterModal(${s.season},'${owner.replace(/'/g, "\\'")}')"` : ''}>
     <td>${s.season}</td>
     <td style="color:#94a3b8">${s.team_name || '—'}</td>
     <td class="num">${s.wins ?? '—'}–${s.losses ?? '—'}</td>
@@ -1396,6 +1473,46 @@ function renderOwner() {
     <td class="num" style="color:${(s.profit||0) >= 0 ? '#4ade80' : '#f87171'}">${s.finish != null && s.profit != null ? fmtUsd(s.profit) : '—'}</td>
   </tr>`).join('');
 }
+
+// Final roster per season|owner from PLAYERS
+const SLOT_ORDER = ['QB', 'RB', 'WR', 'TE', 'FLEX', 'D/ST', 'K', 'Bench', 'IR'];
+let _rosters = null;
+function rosterFor(season, owner) {
+  if (!_rosters) {
+    _rosters = {};
+    const ix = Object.fromEntries(PLAYERS.cols.map((c, i) => [c, i]));
+    PLAYERS.rows.forEach(r => {
+      if (!r[ix.final_owner]) return;
+      (_rosters[r[ix.season] + '|' + r[ix.final_owner]] ||= []).push(Object.fromEntries(PLAYERS.cols.map((c, i) => [c, r[i]])));
+    });
+    Object.values(_rosters).forEach(a => a.sort((x, y) => {
+      const sx = SLOT_ORDER.indexOf(x.lineup_slot), sy = SLOT_ORDER.indexOf(y.lineup_slot);
+      return (sx < 0 ? 99 : sx) - (sy < 0 ? 99 : sy) || (y.season_points || 0) - (x.season_points || 0);
+    }));
+  }
+  return _rosters[season + '|' + owner] || null;
+}
+function openRosterModal(season, owner) {
+  const roster = rosterFor(season, owner);
+  if (!roster) return;
+  const s = SEASONS.find(x => x.season === season && x.owner === owner) || {};
+  const total = roster.filter(p => p.lineup_slot !== 'Bench' && p.lineup_slot !== 'IR').reduce((a, p) => a + (p.season_points || 0), 0);
+  document.getElementById('rm-head').innerHTML = `${logo(owner, season, 48)}<div>
+    <div class="modal-title">${s.team_name || owner} <span style="font-weight:400;color:#64748b">\u00b7 ${season}</span></div>
+    <div class="modal-sub">${owner} \u00b7 ${s.wins ?? '\u2014'}\u2013${s.losses ?? '\u2014'} \u00b7 ${s.finish != null ? (s.finish === 1 ? 'Champion' : '#' + s.finish + ' final') : 'in progress'} \u00b7 starters ${fmt1(total)} pts</div></div>`;
+  let prev = null;
+  document.getElementById('rm-body').innerHTML = roster.map(p => {
+    const bench = p.lineup_slot === 'Bench' || p.lineup_slot === 'IR';
+    const sep = bench && prev !== p.lineup_slot ? `<tr class="rm-sep"><td colspan="7">${p.lineup_slot === 'IR' ? 'Injured reserve' : 'Bench'}</td></tr>` : '';
+    prev = p.lineup_slot;
+    return sep + `<tr class="${bench ? 'rm-bench' : ''}"><td>${bench ? '' : p.lineup_slot}</td><td>${p.player}</td><td>${p.position}</td><td>${p.nfl_team}</td>
+      <td class="num">${p.season_points == null ? '\u2014' : fmt1(p.season_points)}</td><td class="num">${p.points_per_game == null ? '\u2014' : fmt1(p.points_per_game)}</td>
+      <td class="num">${p.draft_price != null ? '$' + p.draft_price : '\u2014'}</td></tr>`;
+  }).join('');
+  document.getElementById('roster-modal').classList.add('open');
+}
+function closeRosterModal() { document.getElementById('roster-modal').classList.remove('open'); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeRosterModal(); });
 
 // ══════════════════════════════════════════════════════
 // TAB 4 — CURRENT SEASON
@@ -1488,7 +1605,7 @@ const gk = (y, w) => `${y} Wk ${w}`;
 // ══════════════════════════════════════════════════════
 function recCard(title, rows) {
   return `<div class="rec-card"><div class="rec-title">${title}</div><table class="data-table"><tbody>${
-    rows.map((r, i) => `<tr class="${r.cur ? 'rec-new' : ''}"><td class="num" style="color:#334155;width:18px">${i + 1}</td><td>${r.main}${r.cur ? `<span class="rec-pill">${SEASON_YEAR}</span>` : ''}<div class="rec-sub">${r.sub}</div></td><td class="num rec-val">${r.val}</td></tr>`).join('')
+    rows.map((r, i) => `<tr class="${r.cur ? 'rec-new' : ''}"${r.click ? ` onclick="${r.click}" style="cursor:pointer"` : ''}><td class="num" style="color:#334155;width:18px">${i + 1}</td><td>${r.main}${r.cur ? `<span class="rec-pill">${SEASON_YEAR}</span>` : ''}<div class="rec-sub">${r.sub}</div></td><td class="num rec-val">${r.val}</td></tr>`).join('')
   }</tbody></table></div>`;
 }
 const retiredTag = o => isCurrent(o) ? '' : ' <span style="font-size:9px;color:#334155">retired</span>';
@@ -1534,17 +1651,18 @@ function renderRecords() {
   // Single-game records (one row per game, winner's view)
   const G = PLAYED.filter(m => m.result === 1 && m.opp_score > 0).map(m => ({
     year: m.year, week: m.week, w: m.owner, l: m.opponent, ws: m.score, ls: m.opp_score, margin: m.score - m.opp_score }));
-  const game = (g, who, val) => { const me = who === 'w' ? g.w : g.l, other = who === 'w' ? g.l : g.w;
+  const game = (g, who, val, title) => { const me = who === 'w' ? g.w : g.l, other = who === 'w' ? g.l : g.w;
     return { main: `${me}${retiredTag(me)}${teamTag(me, g.year)}`,
+      click: `openGameModal(${g.year},${g.week},'${g.w}','${g.l}','${who}','${title}')`,
       sub: `${gk(g.year, g.week)} · ${who === 'w' ? 'beat' : 'lost to'} ${other}${teamOf(other, g.year) ? ` (${teamOf(other, g.year)})` : ''} · ${fmt1(g.ws)}–${fmt1(g.ls)}`, val, cur: g.year === SEASON_YEAR }; };
   const top = (arr, key, dir) => [...arr].sort((a, b) => dir * (a[key] - b[key])).slice(0, 5);
   document.getElementById('rec-games').innerHTML = [
-    recCard('Highest score',        top(G, 'ws', -1).map(g => game(g, 'w', fmt1(g.ws)))),
-    recCard('Lowest score',         top(G, 'ls',  1).map(g => game(g, 'l', fmt1(g.ls)))),
-    recCard('Biggest blowout',      top(G, 'margin', -1).map(g => game(g, 'w', '+' + fmt1(g.margin)))),
-    recCard('Closest game',         top(G, 'margin',  1).map(g => game(g, 'w', fmt2(g.margin)))),
-    recCard('Most points in a loss',top(G, 'ls', -1).map(g => game(g, 'l', fmt1(g.ls)))),
-    recCard('Fewest points in a win',top(G, 'ws',  1).map(g => game(g, 'w', fmt1(g.ws)))),
+    recCard('Highest score',        top(G, 'ws', -1).map(g => game(g, 'w', fmt1(g.ws), 'Highest score'))),
+    recCard('Lowest score',         top(G, 'ls',  1).map(g => game(g, 'l', fmt1(g.ls), 'Lowest score'))),
+    recCard('Biggest blowout',      top(G, 'margin', -1).map(g => game(g, 'w', '+' + fmt1(g.margin), 'Biggest blowout'))),
+    recCard('Closest game',         top(G, 'margin',  1).map(g => game(g, 'w', fmt2(g.margin), 'Closest game'))),
+    recCard('Most points in a loss',top(G, 'ls', -1).map(g => game(g, 'l', fmt1(g.ls), 'Most points in a loss'))),
+    recCard('Fewest points in a win',top(G, 'ws',  1).map(g => game(g, 'w', fmt1(g.ws), 'Fewest points in a win'))),
   ].join('');
 
   // Streaks
@@ -1606,6 +1724,32 @@ function renderRecords() {
     <td class="num ${r.vs > 0.25 ? 'luck-pos' : r.vs < -0.25 ? 'luck-neg' : ''}">${r.vs == null ? '—' : sgn(r.vs)}</td>
     <td class="num" style="${r.last ? 'color:#f87171' : ''}">${r.last}</td></tr>`).join('');
 }
+
+function gameSide(year, week, owner, score, focus) {
+  const lu = weeklyLineup(year, week, owner);
+  const team = teamOf(owner, year);
+  const rows = lu ? lu.map(([slot, name, pos, nfl, pts], i) => {
+    const bench = slot === 'Bench' || slot === 'IR';
+    const sep = bench && (i === 0 || lu[i - 1][0] !== slot) ? `<tr class="rm-sep"><td colspan="4">${slot === 'IR' ? 'Injured reserve' : 'Bench'}</td></tr>` : '';
+    return sep + `<tr class="${bench ? 'rm-bench' : ''}"><td>${bench ? '' : slot}</td><td>${name}</td><td>${nfl}</td><td class="num">${pts == null ? '\u2014' : fmt1(pts)}</td></tr>`;
+  }).join('') : '';
+  return `<div class="gm-col ${focus ? 'focus' : ''}"><div class="gm-team">${team || owner}</div>
+    <div class="gm-owner">${owner}${retiredTag(owner)}</div><div class="gm-score">${fmt1(score)}</div>
+    ${lu ? `<table class="data-table"><thead><tr><th>Slot</th><th>Player</th><th>NFL</th><th class="num">Pts</th></tr></thead><tbody>${rows}</tbody></table>`
+         : '<div class="gm-note">Weekly lineup not available</div>'}</div>`;
+}
+async function openGameModal(year, week, winner, loser, who, title) {
+  const m = PLAYED.find(x => x.year === year && x.week === week && x.owner === winner && x.opponent === loser);
+  if (!m) return;
+  await loadWeekly(year);
+  document.getElementById('gm-title').textContent = `${winner} ${fmt1(m.score)}\u2013${fmt1(m.opp_score)} ${loser}`;
+  document.getElementById('gm-sub').textContent = `${title} \u00b7 ${gk(year, week)}${m.game_type ? ' \u00b7 ' + m.game_type : ''}`;
+  document.getElementById('gm-cols').innerHTML = gameSide(year, week, winner, m.score, who === 'w') + gameSide(year, week, loser, m.opp_score, who === 'l');
+  document.getElementById('gm-note').textContent = weeklyLineup(year, week, winner) ? '' : 'Weekly lineups are available from 2019 (regular season and winners bracket).';
+  document.getElementById('game-modal').classList.add('open');
+}
+function closeGameModal() { document.getElementById('game-modal').classList.remove('open'); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeGameModal(); });
 
 // ══════════════════════════════════════════════════════
 // RIVALRY TAB
