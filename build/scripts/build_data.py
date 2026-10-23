@@ -268,12 +268,32 @@ def apply_final_live(matchups):
     print(f"  Applied final ESPN scores for {live['year']} week {live['week']}")
 
 
+def derive_current_record(seasons, matchups):
+    """The sheet's season totals lag the weekly scores, so for the in-progress season recompute
+    W/L/PF/PA from the played regular-season matchups."""
+    year = max((m["year"] for m in matchups if (m["score"] or 0) > 0), default=None)
+    if year is None: return
+    by_owner = defaultdict(list)
+    for m in matchups:
+        if m["year"] == year and m["game_type"] == "Regular Season" and m["opponent"] and (m["score"] or 0) > 0:
+            by_owner[m["owner"]].append(m)
+    for s in seasons:
+        g = by_owner.get(s["owner"]) if s["season"] == year else None
+        if not g: continue
+        s["wins"] = sum(1 for m in g if m["score"] > m["opp_score"])
+        s["losses"] = sum(1 for m in g if m["score"] < m["opp_score"])
+        s["points_for"] = round(sum(m["score"] for m in g), 2)
+        s["points_against"] = round(sum(m["opp_score"] for m in g), 2)
+    print(f"  Derived {year} W/L/PF/PA from matchups")
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
     seasons, matchups = load_excel()
     espn = load_espn()
     apply_final_live(matchups)
+    derive_current_record(seasons, matchups)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
