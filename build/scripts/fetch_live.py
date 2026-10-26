@@ -6,6 +6,7 @@ Rerun any time during the week, then rerun build_data.py.
 """
 import json, re, sys
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from pathlib import Path
 import requests
 
@@ -41,7 +42,7 @@ for h, a in games:
     out.append({'a': owner[h['teamId']], 'b': owner[a['teamId']],
                 'a_pts': round(h.get('totalPointsLive', h.get('totalPoints', 0)), 2),
                 'b_pts': round(a.get('totalPointsLive', a.get('totalPoints', 0)), 2)})
-res = {'year': YEAR, 'week': week, 'updated': datetime.now().strftime('%Y-%m-%d %H:%M'), 'games': out}
+res = {'year': YEAR, 'week': week, 'updated': datetime.now(ZoneInfo('America/Los_Angeles')).strftime('%Y-%m-%d %H:%M PT'), 'games': out}
 # Last week's final scores: ESPN rolls to the next matchup period Monday night, so if the sheet
 # hasn't been filled in for week-1 yet, carry ESPN's final scores so the recap can show it.
 prev = week - 1

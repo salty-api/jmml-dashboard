@@ -610,7 +610,7 @@ tr.rm-sep td { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em;
   </div>
 
   <div class="section">
-    <div class="section-title" id="recap-title">Latest Week</div>
+    <div class="section-title"><span id="recap-title">Latest Week</span> <span id="recap-updated" style="font-weight:400;text-transform:none;font-size:10px;color:#64748b"></span></div>
     <div class="kpi-row" id="recap-cards"></div>
     <div class="matchup-grid" id="recap-grid"></div>
   </div>
@@ -2184,6 +2184,7 @@ function renderLuck(table) {
 function renderRecap(games, week) {
   const wm = games.filter(m => m.week === week);
   document.getElementById('recap-title').textContent = `Week ${week} Recap`;
+  document.getElementById('recap-updated').textContent = LIVE && LIVE.year === SEASON_YEAR && LIVE.updated ? `· scores updated ${LIVE.updated}` : '';
   // one row per game
   const seen = new Set(), pairs = [];
   for (const m of wm) {
