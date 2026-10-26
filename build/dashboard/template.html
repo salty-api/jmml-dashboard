@@ -2496,6 +2496,7 @@ function init() {
   // Tabs 3 + 4 — charts deferred until tab is opened
   buildOwnerSelect();
   document.getElementById('season-tab-btn').textContent = `${SEASON_YEAR} Season`;
+  if (!location.hash.slice(1)) history.replaceState(null, '', '#season');  // default landing view: current season (recap + weekly scores)
   routeFromHash();
 }
 
