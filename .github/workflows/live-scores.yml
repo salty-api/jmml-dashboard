@@ -64,7 +64,7 @@ jobs:
         run: |
           pip install -r build/requirements.txt
           cd build
-          ln -s ../logos dashboard/logos
+          ln -s ../../logos dashboard/logos
           python scripts/fetch_live.py
           python scripts/fetch_weekly_players.py --current
           python scripts/build_data.py
