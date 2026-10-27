@@ -251,21 +251,24 @@ def apply_final_live(matchups):
     f = OUT_DIR / "live.json"
     if not f.exists(): return
     live = json.load(open(f))
-    if live.get("prev_final"):
-        live = {"year": live["year"], "final": True, **live["prev_final"]}
-    if not live.get("final"): return
-    rows = [m for m in matchups if m["year"] == live["year"] and m["week"] == live["week"]]
-    if not rows or any((m["score"] or 0) or (m["opp_score"] or 0) for m in rows): return
-    pts = {}
-    for g in live["games"]:
-        pts[(g["a"], g["b"])] = (g["a_pts"], g["b_pts"])
-        pts[(g["b"], g["a"])] = (g["b_pts"], g["a_pts"])
-    for m in rows:
-        if (m["owner"], m["opponent"]) in pts:
-            m["score"], m["opp_score"] = pts[(m["owner"], m["opponent"])]
-            m["result"] = 1 if m["score"] > m["opp_score"] else 0
-            m["source"] = "espn-final"
-    print(f"  Applied final ESPN scores for {live['year']} week {live['week']}")
+    if live.get("prev_finals") or live.get("prev_final"):
+        lives = [{"year": live["year"], "final": True, **p} for p in (live.get("prev_finals") or [live["prev_final"]])]
+    else:
+        lives = [live]
+    for live in lives:
+        if not live.get("final"): continue
+        rows = [m for m in matchups if m["year"] == live["year"] and m["week"] == live["week"]]
+        if not rows or any((m["score"] or 0) or (m["opp_score"] or 0) for m in rows): continue
+        pts = {}
+        for g in live["games"]:
+            pts[(g["a"], g["b"])] = (g["a_pts"], g["b_pts"])
+            pts[(g["b"], g["a"])] = (g["b_pts"], g["a_pts"])
+        for m in rows:
+            if (m["owner"], m["opponent"]) in pts:
+                m["score"], m["opp_score"] = pts[(m["owner"], m["opponent"])]
+                m["result"] = 1 if m["score"] > m["opp_score"] else 0
+                m["source"] = "espn-final"
+        print(f"  Applied final ESPN scores for {live['year']} week {live['week']}")
 
 
 def derive_current_record(seasons, matchups):
