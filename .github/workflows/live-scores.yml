@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: live-scores
@@ -80,3 +81,13 @@ jobs:
           git diff --cached --quiet && { echo "No change"; exit 0; }
           git commit -m "Live scores $(TZ=America/Los_Angeles date '+%Y-%m-%d %H:%M')"
           git push
+
+      - name: Open an issue if the refresh failed
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          open=$(gh issue list --state open --search "Live scores refresh failing in:title" --json number -q '.[0].number')
+          if [ -n "$open" ]; then gh issue comment "$open" --body "Failed again: $url"
+          else gh issue create --title "Live scores refresh failing" --body "A scheduled run failed: $url"; fi
