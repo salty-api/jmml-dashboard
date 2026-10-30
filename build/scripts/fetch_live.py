@@ -33,6 +33,10 @@ for s in d['schedule']:
     h, a = s['home'], s['away']
     games.append((h, a))
 missing = [t['id'] for t in d['teams'] if t['id'] not in owner]
+if len(missing) == 1:   # one team renamed on ESPN: it is the one owner left over
+    left = set(sheet.values()) - set(owner.values())
+    if len(left) == 1:
+        owner[missing[0]] = left.pop(); missing = []
 if missing:
     sys.exit(f"could not map ESPN teams to owners: {missing}")
 out = []
