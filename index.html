@@ -1817,7 +1817,7 @@ function renderOdds(games, table) {
   const remaining = uniquePairs(seasonRegular().filter(m => !(m.score > 0))).filter(g => mu[g.a] != null && mu[g.b] != null);
   const N = 10000, owners = table.map(r => r.owner);
   const base = Object.fromEntries(table.map(r => [r.owner, { w: r.w, pf: r.pf }]));
-  const res = Object.fromEntries(owners.map(o => [o, { po: 0, s1: 0, wsum: 0, wins: [], pos: owners.map(() => 0) }]));
+  const res = Object.fromEntries(owners.map(o => [o, { po: 0, s1: 0, wsum: 0, wins: [], pos: owners.map(() => 0), tp: 0 }]));
   for (let n = 0; n < N; n++) {
     const cur = {}; owners.forEach(o => cur[o] = { w: base[o].w, pf: base[o].pf });
     for (const g of remaining) {
@@ -1825,6 +1825,7 @@ function renderOdds(games, table) {
       cur[g.a].pf += sa; cur[g.b].pf += sb; (sa > sb ? cur[g.a] : cur[g.b]).w++;
     }
     const rank = [...owners].sort((x, y) => cur[y].w - cur[x].w || cur[y].pf - cur[x].pf);
+    res[owners.reduce((x, y) => cur[y].pf > cur[x].pf ? y : x)].tp++;
     rank.forEach((o, i) => { if (i < PLAYOFF_TEAMS) res[o].po++; if (i === 0) res[o].s1++; res[o].pos[i]++; });
     owners.forEach(o => { res[o].wsum += cur[o].w; res[o].wins.push(cur[o].w); });
   }
@@ -1843,13 +1844,13 @@ function renderOdds(games, table) {
   // Seed odds: probability of finishing in each regular-season position
   const cut = `border-right:2px solid #475569;`;
   document.getElementById('seed-head').innerHTML = `<tr><th>Owner</th>${owners.map((_, i) =>
-    `<th class="num" style="${i === PLAYOFF_TEAMS - 1 ? cut : ''}cursor:default">${i + 1}</th>`).join('')}<th class="num" style="cursor:default">Top 6</th></tr>`;
+    `<th class="num" style="${i === PLAYOFF_TEAMS - 1 ? cut : ''}cursor:default">${i + 1}</th>`).join('')}<th class="num" style="cursor:default">Top 6</th><th class="num" style="cursor:default">Top Pts</th></tr>`;
   document.getElementById('seed-body').innerHTML = rows.map(r => `<tr data-owner="${r.o}" onclick="setActiveOwner('${r.o}')">
     <td><span class="owner-dot" style="background:${greyFor(r.o)}"></span>${r.o}</td>${res[r.o].pos.map((c, i) => {
       const p = c / N * 100, a = Math.min(0.9, p / 40);
       const bg = p < 0.05 ? '' : `background:rgba(${i < PLAYOFF_TEAMS ? '34,197,94' : '148,163,184'},${(a * (i < PLAYOFF_TEAMS ? 1 : 0.5)).toFixed(2)});`;
       return `<td class="num" style="${bg}${i === PLAYOFF_TEAMS - 1 ? cut : ''}">${p < 0.05 ? '' : p < 1 ? '<1' : Math.round(p)}</td>`;
-    }).join('')}<td class="num" style="font-weight:700;color:#e2e8f0">${label(r.po)}</td></tr>`).join('');
+    }).join('')}<td class="num" style="font-weight:700;color:#e2e8f0">${label(r.po)}</td><td class="num" style="font-weight:700;color:#fcd34d">${pct(res[r.o].tp) <= 0.05 ? '0%' : label(pct(res[r.o].tp))}</td></tr>`).join('');
 }
 
 function renderPreview(games, table, lastWeek) {
