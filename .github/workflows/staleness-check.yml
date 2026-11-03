@@ -1,0 +1,40 @@
+name: Live scores staleness check
+
+on:
+  schedule:
+    - cron: "40 * * * *"   # hourly; only alerts inside the Pacific-time windows below
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Alert if live.json is stale during a scoring window
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -fsSL "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/main/build/data/processed/live.json?$(date +%s)" -o live.json
+          python3 - <<'PY' > result.txt
+          import json
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          tz = ZoneInfo("America/Los_Angeles")
+          now = datetime.now(tz)
+          d, h = (now.weekday() + 1) % 7, now.hour          # 0=Sun
+          # windows where hourly refreshes are expected, starting 3h after the window opens
+          in_window = (d == 0 and 10 <= h <= 22) or (d == 2 and h <= 5)
+          upd = datetime.strptime(json.load(open("live.json"))["updated"].replace(" PT", ""), "%Y-%m-%d %H:%M").replace(tzinfo=tz)
+          age = (now - upd).total_seconds() / 3600
+          print("stale" if in_window and age > 3 else "ok")
+          print(f"now={now:%a %H:%M} PT, live.json updated {upd:%a %Y-%m-%d %H:%M} PT, age={age:.1f}h, in_window={in_window}")
+          PY
+          cat result.txt
+          if [ "$(head -1 result.txt)" = "stale" ]; then
+            open=$(gh issue list --state open --search "Live scores are stale in:title" --json number -q '.[0].number')
+            body="$(tail -1 result.txt). Scheduled runs were probably dropped by GitHub; trigger Live scores by hand (Actions > Live scores > Run workflow)."
+            if [ -n "$open" ]; then gh issue comment "$open" --body "$body"
+            else gh issue create --title "Live scores are stale" --body "$body"; fi
+          fi

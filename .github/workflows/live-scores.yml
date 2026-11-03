@@ -25,9 +25,12 @@ jobs:
         run: |
           d=$(TZ=America/Los_Angeles date +%w); h=$(TZ=America/Los_Angeles date +%-H)
           sheet=0; cards=0
+          # GitHub drops/delays scheduled runs, so each job spans a window: a missed fire is caught by the next hourly one.
           [ "$d" = 2 ] && [ "$h" = 9 ] && cards=1                        # Tue 9:15am PT: cards pick up the finished week
-          [ "$d" = 1 ] && [ "$h" = 23 ] && cards=1
+          [ "$d" = 1 ] && [ "$h" = 23 ] && cards=1                       # Mon 11pm PT
+          [ "$d" = 2 ] && [ "$h" -le 3 ] && cards=1                      # Tue 12-3am PT
           [ "$d" = 1 ] && [ "$h" = 23 ] && sheet=1                       # Mon 11pm PT: refresh standings from the sheet
+          [ "$d" = 2 ] && [ "$h" -le 3 ] && sheet=1                      # Tue 12-3am PT (backup for a dropped Mon 11pm run)
           if [ -z "$SCHEDULE" ]; then echo "run=1" >> "$GITHUB_OUTPUT"; echo "sheet=1" >> "$GITHUB_OUTPUT"; echo "cards=1" >> "$GITHUB_OUTPUT"; exit 0; fi
           run=0
           if [ "$SCHEDULE" = "15 16,17 * * 2" ]; then
@@ -35,7 +38,8 @@ jobs:
           else
             [ "$d" = 0 ] && [ "$h" -ge 7 ] && [ "$h" -le 21 ] && run=1   # Sun 7am-9pm
             [ "$d" = 4 ] && [ "$h" = 23 ] && run=1                       # Thu 11pm
-            [ "$d" = 2 ] && [ "$h" = 2 ] && run=1                        # Tue 2am PT
+            [ "$d" = 5 ] && [ "$h" -le 1 ] && run=1                      # Fri 12-1am (backup for Thu 11pm)
+            [ "$d" = 2 ] && [ "$h" -le 3 ] && run=1                      # Tue 12-3am PT
             [ "$d" = 1 ] && [ "$h" -ge 21 ] && [ "$h" -le 23 ] && run=1  # Mon 9-11pm
           fi
           echo "PT day=$d hour=$h run=$run"
