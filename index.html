@@ -1843,13 +1843,13 @@ function renderOdds(games, table) {
   // Seed odds: probability of finishing in each regular-season position
   const cut = `border-right:2px solid #475569;`;
   document.getElementById('seed-head').innerHTML = `<tr><th>Owner</th>${owners.map((_, i) =>
-    `<th class="num" style="${i === PLAYOFF_TEAMS - 1 ? cut : ''}cursor:default">${i + 1}</th>`).join('')}</tr>`;
+    `<th class="num" style="${i === PLAYOFF_TEAMS - 1 ? cut : ''}cursor:default">${i + 1}</th>`).join('')}<th class="num" style="cursor:default">Top 6</th></tr>`;
   document.getElementById('seed-body').innerHTML = rows.map(r => `<tr data-owner="${r.o}" onclick="setActiveOwner('${r.o}')">
     <td><span class="owner-dot" style="background:${greyFor(r.o)}"></span>${r.o}</td>${res[r.o].pos.map((c, i) => {
       const p = c / N * 100, a = Math.min(0.9, p / 40);
       const bg = p < 0.05 ? '' : `background:rgba(${i < PLAYOFF_TEAMS ? '34,197,94' : '148,163,184'},${(a * (i < PLAYOFF_TEAMS ? 1 : 0.5)).toFixed(2)});`;
       return `<td class="num" style="${bg}${i === PLAYOFF_TEAMS - 1 ? cut : ''}">${p < 0.05 ? '' : p < 1 ? '<1' : Math.round(p)}</td>`;
-    }).join('')}</tr>`).join('');
+    }).join('')}<td class="num" style="font-weight:700;color:#e2e8f0">${label(r.po)}</td></tr>`).join('');
 }
 
 function renderPreview(games, table, lastWeek) {
