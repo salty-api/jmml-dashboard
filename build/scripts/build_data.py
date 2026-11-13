@@ -36,6 +36,9 @@ LOGO_DIR  = ROOT / "dashboard" / "logos"
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
+# Team renames not yet reflected in the sheet: (season, owner) -> team name
+TEAM_RENAMES = {(2026, "Salty"): "P-U Later"}
+
 def _num(v, cast=float):
     try:
         return cast(v) if v is not None else None
@@ -60,7 +63,7 @@ def load_excel():
         seasons_raw.append({
             "season":             int(d["Season"]),
             "owner":              str(d["Owner"] or "").strip(),
-            "team_name":          str(d["Team Name"] or "").strip(),
+            "team_name":          TEAM_RENAMES.get((int(d["Season"]), str(d["Owner"] or "").strip()), str(d["Team Name"] or "").strip()),
             "current_owner":      str(d.get("Current Owner") or "") == "Current Owner",
             "wins":               _num(d.get("Wins"), int),
             "losses":             _num(d.get("Losses"), int),
