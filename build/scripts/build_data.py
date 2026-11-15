@@ -37,7 +37,7 @@ LOGO_DIR  = ROOT / "dashboard" / "logos"
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
 # Team renames not yet reflected in the sheet: (season, owner) -> team name
-TEAM_RENAMES = {(2026, "Salty"): "P-U Later"}
+TEAM_RENAMES = {(2026, "Salty"): "P-U Later", (2026, "Riley"): "Wet K9"}
 
 def _num(v, cast=float):
     try:

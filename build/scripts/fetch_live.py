@@ -25,6 +25,17 @@ for t in d['teams']:
     n = norm(t.get('name'))
     o = sheet.get(n) or next((v for k, v in sheet.items() if k and (k in n or n in k)), None)
     if o: owner[t['id']] = o
+# renamed teams: fall back to the ESPN owner's real name via owner_map.json (survives any number of renames)
+omap = json.load(open(ROOT / "data/raw/owner_map.json"))
+members = {m['id']: f"{m.get('firstName','')} {m.get('lastName','')}".strip().lower() for m in d.get('members', [])}
+for t in d['teams']:
+    if t['id'] in owner: continue
+    names = [members.get(i, '') for i in t.get('owners', [])]
+    for cand in (', '.join(names), *names):
+        if omap.get(cand):
+            owner[t['id']] = omap[cand]
+            print(f"mapped renamed team {t['id']} ({t.get('name')!r}) -> {omap[cand]} via owner name")
+            break
 # unmatched teams: resolve by elimination against the sheet's schedule for this week
 sched = {frozenset((m['owner'], m['opponent'])) for m in matchups if m['year'] == YEAR and m['week'] == week and m['opponent']}
 games = []
