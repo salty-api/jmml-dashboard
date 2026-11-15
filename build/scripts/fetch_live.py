@@ -76,7 +76,10 @@ for h, a in games:
     if pair not in sched: degrade(f"ESPN pairing {sorted(pair)} not in sheet schedule for week {week}")
     out.append({'a': owner[h['teamId']], 'b': owner[a['teamId']],
                 'a_pts': round(h.get('totalPointsLive', h.get('totalPoints', 0)), 2),
-                'b_pts': round(a.get('totalPointsLive', a.get('totalPoints', 0)), 2)})
+                'b_pts': round(a.get('totalPointsLive', a.get('totalPoints', 0)), 2),
+                # ESPN's live projection of each team's final score (None if ESPN omits it)
+                'a_proj': round(h['totalProjectedPointsLive'], 2) if h.get('totalProjectedPointsLive') is not None else None,
+                'b_proj': round(a['totalProjectedPointsLive'], 2) if a.get('totalProjectedPointsLive') is not None else None})
 res = {'year': YEAR, 'week': week, 'updated': datetime.now(ZoneInfo('America/Los_Angeles')).strftime('%Y-%m-%d %H:%M PT'), 'games': out}
 # Final scores for past weeks the sheet hasn't been filled in for: ESPN rolls to the next matchup
 # period Monday night, so carry ESPN's final scores so the recap and standings stay current.

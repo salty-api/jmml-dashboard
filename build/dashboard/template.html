@@ -1871,6 +1871,15 @@ function renderOdds(games, table) {
     <td class="num" style="font-weight:700">${label(res[o].pos.slice(0, PLAYOFF_TEAMS).reduce((a, c) => a + c, 0) / N * 100)}</td></tr>`).join('');
 }
 
+// Live win probability: ESPN's projected final scores as the mean gap; spread shrinks with the share of the game still to play.
+function liveWinProb(g, aIsFirst) {
+  const [pa, pb, ja, jb] = aIsFirst ? [g.a_pts, g.b_pts, g.a_proj, g.b_proj] : [g.b_pts, g.a_pts, g.b_proj, g.a_proj];
+  const rem = (pts, proj) => proj > 0 ? Math.min(1, Math.max(0, (proj - pts) / proj)) : 1;
+  const f = (rem(pa, ja) + rem(pb, jb)) / 2;
+  if (f < 0.005) return pa === pb ? 0.5 : (pa > pb ? 1 : 0);
+  return normCdf((ja - jb) / (LEAGUE_SD * Math.SQRT2 * Math.sqrt(f)));
+}
+
 function renderPreview(games, table, lastWeek) {
   const mu = seasonModel(games);
   const maxWeek = Math.max(...seasonRegular().map(m => m.week));
@@ -1879,11 +1888,14 @@ function renderPreview(games, table, lastWeek) {
   const live = LIVE && LIVE.year === SEASON_YEAR && LIVE.week === next ? LIVE : null;
   const liveOf = (a, b) => { const g = live && live.games.find(x => (x.a === a && x.b === b) || (x.a === b && x.b === a)); return g ? (g.a === a ? [g.a_pts, g.b_pts] : [g.b_pts, g.a_pts]) : null; };
   document.getElementById('preview-title').innerHTML = live
-    ? `Week ${next} &middot; In Progress <span class="live-badge">LIVE</span> <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; scores as of ${live.updated} &middot; win % is the pre-game scoring model</span>`
+    ? `Week ${next} &middot; In Progress <span class="live-badge">LIVE</span> <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; scores as of ${live.updated} &middot; win % updates with live scores and ESPN projections</span>`
     : `Week ${next} Preview <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; click a game for the full rivalry &middot; win % from a simple scoring model</span>`;
   const rec = o => table.find(t => t.owner === o);
   host.innerHTML = uniquePairs(seasonRegular().filter(m => m.week === next)).map(({ a, b }) => {
-    const pa = normCdf((mu[a] - mu[b]) / (LEAGUE_SD * Math.SQRT2)), pb = 1 - pa;
+    let pa = normCdf((mu[a] - mu[b]) / (LEAGUE_SD * Math.SQRT2));
+    const lg = live && live.games.find(x => (x.a === a && x.b === b) || (x.a === b && x.b === a));
+    if (lg && lg.a_proj != null && lg.b_proj != null) pa = liveWinProb(lg, lg.a === a);
+    const pb = 1 - pa;
     const h = PLAYED.filter(m => m.owner === a && m.opponent === b).sort((x, y) => gameOrder(x) - gameOrder(y));
     const wa = h.filter(g => g.result === 1).length, lm = h[h.length - 1];
     const side = (o, cls) => `<div class="pv-team ${cls}" style="color:${ownerColor(o)}">${o.split('/')[0]}<small>${rec(o).w}–${rec(o).l} · ${fmt1(rec(o).ppg)} PF/G</small></div>`;
