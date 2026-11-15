@@ -1903,9 +1903,9 @@ function renderPreview(games, table, lastWeek) {
     const side = (o, cls) => `<div class="pv-team ${cls}" style="color:${ownerColor(o)}">${o.split('/')[0]}<small>${rec(o).w}–${rec(o).l} · ${fmt1(rec(o).ppg)} PF/G</small></div>`;
     return `<div class="preview-card" onclick="openRivalry('${a}','${b}')">
       <div class="pv-teams">${side(a, '')}<span class="pv-vs">VS</span>${side(b, 'r')}</div>
-      ${(() => { const l = liveOf(a, b); return l ? `<div class="pv-live"><span class="${l[0] >= l[1] ? 'lead' : 'trail'}">${fmt1(l[0])}</span><span class="${l[1] > l[0] ? 'lead' : 'trail'}">${fmt1(l[1])}</span></div>` : ''; })()}
-      <div class="pv-prob"><span style="width:${pa * 100}%"></span><span style="width:${pb * 100}%"></span></div>
-      <div class="pv-prob-lbl"><span style="color:#4ade80">${Math.round(pa * 100)}%</span><span style="color:#f87171">${Math.round(pb * 100)}%</span></div>
+      ${(() => { const l = liveOf(a, b); return l ? `<div class="pv-live"><span class="${l[0] >= l[1] ? 'lead' : 'trail'}" style="color:${ownerColor(a)};${l[0] >= l[1] ? '' : 'opacity:.55'}">${fmt1(l[0])}</span><span class="${l[1] > l[0] ? 'lead' : 'trail'}" style="color:${ownerColor(b)};${l[1] > l[0] ? '' : 'opacity:.55'}">${fmt1(l[1])}</span></div>` : ''; })()}
+      <div class="pv-prob"><span style="width:${pa * 100}%;background:${ownerColor(a)}"></span><span style="width:${pb * 100}%;background:${ownerColor(b)}"></span></div>
+      <div class="pv-prob-lbl"><span style="color:${ownerColor(a)}">${Math.round(pa * 100)}%</span><span style="color:${ownerColor(b)}">${Math.round(pb * 100)}%</span></div>
       <div class="pv-h2h">${h.length ? `All-time: ${wa === h.length - wa ? 'tied' : (wa > h.length - wa ? a : b) + ' leads'} ${Math.max(wa, h.length - wa)}–${Math.min(wa, h.length - wa)}<br>Last: ${gk(lm.year, lm.week)}, ${lm.result === 1 ? a : b} won ${fmt1(Math.max(lm.score, lm.opp_score))}–${fmt1(Math.min(lm.score, lm.opp_score))}` : 'First-ever meeting'}</div>
     </div>`; }).join('');
 }
