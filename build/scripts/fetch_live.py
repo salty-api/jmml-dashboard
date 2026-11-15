@@ -4,7 +4,7 @@ Pull the in-progress week's live scores from ESPN (league 88024) -> data/process
   {year, week, updated, games: [{a, b, a_pts, b_pts, a_proj, b_proj}]}   (a/b are owner names)
 Rerun any time during the week, then rerun build_data.py.
 """
-import json, re, sys
+import json, re, sys, time
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from pathlib import Path
@@ -13,9 +13,29 @@ import requests
 ROOT = Path(__file__).parent.parent
 YEAR = 2026
 API = f"https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/{YEAR}/segments/0/leagues/88024"
+
+def degrade(msg):
+    """Soft failure: keep the last good live.json, flag the run so the workflow still publishes the sheet data and opens an issue."""
+    print(f"::warning title=Live scores degraded::{msg}")
+    (ROOT / ".live_degraded").write_text(msg)
+    sys.exit(0)
+
+
 norm = lambda s: re.sub(r'[^a-z0-9]', '', (s or '').lower())
 
-d = requests.get(API, params={"view": ["mMatchupScore", "mTeam"]}, timeout=60).json()
+try:
+    for attempt in range(4):
+        try:
+            r_ = requests.get(API, params={"view": ["mMatchupScore", "mTeam"]}, timeout=60)
+            r_.raise_for_status()
+            d = r_.json()
+            if d.get('teams') and d.get('schedule'): break
+            raise ValueError("empty ESPN payload")
+        except (requests.RequestException, ValueError) as e:
+            if attempt == 3: raise
+            time.sleep(5 * 2 ** attempt)
+except Exception as e:
+    degrade(f"ESPN fetch failed after retries: {e}")
 week = d['status']['currentMatchupPeriod']
 seasons = json.load(open(ROOT / "data/processed/seasons.json"))
 matchups = json.load(open(ROOT / "data/processed/matchups.json"))
@@ -49,11 +69,11 @@ if len(missing) == 1:   # one team renamed on ESPN: it is the one owner left ove
     if len(left) == 1:
         owner[missing[0]] = left.pop(); missing = []
 if missing:
-    sys.exit(f"could not map ESPN teams to owners: {missing}")
+    degrade(f"could not map ESPN teams to owners: {missing}")
 out = []
 for h, a in games:
     pair = frozenset((owner[h['teamId']], owner[a['teamId']]))
-    if pair not in sched: sys.exit(f"ESPN pairing {sorted(pair)} not in sheet schedule for week {week}")
+    if pair not in sched: degrade(f"ESPN pairing {sorted(pair)} not in sheet schedule for week {week}")
     out.append({'a': owner[h['teamId']], 'b': owner[a['teamId']],
                 'a_pts': round(h.get('totalPointsLive', h.get('totalPoints', 0)), 2),
                 'b_pts': round(a.get('totalPointsLive', a.get('totalPoints', 0)), 2)})

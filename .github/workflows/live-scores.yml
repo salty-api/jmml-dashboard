@@ -73,6 +73,7 @@ jobs:
           python scripts/fetch_live.py
           python scripts/fetch_weekly_players.py --current
           python scripts/build_data.py
+          python scripts/validate_build.py
           cp dashboard/index.html ../index.html
           cp dashboard/data.json ../data.json
           if [ "${{ steps.gate.outputs.cards }}" = "1" ]; then
@@ -86,12 +87,23 @@ jobs:
           git commit -m "Live scores $(TZ=America/Los_Angeles date '+%Y-%m-%d %H:%M')"
           git push
 
-      - name: Open an issue if the refresh failed
-        if: failure()
+      - name: Open an issue if the refresh failed or degraded
+        if: failure() || (steps.gate.outputs.run == '1' && hashFiles('build/.live_degraded') != '')
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          why="$(cat build/.live_degraded 2>/dev/null || echo 'run failed')"
           open=$(gh issue list --state open --search "Live scores refresh failing in:title" --json number -q '.[0].number')
-          if [ -n "$open" ]; then gh issue comment "$open" --body "Failed again: $url"
-          else gh issue create --title "Live scores refresh failing" --body "A scheduled run failed: $url"; fi
+          if [ -n "$open" ]; then gh issue comment "$open" --body "Failed again ($why): $url"
+          else gh issue create --title "Live scores refresh failing" --body "A scheduled run failed or degraded ($why): $url"; fi
+
+      - name: Close the failure issue after a clean run
+        if: success() && steps.gate.outputs.run == '1' && hashFiles('build/.live_degraded') == ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          for n in $(gh issue list --state open --search "Live scores refresh failing in:title" --json number -q '.[].number'); do
+            gh issue close "$n" --comment "Recovered: clean run $url"
+          done
