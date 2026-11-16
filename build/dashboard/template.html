@@ -44,6 +44,8 @@ h1 { font-size: 20px; font-weight: 600; color: #f8fafc; margin-bottom: 4px; }
 .data-table th.sorted .sort-arrow { opacity: 1; }
 .data-table td { padding: 6px 10px; border-bottom: 1px solid #0f1420; color: #cbd5e1; vertical-align: middle; font-size: 12px; }
 .data-table tr:hover td { background: #111827; }
+#standings-2025 td, #standings-2025 th { white-space: nowrap; padding-left: 7px; padding-right: 7px; }
+#standings-2025 .team-name { display: inline-block; max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: middle; }
 .data-table tr.retired td { color: #334155; }
 .data-table tr { transition: opacity .18s; cursor: default; }
 .data-table tr[data-owner] { cursor: pointer; }
@@ -2104,7 +2106,7 @@ function renderSeasonStandings(table, games, lastWeek) {
   document.getElementById('standings-body').innerHTML = table.map((r, i) => `<tr data-owner="${r.owner}" onclick="setActiveOwner('${r.owner}')">
       <td class="num" style="color:#334155">${i + 1}</td>
       <td><span class="logo-cell">${logo(r.owner, SEASON_YEAR, 24)}${r.owner}</span></td>
-      <td style="color:#94a3b8;font-size:11px">${r.team}</td>
+      <td style="color:#94a3b8;font-size:11px"><span class="team-name" title="${String(r.team).replace(/"/g, '&quot;')}">${r.team}</span></td>
       <td class="num" style="color:#4ade80">${r.w}</td>
       <td class="num" style="color:#f87171">${r.l}</td>
       <td class="num">${(r.w / ((r.w + r.l) || 1) * 100).toFixed(1)}%</td>
