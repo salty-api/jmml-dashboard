@@ -158,10 +158,13 @@ table.hm tr.dimmed { opacity: 0.15; }
 .owner-card.sm { padding: 6px 10px; } .owner-card.sm .owner-card-name { font-size: 11.5px; }
 .owner-card.retired .owner-card-name { color: #64748b; }
 .rec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr)); gap: 18px; }
-.rec-card { background: #0d111a; border: 1px solid #1a2030; border-radius: 8px; padding: 12px 14px 6px; }
+.rec-card { background: #0d111a; border: 1px solid #1a2030; border-radius: 8px; padding: 10px 12px 4px; }
+.rec-card .data-table td { border-bottom: none; line-height: 1.25; }
+.rec-card .data-table tr + tr td { border-top: 1px solid #0f1420; }
 .rec-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #94a3b8; margin-bottom: 6px; }
-.rec-card .data-table td { font-size: 11.5px; padding: 5px 8px; }
-.rec-team { display: block; font-size: 11px; font-weight: 500; font-style: italic; color: #94a3b8; }
+.rec-card .data-table td { font-size: 11.5px; padding: 4px 6px; }
+.rec-team { font-size: 11px; font-weight: 500; font-style: italic; color: #94a3b8; }
+.rec-team::before { content: ' \00b7 '; font-style: normal; color: #475569; }
 .ot-owner { color: #fcd34d; }
 .ot-owner:empty { display: none; }
 .ot-owner::after { content: ' \00b7'; color: #475569; margin: 0 0.6em 0 0.2em; }
@@ -504,7 +507,7 @@ tr.rm-sep td { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em;
 <!-- ══════════ TAB: RECORDS ══════════ -->
 <div class="tab-panel" id="tab-records">
   <h1>Records</h1>
-  <p class="subtitle">Single-game bests and worsts, streaks, all-time luck and playoff performance &middot; <span style="color:#fcd34d">gold rows</span> are from the current season</p>
+  <p class="subtitle">Single-game bests and worsts, streaks, all-time luck and playoff performance &middot; <span style="color:#fcd34d">gold rows</span> are from the current season <span class="toggle-pill" id="rec-top-toggle" onclick="toggleRecTop()"><span class="pill-dot"></span>Top 10</span></p>
   <div class="section"><div class="section-title">Single-Game Records <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; all owners, all games</span></div><div class="rec-grid" id="rec-games"></div></div>
   <div class="section"><div class="section-title">Streaks <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; consecutive games, carrying across seasons</span></div><div class="rec-grid" id="rec-streaks"></div></div>
   <div class="section">
@@ -1605,6 +1608,12 @@ const gk = (y, w) => `${y} Wk ${w}`;
 // ══════════════════════════════════════════════════════
 // RECORDS TAB
 // ══════════════════════════════════════════════════════
+let REC_N = 5;
+function toggleRecTop() {
+  REC_N = REC_N === 5 ? 10 : 5;
+  document.getElementById('rec-top-toggle').classList.toggle('on', REC_N === 10);
+  renderRecords();
+}
 function recCard(title, rows) {
   return `<div class="rec-card"><div class="rec-title">${title}</div><table class="data-table"><tbody>${
     rows.map((r, i) => `<tr class="${r.cur ? 'rec-new' : ''}"${r.click ? ` onclick="${r.click}" style="cursor:pointer"` : ''}><td class="num" style="color:#334155;width:18px">${i + 1}</td><td>${r.main}${r.cur ? `<span class="rec-pill">${SEASON_YEAR}</span>` : ''}<div class="rec-sub">${r.sub}</div></td><td class="num rec-val">${r.val}</td></tr>`).join('')
@@ -1657,7 +1666,7 @@ function renderRecords() {
     return { main: `${me}${retiredTag(me)}${teamTag(me, g.year)}`,
       click: `openGameModal(${g.year},${g.week},'${g.w}','${g.l}','${who}','${title}')`,
       sub: `${gk(g.year, g.week)} · ${who === 'w' ? 'beat' : 'lost to'} ${other}${teamOf(other, g.year) ? ` (${teamOf(other, g.year)})` : ''} · ${fmt1(g.ws)}–${fmt1(g.ls)}`, val, cur: g.year === SEASON_YEAR }; };
-  const top = (arr, key, dir) => [...arr].sort((a, b) => dir * (a[key] - b[key])).slice(0, 5);
+  const top = (arr, key, dir) => [...arr].sort((a, b) => dir * (a[key] - b[key])).slice(0, REC_N);
   document.getElementById('rec-games').innerHTML = [
     recCard('Highest score',        top(G, 'ws', -1).map(g => game(g, 'w', fmt1(g.ws), 'Highest score'))),
     recCard('Lowest score',         top(G, 'ls',  1).map(g => game(g, 'l', fmt1(g.ls), 'Lowest score'))),
@@ -1669,11 +1678,11 @@ function renderRecords() {
 
   // Streaks
   const st = streakRecords();
-  const sRows = arr => arr.sort((a, b) => b.len - a.len || gameOrder(b.end) - gameOrder(a.end)).slice(0, 5).map(r => ({
+  const sRows = arr => arr.sort((a, b) => b.len - a.len || gameOrder(b.end) - gameOrder(a.end)).slice(0, REC_N).map(r => ({
     main: r.owner + retiredTag(r.owner), sub: `${gk(r.start.year, r.start.week)} – ${gk(r.end.year, r.end.week)}`, val: r.len, cur: r.end.year === SEASON_YEAR }));
   const active = Object.values(
     [...st.W, ...st.L].reduce((acc, r) => { const o = r.owner; if (!acc[o] || gameOrder(r.end) > gameOrder(acc[o].end)) acc[o] = { ...r, type: st.W.includes(r) ? 'W' : 'L' }; return acc; }, {})
-  ).filter(r => isCurrent(r.owner)).sort((a, b) => b.len - a.len).slice(0, 5);
+  ).filter(r => isCurrent(r.owner)).sort((a, b) => b.len - a.len).slice(0, REC_N);
   document.getElementById('rec-streaks').innerHTML = [
     recCard('Longest winning streaks', sRows(st.W)),
     recCard('Longest losing streaks',  sRows(st.L)),
@@ -1704,7 +1713,7 @@ function renderRecords() {
       <td class="num">${o.w}</td><td class="num">${fmt1(o.exp)}</td><td class="num ${cls}">${sgn(o.luck)}</td>
       <td class="num ${cls}">${sgn(o.luck / o.seasons, 2)}</td></tr>`; }).join('');
   const full = LR.filter(r => r.g >= 13);
-  const lRows = arr => arr.slice(0, 5).map(r => ({ main: r.owner + retiredTag(r.owner) + teamTag(r.owner, r.year), sub: `${r.year} · ${r.w} wins vs ${fmt1(r.exp)} expected`, val: sgn(r.luck), cur: r.year === SEASON_YEAR }));
+  const lRows = arr => arr.slice(0, REC_N).map(r => ({ main: r.owner + retiredTag(r.owner) + teamTag(r.owner, r.year), sub: `${r.year} · ${r.w} wins vs ${fmt1(r.exp)} expected`, val: sgn(r.luck), cur: r.year === SEASON_YEAR }));
   document.getElementById('rec-luck').innerHTML =
     recCard('Luckiest seasons',   lRows([...full].sort((a, b) => b.luck - a.luck))) +
     recCard('Unluckiest seasons', lRows([...full].sort((a, b) => a.luck - b.luck)));
