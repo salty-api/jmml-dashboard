@@ -1,15 +1,15 @@
 {
   "year": 2026,
   "week": 10,
-  "updated": "2026-11-15 19:34 PT",
+  "updated": "2026-11-15 19:36 PT",
   "games": [
     {
       "a": "Pierson",
       "b": "Buser",
       "a_pts": 133.62,
       "b_pts": 67.44,
-      "a_proj": 137.32,
-      "b_proj": 70.66
+      "a_proj": 136.96,
+      "b_proj": 70.35
     },
     {
       "a": "Salty",
@@ -22,25 +22,25 @@
     {
       "a": "Riley",
       "b": "KnardDawg",
-      "a_pts": 104.3,
+      "a_pts": 105.4,
       "b_pts": 78.76,
-      "a_proj": 106.71,
-      "b_proj": 88.55
+      "a_proj": 107.58,
+      "b_proj": 88.3
     },
     {
       "a": "Cock",
       "b": "Hudspeath",
       "a_pts": 86.52,
-      "b_pts": 98.5,
+      "b_pts": 98.74,
       "a_proj": 95.54,
-      "b_proj": 121.44
+      "b_proj": 121.17
     },
     {
       "a": "Shep",
       "b": "Rooney/Jackson",
       "a_pts": 113.72,
       "b_pts": 105.44,
-      "a_proj": 117.74,
+      "a_proj": 117.35,
       "b_proj": 117.31
     },
     {
@@ -48,7 +48,7 @@
       "b": "Ewert",
       "a_pts": 107.72,
       "b_pts": 107.88,
-      "a_proj": 117.76,
+      "a_proj": 116.8,
       "b_proj": 107.88
     }
   ],
