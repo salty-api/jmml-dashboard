@@ -563,6 +563,7 @@ tr.rm-sep td { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em;
           <th class="num">Win %</th>
           <th class="num">PF</th><th class="num">PA</th><th class="num">PF/G</th>
           <th>Streak</th>
+          <th class="num" id="st-proj-h" title="Projected result of this week's game, live-updated">Wk</th>
         </tr></thead>
         <tbody id="standings-body"></tbody>
       </table>
@@ -1884,6 +1885,25 @@ function liveWinProb(g, aIsFirst) {
   return normCdf((ja - jb) / (LIVE_SD_MULT * LEAGUE_SD * Math.SQRT2 * Math.sqrt(f)));
 }
 
+// Win probability for one matchup: pre-game scoring model, replaced by the live model once ESPN projections exist.
+function pairProb(mu, a, b, live) {
+  let pa = normCdf((mu[a] - mu[b]) / (LEAGUE_SD * Math.SQRT2));
+  const lg = live && live.games.find(x => (x.a === a && x.b === b) || (x.a === b && x.b === a));
+  if (lg && lg.a_proj != null && lg.b_proj != null) pa = liveWinProb(lg, lg.a === a);
+  return pa;
+}
+// {owner: {p, opp}} for the upcoming / in-progress week; empty once the regular season is over.
+function weekProbs(games, lastWeek) {
+  const next = lastWeek + 1, out = {};
+  if (next > Math.max(...seasonRegular().map(m => m.week))) return { next, probs: out };
+  const mu = seasonModel(games), live = LIVE && LIVE.year === SEASON_YEAR && LIVE.week === next ? LIVE : null;
+  uniquePairs(seasonRegular().filter(m => m.week === next)).forEach(({ a, b }) => {
+    if (mu[a] == null || mu[b] == null) return;
+    const pa = pairProb(mu, a, b, live); out[a] = { p: pa, opp: b }; out[b] = { p: 1 - pa, opp: a };
+  });
+  return { next, probs: out };
+}
+
 function renderPreview(games, table, lastWeek) {
   const mu = seasonModel(games);
   const maxWeek = Math.max(...seasonRegular().map(m => m.week));
@@ -1896,10 +1916,7 @@ function renderPreview(games, table, lastWeek) {
     : `Week ${next} Preview <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; click a game for the full rivalry &middot; win % from a simple scoring model</span>`;
   const rec = o => table.find(t => t.owner === o);
   host.innerHTML = uniquePairs(seasonRegular().filter(m => m.week === next)).map(({ a, b }) => {
-    let pa = normCdf((mu[a] - mu[b]) / (LEAGUE_SD * Math.SQRT2));
-    const lg = live && live.games.find(x => (x.a === a && x.b === b) || (x.a === b && x.b === a));
-    if (lg && lg.a_proj != null && lg.b_proj != null) pa = liveWinProb(lg, lg.a === a);
-    const pb = 1 - pa;
+    const pa = pairProb(mu, a, b, live), pb = 1 - pa;
     const h = PLAYED.filter(m => m.owner === a && m.opponent === b).sort((x, y) => gameOrder(x) - gameOrder(y));
     const wa = h.filter(g => g.result === 1).length, lm = h[h.length - 1];
     const side = (o, cls) => `<div class="pv-team ${cls}" style="color:${ownerColor(o)}">${o.split('/')[0]}<small>${rec(o).w}–${rec(o).l} · ${fmt1(rec(o).ppg)} PF/G</small></div>`;
@@ -2103,6 +2120,11 @@ function streakInfo(owner, games) {
 }
 function renderSeasonStandings(table, games, lastWeek) {
   const prev = seasonTable(games.filter(m => m.week < lastWeek)).map(r => r.owner);
+  const wp = weekProbs(games, lastWeek);
+  document.getElementById('st-proj-h').textContent = Object.keys(wp.probs).length ? `Wk ${wp.next}` : 'Wk';
+  const projCell = o => { const x = wp.probs[o]; if (!x) return '';
+    const win = x.p >= 0.5, q = win ? x.p : 1 - x.p, pct = q >= 1 ? 100 : Math.min(99, Math.max(1, Math.round(q * 100)));
+    return `<span class="${win ? 'streak-up' : 'streak-down'}" style="font-weight:700" title="vs ${x.opp}: ${Math.round(x.p * 100)}% to win">${win ? 'W' : 'L'} ${pct}%</span>`; };
   document.getElementById('standings-body').innerHTML = table.map((r, i) => `<tr data-owner="${r.owner}" onclick="setActiveOwner('${r.owner}')">
       <td class="num" style="color:#334155">${i + 1}</td>
       <td><span class="logo-cell">${logo(r.owner, SEASON_YEAR, 24)}${r.owner}</span></td>
@@ -2119,6 +2141,7 @@ function renderSeasonStandings(table, games, lastWeek) {
         const arrow = d > 0 ? `<span class="streak-up">\u25b2${d}</span>` : d < 0 ? `<span class="streak-down">\u25bc${-d}</span>` : '<span class="streak-flat">\u2013</span>';
         return `<span class="${st.win ? 'streak-up' : 'streak-down'}" style="font-weight:700">${st.label}</span> ${arrow}`;
       })()}</td>
+      <td class="num" style="white-space:nowrap">${projCell(r.owner)}</td>
     </tr>`).join('');
 }
 
