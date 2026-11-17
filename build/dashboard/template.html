@@ -226,6 +226,7 @@ table.hm tr.dimmed { opacity: 0.15; }
 .sb-team { display: flex; align-items: center; gap: 7px; }
 .sb-team.right { justify-content: flex-end; text-align: right; }
 .sb-team.win { color: #f8fafc; }
+.sb-owner { display: block; font-family: system-ui, sans-serif; font-size: 9.5px; font-weight: 500; letter-spacing: 0; text-transform: none; color: #64748b; margin-top: 2px; }
 .sb-score { font-family: 'Courier New', monospace; font-weight: 700; font-size: 20px; min-width: 74px; text-align: center; background: #120a02; border: 1px solid #2a1a08; border-radius: 3px; padding: 2px 6px; color: #7c4a14; font-variant-numeric: tabular-nums; letter-spacing: 0.06em; }
 .sb-score.win { color: #fbbf24; text-shadow: 0 0 8px #f59e0b, 0 0 2px #fde68a; }
 .playoff-badge { font-size: 9px; background: #3b2800; color: #fcd34d; padding: 1px 5px; border-radius: 3px; font-weight: 700; }
@@ -1974,7 +1975,7 @@ function renderPreview(games, table, lastWeek) {
     const pa = pairProb(mu, a, b, live), pb = 1 - pa;
     const h = PLAYED.filter(m => m.owner === a && m.opponent === b).sort((x, y) => gameOrder(x) - gameOrder(y));
     const wa = h.filter(g => g.result === 1).length, lm = h[h.length - 1];
-    const side = (o, cls) => `<div class="pv-team ${cls}" style="color:${ownerColor(o)}">${o.split('/')[0]}<small>${rec(o).w}–${rec(o).l} · ${fmt1(rec(o).ppg)} PF/G</small></div>`;
+    const side = (o, cls) => `<div class="pv-team ${cls}" style="color:${ownerColor(o, SEASON_YEAR)}">${teamOf(o, SEASON_YEAR) || o.split('/')[0]}<small>${o.split('/')[0]} · ${rec(o).w}–${rec(o).l} · ${fmt1(rec(o).ppg)} ppg</small></div>`;
     return `<div class="preview-card" onclick="openRivalry('${a}','${b}')">
       <div class="pv-teams">${side(a, '')}<span class="pv-vs">VS</span>${side(b, 'r')}</div>
       ${(() => { const l = liveOf(a, b); return l ? `<div class="pv-live"><span class="${l[0] >= l[1] ? 'lead' : 'trail'}" style="color:${ownerColor(a)};${l[0] >= l[1] ? '' : 'opacity:.55'}">${fmt1(l[0])}</span><span class="${l[1] > l[0] ? 'lead' : 'trail'}" style="color:${ownerColor(b)};${l[1] > l[0] ? '' : 'opacity:.55'}">${fmt1(l[1])}</span></div>` : ''; })()}
@@ -2398,10 +2399,10 @@ function renderScoreboards(matchups, elId) {
       const b = wm.find(x => x.owner === a.opponent && x.opponent === a.owner);
       const aWin = a.result === 1;
       rows.push(`<div class="matchup-game" data-owners="${a.owner}||${a.opponent}">
-        <span class="sb-team right ${aWin ? 'win' : ''}"><span>${a.owner}</span>${logo(a.owner, a.year, 24)}</span>
+        <span class="sb-team right ${aWin ? 'win' : ''}"><span>${teamOf(a.owner, a.year) || a.owner}<small class="sb-owner">${a.owner}</small></span>${logo(a.owner, a.year, 24)}</span>
         <span class="sb-score ${aWin ? 'win' : ''}">${fmt1(a.score)}</span>
         <span class="sb-score ${!aWin ? 'win' : ''}">${fmt1(b?.score ?? a.opp_score)}</span>
-        <span class="sb-team ${!aWin ? 'win' : ''}">${logo(a.opponent, a.year, 24)}<span>${a.opponent}</span></span>
+        <span class="sb-team ${!aWin ? 'win' : ''}">${logo(a.opponent, a.year, 24)}<span>${teamOf(a.opponent, a.year) || a.opponent}<small class="sb-owner">${a.opponent}</small></span></span>
       </div>`);
     }
     return `<div class="scoreboard">
