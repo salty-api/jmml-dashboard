@@ -336,6 +336,8 @@ def main():
         html = html.replace("__H2H__",      json.dumps(h2h,      separators=(",", ":")))
         html = html.replace("__META__",     json.dumps(meta,     separators=(",", ":")))
         html = html.replace("__PLAYERS__",  json.dumps(load_players(), separators=(",", ":")))
+        lc = OUT_DIR / "logo_colors.json"
+        html = html.replace("__LOGO_COLORS__", lc.read_text().replace("\n", "") if lc.exists() else "{}")
         html = html.replace("__LOGOS__",    json.dumps(build_logos(meta["owners"]), separators=(",", ":")))
         live_f = OUT_DIR / "live.json"
         html = html.replace("__LIVE__",     json.dumps(json.load(open(live_f)) if live_f.exists() else None, separators=(",", ":")))

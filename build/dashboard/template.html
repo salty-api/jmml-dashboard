@@ -720,6 +720,7 @@ function weeklyLineup(year, week, owner) {
 }
 const PLAYERS  = __PLAYERS__;   // {cols, rows} one row per player per season
 const LOGOS    = __LOGOS__;   // 'year|owner' -> image path
+const LOGO_COLORS = __LOGO_COLORS__;   // 'year|owner' -> key color from that year's logo (build/scripts/extract_logo_colors.py)
 
 // ══════════════════════════════════════════════════════
 // CONFIG
@@ -740,7 +741,13 @@ const OWNER_COLORS = {
 };
 const RETIRED_COLOR = '#334155';
 
-function ownerColor(name) { return OWNER_COLORS[name] || RETIRED_COLOR; }
+// Key color from the team's logo. With a year: that season's logo; without: the owner's most recent logo.
+// Falls back to the owner's palette color when a logo has no vivid color.
+const _latestLogoColor = {};
+Object.keys(LOGO_COLORS).sort().forEach(k => { _latestLogoColor[k.split('|')[1]] = LOGO_COLORS[k]; });
+function ownerColor(name, year) {
+  return (year && LOGO_COLORS[year + '|' + name]) || _latestLogoColor[name] || OWNER_COLORS[name] || RETIRED_COLOR;
+}
 const GOLD = '#fcd34d';
 const GREYS = ['#64748b','#94a3b8','#475569','#7c8aa0','#a8b3c4','#5b6678'];
 function greyFor(name) { return GREYS[Math.max(0, META.owners.indexOf(name)) % GREYS.length]; }
@@ -1117,10 +1124,10 @@ function renderHistScatter(seasons, yr) {
     : 'X = points per game · Y = points against per game · lines at season averages';
 
   const datasets = seasons.filter(s => useX(s) && useY(s)).map(s => ({
-    label: `${s.owner} ${s.season}`, ownerKey: s.owner,
+    label: `${s.owner} ${s.season}`, ownerKey: s.owner, season: s.season,
     data: [{ x: useX(s), y: useY(s), season: s.season, owner: s.owner, team: s.team_name, wins: s.wins, losses: s.losses }],
-    backgroundColor: ownerColor(s.owner) + 'bb',
-    borderColor: ownerColor(s.owner),
+    backgroundColor: ownerColor(s.owner, s.season) + 'bb',
+    borderColor: ownerColor(s.owner, s.season),
     borderWidth: 1.5,
     _baseAlphas: { bg: 'bb', border: 'ff' },
   }));
@@ -1257,7 +1264,7 @@ function miniRadar(s, size = 76) {
   const c = size / 2, R = c - 14, MAX = 1.6, n = RADAR_POS.length;
   const pt = (i, f) => { const a = -Math.PI / 2 + i * 2 * Math.PI / n; return [c + Math.cos(a) * R * f, c + Math.sin(a) * R * f]; };
   const poly = f => RADAR_POS.map((_, i) => pt(i, f(i)).join(',')).join(' ');
-  const col = ownerColor(s.owner);
+  const col = ownerColor(s.owner, s.season);
   const spokes = RADAR_POS.map((_, i) => { const [x, y] = pt(i, 1); return `<line x1="${c}" y1="${c}" x2="${x}" y2="${y}" stroke="#1e293b"/>`; }).join('');
   const labels = RADAR_POS.map((p, i) => { const [x, y] = pt(i, 1 + 9 / R); return `<text x="${x}" y="${y}" fill="#475569" font-size="7" text-anchor="middle" dominant-baseline="central">${p === 'D/ST' ? 'DST' : p}</text>`; }).join('');
   const tip = RADAR_POS.map(p => `${p} ${v[p] == null ? '-' : v[p].toFixed(2)}x`).join(' | ');
@@ -1308,7 +1315,7 @@ function seasonCardHtml(s) {
   const inProgress = s.finish == null;
   const badge = inProgress ? 'badge-reg' : isChamp ? 'badge-champ' : isPlayoff ? 'badge-playoff' : 'badge-reg';
   const badgeText = inProgress ? 'In progress' : isChamp ? 'Champion' : isPlayoff ? 'Playoffs' : `#${finish}`;
-  const color = ownerColor(s.owner);
+  const color = ownerColor(s.owner, s.season);
   return `<div class="season-card" data-owner="${s.owner}" onclick="setActiveOwner('${s.owner}')" style="border-top: 2px solid ${color}40;cursor:pointer">
       <div class="card-head">${logo(s.owner, s.season, 40)}<div><div class="card-team">${s.team_name || '\u2014'}</div>
       <div class="card-owner" style="color:${color}">${s.owner} \u00b7 ${s.season}</div></div></div>
@@ -1342,7 +1349,7 @@ function renderBadLuck() {
     const gap = s.reg_season_finish - s.reg_season_pts_rank;
     return `<tr data-owner="${s.owner}" onclick="setActiveOwner('${s.owner}')">
       <td>${s.season}</td>
-      <td><span class="owner-dot" style="background:${ownerColor(s.owner)}"></span>${s.owner}</td>
+      <td><span class="owner-dot" style="background:${ownerColor(s.owner, s.season)}"></span>${s.owner}</td>
       <td style="color:#94a3b8">${s.team_name}</td>
       <td class="num">#${s.reg_season_pts_rank}</td>
       <td class="num">#${s.reg_season_finish}</td>
@@ -1620,7 +1627,7 @@ function logo(owner, year, size = 28) {
   const src = logoPath(owner, year);
   if (src) return `<img class="logo" src="${src}" alt="" loading="lazy" style="--s:${size}px" onerror="this.style.visibility='hidden'">`;
   const ini = owner.split('/')[0].slice(0, 2);
-  return `<span class="logo logo-fb" style="--s:${size}px;background:${ownerColor(owner)}">${ini}</span>`;
+  return `<span class="logo logo-fb" style="--s:${size}px;background:${ownerColor(owner, year)}">${ini}</span>`;
 }
 
 // ══════════════════════════════════════════════════════
@@ -2522,8 +2529,8 @@ function applyHighlight() {
     chart.data.datasets.forEach(ds => {
       const isActive = !ao || ds.ownerKey === ao;
       const base = ds._baseAlphas || { bg: 'cc', border: 'ff' };
-      ds.backgroundColor = ownerColor(ds.ownerKey) + (isActive ? base.bg : '18');
-      ds.borderColor     = ownerColor(ds.ownerKey) + (isActive ? 'ff' : '22');
+      ds.backgroundColor = ownerColor(ds.ownerKey, ds.season) + (isActive ? base.bg : '18');
+      ds.borderColor     = ownerColor(ds.ownerKey, ds.season) + (isActive ? 'ff' : '22');
     });
     chart.update('none');
   });
