@@ -118,6 +118,8 @@ h1 { font-size: 20px; font-weight: 600; color: #f8fafc; margin-bottom: 4px; }
 .card-pts { font-size: 11px; color: #64748b; margin-bottom: 8px; }
 .card-pts span { color: #94a3b8; }
 .card-players { font-size: 10.5px; color: #334155; line-height: 1.7; }
+.card-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 6px; }
+.mini-radar { flex: none; margin: 0 -4px -8px 0; }
 .card-players strong { color: #475569; }
 
 /* ── FILTERS ── */
@@ -1226,6 +1228,44 @@ function renderScoreRange(seasons, yr, activeOwners) {
   );
 }
 
+const RADAR_POS = ['QB', 'RB', 'WR', 'TE', 'D/ST', 'K'];
+let _posIndex = null;
+// {season: {owner: {pos: starter pts / league avg for that season+pos}}}; starters = any non-Bench/IR slot
+function posIndex() {
+  if (_posIndex) return _posIndex;
+  const ix = Object.fromEntries(PLAYERS.cols.map((c, i) => [c, i]));
+  const raw = {};
+  PLAYERS.rows.forEach(r => {
+    const slot = r[ix.lineup_slot], pos = r[ix.position], o = r[ix.final_owner];
+    if (!o || !slot || slot === 'Bench' || slot === 'IR' || !RADAR_POS.includes(pos)) return;
+    const t = ((raw[r[ix.season]] ||= {})[o] ||= {});
+    t[pos] = (t[pos] || 0) + (r[ix.season_points] || 0);
+  });
+  _posIndex = {};
+  for (const [yr, owners] of Object.entries(raw)) {
+    const names = Object.keys(owners), avg = {};
+    RADAR_POS.forEach(p => avg[p] = names.reduce((a, o) => a + (owners[o][p] || 0), 0) / names.length);
+    _posIndex[yr] = {};
+    names.forEach(o => { _posIndex[yr][o] = {}; RADAR_POS.forEach(p => { if (avg[p] > 0) _posIndex[yr][o][p] = (owners[o][p] || 0) / avg[p]; }); });
+  }
+  return _posIndex;
+}
+// Tiny SVG radar for one season card: axes QB RB WR TE D/ST K, dashed ring = league avg (1.0), scale 0..1.6
+function miniRadar(s, size = 76) {
+  const v = (posIndex()[s.season] || {})[s.owner];
+  if (!v) return '';
+  const c = size / 2, R = c - 14, MAX = 1.6, n = RADAR_POS.length;
+  const pt = (i, f) => { const a = -Math.PI / 2 + i * 2 * Math.PI / n; return [c + Math.cos(a) * R * f, c + Math.sin(a) * R * f]; };
+  const poly = f => RADAR_POS.map((_, i) => pt(i, f(i)).join(',')).join(' ');
+  const col = ownerColor(s.owner);
+  const spokes = RADAR_POS.map((_, i) => { const [x, y] = pt(i, 1); return `<line x1="${c}" y1="${c}" x2="${x}" y2="${y}" stroke="#1e293b"/>`; }).join('');
+  const labels = RADAR_POS.map((p, i) => { const [x, y] = pt(i, 1 + 9 / R); return `<text x="${x}" y="${y}" fill="#475569" font-size="7" text-anchor="middle" dominant-baseline="central">${p === 'D/ST' ? 'DST' : p}</text>`; }).join('');
+  const tip = RADAR_POS.map(p => `${p} ${v[p] == null ? '-' : v[p].toFixed(2)}x`).join(' | ');
+  return `<svg class="mini-radar" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><title>Starter points vs league avg: ${tip}</title>
+    ${spokes}<polygon points="${poly(() => 1 / MAX)}" fill="none" stroke="#334155" stroke-dasharray="2 2"/>
+    <polygon points="${poly(i => Math.min(MAX, v[RADAR_POS[i]] || 0) / MAX)}" fill="${col}40" stroke="${col}" stroke-width="1.5" stroke-linejoin="round"/>${labels}</svg>`;
+}
+
 let cardGroup = 'year', lastCardSeasons = [];
 function toggleCardGroup() {
   cardGroup = cardGroup === 'year' ? 'owner' : 'year';
@@ -1275,7 +1315,7 @@ function seasonCardHtml(s) {
       <div class="card-wl">${s.wins??'\u2014'}\u2013${s.losses??'\u2014'}</div>
       <div class="card-pts">PF <span>${fmt1(s.points_for)}</span> &nbsp;\u00b7&nbsp; PA <span>${fmt1(s.points_against)}</span></div>
       <div style="margin-bottom:8px"><span class="badge ${badge}">${badgeText}</span>${s.reg_season_finish === 1 ? ' <span class="badge badge-champ" title="First place, regular season">#1 Reg Season</span>' : ''}${s.reg_season_pts_rank === 1 ? ' <span class="badge badge-playoff" title="Most points scored, regular season">Most Pts</span>' : ''}</div>
-      <div class="card-players">${lineupHtml(s)}</div>
+      <div class="card-bottom"><div class="card-players">${lineupHtml(s)}</div>${miniRadar(s)}</div>
     </div>`;
 }
 function renderSeasonCards(seasons) {
