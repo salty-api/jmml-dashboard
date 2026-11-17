@@ -586,7 +586,7 @@ tr.rm-sep td { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em;
   <div class="section">
     <div class="section-title">Playoff Odds <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; 10,000 simulated seasons &middot; top 6 make the playoffs &middot; ranked by wins, then points for</span></div>
     <table class="data-table" id="odds-table">
-      <thead><tr><th>Owner</th><th class="num">Record</th><th>Playoff %</th><th>#1 Seed %</th><th class="num">Proj. Wins</th><th class="num">Range (10-90%)</th></tr></thead>
+      <thead><tr><th>Owner</th><th class="num">Record</th><th>Playoff %</th><th>#1 Seed %</th><th>Top Pts %</th><th class="num">Proj. Wins</th><th class="num">Range (10-90%)</th></tr></thead>
       <tbody id="odds-body"></tbody>
     </table>
     <p style="font-size:10px;color:#334155;margin-top:6px">Each team's weekly score is drawn around its season average (pulled toward the league average early in the year) with the league's historical week-to-week spread. A simple model, not a forecast.</p>
@@ -1896,7 +1896,7 @@ function renderOdds(games, table) {
   const remaining = uniquePairs(seasonRegular().filter(m => !(m.score > 0))).filter(g => mu[g.a] != null && mu[g.b] != null);
   const N = 10000, owners = table.map(r => r.owner);
   const base = Object.fromEntries(table.map(r => [r.owner, { w: r.w, pf: r.pf }]));
-  const res = Object.fromEntries(owners.map(o => [o, { po: 0, s1: 0, wsum: 0, wins: [], pos: owners.map(() => 0) }]));
+  const res = Object.fromEntries(owners.map(o => [o, { po: 0, s1: 0, tp: 0, wsum: 0, wins: [], pos: owners.map(() => 0) }]));
   for (let n = 0; n < N; n++) {
     const cur = {}; owners.forEach(o => cur[o] = { w: base[o].w, pf: base[o].pf });
     for (const g of remaining) {
@@ -1904,19 +1904,21 @@ function renderOdds(games, table) {
       cur[g.a].pf += sa; cur[g.b].pf += sb; (sa > sb ? cur[g.a] : cur[g.b]).w++;
     }
     const rank = [...owners].sort((x, y) => cur[y].w - cur[x].w || cur[y].pf - cur[x].pf);
+    res[owners.reduce((x, y) => cur[y].pf > cur[x].pf ? y : x)].tp++;
     rank.forEach((o, i) => { if (i < PLAYOFF_TEAMS) res[o].po++; if (i === 0) res[o].s1++; res[o].pos[i]++; });
     owners.forEach(o => { res[o].wsum += cur[o].w; res[o].wins.push(cur[o].w); });
   }
   const pct = x => x / N * 100;
   const label = p => p >= 99.95 ? 'Clinched' : p <= 0.05 ? 'Out' : (p < 1 ? '<1' : p > 99 ? '>99' : Math.round(p)) + '%';
   const rows = owners.map(o => { const r = res[o]; r.wins.sort((a, b) => a - b);
-    return { o, rec: table.find(t => t.owner === o), po: pct(r.po), s1: pct(r.s1), pw: r.wsum / N, lo: r.wins[Math.floor(N * .1)], hi: r.wins[Math.floor(N * .9)] }; })
+    return { o, rec: table.find(t => t.owner === o), po: pct(r.po), s1: pct(r.s1), tp: pct(r.tp), pw: r.wsum / N, lo: r.wins[Math.floor(N * .1)], hi: r.wins[Math.floor(N * .9)] }; })
     .sort((a, b) => b.po - a.po || b.pw - a.pw);
   document.getElementById('odds-body').innerHTML = rows.map(r => `<tr data-owner="${r.o}" onclick="setActiveOwner('${r.o}')">
     <td><span class="owner-dot" style="background:${greyFor(r.o)}"></span>${r.o}</td>
     <td class="num">${r.rec.w}–${r.rec.l}</td>
     <td><div class="odds-bar"><span style="width:${r.po}%"></span><b>${label(r.po)}</b></div></td>
     <td><div class="odds-bar"><span style="width:${r.s1}%;background:#854d0e"></span><b>${r.s1 <= 0.05 ? '0%' : label(r.s1)}</b></div></td>
+    <td><div class="odds-bar"><span style="width:${r.tp}%;background:#a16207"></span><b>${r.tp <= 0.05 ? '0%' : label(r.tp)}</b></div></td>
     <td class="num">${fmt1(r.pw)}</td><td class="num">${r.lo}–${r.hi}</td></tr>`).join('');
 
   // Finish-position matrix: rows sorted by expected finish, cells shaded by probability
