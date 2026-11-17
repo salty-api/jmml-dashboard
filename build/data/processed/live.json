@@ -1,95 +1,95 @@
 {
   "year": 2026,
-  "week": 10,
-  "updated": "2026-11-15 19:48 PT",
+  "week": 11,
+  "updated": "2026-11-17 02:16 PT",
   "games": [
     {
-      "a": "Pierson",
-      "b": "Buser",
-      "a_pts": 133.62,
-      "b_pts": 67.44,
-      "a_proj": 136.29,
-      "b_proj": 69.76
-    },
-    {
       "a": "Salty",
-      "b": "Tayski",
-      "a_pts": 158.46,
-      "b_pts": 101.4,
-      "a_proj": 158.46,
-      "b_proj": 101.4
+      "b": "Pierson",
+      "a_pts": 0.0,
+      "b_pts": 0.0,
+      "a_proj": 110.13,
+      "b_proj": 103.28
     },
     {
-      "a": "Riley",
-      "b": "KnardDawg",
-      "a_pts": 102.4,
-      "b_pts": 91.16,
-      "a_proj": 104.76,
-      "b_proj": 100.25
+      "a": "Buser",
+      "b": "Riley",
+      "a_pts": 0.0,
+      "b_pts": 0.0,
+      "a_proj": 116.94,
+      "b_proj": 86.21
     },
     {
-      "a": "Cock",
-      "b": "Hudspeath",
-      "a_pts": 86.52,
-      "b_pts": 98.74,
-      "a_proj": 95.54,
-      "b_proj": 120.19
+      "a": "Tayski",
+      "b": "Cock",
+      "a_pts": 0.0,
+      "b_pts": 0.0,
+      "a_proj": 69.93,
+      "b_proj": 52.81
     },
     {
-      "a": "Shep",
-      "b": "Rooney/Jackson",
-      "a_pts": 113.72,
-      "b_pts": 105.44,
-      "a_proj": 116.62,
-      "b_proj": 117.31
+      "a": "KnardDawg",
+      "b": "Shep",
+      "a_pts": 0.0,
+      "b_pts": 0.0,
+      "a_proj": 78.45,
+      "b_proj": 100.03
     },
     {
-      "a": "T-How",
+      "a": "Hudspeath",
+      "b": "T-How",
+      "a_pts": 0.0,
+      "b_pts": 0.0,
+      "a_proj": 89.44,
+      "b_proj": 101.69
+    },
+    {
+      "a": "Rooney/Jackson",
       "b": "Ewert",
-      "a_pts": 109.92,
-      "b_pts": 107.88,
-      "a_proj": 117.17,
-      "b_proj": 107.88
+      "a_pts": 0.0,
+      "b_pts": 0.0,
+      "a_proj": 107.82,
+      "b_proj": 67.26
     }
   ],
   "prev_final": {
-    "week": 9,
+    "week": 10,
     "games": [
       {
-        "a": "Tayski",
-        "b": "Pierson",
-        "a_pts": 127.28,
-        "b_pts": 122.16
-      },
-      {
-        "a": "KnardDawg",
+        "a": "Pierson",
         "b": "Buser",
-        "a_pts": 78.68,
-        "b_pts": 84.06
+        "a_pts": 133.62,
+        "b_pts": 68.44
       },
       {
-        "a": "Hudspeath",
-        "b": "Salty",
-        "a_pts": 139.22,
-        "b_pts": 128.86
+        "a": "Salty",
+        "b": "Tayski",
+        "a_pts": 158.46,
+        "b_pts": 101.4
       },
       {
-        "a": "Rooney/Jackson",
-        "b": "Riley",
-        "a_pts": 137.46,
-        "b_pts": 95.32
+        "a": "Riley",
+        "b": "KnardDawg",
+        "a_pts": 99.9,
+        "b_pts": 110.16
       },
       {
-        "a": "Ewert",
-        "b": "Cock",
-        "a_pts": 94.48,
-        "b_pts": 71.48
+        "a": "Cock",
+        "b": "Hudspeath",
+        "a_pts": 88.52,
+        "b_pts": 116.96
+      },
+      {
+        "a": "Shep",
+        "b": "Rooney/Jackson",
+        "a_pts": 115.82,
+        "b_pts": 113.84
       },
       {
         "a": "T-How",
-        "b": "Shep",
-        "a_pts": 110.2,
-        "b_pts": 82.18
+        "b": "Ewert",
+        "a_pts": 116.42,
+        "b_pts": 107.88
       }
     ]
   },
@@ -255,6 +255,47 @@
           "b": "Shep",
           "a_pts": 110.2,
           "b_pts": 82.18
+        }
+      ]
+    },
+    {
+      "week": 10,
+      "games": [
+        {
+          "a": "Pierson",
+          "b": "Buser",
+          "a_pts": 133.62,
+          "b_pts": 68.44
+        },
+        {
+          "a": "Salty",
+          "b": "Tayski",
+          "a_pts": 158.46,
+          "b_pts": 101.4
+        },
+        {
+          "a": "Riley",
+          "b": "KnardDawg",
+          "a_pts": 99.9,
+          "b_pts": 110.16
+        },
+        {
+          "a": "Cock",
+          "b": "Hudspeath",
+          "a_pts": 88.52,
+          "b_pts": 116.96
+        },
+        {
+          "a": "Shep",
+          "b": "Rooney/Jackson",
+          "a_pts": 115.82,
+          "b_pts": 113.84
+        },
+        {
+          "a": "T-How",
+          "b": "Ewert",
+          "a_pts": 116.42,
+          "b_pts": 107.88
         }
       ]
     }
