@@ -1,55 +1,55 @@
 {
   "year": 2026,
   "week": 11,
-  "updated": "2026-11-17 02:16 PT",
+  "updated": "2026-11-17 11:41 PT",
   "games": [
     {
       "a": "Salty",
       "b": "Pierson",
       "a_pts": 0.0,
       "b_pts": 0.0,
-      "a_proj": 110.13,
-      "b_proj": 103.28
+      "a_proj": 110.2,
+      "b_proj": 114.09
     },
     {
       "a": "Buser",
       "b": "Riley",
       "a_pts": 0.0,
       "b_pts": 0.0,
-      "a_proj": 116.94,
-      "b_proj": 86.21
+      "a_proj": 117.06,
+      "b_proj": 116.56
     },
     {
       "a": "Tayski",
       "b": "Cock",
       "a_pts": 0.0,
       "b_pts": 0.0,
-      "a_proj": 69.93,
-      "b_proj": 52.81
+      "a_proj": 70.05,
+      "b_proj": 52.97
     },
     {
       "a": "KnardDawg",
       "b": "Shep",
       "a_pts": 0.0,
       "b_pts": 0.0,
-      "a_proj": 78.45,
-      "b_proj": 100.03
+      "a_proj": 80.82,
+      "b_proj": 109.25
     },
     {
       "a": "Hudspeath",
       "b": "T-How",
       "a_pts": 0.0,
       "b_pts": 0.0,
-      "a_proj": 89.44,
-      "b_proj": 101.69
+      "a_proj": 109.78,
+      "b_proj": 101.33
     },
     {
       "a": "Rooney/Jackson",
       "b": "Ewert",
       "a_pts": 0.0,
       "b_pts": 0.0,
-      "a_proj": 107.82,
-      "b_proj": 67.26
+      "a_proj": 107.81,
+      "b_proj": 66.17
     }
   ],
   "prev_final": {
@@ -298,6 +298,128 @@
           "b_pts": 107.88
         }
       ]
+    }
+  ],
+  "schedule": [
+    {
+      "week": 11,
+      "a": "Salty",
+      "b": "Pierson"
+    },
+    {
+      "week": 11,
+      "a": "Buser",
+      "b": "Riley"
+    },
+    {
+      "week": 11,
+      "a": "Tayski",
+      "b": "Cock"
+    },
+    {
+      "week": 11,
+      "a": "KnardDawg",
+      "b": "Shep"
+    },
+    {
+      "week": 11,
+      "a": "Hudspeath",
+      "b": "T-How"
+    },
+    {
+      "week": 11,
+      "a": "Rooney/Jackson",
+      "b": "Ewert"
+    },
+    {
+      "week": 12,
+      "a": "Pierson",
+      "b": "Riley"
+    },
+    {
+      "week": 12,
+      "a": "Cock",
+      "b": "Salty"
+    },
+    {
+      "week": 12,
+      "a": "Shep",
+      "b": "Buser"
+    },
+    {
+      "week": 12,
+      "a": "T-How",
+      "b": "Tayski"
+    },
+    {
+      "week": 12,
+      "a": "Ewert",
+      "b": "KnardDawg"
+    },
+    {
+      "week": 12,
+      "a": "Rooney/Jackson",
+      "b": "Hudspeath"
+    },
+    {
+      "week": 13,
+      "a": "Cock",
+      "b": "Pierson"
+    },
+    {
+      "week": 13,
+      "a": "Riley",
+      "b": "Shep"
+    },
+    {
+      "week": 13,
+      "a": "Salty",
+      "b": "T-How"
+    },
+    {
+      "week": 13,
+      "a": "Buser",
+      "b": "Ewert"
+    },
+    {
+      "week": 13,
+      "a": "Tayski",
+      "b": "Rooney/Jackson"
+    },
+    {
+      "week": 13,
+      "a": "KnardDawg",
+      "b": "Hudspeath"
+    },
+    {
+      "week": 14,
+      "a": "Pierson",
+      "b": "Shep"
+    },
+    {
+      "week": 14,
+      "a": "T-How",
+      "b": "Cock"
+    },
+    {
+      "week": 14,
+      "a": "Ewert",
+      "b": "Riley"
+    },
+    {
+      "week": 14,
+      "a": "Rooney/Jackson",
+      "b": "Salty"
+    },
+    {
+      "week": 14,
+      "a": "Hudspeath",
+      "b": "Buser"
+    },
+    {
+      "week": 14,
+      "a": "KnardDawg",
+      "b": "Tayski"
     }
   ]
 }

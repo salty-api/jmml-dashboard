@@ -96,5 +96,9 @@ for prev in range(1, week):
 if finals:
     res['prev_final'] = finals[-1]   # latest, kept for the recap
     res['prev_finals'] = finals
+# Full remaining schedule from ESPN (current week onward). The sheet's future weeks are hand-entered and can be
+# inconsistent (a team listed against two opponents), which skews the playoff-odds simulation.
+res['schedule'] = [{'week': s['matchupPeriodId'], 'a': owner[s['home']['teamId']], 'b': owner[s['away']['teamId']]}
+                   for s in d['schedule'] if s['matchupPeriodId'] >= week and 'away' in s and 'home' in s]
 (ROOT / "data/processed/live.json").write_text(json.dumps(res, indent=2))
 print(f"week {week}: {len(out)} games"); [print(f"  {g['a']} {g['a_pts']} - {g['b_pts']} {g['b']}") for g in out]

@@ -1893,7 +1893,12 @@ const seasonRegular = () => MATCHUPS.filter(m => m.year === SEASON_YEAR && m.gam
 
 function renderOdds(games, table) {
   const mu = seasonModel(games);
-  const remaining = uniquePairs(seasonRegular().filter(m => !(m.score > 0))).filter(g => mu[g.a] != null && mu[g.b] != null);
+  // Remaining games: ESPN's schedule when available (the sheet's future weeks can be inconsistent); else the sheet's.
+  const played = new Set(seasonRegular().filter(m => m.score > 0).map(m => m.week + '|' + m.owner));
+  const remaining = (LIVE && LIVE.year === SEASON_YEAR && LIVE.schedule
+      ? LIVE.schedule.filter(g => !(played.has(g.week + '|' + g.a) && played.has(g.week + '|' + g.b)))
+      : uniquePairs(seasonRegular().filter(m => !(m.score > 0)))
+    ).filter(g => mu[g.a] != null && mu[g.b] != null);
   const N = 10000, owners = table.map(r => r.owner);
   const base = Object.fromEntries(table.map(r => [r.owner, { w: r.w, pf: r.pf }]));
   const res = Object.fromEntries(owners.map(o => [o, { po: 0, s1: 0, tp: 0, wsum: 0, wins: [], pos: owners.map(() => 0) }]));
