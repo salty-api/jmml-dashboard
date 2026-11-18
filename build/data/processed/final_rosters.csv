@@ -2895,203 +2895,201 @@ season,owner,team_name,espn_team_id,player,position,nfl_team,lineup_slot,acquire
 2025,Tayski,Tour de Weis,10,Jeremy McNichols,RB,WSH,Bench,ADD,60.2,3.5,,,3127586
 2025,Tayski,Tour de Weis,10,Alvin Kamara,RB,NO,IR,DRAFT,84.2,7.7,21,46,3054850
 2025,Tayski,Tour de Weis,10,Brandon Aiyuk,WR,SF,IR,DRAFT,0,0.0,3,156,4360438
-2026,Buser,LaPorta Potties,7,Josh Allen,QB,BUF,QB,DRAFT,112.0,28.0,27,7,3918298
-2026,Buser,LaPorta Potties,7,Bhayshul Tuten,RB,JAX,RB,DRAFT,59.2,11.8,19,51,4882093
-2026,Buser,LaPorta Potties,7,Alvin Kamara,RB,NO,RB,ADD,31.2,7.8,1,164,3054850
-2026,Buser,LaPorta Potties,7,Chris Olave,WR,NO,WR,DRAFT,79.2,15.8,25,48,4361370
-2026,Buser,LaPorta Potties,7,Romeo Doubs,WR,NE,WR,DRAFT,40.4,8.1,1,155,4361432
-2026,Buser,LaPorta Potties,7,Sam LaPorta,TE,DET,TE,DRAFT,63.1,12.6,4,89,4430027
-2026,Buser,LaPorta Potties,7,Jameson Williams,WR,DET,FLEX,DRAFT,48.6,9.7,16,60,4426388
-2026,Buser,LaPorta Potties,7,Steelers D/ST,D/ST,PIT,D/ST,DRAFT,39.0,7.8,1,135,-16023
-2026,Buser,LaPorta Potties,7,Cam Little,K,JAX,K,DRAFT,50.2,10.0,1,112,4686361
-2026,Buser,LaPorta Potties,7,Jalen Coker,WR,CAR,Bench,ADD,43.2,14.4,,,4695883
-2026,Buser,LaPorta Potties,7,Chris Rodriguez Jr.,RB,JAX,Bench,DRAFT,24.4,4.9,1,145,4362619
-2026,Buser,LaPorta Potties,7,Saquon Barkley,RB,PHI,Bench,DRAFT,21.0,5.2,52,14,3929630
-2026,Buser,LaPorta Potties,7,Will Shipley,RB,PHI,Bench,ADD,17.3,3.5,,,4431545
-2026,Buser,LaPorta Potties,7,Marvin Harrison Jr.,WR,ARI,Bench,ADD,17.0,4.2,,,4432708
-2026,Buser,LaPorta Potties,7,Dameon Pierce,RB,PHI,Bench,ADD,2.2,2.2,,,4360238
-2026,Buser,LaPorta Potties,7,Jonah Coleman,RB,DEN,IR,ADD,13.3,6.7,,,4702555
-2026,Buser,LaPorta Potties,7,A.J. Brown,WR,NE,IR,DRAFT,4.1,4.1,50,36,4047646
-2026,Cock,Judkins Sp!ce Latte,9,Jalen Hurts,QB,PHI,QB,DRAFT,80.0,16.0,6,47,4040715
-2026,Cock,Judkins Sp!ce Latte,9,Quinshon Judkins,RB,CLE,RB,DRAFT,47.3,9.5,23,46,4685702
-2026,Cock,Judkins Sp!ce Latte,9,Cam Skattebo,RB,NYG,RB,DRAFT,46.3,9.3,16,54,4696981
-2026,Cock,Judkins Sp!ce Latte,9,Michael Wilson,WR,ARI,WR,DRAFT,49.6,9.9,1,115,4360761
-2026,Cock,Judkins Sp!ce Latte,9,Carnell Tate,WR,TEN,WR,DRAFT,36.9,7.4,9,79,4871023
-2026,Cock,Judkins Sp!ce Latte,9,Colston Loveland,TE,CHI,TE,DRAFT,17.5,3.5,18,33,4723086
-2026,Cock,Judkins Sp!ce Latte,9,Drake London,WR,ATL,FLEX,DRAFT,60.2,12.0,36,15,4426502
-2026,Cock,Judkins Sp!ce Latte,9,Jets D/ST,D/ST,NYJ,D/ST,ADD,37.0,7.4,,,-16020
-2026,Cock,Judkins Sp!ce Latte,9,Jason Myers,K,SEA,K,DRAFT,55.1,11.0,1,127,2473037
-2026,Cock,Judkins Sp!ce Latte,9,Tetairoa McMillan,WR,CAR,Bench,DRAFT,61.5,15.4,21,35,4685472
-2026,Cock,Judkins Sp!ce Latte,9,George Pickens,WR,DAL,Bench,DRAFT,55.0,11.0,40,30,4426354
-2026,Cock,Judkins Sp!ce Latte,9,David Montgomery,RB,HOU,Bench,DRAFT,42.0,8.4,20,57,4035538
-2026,Cock,Judkins Sp!ce Latte,9,Woody Marks,RB,HOU,Bench,DRAFT,37.8,7.6,1,148,4429059
-2026,Cock,Judkins Sp!ce Latte,9,Samaje Perine,RB,CIN,Bench,ADD,26.6,5.3,,,3116389
-2026,Cock,Judkins Sp!ce Latte,9,Travis Hunter,WR,JAX,Bench,DRAFT,3.0,0.6,1,138,4685415
-2026,Cock,Judkins Sp!ce Latte,9,Alec Pierce,WR,IND,IR,ADD,9.7,4.8,,,4360078
-2026,Cock,Judkins Sp!ce Latte,9,Josh Jacobs,RB,GB,IR,DRAFT,0,0.0,8,44,4047365
-2026,Ewert,FeBreece,2,Trevor Lawrence,QB,JAX,QB,DRAFT,86.9,17.4,5,86,4360310
-2026,Ewert,FeBreece,2,Braelon Allen,RB,NYJ,RB,DRAFT,41.0,8.2,1,147,4685247
-2026,Ewert,FeBreece,2,Kaleb Johnson,RB,GB,RB,ADD,10.1,2.0,,,4819231
-2026,Ewert,FeBreece,2,Amon-Ra St. Brown,WR,DET,WR,DRAFT,85.7,17.1,68,4,4374302
-2026,Ewert,FeBreece,2,Garrett Wilson,WR,NYJ,WR,DRAFT,70.9,14.2,16,45,4569618
-2026,Ewert,FeBreece,2,Harold Fannin Jr.,TE,CLE,TE,DRAFT,42.7,8.5,6,80,5083076
-2026,Ewert,FeBreece,2,Josh Downs,WR,IND,FLEX,DRAFT,34.9,7.0,1,137,4688813
-2026,Ewert,FeBreece,2,Browns D/ST,D/ST,CLE,D/ST,ADD,31.0,6.2,,,-16005
-2026,Ewert,FeBreece,2,Chris Boswell,K,PIT,K,ADD,47.3,9.5,,,17372
-2026,Ewert,FeBreece,2,Tyler Shough,QB,NO,Bench,DRAFT,85.2,17.0,1,114,4360689
-2026,Ewert,FeBreece,2,Dontayvion Wicks,WR,PHI,Bench,ADD,40.5,8.1,,,4428850
-2026,Ewert,FeBreece,2,Dalton Kincaid,TE,BUF,Bench,DRAFT,38.5,9.6,1,156,4385690
-2026,Ewert,FeBreece,2,Breece Hall,RB,NYJ,Bench,DRAFT,37.5,12.5,35,25,4427366
-2026,Ewert,FeBreece,2,Ladd McConkey,WR,LAC,Bench,DRAFT,30.3,7.6,34,49,4612826
-2026,Ewert,FeBreece,2,George Holani,RB,SEA,Bench,ADD,18.8,3.8,,,4429835
-2026,Ewert,FeBreece,2,Jadarian Price,RB,SEA,IR,DRAFT,12.0,3.0,27,65,4685512
-2026,Ewert,FeBreece,2,Jordan Mason,RB,MIN,IR,DRAFT,11.9,11.9,3,126,4360569
-2026,Hudspeath,Pile of Monangai,3,Joe Burrow,QB,CIN,QB,DRAFT,101.2,20.2,6,73,3915511
-2026,Hudspeath,Pile of Monangai,3,Derrick Henry,RB,BAL,RB,DRAFT,104.6,20.9,51,13,3043078
-2026,Hudspeath,Pile of Monangai,3,D'Andre Swift,RB,CHI,RB,DRAFT,73.8,14.8,20,41,4259545
-2026,Hudspeath,Pile of Monangai,3,CeeDee Lamb,WR,DAL,WR,DRAFT,95.6,19.1,52,24,4241389
-2026,Hudspeath,Pile of Monangai,3,Matthew Golden,WR,GB,WR,DRAFT,66.3,13.3,3,120,4701936
-2026,Hudspeath,Pile of Monangai,3,Trey McBride,TE,ARI,TE,DRAFT,69.8,14.0,29,19,4361307
-2026,Hudspeath,Pile of Monangai,3,KC Concepcion,WR,CLE,FLEX,DRAFT,22.8,4.6,1,161,4870653
-2026,Hudspeath,Pile of Monangai,3,Cowboys D/ST,D/ST,DAL,D/ST,ADD,7.0,1.4,,,-16006
-2026,Hudspeath,Pile of Monangai,3,Spencer Shrader,K,IND,K,ADD,82.1,16.4,,,4571557
-2026,Hudspeath,Pile of Monangai,3,Kyle Monangai,RB,CHI,Bench,DRAFT,56.8,14.2,5,96,4608686
-2026,Hudspeath,Pile of Monangai,3,Stefon Diggs,WR,WSH,Bench,DRAFT,44.0,11.0,2,85,2976212
-2026,Hudspeath,Pile of Monangai,3,Justice Hill,RB,BAL,Bench,DRAFT,21.7,4.3,1,108,4038441
-2026,Hudspeath,Pile of Monangai,3,Blake Corum,RB,LAR,Bench,TRADE,20.2,5.0,,,4429096
-2026,Hudspeath,Pile of Monangai,3,Makai Lemon,WR,PHI,Bench,DRAFT,17.8,3.6,2,129,4870795
-2026,Hudspeath,Pile of Monangai,3,Roschon Johnson,RB,CHI,Bench,ADD,9.3,1.9,,,4426386
-2026,Hudspeath,Pile of Monangai,3,DeVonta Smith,WR,PHI,IR,DRAFT,39.0,13.0,27,11,4241478
-2026,Hudspeath,Pile of Monangai,3,Tank Dell,WR,HOU,IR,DRAFT,0,0.0,1,169,4366031
-2026,KnardDawg,Spoiled Egbukas,11,Brock Purdy,QB,SF,QB,DRAFT,116.6,23.3,2,97,4361741
-2026,KnardDawg,Spoiled Egbukas,11,Omarion Hampton,RB,LAC,RB,DRAFT,47.1,9.4,53,16,4685382
-2026,KnardDawg,Spoiled Egbukas,11,Jaylen Wright,RB,MIA,RB,ADD,2.8,0.7,,,4682745
-2026,KnardDawg,Spoiled Egbukas,11,Justin Jefferson,WR,MIN,WR,DRAFT,54.2,13.6,55,27,4262921
-2026,KnardDawg,Spoiled Egbukas,11,Emeka Egbuka,WR,TB,WR,DRAFT,42.8,8.6,22,42,4567750
-2026,KnardDawg,Spoiled Egbukas,11,T.J. Hockenson,TE,MIN,TE,ADD,37.7,7.5,,,4036133
-2026,KnardDawg,Spoiled Egbukas,11,DK Metcalf,WR,PIT,FLEX,DRAFT,39.1,7.8,5,70,4047650
-2026,KnardDawg,Spoiled Egbukas,11,Patriots D/ST,D/ST,NE,D/ST,DRAFT,40.0,8.0,1,174,-16017
-2026,KnardDawg,Spoiled Egbukas,11,Jake Bates,K,DET,K,DRAFT,49.4,9.9,1,167,4689936
-2026,KnardDawg,Spoiled Egbukas,11,Jake Ferguson,TE,DAL,Bench,DRAFT,33.7,6.7,1,117,4242355
-2026,KnardDawg,Spoiled Egbukas,11,Kenyon Sadiq,TE,NYJ,Bench,DRAFT,31.9,6.4,1,159,5083315
-2026,KnardDawg,Spoiled Egbukas,11,Rashid Shaheed,WR,SEA,Bench,ADD,23.8,4.8,,,4032473
-2026,KnardDawg,Spoiled Egbukas,11,Khalil Shakir,WR,BUF,Bench,ADD,23.1,5.8,,,4373678
-2026,KnardDawg,Spoiled Egbukas,11,Konata Mumpfield,WR,LAR,Bench,ADD,20.2,5.1,,,4710855
-2026,KnardDawg,Spoiled Egbukas,11,Kaelon Black,RB,SF,Bench,DRAFT,14.6,2.9,4,81,4696044
-2026,KnardDawg,Spoiled Egbukas,11,Caleb Williams,QB,CHI,IR,DRAFT,45.0,22.5,3,94,4431611
-2026,Pierson,Fart and Dart to IR,8,Drake Maye,QB,NE,QB,ADD,87.2,17.4,,,4431452
-2026,Pierson,Fart and Dart to IR,8,Christian McCaffrey,RB,SF,RB,DRAFT,81.8,16.4,58,6,3117251
-2026,Pierson,Fart and Dart to IR,8,Ollie Gordon II,RB,MIA,RB,ADD,45.5,9.1,,,4711533
-2026,Pierson,Fart and Dart to IR,8,Tee Higgins,WR,CIN,WR,TRADE,61.8,12.4,,,4239993
-2026,Pierson,Fart and Dart to IR,8,Devaughn Vele,WR,NO,WR,ADD,49.7,9.9,,,4569559
-2026,Pierson,Fart and Dart to IR,8,Isaiah Likely,TE,NYG,TE,DRAFT,68.9,13.8,3,83,4361050
-2026,Pierson,Fart and Dart to IR,8,Bijan Robinson,RB,ATL,FLEX,DRAFT,112.2,22.4,67,5,4430807
-2026,Pierson,Fart and Dart to IR,8,Vikings D/ST,D/ST,MIN,D/ST,ADD,62.0,12.4,,,-16016
-2026,Pierson,Fart and Dart to IR,8,Brandon Aubrey,K,DAL,K,DRAFT,47.8,9.6,3,100,3953687
-2026,Pierson,Fart and Dart to IR,8,Bryce Young,QB,CAR,Bench,TRADE,90.6,22.7,,,4685720
-2026,Pierson,Fart and Dart to IR,8,Jacory Croskey-Merritt,RB,WSH,Bench,DRAFT,42.4,8.5,3,111,4575131
-2026,Pierson,Fart and Dart to IR,8,Tre Tucker,WR,LV,Bench,ADD,42.3,8.5,,,4428718
-2026,Pierson,Fart and Dart to IR,8,Keon Coleman,WR,BUF,Bench,TRADE,34.7,8.7,,,4635008
-2026,Pierson,Fart and Dart to IR,8,RJ Harvey,RB,DEN,Bench,DRAFT,28.8,7.2,5,95,4568490
-2026,Pierson,Fart and Dart to IR,8,Kenny Gainwell,RB,TB,Bench,DRAFT,21.3,4.3,2,91,4371733
-2026,Pierson,Fart and Dart to IR,8,Terry McLaurin,WR,WSH,IR,DRAFT,35.3,8.8,16,55,3121422
-2026,Pierson,Fart and Dart to IR,8,Dallas Goedert,TE,PHI,IR,ADD,29.4,9.8,,,3121023
-2026,Riley,B.O.,5,Kirk Cousins,QB,LV,QB,ADD,92.6,18.5,,,14880
-2026,Riley,B.O.,5,Chase Brown,RB,CIN,RB,DRAFT,53.0,10.6,56,18,4362238
-2026,Riley,B.O.,5,TreVeyon Henderson,RB,NE,RB,DRAFT,25.5,6.4,7,72,4432710
-2026,Riley,B.O.,5,Parker Washington,WR,JAX,WR,DRAFT,70.5,14.1,13,68,4432620
-2026,Riley,B.O.,5,Malik Nabers,WR,NYG,WR,DRAFT,59.4,11.9,26,39,4595348
-2026,Riley,B.O.,5,Tucker Kraft,TE,GB,TE,DRAFT,37.7,7.5,7,75,4572680
-2026,Riley,B.O.,5,Rhamondre Stevenson,RB,NE,FLEX,DRAFT,53.3,10.7,11,67,4569173
-2026,Riley,B.O.,5,Texans D/ST,D/ST,HOU,D/ST,DRAFT,36.0,7.2,2,87,-16034
-2026,Riley,B.O.,5,Will Reichard,K,MIN,K,ADD,74.3,14.9,,,4567104
-2026,Riley,B.O.,5,Kenneth Walker III,RB,KC,Bench,DRAFT,104.1,26.0,47,12,4567048
-2026,Riley,B.O.,5,Bo Nix,QB,DEN,Bench,ADD,65.2,13.0,,,4426338
-2026,Riley,B.O.,5,Juwan Johnson,TE,NO,Bench,ADD,53.3,10.7,,,3929645
-2026,Riley,B.O.,5,Kalif Raymond,WR,CHI,Bench,ADD,40.4,8.1,,,2973405
-2026,Riley,B.O.,5,Keaton Mitchell,RB,LAC,Bench,DRAFT,30.7,6.1,3,99,4596334
-2026,Riley,B.O.,5,DJ Moore,WR,BUF,Bench,DRAFT,30.3,7.6,14,64,3915416
-2026,Riley,B.O.,5,De'Zhaun Stribling,WR,SF,IR,DRAFT,0,0.0,2,128,4710714
-2026,Riley,B.O.,5,Tyreek Hill,WR,FA,IR,ADD,0,0.0,,,3116406
-2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Jacoby Brissett,QB,ARI,QB,ADD,83.8,16.8,,,2578570
-2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Javonte Williams,RB,DAL,RB,DRAFT,87.5,17.5,40,32,4361579
-2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,J.K. Dobbins,RB,DEN,RB,DRAFT,33.6,6.7,4,105,4241985
-2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Christian Watson,WR,GB,WR,DRAFT,96.4,19.3,10,77,4248528
-2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Zay Flowers,WR,BAL,WR,DRAFT,67.1,16.8,34,37,4429615
-2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Kyle Pitts Sr.,TE,ATL,TE,DRAFT,21.9,4.4,4,82,4360248
-2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Jahmyr Gibbs,RB,DET,FLEX,DRAFT,140.2,28.0,70,1,4429795
-2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Seahawks D/ST,D/ST,SEA,D/ST,DRAFT,43.0,8.6,1,113,-16026
-2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Ka'imi Fairbairn,K,HOU,K,DRAFT,57.7,11.5,1,125,2971573
-2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Lamar Jackson,QB,BAL,Bench,DRAFT,79.1,19.8,13,28,3916387
-2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Denzel Boston,WR,CLE,Bench,ADD,61.0,12.2,,,4832800
-2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,MarShawn Lloyd,RB,GB,Bench,DRAFT,37.7,7.5,12,23,4429023
-2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Courtland Sutton,WR,DEN,Bench,DRAFT,21.9,4.4,6,84,3128429
-2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Sione Vaki,RB,DET,Bench,ADD,12.3,2.5,,,4912274
-2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Ray Davis,RB,BUF,Bench,ADD,1.5,0.4,,,4429501
-2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Zach Charbonnet,RB,SEA,IR,DRAFT,0,0.0,3,107,4426385
-2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Jordyn Tyson,WR,NO,IR,DRAFT,0,0.0,2,136,4880281
-2026,Salty,P-U Later,1,Jayden Daniels,QB,WSH,QB,TRADE,64.7,21.6,,,4426348
-2026,Salty,P-U Later,1,Emanuel Wilson,RB,SEA,RB,ADD,48.6,9.7,,,4887558
-2026,Salty,P-U Later,1,Mike Washington Jr.,RB,LV,RB,ADD,19.9,4.0,1,139,4686658
-2026,Salty,P-U Later,1,Luther Burden III,WR,CHI,WR,DRAFT,44.3,8.9,27,61,4685278
-2026,Salty,P-U Later,1,Jaylen Waddle,WR,DEN,WR,TRADE,39.7,7.9,,,4372016
-2026,Salty,P-U Later,1,Brock Bowers,TE,LV,TE,DRAFT,59.2,19.7,42,20,4432665
-2026,Salty,P-U Later,1,Puka Nacua,WR,LAR,FLEX,DRAFT,33.1,16.6,61,9,4426515
-2026,Salty,P-U Later,1,Bengals D/ST,D/ST,CIN,D/ST,ADD,46.0,9.2,,,-16004
-2026,Salty,P-U Later,1,Harrison Mevis,K,LAR,K,ADD,29.9,7.5,,,4574716
-2026,Salty,P-U Later,1,Jordan Love,QB,GB,Bench,ADD,90.1,18.0,1,149,4036378
-2026,Salty,P-U Later,1,Chuba Hubbard,RB,CAR,Bench,DRAFT,74.0,18.5,4,103,4241416
-2026,Salty,P-U Later,1,Antonio Williams,WR,WSH,Bench,ADD,29.0,5.8,,,5081432
-2026,Salty,P-U Later,1,Kendre Miller,RB,NO,Bench,ADD,21.8,5.5,,,4599739
-2026,Salty,P-U Later,1,Emmett Johnson,RB,KC,Bench,ADD,15.5,3.9,,,4832955
-2026,Salty,P-U Later,1,Chris Bell,WR,MIA,Bench,ADD,14.3,2.9,,,4869961
-2026,Salty,P-U Later,1,Travis Etienne Jr.,RB,NO,IR,DRAFT,25.4,8.5,32,43,4239996
-2026,Salty,P-U Later,1,Adonai Mitchell,WR,NYJ,IR,ADD,16.8,8.4,,,4597500
-2026,Shep,Ashton Scenty's Stank Tank,4,Matthew Stafford,QB,LAR,QB,DRAFT,61.7,15.4,1,109,12483
-2026,Shep,Ashton Scenty's Stank Tank,4,Jonathan Taylor,RB,IND,RB,DRAFT,90.9,18.2,65,10,4242335
-2026,Shep,Ashton Scenty's Stank Tank,4,Ashton Jeanty,RB,LV,RB,DRAFT,73.6,14.7,44,34,4890973
-2026,Shep,Ashton Scenty's Stank Tank,4,Jaxon Smith-Njigba,WR,SEA,WR,DRAFT,121.0,24.2,62,21,4430878
-2026,Shep,Ashton Scenty's Stank Tank,4,Rome Odunze,WR,CHI,WR,DRAFT,33.8,6.8,14,56,4431299
-2026,Shep,Ashton Scenty's Stank Tank,4,George Kittle,TE,SF,TE,DRAFT,61.3,12.3,3,62,3040151
-2026,Shep,Ashton Scenty's Stank Tank,4,Jaylen Warren,RB,PIT,FLEX,DRAFT,83.5,16.7,4,102,4569987
-2026,Shep,Ashton Scenty's Stank Tank,4,Jaguars D/ST,D/ST,JAX,D/ST,ADD,43.0,8.6,,,-16030
-2026,Shep,Ashton Scenty's Stank Tank,4,Matt Gay,K,LV,K,ADD,56.7,11.3,,,4249087
-2026,Shep,Ashton Scenty's Stank Tank,4,Patrick Mahomes,QB,KC,Bench,DRAFT,83.6,20.9,1,176,3139477
-2026,Shep,Ashton Scenty's Stank Tank,4,Wan'Dale Robinson,WR,TEN,Bench,DRAFT,40.7,8.1,2,93,4569587
-2026,Shep,Ashton Scenty's Stank Tank,4,Jakobi Meyers,WR,JAX,Bench,DRAFT,39.9,8.0,1,170,3916433
-2026,Shep,Ashton Scenty's Stank Tank,4,Roman Wilson,WR,PIT,Bench,ADD,37.8,7.6,,,4431492
-2026,Shep,Ashton Scenty's Stank Tank,4,Rachaad White,RB,WSH,Bench,DRAFT,28.1,7.0,1,132,4697815
-2026,Shep,Ashton Scenty's Stank Tank,4,Xavier Worthy,WR,KC,Bench,DRAFT,26.3,6.6,1,143,4683062
-2026,T-How,Silent But Dowdle,12,Jared Goff,QB,DET,QB,DRAFT,115.0,23.0,1,151,3046779
-2026,T-How,Silent But Dowdle,12,Jeremiyah Love,RB,ARI,RB,DRAFT,45.6,9.1,39,22,4870808
-2026,T-How,Silent But Dowdle,12,Tony Pollard,RB,TEN,RB,DRAFT,39.7,7.9,6,88,3916148
-2026,T-How,Silent But Dowdle,12,Ja'Marr Chase,WR,CIN,WR,DRAFT,66.4,13.3,66,2,4362628
-2026,T-How,Silent But Dowdle,12,Nico Collins,WR,HOU,WR,DRAFT,53.1,17.7,38,17,4258173
-2026,T-How,Silent But Dowdle,12,Tyler Warren,TE,IND,TE,DRAFT,54.9,11.0,19,53,4431459
-2026,T-How,Silent But Dowdle,12,Mike Evans,WR,SF,FLEX,DRAFT,64.6,12.9,14,69,16737
-2026,T-How,Silent But Dowdle,12,Commanders D/ST,D/ST,WSH,D/ST,ADD,25.0,5.0,,,-16028
-2026,T-How,Silent But Dowdle,12,Evan McPherson,K,CIN,K,DRAFT,55.6,11.1,1,160,4360234
-2026,T-How,Silent But Dowdle,12,Dak Prescott,QB,DAL,Bench,DRAFT,93.8,18.8,5,58,2577417
-2026,T-How,Silent But Dowdle,12,Malik Washington,WR,MIA,Bench,ADD,38.7,7.7,,,4569603
-2026,T-How,Silent But Dowdle,12,Rashod Bateman,WR,BAL,Bench,ADD,36.3,7.3,,,4360939
-2026,T-How,Silent But Dowdle,12,Tyler Allgeier,RB,ARI,Bench,TRADE,28.3,5.7,,,4373626
-2026,T-How,Silent But Dowdle,12,Brian Thomas Jr.,WR,JAX,Bench,DRAFT,21.0,4.2,3,106,4432773
-2026,T-How,Silent But Dowdle,12,Najee Harris,RB,NYG,Bench,ADD,10.7,2.7,1,168,4241457
-2026,T-How,Silent But Dowdle,12,Jordan Addison,WR,MIN,IR,DRAFT,27.7,6.9,1,141,4429205
-2026,T-How,Silent But Dowdle,12,Rico Dowdle,RB,PIT,IR,DRAFT,8.5,4.2,2,78,4038815
-2026,Tayski,Weis Cookin Rice,10,Kyler Murray,QB,MIN,QB,DRAFT,39.8,9.9,1,98,3917315
-2026,Tayski,Weis Cookin Rice,10,Kyren Williams,RB,LAR,RB,DRAFT,79.2,19.8,36,31,4430737
-2026,Tayski,Weis Cookin Rice,10,James Cook III,RB,BUF,RB,DRAFT,63.5,15.9,65,8,4379399
-2026,Tayski,Weis Cookin Rice,10,Davante Adams,WR,LAR,WR,DRAFT,62.0,15.5,16,38,16800
-2026,Tayski,Weis Cookin Rice,10,Deebo Samuel Sr.,WR,SF,WR,DRAFT,52.4,10.5,1,122,3126486
-2026,Tayski,Weis Cookin Rice,10,Mark Andrews,TE,BAL,TE,ADD,30.1,6.0,,,3116365
-2026,Tayski,Weis Cookin Rice,10,Aaron Jones Sr.,RB,MIN,FLEX,DRAFT,64.2,12.8,3,133,3042519
-2026,Tayski,Weis Cookin Rice,10,Broncos D/ST,D/ST,DEN,D/ST,DRAFT,40.0,8.0,1,110,-16007
-2026,Tayski,Weis Cookin Rice,10,Nick Folk,K,ATL,K,ADD,46.4,9.3,,,10621
-2026,Tayski,Weis Cookin Rice,10,Bucky Irving,RB,TB,Bench,DRAFT,71.2,14.2,19,26,4596448
-2026,Tayski,Weis Cookin Rice,10,Justin Herbert,QB,LAC,Bench,DRAFT,53.7,10.7,4,74,4038941
-2026,Tayski,Weis Cookin Rice,10,Brian Robinson Jr.,RB,ATL,Bench,DRAFT,48.6,9.7,1,154,4241474
-2026,Tayski,Weis Cookin Rice,10,Travis Kelce,TE,KC,Bench,DRAFT,44.6,11.2,3,50,15847
-2026,Tayski,Weis Cookin Rice,10,Harrison Butker,K,KC,Bench,DRAFT,36.5,9.1,1,144,3055899
-2026,Tayski,Weis Cookin Rice,10,Rashee Rice,WR,KC,Bench,DRAFT,31.5,7.9,39,29,4428331
-2026,Tayski,Weis Cookin Rice,10,Isiah Pacheco,RB,DET,IR,DRAFT,0,0.0,2,152,4361529
+2026,Buser,LaPorta Potties,7,Josh Allen,QB,BUF,QB,DRAFT,222.5,24.7,27,7,3918298
+2026,Buser,LaPorta Potties,7,Bhayshul Tuten,RB,JAX,RB,DRAFT,138.5,15.4,19,51,4882093
+2026,Buser,LaPorta Potties,7,Jonah Coleman,RB,DEN,RB,ADD,56.4,11.3,,,4702555
+2026,Buser,LaPorta Potties,7,Chris Olave,WR,NO,WR,DRAFT,117.9,13.1,25,48,4361370
+2026,Buser,LaPorta Potties,7,Jameson Williams,WR,DET,WR,DRAFT,98.7,11.0,16,60,4426388
+2026,Buser,LaPorta Potties,7,Sam LaPorta,TE,DET,TE,DRAFT,77.7,8.6,4,89,4430027
+2026,Buser,LaPorta Potties,7,Saquon Barkley,RB,PHI,FLEX,DRAFT,55.2,7.9,52,14,3929630
+2026,Buser,LaPorta Potties,7,Steelers D/ST,D/ST,PIT,D/ST,DRAFT,75.0,8.3,1,135,-16023
+2026,Buser,LaPorta Potties,7,Chris Boswell,K,PIT,K,ADD,92.8,10.3,,,17372
+2026,Buser,LaPorta Potties,7,Packers D/ST,D/ST,GB,Bench,ADD,78.0,7.8,,,-16009
+2026,Buser,LaPorta Potties,7,Alvin Kamara,RB,NO,Bench,ADD,76.1,9.5,1,164,3054850
+2026,Buser,LaPorta Potties,7,Jalen Coker,WR,CAR,Bench,ADD,70.8,8.9,,,4695883
+2026,Buser,LaPorta Potties,7,Chris Rodriguez Jr.,RB,JAX,Bench,DRAFT,52.9,5.9,1,145,4362619
+2026,Buser,LaPorta Potties,7,Marvin Harrison Jr.,WR,HOU,Bench,ADD,32.0,4.6,,,4432708
+2026,Buser,LaPorta Potties,7,A.J. Brown,WR,NE,Bench,DRAFT,18.3,4.6,50,36,4047646
+2026,Buser,LaPorta Potties,7,RJ Harvey,RB,DEN,IR,ADD,54.9,9.2,,,4568490
+2026,Buser,LaPorta Potties,7,Tank Bigsby,RB,PHI,IR,ADD,15.6,3.9,2,142,4429013
+2026,Cock,Judkins Sp!ce Latte,9,Fernando Mendoza,QB,LV,QB,TRADE,16.1,4.0,,,4837248
+2026,Cock,Judkins Sp!ce Latte,9,Cam Skattebo,RB,NYG,RB,DRAFT,90.6,11.3,16,54,4696981
+2026,Cock,Judkins Sp!ce Latte,9,David Montgomery,RB,HOU,RB,DRAFT,42.0,8.4,20,57,4035538
+2026,Cock,Judkins Sp!ce Latte,9,George Pickens,WR,DAL,WR,DRAFT,122.8,13.6,40,30,4426354
+2026,Cock,Judkins Sp!ce Latte,9,Tetairoa McMillan,WR,CAR,WR,DRAFT,106.5,11.8,21,35,4685472
+2026,Cock,Judkins Sp!ce Latte,9,Colston Loveland,TE,CHI,TE,DRAFT,64.8,7.2,18,33,4723086
+2026,Cock,Judkins Sp!ce Latte,9,Darren Waller,TE,CAR,FLEX,ADD,68.8,7.6,,,2576925
+2026,Cock,Judkins Sp!ce Latte,9,Ravens D/ST,D/ST,BAL,D/ST,ADD,40.0,4.0,,,-16033
+2026,Cock,Judkins Sp!ce Latte,9,Jason Myers,K,SEA,K,DRAFT,84.2,8.4,1,127,2473037
+2026,Cock,Judkins Sp!ce Latte,9,Drake London,WR,ATL,Bench,DRAFT,113.5,11.3,36,15,4426502
+2026,Cock,Judkins Sp!ce Latte,9,Quinshon Judkins,RB,CLE,Bench,DRAFT,95.7,10.6,23,46,4685702
+2026,Cock,Judkins Sp!ce Latte,9,Cameron Dicker,K,LAC,Bench,ADD,77.1,8.6,,,4362081
+2026,Cock,Judkins Sp!ce Latte,9,Woody Marks,RB,HOU,Bench,DRAFT,70.4,7.8,1,148,4429059
+2026,Cock,Judkins Sp!ce Latte,9,Dylan Sampson,RB,CLE,Bench,TRADE,31.1,6.2,,,5081397
+2026,Cock,Judkins Sp!ce Latte,9,Kaleb Johnson,RB,GB,Bench,TRADE,26.9,3.4,,,4819231
+2026,Cock,Judkins Sp!ce Latte,9,Josh Jacobs,RB,GB,IR,DRAFT,38.3,12.8,8,44,4047365
+2026,Ewert,FeBreece,2,Trevor Lawrence,QB,JAX,QB,DRAFT,174.0,19.3,5,86,4360310
+2026,Ewert,FeBreece,2,Breece Hall,RB,NYJ,RB,DRAFT,60.5,12.1,35,25,4427366
+2026,Ewert,FeBreece,2,Jadarian Price,RB,SEA,RB,DRAFT,37.4,5.3,27,65,4685512
+2026,Ewert,FeBreece,2,Amon-Ra St. Brown,WR,DET,WR,DRAFT,150.9,16.8,68,4,4374302
+2026,Ewert,FeBreece,2,DeMario Douglas,WR,NE,WR,ADD,81.8,8.2,,,4427095
+2026,Ewert,FeBreece,2,Harold Fannin Jr.,TE,CLE,TE,DRAFT,96.4,9.6,6,80,5083076
+2026,Ewert,FeBreece,2,Garrett Wilson,WR,NYJ,FLEX,DRAFT,104.3,11.6,16,45,4569618
+2026,Ewert,FeBreece,2,Browns D/ST,D/ST,CLE,D/ST,ADD,60.0,6.0,,,-16005
+2026,Ewert,FeBreece,2,Jake Bates,K,DET,K,ADD,85.2,9.5,,,4689936
+2026,Ewert,FeBreece,2,Tyler Shough,QB,NO,Bench,DRAFT,155.6,17.3,1,114,4360689
+2026,Ewert,FeBreece,2,Braelon Allen,RB,NYJ,Bench,DRAFT,100.6,10.1,1,147,4685247
+2026,Ewert,FeBreece,2,Dalton Kincaid,TE,BUF,Bench,DRAFT,76.7,8.5,1,156,4385690
+2026,Ewert,FeBreece,2,Caleb Douglas,WR,MIA,Bench,ADD,59.7,10.0,,,4869645
+2026,Ewert,FeBreece,2,Ladd McConkey,WR,LAC,Bench,DRAFT,43.1,7.2,34,49,4612826
+2026,Ewert,FeBreece,2,Jordan Mason,RB,MIN,Bench,DRAFT,31.8,6.4,3,126,4360569
+2026,Hudspeath,Pile of Monangai,3,Joe Burrow,QB,CIN,QB,DRAFT,232.3,25.8,6,73,3915511
+2026,Hudspeath,Pile of Monangai,3,Derrick Henry,RB,BAL,RB,DRAFT,152.8,15.3,51,13,3043078
+2026,Hudspeath,Pile of Monangai,3,D'Andre Swift,RB,CHI,RB,DRAFT,141.8,15.8,20,41,4259545
+2026,Hudspeath,Pile of Monangai,3,CeeDee Lamb,WR,DAL,WR,DRAFT,183.5,18.4,52,24,4241389
+2026,Hudspeath,Pile of Monangai,3,DeVonta Smith,WR,PHI,WR,DRAFT,56.0,14.0,27,11,4241478
+2026,Hudspeath,Pile of Monangai,3,Trey McBride,TE,ARI,TE,DRAFT,132.5,13.2,29,19,4361307
+2026,Hudspeath,Pile of Monangai,3,Tank Dell,WR,HOU,FLEX,DRAFT,27.1,9.0,1,169,4366031
+2026,Hudspeath,Pile of Monangai,3,Jets D/ST,D/ST,NYJ,D/ST,ADD,49.0,4.9,,,-16020
+2026,Hudspeath,Pile of Monangai,3,Spencer Shrader,K,IND,K,ADD,123.1,12.3,,,4571557
+2026,Hudspeath,Pile of Monangai,3,Matthew Golden,WR,GB,Bench,DRAFT,146.9,14.7,3,120,4701936
+2026,Hudspeath,Pile of Monangai,3,Justice Hill,RB,BAL,Bench,DRAFT,57.4,5.7,1,108,4038441
+2026,Hudspeath,Pile of Monangai,3,Mike Washington Jr.,RB,LV,Bench,TRADE,39.3,3.9,,,4686658
+2026,Hudspeath,Pile of Monangai,3,Konata Mumpfield,WR,LAR,Bench,TRADE,37.3,3.7,,,4710855
+2026,Hudspeath,Pile of Monangai,3,Austin Ekeler,RB,WSH,Bench,ADD,25.3,4.2,,,3068267
+2026,Hudspeath,Pile of Monangai,3,Tutu Atwell,WR,LAR,Bench,ADD,17.0,2.4,,,4360797
+2026,Hudspeath,Pile of Monangai,3,Puka Nacua,WR,LAR,IR,TRADE,138.6,19.8,,,4426515
+2026,Hudspeath,Pile of Monangai,3,Kyle Monangai,RB,CHI,IR,DRAFT,56.8,14.2,5,96,4608686
+2026,KnardDawg,Spoiled Egbukas,11,Caleb Williams,QB,CHI,QB,DRAFT,110.3,18.4,3,94,4431611
+2026,KnardDawg,Spoiled Egbukas,11,Omarion Hampton,RB,LAC,RB,DRAFT,79.7,8.9,53,16,4685382
+2026,KnardDawg,Spoiled Egbukas,11,Emari Demercado,RB,HOU,RB,ADD,6.4,1.6,,,4362478
+2026,KnardDawg,Spoiled Egbukas,11,Justin Jefferson,WR,MIN,WR,DRAFT,91.6,11.4,55,27,4262921
+2026,KnardDawg,Spoiled Egbukas,11,DK Metcalf,WR,PIT,WR,DRAFT,75.8,8.4,5,70,4047650
+2026,KnardDawg,Spoiled Egbukas,11,Dalton Schultz,TE,HOU,TE,ADD,61.5,6.8,,,3117256
+2026,KnardDawg,Spoiled Egbukas,11,Khalil Shakir,WR,BUF,FLEX,ADD,67.2,7.5,,,4373678
+2026,KnardDawg,Spoiled Egbukas,11,Lions D/ST,D/ST,DET,D/ST,ADD,61.0,6.8,,,-16008
+2026,KnardDawg,Spoiled Egbukas,11,Tyler Bass,K,BUF,K,ADD,103.2,11.5,,,3917232
+2026,KnardDawg,Spoiled Egbukas,11,Brock Purdy,QB,SF,Bench,DRAFT,203.0,22.6,2,97,4361741
+2026,KnardDawg,Spoiled Egbukas,11,Emeka Egbuka,WR,TB,Bench,DRAFT,62.5,8.9,22,42,4567750
+2026,KnardDawg,Spoiled Egbukas,11,AJ Barner,TE,SEA,Bench,ADD,54.7,5.5,,,4576297
+2026,KnardDawg,Spoiled Egbukas,11,Kaelon Black,RB,SF,Bench,DRAFT,49.8,5.5,4,81,4696044
+2026,KnardDawg,Spoiled Egbukas,11,Rashid Shaheed,WR,SEA,Bench,ADD,35.5,4.4,,,4032473
+2026,KnardDawg,Spoiled Egbukas,11,Jaylen Wright,RB,MIA,Bench,ADD,6.6,0.9,,,4682745
+2026,KnardDawg,Spoiled Egbukas,11,T.J. Hockenson,TE,MIN,IR,ADD,68.3,8.5,,,4036133
+2026,KnardDawg,Spoiled Egbukas,11,Jake Ferguson,TE,DAL,IR,DRAFT,45.1,5.0,1,117,4242355
+2026,Pierson,Fart and Dart to IR,8,Bo Nix,QB,DEN,QB,ADD,130.8,14.5,,,4426338
+2026,Pierson,Fart and Dart to IR,8,Christian McCaffrey,RB,SF,RB,DRAFT,193.0,21.4,58,6,3117251
+2026,Pierson,Fart and Dart to IR,8,Ollie Gordon II,RB,MIA,RB,ADD,89.6,10.0,,,4711533
+2026,Pierson,Fart and Dart to IR,8,Tee Higgins,WR,CIN,WR,TRADE,144.9,16.1,,,4239993
+2026,Pierson,Fart and Dart to IR,8,Carnell Tate,WR,TEN,WR,TRADE,60.3,8.6,,,4871023
+2026,Pierson,Fart and Dart to IR,8,Isaiah Likely,TE,NYG,TE,DRAFT,129.0,14.3,3,83,4361050
+2026,Pierson,Fart and Dart to IR,8,Malik Washington,WR,MIA,FLEX,ADD,71.2,7.9,,,4569603
+2026,Pierson,Fart and Dart to IR,8,Chiefs D/ST,D/ST,KC,D/ST,ADD,65.0,7.2,,,-16012
+2026,Pierson,Fart and Dart to IR,8,Brandon Aubrey,K,DAL,K,DRAFT,98.8,9.9,3,100,3953687
+2026,Pierson,Fart and Dart to IR,8,Bijan Robinson,RB,ATL,Bench,DRAFT,180.2,18.0,67,5,4430807
+2026,Pierson,Fart and Dart to IR,8,Deshaun Watson,QB,CLE,Bench,ADD,139.3,15.5,,,3122840
+2026,Pierson,Fart and Dart to IR,8,Cam Ward,QB,TEN,Bench,ADD,119.7,13.3,,,4688380
+2026,Pierson,Fart and Dart to IR,8,Vikings D/ST,D/ST,MIN,Bench,ADD,105.0,11.7,,,-16016
+2026,Pierson,Fart and Dart to IR,8,Tre Tucker,WR,LV,Bench,ADD,94.2,9.4,,,4428718
+2026,Pierson,Fart and Dart to IR,8,Samaje Perine,RB,CIN,Bench,ADD,52.8,5.9,,,3116389
+2026,Pierson,Fart and Dart to IR,8,Jordan Addison,WR,MIN,IR,ADD,44.9,6.4,,,4429205
+2026,Pierson,Fart and Dart to IR,8,Jacory Croskey-Merritt,RB,WSH,IR,DRAFT,42.4,8.5,3,111,4575131
+2026,Riley,Wet K9,5,Bryce Young,QB,CAR,QB,ADD,154.7,17.2,,,4685720
+2026,Riley,Wet K9,5,Kenneth Walker III,RB,KC,RB,DRAFT,183.4,22.9,47,12,4567048
+2026,Riley,Wet K9,5,Chase Brown,RB,CIN,RB,DRAFT,106.2,11.8,56,18,4362238
+2026,Riley,Wet K9,5,Parker Washington,WR,JAX,WR,DRAFT,119.8,13.3,13,68,4432620
+2026,Riley,Wet K9,5,Malik Nabers,WR,NYG,WR,DRAFT,108.2,12.0,26,39,4595348
+2026,Riley,Wet K9,5,Mike Gesicki,TE,CIN,TE,ADD,72.1,8.0,,,3116164
+2026,Riley,Wet K9,5,DJ Moore,WR,BUF,FLEX,DRAFT,67.4,9.6,14,64,3915416
+2026,Riley,Wet K9,5,Bengals D/ST,D/ST,CIN,D/ST,ADD,70.0,7.8,,,-16004
+2026,Riley,Wet K9,5,Will Reichard,K,MIN,K,ADD,110.2,12.2,,,4567104
+2026,Riley,Wet K9,5,Kirk Cousins,QB,MIN,Bench,ADD,187.7,18.8,,,14880
+2026,Riley,Wet K9,5,Rhamondre Stevenson,RB,NE,Bench,DRAFT,101.7,10.2,11,67,4569173
+2026,Riley,Wet K9,5,Tucker Kraft,TE,GB,Bench,DRAFT,74.8,7.5,7,75,4572680
+2026,Riley,Wet K9,5,Josh Downs,WR,KC,Bench,ADD,71.9,7.2,,,4688813
+2026,Riley,Wet K9,5,Germie Bernard,WR,PIT,Bench,ADD,51.8,5.8,,,4685261
+2026,Riley,Wet K9,5,Corey Kiner,RB,NE,Bench,ADD,33.5,3.4,,,4431431
+2026,Riley,Wet K9,5,TreVeyon Henderson,RB,NE,IR,DRAFT,31.3,5.2,7,72,4432710
+2026,Riley,Wet K9,5,Tyreek Hill,WR,FA,IR,ADD,0,0.0,,,3116406
+2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,C.J. Stroud,QB,HOU,QB,ADD,184.5,20.5,,,4432577
+2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Jahmyr Gibbs,RB,DET,RB,DRAFT,232.9,25.9,70,1,4429795
+2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Javonte Williams,RB,DAL,RB,DRAFT,154.8,15.5,40,32,4361579
+2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Zay Flowers,WR,BAL,WR,DRAFT,114.4,12.7,34,37,4429615
+2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Ryan Flournoy,WR,DAL,WR,ADD,83.9,8.4,,,5083754
+2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Chig Okonkwo,TE,WSH,TE,ADD,37.8,5.4,,,4360635
+2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Jordyn Tyson,WR,NO,FLEX,DRAFT,16.5,8.2,2,136,4880281
+2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Bills D/ST,D/ST,BUF,D/ST,ADD,63.0,7.0,,,-16002
+2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Ka'imi Fairbairn,K,HOU,K,DRAFT,106.9,11.9,1,125,2971573
+2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Christian Watson,WR,GB,Bench,DRAFT,157.6,15.8,10,77,4248528
+2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Denzel Boston,WR,CLE,Bench,ADD,88.8,8.9,,,4832800
+2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Seahawks D/ST,D/ST,SEA,Bench,DRAFT,80.0,8.0,1,113,-16026
+2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Kyle Pitts Sr.,TE,ATL,Bench,DRAFT,63.5,6.3,4,82,4360248
+2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,J.K. Dobbins,RB,DEN,Bench,DRAFT,58.0,6.4,4,105,4241985
+2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Zach Charbonnet,RB,SEA,Bench,DRAFT,22.9,7.6,3,107,4426385
+2026,Rooney/Jackson,Stop and Smell Zay Flowers,6,Lamar Jackson,QB,BAL,IR,DRAFT,79.1,15.8,13,28,3916387
+2026,Salty,P-U Later,1,Jayden Daniels,QB,WSH,QB,TRADE,136.0,19.4,,,4426348
+2026,Salty,P-U Later,1,Chuba Hubbard,RB,CAR,RB,DRAFT,165.3,18.4,4,103,4241416
+2026,Salty,P-U Later,1,Emmett Johnson,RB,KC,RB,ADD,85.9,9.5,,,4832955
+2026,Salty,P-U Later,1,Luther Burden III,WR,CHI,WR,DRAFT,111.8,12.4,27,61,4685278
+2026,Salty,P-U Later,1,Jaylen Waddle,WR,DEN,WR,TRADE,67.0,7.4,,,4372016
+2026,Salty,P-U Later,1,Brock Bowers,TE,LV,TE,DRAFT,124.8,15.6,42,20,4432665
+2026,Salty,P-U Later,1,Stefon Diggs,WR,WSH,FLEX,TRADE,92.6,11.6,,,2976212
+2026,Salty,P-U Later,1,Texans D/ST,D/ST,HOU,D/ST,ADD,58.0,6.4,,,-16034
+2026,Salty,P-U Later,1,Cam Little,K,JAX,K,ADD,106.3,11.8,,,4686361
+2026,Salty,P-U Later,1,Blake Corum,RB,LAR,Bench,TRADE,109.0,10.9,,,4429096
+2026,Salty,P-U Later,1,Antonio Williams,WR,WSH,Bench,ADD,58.6,6.5,,,5081432
+2026,Salty,P-U Later,1,Mark Andrews,TE,BAL,Bench,ADD,55.4,5.5,,,3116365
+2026,Salty,P-U Later,1,Commanders D/ST,D/ST,WSH,Bench,ADD,54.0,6.0,,,-16028
+2026,Salty,P-U Later,1,Adonai Mitchell,WR,NYJ,Bench,ADD,47.9,8.0,,,4597500
+2026,Salty,P-U Later,1,Travis Etienne Jr.,RB,NO,Bench,DRAFT,30.3,7.6,32,43,4239996
+2026,Salty,P-U Later,1,Romeo Doubs,WR,NE,IR,ADD,51.1,8.5,,,4361432
+2026,Salty,P-U Later,1,Terrance Ferguson,TE,LAR,IR,ADD,15.8,5.3,1,173,4570037
+2026,Shep,Ashton Scenty's Stank Tank,4,Patrick Mahomes,QB,KC,QB,DRAFT,177.4,19.7,1,176,3139477
+2026,Shep,Ashton Scenty's Stank Tank,4,Jonathan Taylor,RB,IND,RB,DRAFT,151.9,15.2,65,10,4242335
+2026,Shep,Ashton Scenty's Stank Tank,4,Jaylen Warren,RB,PIT,RB,DRAFT,134.9,15.0,4,102,4569987
+2026,Shep,Ashton Scenty's Stank Tank,4,Rome Odunze,WR,CHI,WR,DRAFT,72.8,8.1,14,56,4431299
+2026,Shep,Ashton Scenty's Stank Tank,4,Jakobi Meyers,WR,JAX,WR,DRAFT,67.5,7.5,1,170,3916433
+2026,Shep,Ashton Scenty's Stank Tank,4,George Kittle,TE,SF,TE,DRAFT,105.7,11.7,3,62,3040151
+2026,Shep,Ashton Scenty's Stank Tank,4,Ashton Jeanty,RB,LV,FLEX,DRAFT,126.7,12.7,44,34,4890973
+2026,Shep,Ashton Scenty's Stank Tank,4,Jaguars D/ST,D/ST,JAX,D/ST,ADD,78.0,8.7,,,-16030
+2026,Shep,Ashton Scenty's Stank Tank,4,Matt Gay,K,LV,K,ADD,103.5,10.3,,,4249087
+2026,Shep,Ashton Scenty's Stank Tank,4,Jaxon Smith-Njigba,WR,SEA,Bench,DRAFT,223.7,22.4,62,21,4430878
+2026,Shep,Ashton Scenty's Stank Tank,4,Matthew Stafford,QB,LAR,Bench,DRAFT,162.6,16.3,1,109,12483
+2026,Shep,Ashton Scenty's Stank Tank,4,Xavier Hutchinson,WR,HOU,Bench,ADD,68.1,7.6,,,4686422
+2026,Shep,Ashton Scenty's Stank Tank,4,Rachaad White,RB,WSH,Bench,DRAFT,66.4,8.3,1,132,4697815
+2026,Shep,Ashton Scenty's Stank Tank,4,Brenton Strange,TE,JAX,Bench,ADD,64.5,7.2,,,4430539
+2026,Shep,Ashton Scenty's Stank Tank,4,Seth McGowan,RB,IND,Bench,TRADE,43.9,4.4,,,4686468
+2026,Shep,Ashton Scenty's Stank Tank,4,Wan'Dale Robinson,WR,TEN,IR,DRAFT,62.3,6.9,2,93,4569587
+2026,Shep,Ashton Scenty's Stank Tank,4,Roman Wilson,WR,PIT,IR,ADD,37.8,7.6,,,4431492
+2026,T-How,Silent But Dowdle,12,Jared Goff,QB,DET,QB,DRAFT,167.8,18.6,1,151,3046779
+2026,T-How,Silent But Dowdle,12,Tony Pollard,RB,TEN,RB,DRAFT,129.4,14.4,6,88,3916148
+2026,T-How,Silent But Dowdle,12,Tyler Allgeier,RB,ARI,RB,TRADE,80.6,8.1,,,4373626
+2026,T-How,Silent But Dowdle,12,Ja'Marr Chase,WR,CIN,WR,DRAFT,161.8,18.0,66,2,4362628
+2026,T-How,Silent But Dowdle,12,Nico Collins,WR,HOU,WR,DRAFT,97.5,13.9,38,17,4258173
+2026,T-How,Silent But Dowdle,12,Tyler Warren,TE,IND,TE,DRAFT,66.5,8.3,19,53,4431459
+2026,T-How,Silent But Dowdle,12,Rico Dowdle,RB,PIT,FLEX,DRAFT,42.5,7.1,2,78,4038815
+2026,T-How,Silent But Dowdle,12,Bears D/ST,D/ST,CHI,D/ST,ADD,73.0,8.1,,,-16003
+2026,T-How,Silent But Dowdle,12,Evan McPherson,K,CIN,K,ADD,87.0,9.7,1,160,4360234
+2026,T-How,Silent But Dowdle,12,Dak Prescott,QB,DAL,Bench,DRAFT,201.9,20.2,5,58,2577417
+2026,T-How,Silent But Dowdle,12,Mike Evans,WR,SF,Bench,DRAFT,75.5,12.6,14,69,16737
+2026,T-How,Silent But Dowdle,12,Kenny Gainwell,RB,TB,Bench,ADD,56.1,6.2,,,4371733
+2026,T-How,Silent But Dowdle,12,Omar Cooper Jr.,WR,NYJ,Bench,ADD,52.6,8.8,,,4723820
+2026,T-How,Silent But Dowdle,12,Bam Knight,RB,ARI,Bench,ADD,24.0,2.7,,,4427728
+2026,T-How,Silent But Dowdle,12,Tyjae Spears,RB,TEN,Bench,ADD,22.9,3.3,,,4428557
+2026,T-How,Silent But Dowdle,12,Jeremiyah Love,RB,ARI,IR,DRAFT,47.9,8.0,39,22,4870808
+2026,Tayski,Weis Cookin Rice,10,Jordan Love,QB,GB,QB,TRADE,195.8,19.6,,,4036378
+2026,Tayski,Weis Cookin Rice,10,James Cook III,RB,BUF,RB,DRAFT,164.1,18.2,65,8,4379399
+2026,Tayski,Weis Cookin Rice,10,Bucky Irving,RB,TB,RB,DRAFT,148.1,16.5,19,26,4596448
+2026,Tayski,Weis Cookin Rice,10,Keenan Allen,WR,SF,WR,ADD,69.7,7.7,,,15818
+2026,Tayski,Weis Cookin Rice,10,Rashee Rice,WR,KC,WR,DRAFT,64.4,9.2,39,29,4428331
+2026,Tayski,Weis Cookin Rice,10,Travis Kelce,TE,KC,TE,DRAFT,86.8,9.6,3,50,15847
+2026,Tayski,Weis Cookin Rice,10,Deebo Samuel Sr.,WR,SF,FLEX,DRAFT,76.8,12.8,1,122,3126486
+2026,Tayski,Weis Cookin Rice,10,Broncos D/ST,D/ST,DEN,D/ST,DRAFT,68.0,7.6,1,110,-16007
+2026,Tayski,Weis Cookin Rice,10,Harrison Butker,K,KC,K,DRAFT,72.4,8.0,1,144,3055899
+2026,Tayski,Weis Cookin Rice,10,Kyren Williams,RB,LAR,Bench,DRAFT,145.3,14.5,36,31,4430737
+2026,Tayski,Weis Cookin Rice,10,Aaron Jones Sr.,RB,MIN,Bench,DRAFT,86.9,9.7,3,133,3042519
+2026,Tayski,Weis Cookin Rice,10,KC Concepcion,WR,CLE,Bench,TRADE,80.1,8.0,,,4870653
+2026,Tayski,Weis Cookin Rice,10,Courtland Sutton,WR,DEN,Bench,ADD,51.1,5.7,,,3128429
+2026,Tayski,Weis Cookin Rice,10,Chris Godwin Jr.,WR,TB,Bench,ADD,43.4,4.8,,,3116165
+2026,Tayski,Weis Cookin Rice,10,Dolphins D/ST,D/ST,MIA,Bench,ADD,38.0,4.2,,,-16015
+2026,Tayski,Weis Cookin Rice,10,Davante Adams,WR,LAR,IR,DRAFT,87.0,14.5,16,38,16800
