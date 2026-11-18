@@ -156,6 +156,9 @@ table.hm tr.dimmed { opacity: 0.15; }
 .wh-chip b { color: #fcd34d; font-weight: 700; margin-left: 4px; }
 .wh-tag { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 1px 6px; border-radius: 3px; background: #1e2433; color: #64748b; margin-left: 6px; vertical-align: 1px; }
 .wh-tag.moved { background: #3b2800; color: #fcd34d; }
+.wh-tag.trade { background: #3b1d4a; color: #d8b4fe; }
+.wh-tag.waiver { background: #0c3a40; color: #67e8f9; }
+.wh-tag.other { background: #3b2800; color: #fcd34d; }
 .owner-card.selected-b { border-color: #60a5fa; background: #0b1424; }
 .owner-card.sm { padding: 6px 10px; } .owner-card.sm .owner-card-name { font-size: 11.5px; }
 .owner-card.retired .owner-card-name { color: #64748b; }
@@ -2118,7 +2121,7 @@ function renderWhoHasHim() {
           const same = r.final_owner && r.final_owner === r.drafted_by;
           const fin = !r.final_owner ? '<span style="color:#475569">Dropped &middot; not on a final roster</span>'
             : same ? `${ownerLink(r.final_owner, r.season)}<span class="wh-tag">kept</span>`
-            : `${ownerLink(r.final_owner, r.season)}<span class="wh-tag moved">${r.acquired === 'TRADE' ? 'via trade' : r.acquired === 'ADD' ? 'waivers / FA' : (r.acquired || '').toLowerCase()}</span>`;
+            : `${ownerLink(r.final_owner, r.season)}<span class="wh-tag ${r.acquired === 'TRADE' ? 'trade' : r.acquired === 'ADD' ? 'waiver' : 'other'}">${r.acquired === 'TRADE' ? 'via trade' : r.acquired === 'ADD' ? 'waivers / FA' : (r.acquired || '').toLowerCase()}</span>`;
           return `<tr><td>${r.season}</td>
             <td>${r.drafted_by ? `${ownerLink(r.drafted_by, r.season)}<div class="rec-sub" style="font-style:italic">${r.drafted_team || ''}</div>` : '<span style="color:#475569">Undrafted</span>'}</td>
             <td class="num" style="${r.draft_price != null ? 'color:#fcd34d;font-weight:700' : ''}">${whMoney(r.draft_price)}</td>
