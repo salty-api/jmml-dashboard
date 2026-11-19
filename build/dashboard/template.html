@@ -766,6 +766,16 @@ function bubbleStyle(owner, ao) {
     order:           active ? 0 : 1,
   };
 }
+// 2026 season scatter: faded team (owner) colors instead of greys
+function teamBubbleStyle(owner, ao) {
+  const active = ao === owner, dim = !!ao && !active, c = ownerColor(owner);
+  return {
+    backgroundColor: active ? GOLD + 'dd' : c + (dim ? '14' : '40'),
+    borderColor:     active ? GOLD : c + (dim ? '22' : '80'),
+    borderWidth:     active ? 2 : 1,
+    order:           active ? 0 : 1,
+  };
+}
 function lineStyle(owner, ao) {
   const active = ao === owner, dim = !!ao && !active;
   const c = active ? GOLD : greyFor(owner) + (dim ? '33' : 'cc');
@@ -2218,7 +2228,7 @@ function renderSeasonScatter(table) {
       label: r.owner, ownerKey: r.owner,
       data: [{ x: r.ppg, y: r.papg, owner: r.owner, team: r.team }],
       pointRadius: 7, pointHoverRadius: 9,
-      ...bubbleStyle(r.owner, activeOwner),
+      ...teamBubbleStyle(r.owner, activeOwner),
     })) },
     options: {
       responsive: true, maintainAspectRatio: false,
@@ -2550,7 +2560,8 @@ function applyHighlight() {
   ['scatter-alltime', 'scatter-2025'].forEach(id => {
     const c = chartInstances[id];
     if (!c) return;
-    c.data.datasets.forEach(ds => Object.assign(ds, bubbleStyle(ds.ownerKey, ao)));
+    const sty = id === 'scatter-2025' ? teamBubbleStyle : bubbleStyle;
+    c.data.datasets.forEach(ds => Object.assign(ds, sty(ds.ownerKey, ao)));
     c.update('none');
   });
   const luck = chartInstances['luck-chart'];
