@@ -537,7 +537,7 @@ tr.rm-sep td { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em;
 <!-- ══════════ TAB: RIVALRY ══════════ -->
 <div class="tab-panel" id="tab-rivalry">
   <h1>Rivalry</h1>
-  <p class="subtitle">Pick any two owners to see their full head-to-head history</p>
+  <p class="subtitle">Pick any two owners to see their full head-to-head history <span class="toggle-pill on" id="riv-retired-toggle" onclick="toggleRivRetired()"><span class="pill-dot"></span>Hide Retired</span></p>
   <div class="section-title" style="margin-bottom:8px">Owner A <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">(gold)</span></div>
   <div class="owner-cards" id="riv-a" style="margin-bottom:14px"></div>
   <div class="section-title" style="margin-bottom:8px">Owner B <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">(blue)</span></div>
@@ -1827,6 +1827,12 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeGameMod
 // RIVALRY TAB
 // ══════════════════════════════════════════════════════
 let rivA = 'Buser', rivB = 'Salty';
+let rivHideRetired = true;
+function toggleRivRetired() {
+  rivHideRetired = !rivHideRetired;
+  document.getElementById('riv-retired-toggle').classList.toggle('on', rivHideRetired);
+  renderRivalry();
+}
 function pickRiv(which, o) {
   if (which === 'a') rivA = o; else rivB = o;
   setHash(['rivalry', rivA, rivB]);
@@ -1836,7 +1842,7 @@ function openRivalry(a, b) { rivA = a; rivB = b; setHash(['rivalry', rivA, rivB]
 
 function renderRivalry() {
   const all = [...[...META.current_owners].sort(), ...META.owners.filter(o => !isCurrent(o)).sort()];
-  const chips = (which, sel, cls) => all.map(o =>
+  const chips = (which, sel, cls) => all.filter(o => !rivHideRetired || isCurrent(o) || o === rivA || o === rivB).map(o =>
     `<div class="owner-card sm ${o === sel ? cls : ''} ${isCurrent(o) ? '' : 'retired'}" onclick="pickRiv('${which}','${o}')"><div class="owner-card-name">${o}</div></div>`).join('');
   document.getElementById('riv-a').innerHTML = chips('a', rivA, 'selected');
   document.getElementById('riv-b').innerHTML = chips('b', rivB, 'selected-b');
