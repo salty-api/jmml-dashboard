@@ -5,8 +5,8 @@ name = "jmml-bot"
 main = "worker.js"
 compatibility_date = "2026-10-01"
 
-# Optional per visitor rate limit (20 questions per minute per IP).
-# [[ratelimits]]
-# name = "RATE_LIMITER"
-# namespace_id = "1002"
-# simple = { limit = 20, period = 60 }
+# Per visitor rate limit (20 questions per minute per IP). Lower it if abuse shows up.
+[[ratelimits]]
+name = "RATE_LIMITER"
+namespace_id = "1002"
+simple = { limit = 20, period = 60 }
