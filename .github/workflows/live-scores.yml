@@ -75,6 +75,7 @@ jobs:
           python scripts/build_data.py
           python scripts/validate_build.py
           cp dashboard/index.html ../index.html
+          mkdir -p ../playoffs && sed 's#<title>[^<]*</title>#<title>Playoff Path · JMML Fantasy Football</title>#' dashboard/index.html > ../playoffs/index.html
           cp dashboard/data.json ../data.json
           if [ "${{ steps.gate.outputs.cards }}" = "1" ]; then
             CHROME="$(command -v google-chrome || command -v chromium-browser || command -v chromium)" python scripts/build_share_pages.py
@@ -82,7 +83,7 @@ jobs:
           cd ..
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html data.json weekly share owner rivalry season all-time team-history records who-has-him build/data/processed/live.json "build/JMML Finishes - Sheets (1).xlsx"
+          git add index.html data.json playoffs weekly share owner rivalry season all-time team-history records who-has-him build/data/processed/live.json "build/JMML Finishes - Sheets (1).xlsx"
           git diff --cached --quiet && { echo "No change"; exit 0; }
           git commit -m "Live scores $(TZ=America/Los_Angeles date '+%Y-%m-%d %H:%M')"
           git push

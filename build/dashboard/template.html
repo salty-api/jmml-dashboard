@@ -324,6 +324,7 @@ tr.rm-sep td { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em;
     <button class="tab-btn" onclick="showTab('rivalry',this)">Rivalry</button>
     <button class="tab-btn" onclick="showTab('whohashim',this)">Who Has Him</button>
     <button class="tab-btn" id="season-tab-btn" onclick="showTab('season',this)">Season</button>
+    <button class="tab-btn" id="path-tab-btn" style="display:none" onclick="showTab('path',this)">Playoff Path</button>
   </div>
   <button class="share-btn" id="share-btn" onclick="copyShare()" title="Copy a link to this view that previews nicely when shared">Share</button>
   <span class="nav-right" id="updated-label"></span>
@@ -651,6 +652,48 @@ tr.rm-sep td { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em;
   </div>
 </div>
 
+<!-- ══════════ TAB 5: PLAYOFF PATH (final 5 weeks only) ══════════ -->
+<div class="tab-panel" id="tab-path">
+  <h1 id="path-h1">Playoff Path</h1>
+  <p class="subtitle" id="path-sub"></p>
+
+  <div class="section">
+    <div class="section-title">Standings <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; by wins, then points for &middot; top 6 make the playoffs</span></div>
+    <table class="data-table" id="path-standings">
+      <thead><tr><th class="num">#</th><th>Owner</th><th>Team</th><th class="num">W</th><th class="num">L</th><th class="num">PF</th><th class="num">Left</th><th>Playoff %</th></tr></thead>
+      <tbody id="path-st-body"></tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Finish Position Odds <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; chance each team ends the regular season in each spot &middot; simulated seasons &middot; top 6 make the playoffs</span></div>
+    <div style="overflow-x:auto"><table class="data-table"><thead id="path-pos-head"></thead><tbody id="path-pos-body"></tbody></table></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Path Explorer <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; pick a team, then pick game results to see how its playoff odds update</span></div>
+    <div class="owner-cards" id="path-chips" style="margin-bottom:14px"></div>
+    <div class="kpi-row" id="path-kpis" style="margin-bottom:18px"></div>
+    <div class="chart-row">
+      <div>
+        <div class="section-title" style="font-size:11px">Win Scenarios <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; playoff odds by this team's remaining wins</span></div>
+        <table class="data-table"><thead><tr><th>Remaining wins</th><th>Playoff %</th><th class="num">Likelihood</th></tr></thead><tbody id="path-scen-body"></tbody></table>
+      </div>
+      <div>
+        <div class="section-title" style="font-size:11px">Rooting Guide <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; last 3 weeks, games this team is not in, ranked by swing in its playoff odds &middot; click a team to lock in a win</span></div>
+        <table class="data-table"><thead><tr><th class="num">Swing</th><th>Wk</th><th>Game</th><th class="num" title="Selected team's playoff odds if the first-listed side wins">If 1st wins</th><th class="num">If 2nd wins</th></tr></thead><tbody id="path-root-body"></tbody></table>
+      </div>
+    </div>
+    <p style="margin-top:10px"><button class="tab-btn" style="border:1px solid #1e293b" onclick="pathReset()">Clear locked results</button> <span id="path-picks-note" style="font-size:11px;color:#64748b;margin-left:8px"></span></p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Most Impactful Games <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; final 3 weeks &middot; swing = change in a team's playoff odds between the two outcomes, in percentage points &middot; updates with locked results</span></div>
+    <table class="data-table"><thead><tr><th>Wk</th><th>Game</th><th class="num" title="Sum of every team's swing, in points">Total swing</th><th>Teams it moves most</th></tr></thead><tbody id="path-impact-body"></tbody></table>
+    <p style="font-size:10px;color:#334155;margin-top:6px">Odds come from 40,000 simulated finishes (same scoring model as the Season tab). Locking results keeps only the simulations that match them, which is a Bayesian update: P(playoffs | results) = P(playoffs and results) / P(results). With many locks the sample shrinks and small swings get noisy.</p>
+  </div>
+</div>
+
 <!-- ══════════ H2H MODAL ══════════ -->
 <div class="modal-bg" id="h2h-modal" onclick="if(event.target===this)closeModal()">
   <div class="modal" style="position:relative">
@@ -805,6 +848,7 @@ function destroyChart(id) { if (chartInstances[id]) { chartInstances[id].destroy
 // ══════════════════════════════════════════════════════
 const tabInitialized = {};
 
+const ON_PLAYOFFS = /^\/playoffs\/?$/.test(location.pathname);
 function showTab(name, btn, fromHash) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -816,6 +860,7 @@ function showTab(name, btn, fromHash) {
     if (name === 'history') renderHistory();
     if (name === 'owner')   renderOwner();
     if (name === 'season')  renderSeason();
+    if (name === 'path')    renderPath();
     if (name === 'records') renderRecords();
     if (name === 'rivalry') renderRivalry();
     if (name === 'whohashim') renderWhoHasHim();
@@ -833,7 +878,7 @@ function routeFromHash() {
   const parts = location.hash.slice(1).split('/').map(decodeURIComponent);
   const name = parts[0];
   const btn = document.querySelector(`.tab-btn[onclick*="'${name}'"]`);
-  if (!btn) return;
+  if (!btn || (btn.style.display === 'none' && !(name === 'path' && ON_PLAYOFFS))) return;
   if (name === 'owner' && META.current_owners.includes(parts[1])) {
     document.getElementById('owner-select').value = parts[1];
     renderOwnerCards();
@@ -1913,14 +1958,31 @@ function seasonModel(games) {
 }
 const seasonRegular = () => MATCHUPS.filter(m => m.year === SEASON_YEAR && m.game_type !== 'Playoffs' && m.opponent);
 
-function renderOdds(games, table) {
-  const mu = seasonModel(games);
-  // Remaining games: ESPN's schedule when available (the sheet's future weeks can be inconsistent); else the sheet's.
+// Remaining regular-season games: ESPN's schedule when available (the sheet's future weeks can be inconsistent); else the sheet's.
+function remainingGames(mu) {
   const played = new Set(seasonRegular().filter(m => m.score > 0).map(m => m.week + '|' + m.owner));
-  const remaining = (LIVE && LIVE.year === SEASON_YEAR && LIVE.schedule
+  return (LIVE && LIVE.year === SEASON_YEAR && LIVE.schedule
       ? LIVE.schedule.filter(g => !(played.has(g.week + '|' + g.a) && played.has(g.week + '|' + g.b)))
       : uniquePairs(seasonRegular().filter(m => !(m.score > 0)))
     ).filter(g => mu[g.a] != null && mu[g.b] != null);
+}
+const oddsLabel = p => p >= 99.95 ? 'Clinched' : p <= 0.05 ? 'Out' : (p < 1 ? '<1' : p > 99 ? '>99' : Math.round(p)) + '%';
+
+// Finish-position matrix: rows sorted by expected finish, cells shaded by probability. res[o].pos[i] = sims ending in spot i+1.
+function renderPosMatrix(res, owners, N, headId, bodyId) {
+  const ev = o => res[o].pos.reduce((a, c, i) => a + c * (i + 1), 0) / N;
+  const prows = [...owners].sort((a, b) => ev(a) - ev(b));
+  document.getElementById(headId).innerHTML = `<tr><th>Owner</th>${owners.map((_, i) => `<th class="num"${i === PLAYOFF_TEAMS - 1 ? ' style="border-right:2px solid #475569"' : ''}>${i + 1}</th>`).join('')}<th class="num">Playoffs</th></tr>`;
+  document.getElementById(bodyId).innerHTML = prows.map(o => `<tr data-owner="${o}" onclick="setActiveOwner('${o}')">
+    <td><span class="owner-dot" style="background:${greyFor(o)}"></span>${o}</td>
+    ${res[o].pos.map((c, i) => { const p = c / N * 100;
+      return `<td class="num" style="${p >= 0.5 ? `background:rgba(74,222,128,${Math.min(0.75, p / 40).toFixed(2)});` : 'color:#334155;'}${i === PLAYOFF_TEAMS - 1 ? 'border-right:2px solid #475569;' : ''}">${p < 0.5 ? (p > 0 ? '<1' : '–') : Math.round(p)}</td>`; }).join('')}
+    <td class="num" style="font-weight:700">${oddsLabel(res[o].pos.slice(0, PLAYOFF_TEAMS).reduce((a, c) => a + c, 0) / N * 100)}</td></tr>`).join('');
+}
+
+function renderOdds(games, table) {
+  const mu = seasonModel(games);
+  const remaining = remainingGames(mu);
   const N = 10000, owners = table.map(r => r.owner);
   const base = Object.fromEntries(table.map(r => [r.owner, { w: r.w, pf: r.pf }]));
   const res = Object.fromEntries(owners.map(o => [o, { po: 0, s1: 0, tp: 0, wsum: 0, wins: [], pos: owners.map(() => 0) }]));
@@ -1948,15 +2010,7 @@ function renderOdds(games, table) {
     <td><div class="odds-bar"><span style="width:${r.tp}%;background:#a16207"></span><b>${r.tp <= 0.05 ? '0%' : label(r.tp)}</b></div></td>
     <td class="num">${fmt1(r.pw)}</td><td class="num">${r.lo}–${r.hi}</td></tr>`).join('');
 
-  // Finish-position matrix: rows sorted by expected finish, cells shaded by probability
-  const ev = o => res[o].pos.reduce((a, c, i) => a + c * (i + 1), 0) / N;
-  const prows = [...owners].sort((a, b) => ev(a) - ev(b));
-  document.getElementById('pos-head').innerHTML = `<tr><th>Owner</th>${owners.map((_, i) => `<th class="num"${i === PLAYOFF_TEAMS - 1 ? ' style="border-right:2px solid #475569"' : ''}>${i + 1}</th>`).join('')}<th class="num">Playoffs</th></tr>`;
-  document.getElementById('pos-body').innerHTML = prows.map(o => `<tr data-owner="${o}" onclick="setActiveOwner('${o}')">
-    <td><span class="owner-dot" style="background:${greyFor(o)}"></span>${o}</td>
-    ${res[o].pos.map((c, i) => { const p = c / N * 100;
-      return `<td class="num" style="${p >= 0.5 ? `background:rgba(74,222,128,${Math.min(0.75, p / 40).toFixed(2)});` : 'color:#334155;'}${i === PLAYOFF_TEAMS - 1 ? 'border-right:2px solid #475569;' : ''}">${p < 0.5 ? (p > 0 ? '<1' : '–') : Math.round(p)}</td>`; }).join('')}
-    <td class="num" style="font-weight:700">${label(res[o].pos.slice(0, PLAYOFF_TEAMS).reduce((a, c) => a + c, 0) / N * 100)}</td></tr>`).join('');
+  renderPosMatrix(res, owners, N, 'pos-head', 'pos-body');
 }
 
 // Spread inflation, fitted so the live win % tracks ESPN's own winProbability (a plain sqrt(f) shrink was overconfident, e.g. 95% vs ESPN's 88%).
@@ -2014,6 +2068,160 @@ function renderPreview(games, table, lastWeek) {
     </div>`; }).join('');
 }
 
+
+// ══════════════════════════════════════════════════════
+// PLAYOFF PATH (final 5 weeks): standings, finish odds, Bayesian path explorer
+// ══════════════════════════════════════════════════════
+const PATH_N = 40000, PATH_WINDOW = 3, PATH_SHOW_WEEKS = 5, PATH_MIN = 150;
+let pathData = null, pathSel = null, pathPicks = {};
+
+function pathInfo() {
+  const reg = seasonRegular(), games = seasonGames();
+  if (!reg.length || !games.length) return { show: false };
+  const maxWeek = Math.max(...reg.map(m => m.week)), lastWeek = Math.max(...games.map(m => m.week));
+  return { maxWeek, lastWeek, show: lastWeek < maxWeek && lastWeek + 1 >= maxWeek - (PATH_SHOW_WEEKS - 1) };
+}
+
+// Simulate once, keeping each season's game results and playoff field so any set of results can be conditioned on later.
+function pathSim(table, mu, remaining) {
+  const owners = table.map(r => r.owner), T = owners.length, G = remaining.length, N = PATH_N;
+  const idx = Object.fromEntries(owners.map((o, i) => [o, i]));
+  const ga = remaining.map(g => idx[g.a]), gb = remaining.map(g => idx[g.b]), m = owners.map(o => mu[o]);
+  const winA = new Uint8Array(N * G), made = new Uint8Array(N * T);
+  const pos = Object.fromEntries(owners.map(o => [o, { pos: owners.map(() => 0) }]));
+  const w = new Float64Array(T), pf = new Float64Array(T), order = owners.map((_, i) => i);
+  for (let n = 0; n < N; n++) {
+    for (let t = 0; t < T; t++) { w[t] = table[t].w; pf[t] = table[t].pf; }
+    for (let g = 0; g < G; g++) {
+      const sa = m[ga[g]] + LEAGUE_SD * randn(), sb = m[gb[g]] + LEAGUE_SD * randn();
+      pf[ga[g]] += sa; pf[gb[g]] += sb;
+      if (sa > sb) { w[ga[g]]++; winA[n * G + g] = 1; } else w[gb[g]]++;
+    }
+    order.sort((x, y) => w[y] - w[x] || pf[y] - pf[x]);
+    for (let i = 0; i < T; i++) { pos[owners[order[i]]].pos[i]++; if (i < PLAYOFF_TEAMS) made[n * T + order[i]] = 1; }
+  }
+  return { owners, idx, remaining, T, G, N, winA, made, pos, ga, gb };
+}
+
+// Simulations matching every locked result: the Bayesian "evidence"
+function pathMatch(picks) {
+  const D = pathData, keys = Object.keys(picks).map(Number), out = [];
+  for (let n = 0; n < D.N; n++) {
+    let ok = true;
+    for (const g of keys) if (D.winA[n * D.G + g] !== picks[g]) { ok = false; break; }
+    if (ok) out.push(n);
+  }
+  return out;
+}
+
+function renderPath() {
+  const info = pathInfo(), games = seasonGames(), table = seasonTable(games), mu = seasonModel(games);
+  let remaining = remainingGames(mu);
+  // The in-progress week is treated as final: the favorite (ESPN-based live win %) wins, and each team banks its projected points.
+  const lw = LIVE && LIVE.year === SEASON_YEAR && LIVE.week === info.lastWeek + 1 ? LIVE : null;
+  if (lw) {
+    for (const g of lw.games) {
+      const a = table.find(t => t.owner === g.a), b = table.find(t => t.owner === g.b);
+      if (!a || !b) continue;
+      const aWins = liveWinProb(g, true) >= 0.5;
+      a.pf += g.a_proj || g.a_pts; b.pf += g.b_proj || g.b_pts;
+      (aWins ? a : b).w++; (aWins ? b : a).l++;
+    }
+    table.sort((x, y) => y.w - x.w || y.pf - x.pf);
+    remaining = remaining.filter(g => g.week !== lw.week);
+  }
+  info.through = lw ? lw.week : info.lastWeek;
+  document.getElementById('path-h1').textContent = `${SEASON_YEAR} Playoff Path`;
+  document.getElementById('path-sub').textContent = `Through Week ${info.through}${lw ? ' (Week ' + lw.week + ' assumed final: favorites win, projected points)' : ''} · ${info.maxWeek - info.through} regular-season week${info.maxWeek - info.through === 1 ? '' : 's'} left · who is in, who is out, and which games decide it`;
+  pathData = pathSim(table, mu, remaining);
+  pathData.table = table;
+  pathData.winStart = info.maxWeek - PATH_WINDOW + 1;
+  pathData.win = remaining.map((g, i) => i).filter(i => remaining[i].week >= pathData.winStart);
+  pathPicks = {};
+  const D = pathData, po = o => D.pos[o].pos.slice(0, PLAYOFF_TEAMS).reduce((a, c) => a + c, 0) / D.N * 100;
+  const left = {}; remaining.forEach(g => { left[g.a] = (left[g.a] || 0) + 1; left[g.b] = (left[g.b] || 0) + 1; });
+
+  document.getElementById('path-st-body').innerHTML = table.map((r, i) => `<tr data-owner="${r.owner}" onclick="pathPick('${r.owner}')" style="${i === PLAYOFF_TEAMS - 1 ? 'border-bottom:2px solid #475569' : ''}">
+    <td class="num" style="color:#334155">${i + 1}</td>
+    <td><span class="logo-cell">${logo(r.owner, SEASON_YEAR, 24)}${r.owner}</span></td>
+    <td style="color:#94a3b8;font-size:11px"><span class="team-name">${r.team}</span></td>
+    <td class="num" style="color:#4ade80">${r.w}</td><td class="num" style="color:#f87171">${r.l}</td>
+    <td class="num">${Math.round(r.pf)}</td><td class="num">${left[r.owner] || 0}</td>
+    <td><div class="odds-bar"><span style="width:${po(r.owner)}%"></span><b>${oddsLabel(po(r.owner))}</b></div></td></tr>`).join('');
+  renderPosMatrix(D.pos, D.owners, D.N, 'path-pos-head', 'path-pos-body');
+  if (!pathSel || !D.idx.hasOwnProperty(pathSel)) pathSel = [...D.owners].sort((a, b) => Math.abs(po(a) - 50) - Math.abs(po(b) - 50))[0];
+  renderPathExplorer();
+}
+
+function pathPick(o) { pathSel = o; renderPathExplorer(); }
+function pathLock(g, side) { if (pathPicks[g] === side) delete pathPicks[g]; else pathPicks[g] = side; renderPathExplorer(); }
+function pathReset() { pathPicks = {}; renderPathExplorer(); }
+
+function renderPathExplorer() {
+  const D = pathData, T = D.T, G = D.G, sel = D.idx[pathSel], pk = pathPicks;
+  const sims = pathMatch(pk), n = sims.length, pct = x => x * 100;
+  const f0 = p => `${Math.round(p)}%`;
+  document.getElementById('path-chips').innerHTML = D.table.map(r =>
+    `<div class="owner-card sm ${r.owner === pathSel ? 'selected' : ''}" onclick="pathPick('${r.owner}')"><div class="owner-card-name">${r.owner}</div></div>`).join('');
+
+  // per-game, per-team counts of made-playoffs by outcome, within the matching sims
+  const cnt = D.win.map(() => [new Float64Array(T), new Float64Array(T)]), tot = D.win.map(() => [0, 0]);
+  const made = new Float64Array(T);
+  const own = D.remaining.map((g, i) => i).filter(i => D.ga[i] === sel || D.gb[i] === sel);
+  const scen = {}; // own wins -> [sims, made]
+  for (const s of sims) {
+    for (let t = 0; t < T; t++) made[t] += D.made[s * T + t];
+    D.win.forEach((g, k) => { const side = D.winA[s * G + g] ? 0 : 1; tot[k][side]++; const c = cnt[k][side]; for (let t = 0; t < T; t++) c[t] += D.made[s * T + t]; });
+    let ow = 0; for (const g of own) ow += (D.winA[s * G + g] ? D.ga[g] === sel : D.gb[g] === sel) ? 1 : 0;
+    (scen[ow] = scen[ow] || [0, 0]); scen[ow][0]++; scen[ow][1] += D.made[s * T + sel];
+  }
+  const base = n ? pct(made[sel] / n) : NaN;
+  const prior = pct(D.pos[pathSel].pos.slice(0, PLAYOFF_TEAMS).reduce((a, c) => a + c, 0) / D.N);
+  const locked = Object.keys(pk).length;
+  const sc = k => scen[k] && scen[k][0] >= 30 ? pct(scen[k][1] / scen[k][0]) : null;
+  const top = Math.max(...Object.keys(scen).map(Number)), kpi = (l, v, sub, gold) => `<div class="kpi ${gold ? 'gold' : ''}"><div class="kpi-label">${l}</div><div class="kpi-value">${v}</div>${sub ? `<div class="kpi-sub">${sub}</div>` : ''}</div>`;
+  const rec = D.table.find(r => r.owner === pathSel);
+  document.getElementById('path-kpis').innerHTML =
+    kpi('Record', `${rec.w}–${rec.l}`, `${own.length} games left`) +
+    kpi(locked ? 'Playoff % given locks' : 'Playoff %', n ? oddsLabel(base) : '—', locked ? `prior ${oddsLabel(prior)} · ${n.toLocaleString()} sims match` : 'before any locked results', true) +
+    kpi(`Win out (${top}-0)`, sc(top) == null ? '—' : oddsLabel(sc(top)), 'playoff odds if it wins every game left') +
+    kpi('Lose out', sc(0) == null ? '—' : oddsLabel(sc(0)), 'playoff odds if it loses every game left');
+  document.getElementById('path-scen-body').innerHTML = Object.keys(scen).map(Number).sort((a, b) => b - a).map(k => {
+    const p = scen[k][0] >= 30 ? pct(scen[k][1] / scen[k][0]) : null;
+    return `<tr><td>${k} of ${own.length} <span style="color:#475569">(${rec.w + k}–${rec.l + own.length - k})</span></td>
+      <td>${p == null ? '<span style="color:#475569">too rare</span>' : `<div class="odds-bar"><span style="width:${p}%"></span><b>${oddsLabel(p)}</b></div>`}</td>
+      <td class="num">${(scen[k][0] / n * 100).toFixed(scen[k][0] / n < 0.1 ? 1 : 0)}%</td></tr>`; }).join('') || '<tr><td colspan="3" style="color:#475569">No simulations match these locked results.</td></tr>';
+
+  // rooting guide for the selected team and league-wide impact table
+  const prob = (k, side, t) => tot[k][side] >= PATH_MIN ? pct(cnt[k][side][t] / tot[k][side]) : null;
+  const lockBtn = (g, side, txt, extra) => `<span onclick="event.stopPropagation();pathLock(${g},${side})" style="cursor:pointer;padding:1px 6px;border-radius:4px;border:1px solid ${pk[g] === side ? '#fcd34d' : '#1e293b'};${pk[g] === side ? 'background:#3b2f06;color:#fcd34d;' : ''}${extra || ''}">${txt}</span>`;
+  const name = o => o.split('/')[0];
+  const rows = D.win.map((g, k) => { const gm = D.remaining[g], sw = (() => { const a = prob(k, 0, sel), b = prob(k, 1, sel); return a == null || b == null ? null : a - b; })();
+    return { k, g, gm, a: prob(k, 0, sel), b: prob(k, 1, sel), sw }; }).filter(r => r.gm.a !== pathSel && r.gm.b !== pathSel);
+  const sorted = [...rows].sort((x, y) => Math.abs(y.sw ?? -1) - Math.abs(x.sw ?? -1));
+  document.getElementById('path-root-body').innerHTML = sorted.map(r => {
+    const decided = pk[r.g] != null, col = v => v == null ? '#475569' : v >= 50 ? '#4ade80' : '#f87171';
+    const sw = r.sw == null || decided;
+    return `<tr style="${decided ? 'opacity:.55' : ''}"><td class="num" style="font-weight:700;white-space:nowrap;color:#4ade80">${sw ? '\u2014' : '+' + Math.abs(r.sw).toFixed(0) + ' points'}${sw ? '' : `<div style="font-size:10px;font-weight:400;color:#64748b">if ${name(r.sw > 0 ? r.gm.a : r.gm.b)} wins</div>`}</td>
+      <td>${r.gm.week}</td>
+      <td>${lockBtn(r.g, 0, name(r.gm.a))} <span style="color:#475569">vs</span> ${lockBtn(r.g, 1, name(r.gm.b))}</td>
+      <td class="num" style="color:${col(r.a)}">${r.a == null ? '\u2014' : oddsLabel(r.a)}</td><td class="num" style="color:${col(r.b)}">${r.b == null ? '\u2014' : oddsLabel(r.b)}</td></tr>`; }).join('');
+  document.getElementById('path-picks-note').textContent = locked
+    ? `${locked} result${locked > 1 ? 's' : ''} locked · ${n.toLocaleString()} of ${D.N.toLocaleString()} simulations match${n < 500 ? ' (small sample, treat with caution)' : ''}`
+    : 'Nothing locked. Click a team name in any game to assume it wins.';
+
+  // impact table: every team's swing per game
+  const imp = D.win.filter(g => pk[g] == null).map(g => { const k = D.win.indexOf(g), gm = D.remaining[g], per = [];
+    for (let t = 0; t < T; t++) { const a = prob(k, 0, t), b = prob(k, 1, t); if (a != null && b != null) per.push({ t, a, b, sw: a - b }); }
+    return { g, gm, per, total: per.reduce((x, y) => x + Math.abs(y.sw), 0) }; }).sort((x, y) => y.total - x.total);
+  document.getElementById('path-impact-body').innerHTML = imp.map(r => {
+    const chips = [...r.per].sort((x, y) => Math.abs(y.sw) - Math.abs(x.sw)).slice(0, 4).filter(x => Math.abs(x.sw) >= 1).map(x => {
+      const o = D.owners[x.t], rootFor = x.sw > 0 ? r.gm.a : r.gm.b, part = o === r.gm.a || o === r.gm.b;
+      return `<span title="${o}: ${f0(x.a)} if ${r.gm.a} wins, ${f0(x.b)} if ${r.gm.b} wins" style="display:inline-block;margin:1px 4px 1px 0;padding:2px 7px;border-radius:10px;background:#111827;border:1px solid ${part ? '#854d0e' : '#1e293b'};font-size:11px;white-space:nowrap"><b style="color:${ownerColor(o, SEASON_YEAR)}">${name(o)}</b> ${Math.abs(x.sw).toFixed(0)} pts <span style="color:#64748b">${part ? 'plays' : 'roots ' + name(rootFor)}</span></span>`; }).join('');
+    return `<tr><td>${r.gm.week}</td>
+      <td style="white-space:nowrap">${name(r.gm.a)} <span style="color:#475569">vs</span> ${name(r.gm.b)}</td>
+      <td class="num" style="font-weight:700">${r.total.toFixed(0)}</td><td>${chips || '<span style="color:#475569">little effect</span>'}</td></tr>`; }).join('');
+}
 
 // ══════════════════════════════════════════════════════
 // WHO HAS HIM (player history)
@@ -2618,6 +2826,8 @@ function init() {
   // Tabs 3 + 4 — charts deferred until tab is opened
   buildOwnerSelect();
   document.getElementById('season-tab-btn').textContent = `${SEASON_YEAR} Season`;
+  // Playoff Path lives only at /playoffs (no toolbar button)
+  if (ON_PLAYOFFS && !location.hash.slice(1)) history.replaceState(null, '', '#path');
   if (!location.hash.slice(1)) history.replaceState(null, '', '#season');  // default landing view: current season (recap + weekly scores)
   routeFromHash();
 }
