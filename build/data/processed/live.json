@@ -1,88 +1,142 @@
 {
   "year": 2026,
-  "week": 11,
-  "updated": "2026-11-22 18:48 PT",
+  "week": 12,
+  "updated": "2026-11-24 00:43 PT",
   "games": [
     {
-      "a": "Salty",
-      "b": "Pierson",
-      "a_pts": 89.0,
-      "b_pts": 69.5,
-      "a_proj": 119.09,
-      "b_proj": 92.24
-    },
-    {
-      "a": "Buser",
+      "a": "Pierson",
       "b": "Riley",
-      "a_pts": 123.76,
-      "b_pts": 63.86,
-      "a_proj": 123.76,
-      "b_proj": 102.93
+      "a_pts": 0.0,
+      "b_pts": 0.0,
+      "a_proj": 119.14,
+      "b_proj": 101.33
     },
     {
-      "a": "Tayski",
-      "b": "Cock",
-      "a_pts": 118.48,
-      "b_pts": 112.78,
-      "a_proj": 126.7,
-      "b_proj": 112.78
+      "a": "Cock",
+      "b": "Salty",
+      "a_pts": 0.0,
+      "b_pts": 0.0,
+      "a_proj": 95.92,
+      "b_proj": 107.61
     },
     {
-      "a": "KnardDawg",
-      "b": "Shep",
-      "a_pts": 71.34,
-      "b_pts": 92.06,
-      "a_proj": 79.69,
-      "b_proj": 97.5
+      "a": "Shep",
+      "b": "Buser",
+      "a_pts": 0.0,
+      "b_pts": 0.0,
+      "a_proj": 101.84,
+      "b_proj": 112.76
     },
     {
-      "a": "Hudspeath",
-      "b": "T-How",
-      "a_pts": 83.2,
-      "b_pts": 101.9,
-      "a_proj": 106.06,
-      "b_proj": 136.55
+      "a": "T-How",
+      "b": "Tayski",
+      "a_pts": 0.0,
+      "b_pts": 0.0,
+      "a_proj": 108.84,
+      "b_proj": 101.15
+    },
+    {
+      "a": "Ewert",
+      "b": "KnardDawg",
+      "a_pts": 0.0,
+      "b_pts": 0.0,
+      "a_proj": 103.67,
+      "b_proj": 86.84
     },
     {
       "a": "Rooney/Jackson",
-      "b": "Ewert",
-      "a_pts": 98.06,
-      "b_pts": 68.24,
-      "a_proj": 105.85,
-      "b_proj": 72.27
+      "b": "Hudspeath",
+      "a_pts": 0.0,
+      "b_pts": 0.0,
+      "a_proj": 119.01,
+      "b_proj": 116.51
+    }
+  ],
+  "prev_final": {
+    "week": 11,
+    "games": [
+      {
+        "a": "Salty",
+        "b": "Pierson",
+        "a_pts": 112.56,
+        "b_pts": 90.7
+      },
+      {
+        "a": "Buser",
+        "b": "Riley",
+        "a_pts": 123.76,
+        "b_pts": 97.86
+      },
+      {
+        "a": "Tayski",
+        "b": "Cock",
+        "a_pts": 122.78,
+        "b_pts": 112.78
+      },
+      {
+        "a": "KnardDawg",
+        "b": "Shep",
+        "a_pts": 76.84,
+        "b_pts": 93.46
+      },
+      {
+        "a": "Hudspeath",
+        "b": "T-How",
+        "a_pts": 103.1,
+        "b_pts": 121.2
+      },
+      {
+        "a": "Rooney/Jackson",
+        "b": "Ewert",
+        "a_pts": 106.66,
+        "b_pts": 70.74
+      }
+    ]
+  },
+  "prev_finals": [
+    {
+      "week": 11,
+      "games": [
+        {
+          "a": "Salty",
+          "b": "Pierson",
+          "a_pts": 112.56,
+          "b_pts": 90.7
+        },
+        {
+          "a": "Buser",
+          "b": "Riley",
+          "a_pts": 123.76,
+          "b_pts": 97.86
+        },
+        {
+          "a": "Tayski",
+          "b": "Cock",
+          "a_pts": 122.78,
+          "b_pts": 112.78
+        },
+        {
+          "a": "KnardDawg",
+          "b": "Shep",
+          "a_pts": 76.84,
+          "b_pts": 93.46
+        },
+        {
+          "a": "Hudspeath",
+          "b": "T-How",
+          "a_pts": 103.1,
+          "b_pts": 121.2
+        },
+        {
+          "a": "Rooney/Jackson",
+          "b": "Ewert",
+          "a_pts": 106.66,
+          "b_pts": 70.74
+        }
+      ]
     }
   ],
   "schedule": [
-    {
-      "week": 11,
-      "a": "Salty",
-      "b": "Pierson"
-    },
-    {
-      "week": 11,
-      "a": "Buser",
-      "b": "Riley"
-    },
-    {
-      "week": 11,
-      "a": "Tayski",
-      "b": "Cock"
-    },
-    {
-      "week": 11,
-      "a": "KnardDawg",
-      "b": "Shep"
-    },
-    {
-      "week": 11,
-      "a": "Hudspeath",
-      "b": "T-How"
-    },
-    {
-      "week": 11,
-      "a": "Rooney/Jackson",
-      "b": "Ewert"
-    },
     {
       "week": 12,
       "a": "Pierson",
