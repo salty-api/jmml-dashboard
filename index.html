@@ -680,7 +680,7 @@ tr.rm-sep td { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em;
         <table class="data-table"><thead><tr><th>Remaining wins</th><th>Playoff %</th><th class="num">Likelihood</th></tr></thead><tbody id="path-scen-body"></tbody></table>
       </div>
       <div>
-        <div class="section-title" style="font-size:11px">Rooting Guide <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; last 3 weeks, games this team is not in, ranked by swing in its playoff odds &middot; click a team to lock in a win</span></div>
+        <div class="section-title" style="font-size:11px">Rooting Guide <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; top 10 games this team is not in (last 3 weeks), ranked by swing in its playoff odds &middot; click a team to lock in a win</span></div>
         <table class="data-table"><thead><tr><th class="num">Swing</th><th>Wk</th><th>Game</th><th class="num" title="Selected team's playoff odds if the first-listed side wins">If 1st wins</th><th class="num">If 2nd wins</th></tr></thead><tbody id="path-root-body"></tbody></table>
       </div>
     </div>
@@ -2198,7 +2198,7 @@ function renderPathExplorer() {
   const name = o => o.split('/')[0];
   const rows = D.win.map((g, k) => { const gm = D.remaining[g], sw = (() => { const a = prob(k, 0, sel), b = prob(k, 1, sel); return a == null || b == null ? null : a - b; })();
     return { k, g, gm, a: prob(k, 0, sel), b: prob(k, 1, sel), sw }; }).filter(r => r.gm.a !== pathSel && r.gm.b !== pathSel);
-  const sorted = [...rows].sort((x, y) => Math.abs(y.sw ?? -1) - Math.abs(x.sw ?? -1));
+  const sorted = [...rows].sort((x, y) => Math.abs(y.sw ?? -1) - Math.abs(x.sw ?? -1)).slice(0, 10);
   document.getElementById('path-root-body').innerHTML = sorted.map(r => {
     const decided = pk[r.g] != null, col = v => v == null ? '#475569' : v >= 50 ? '#4ade80' : '#f87171';
     const sw = r.sw == null || decided;
