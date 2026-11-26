@@ -3,6 +3,7 @@ name: Live scores
 on:
   schedule:
     - cron: "5 * * * *"        # hourly; the gate step keeps only the slots below (Pacific time)
+    - cron: "*/15 * * * 0,1"   # every 15 min UTC Sun/Mon (covers PT Sunday); the gate keeps only Sunday here
     - cron: "15 16,17 * * 2"   # Tuesday 9:15am PT (covers PDT and PST)
   workflow_dispatch:            # run by hand; skips the gate
 
@@ -35,8 +36,9 @@ jobs:
           run=0
           if [ "$SCHEDULE" = "15 16,17 * * 2" ]; then
             [ "$d" = 2 ] && [ "$h" = 9 ] && run=1
+          elif [ "$SCHEDULE" = "*/15 * * * 0,1" ]; then
+            [ "$d" = 0 ] && [ "$h" -ge 7 ] && [ "$h" -le 21 ] && run=1   # Sun 7am-9:59pm PT, every 15 min
           else
-            [ "$d" = 0 ] && [ "$h" -ge 7 ] && [ "$h" -le 21 ] && run=1   # Sun 7am-9pm
             [ "$d" = 4 ] && [ "$h" = 23 ] && run=1                       # Thu 11pm
             [ "$d" = 5 ] && [ "$h" -le 1 ] && run=1                      # Fri 12-1am (backup for Thu 11pm)
             [ "$d" = 2 ] && [ "$h" -le 3 ] && run=1                      # Tue 12-3am PT
