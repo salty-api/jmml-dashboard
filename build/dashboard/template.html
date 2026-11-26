@@ -660,7 +660,7 @@ tr.rm-sep td { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em;
   <div class="section">
     <div class="section-title">Standings <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; by wins, then points for &middot; top 6 make the playoffs</span></div>
     <table class="data-table" id="path-standings">
-      <thead><tr><th class="num">#</th><th>Owner</th><th>Team</th><th class="num">W</th><th class="num">L</th><th class="num">PF</th><th class="num">Left</th><th>Playoff %</th></tr></thead>
+      <thead><tr><th class="num">#</th><th>Owner</th><th>Team</th><th class="num">W</th><th class="num">L</th><th class="num">PF</th><th class="num">Left</th><th>Playoff %</th><th title="Finish in the top 2 and earn a playoff bye">Bye (Top 2) %</th></tr></thead>
       <tbody id="path-st-body"></tbody>
     </table>
   </div>
@@ -677,7 +677,7 @@ tr.rm-sep td { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em;
     <div class="chart-row">
       <div>
         <div class="section-title" style="font-size:11px">Win Scenarios <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; playoff odds by this team's remaining wins</span></div>
-        <table class="data-table"><thead><tr><th>Remaining wins</th><th>Playoff %</th><th class="num">Likelihood</th></tr></thead><tbody id="path-scen-body"></tbody></table>
+        <table class="data-table"><thead><tr><th>Remaining wins</th><th>Playoff %</th><th>Bye %</th><th class="num">Likelihood</th></tr></thead><tbody id="path-scen-body"></tbody></table>
       </div>
       <div>
         <div class="section-title" style="font-size:11px">Rooting Guide <span style="font-weight:400;text-transform:none;font-size:10px;color:#334155">&middot; top 10 games this team is not in (last 3 weeks), ranked by swing in its playoff odds &middot; click a team to lock in a win</span></div>
@@ -2087,7 +2087,7 @@ function pathSim(table, mu, remaining) {
   const owners = table.map(r => r.owner), T = owners.length, G = remaining.length, N = PATH_N;
   const idx = Object.fromEntries(owners.map((o, i) => [o, i]));
   const ga = remaining.map(g => idx[g.a]), gb = remaining.map(g => idx[g.b]), m = owners.map(o => mu[o]);
-  const winA = new Uint8Array(N * G), made = new Uint8Array(N * T);
+  const winA = new Uint8Array(N * G), made = new Uint8Array(N * T), bye = new Uint8Array(N * T);
   const pos = Object.fromEntries(owners.map(o => [o, { pos: owners.map(() => 0) }]));
   const w = new Float64Array(T), pf = new Float64Array(T), order = owners.map((_, i) => i);
   for (let n = 0; n < N; n++) {
@@ -2098,9 +2098,9 @@ function pathSim(table, mu, remaining) {
       if (sa > sb) { w[ga[g]]++; winA[n * G + g] = 1; } else w[gb[g]]++;
     }
     order.sort((x, y) => w[y] - w[x] || pf[y] - pf[x]);
-    for (let i = 0; i < T; i++) { pos[owners[order[i]]].pos[i]++; if (i < PLAYOFF_TEAMS) made[n * T + order[i]] = 1; }
+    for (let i = 0; i < T; i++) { pos[owners[order[i]]].pos[i]++; if (i < PLAYOFF_TEAMS) made[n * T + order[i]] = 1; if (i < 2) bye[n * T + order[i]] = 1; }
   }
-  return { owners, idx, remaining, T, G, N, winA, made, pos, ga, gb };
+  return { owners, idx, remaining, T, G, N, winA, made, bye, pos, ga, gb };
 }
 
 // Simulations matching every locked result: the Bayesian "evidence"
@@ -2138,7 +2138,7 @@ function renderPath() {
   pathData.winStart = info.maxWeek - PATH_WINDOW + 1;
   pathData.win = remaining.map((g, i) => i).filter(i => remaining[i].week >= pathData.winStart);
   pathPicks = {};
-  const D = pathData, po = o => D.pos[o].pos.slice(0, PLAYOFF_TEAMS).reduce((a, c) => a + c, 0) / D.N * 100;
+  const D = pathData, po = o => D.pos[o].pos.slice(0, PLAYOFF_TEAMS).reduce((a, c) => a + c, 0) / D.N * 100, pb = o => (D.pos[o].pos[0] + D.pos[o].pos[1]) / D.N * 100;
   const left = {}; remaining.forEach(g => { left[g.a] = (left[g.a] || 0) + 1; left[g.b] = (left[g.b] || 0) + 1; });
 
   document.getElementById('path-st-body').innerHTML = table.map((r, i) => `<tr data-owner="${r.owner}" onclick="pathPick('${r.owner}')" style="${i === PLAYOFF_TEAMS - 1 ? 'border-bottom:2px solid #475569' : ''}">
@@ -2147,7 +2147,8 @@ function renderPath() {
     <td style="color:#94a3b8;font-size:11px"><span class="team-name">${r.team}</span></td>
     <td class="num" style="color:#4ade80">${r.w}</td><td class="num" style="color:#f87171">${r.l}</td>
     <td class="num">${Math.round(r.pf)}</td><td class="num">${left[r.owner] || 0}</td>
-    <td><div class="odds-bar"><span style="width:${po(r.owner)}%"></span><b>${oddsLabel(po(r.owner))}</b></div></td></tr>`).join('');
+    <td><div class="odds-bar"><span style="width:${po(r.owner)}%"></span><b>${oddsLabel(po(r.owner))}</b></div></td>
+    <td><div class="odds-bar"><span style="width:${pb(r.owner)}%"></span><b>${oddsLabel(pb(r.owner))}</b></div></td></tr>`).join('');
   renderPosMatrix(D.pos, D.owners, D.N, 'path-pos-head', 'path-pos-body');
   if (!pathSel || !D.idx.hasOwnProperty(pathSel)) pathSel = [...D.owners].sort((a, b) => Math.abs(po(a) - 50) - Math.abs(po(b) - 50))[0];
   renderPathExplorer();
@@ -2166,17 +2167,18 @@ function renderPathExplorer() {
 
   // per-game, per-team counts of made-playoffs by outcome, within the matching sims
   const cnt = D.win.map(() => [new Float64Array(T), new Float64Array(T)]), tot = D.win.map(() => [0, 0]);
-  const made = new Float64Array(T);
+  const made = new Float64Array(T), byeC = new Float64Array(T);
   const own = D.remaining.map((g, i) => i).filter(i => D.ga[i] === sel || D.gb[i] === sel);
-  const scen = {}; // own wins -> [sims, made]
+  const scen = {}; // own wins -> [sims, made, bye]
   for (const s of sims) {
-    for (let t = 0; t < T; t++) made[t] += D.made[s * T + t];
+    for (let t = 0; t < T; t++) { made[t] += D.made[s * T + t]; byeC[t] += D.bye[s * T + t]; }
     D.win.forEach((g, k) => { const side = D.winA[s * G + g] ? 0 : 1; tot[k][side]++; const c = cnt[k][side]; for (let t = 0; t < T; t++) c[t] += D.made[s * T + t]; });
     let ow = 0; for (const g of own) ow += (D.winA[s * G + g] ? D.ga[g] === sel : D.gb[g] === sel) ? 1 : 0;
-    (scen[ow] = scen[ow] || [0, 0]); scen[ow][0]++; scen[ow][1] += D.made[s * T + sel];
+    (scen[ow] = scen[ow] || [0, 0, 0]); scen[ow][0]++; scen[ow][1] += D.made[s * T + sel]; scen[ow][2] += D.bye[s * T + sel];
   }
   const base = n ? pct(made[sel] / n) : NaN;
   const prior = pct(D.pos[pathSel].pos.slice(0, PLAYOFF_TEAMS).reduce((a, c) => a + c, 0) / D.N);
+  const baseBye = n ? pct(byeC[sel] / n) : NaN, priorBye = pct((D.pos[pathSel].pos[0] + D.pos[pathSel].pos[1]) / D.N);
   const locked = Object.keys(pk).length;
   const sc = k => scen[k] && scen[k][0] >= 30 ? pct(scen[k][1] / scen[k][0]) : null;
   const top = Math.max(...Object.keys(scen).map(Number)), kpi = (l, v, sub, gold) => `<div class="kpi ${gold ? 'gold' : ''}"><div class="kpi-label">${l}</div><div class="kpi-value">${v}</div>${sub ? `<div class="kpi-sub">${sub}</div>` : ''}</div>`;
@@ -2184,13 +2186,15 @@ function renderPathExplorer() {
   document.getElementById('path-kpis').innerHTML =
     kpi('Record', `${rec.w}–${rec.l}`, `${own.length} games left`) +
     kpi(locked ? 'Playoff % given locks' : 'Playoff %', n ? oddsLabel(base) : '—', locked ? `prior ${oddsLabel(prior)} · ${n.toLocaleString()} sims match` : 'before any locked results', true) +
+    kpi(locked ? 'Bye (Top 2) % given locks' : 'Bye (Top 2) %', n ? oddsLabel(baseBye) : '—', locked ? `prior ${oddsLabel(priorBye)} · first-round bye` : 'earns a first-round bye') +
     kpi(`Win out (${top}-0)`, sc(top) == null ? '—' : oddsLabel(sc(top)), 'playoff odds if it wins every game left') +
     kpi('Lose out', sc(0) == null ? '—' : oddsLabel(sc(0)), 'playoff odds if it loses every game left');
   document.getElementById('path-scen-body').innerHTML = Object.keys(scen).map(Number).sort((a, b) => b - a).map(k => {
     const p = scen[k][0] >= 30 ? pct(scen[k][1] / scen[k][0]) : null;
     return `<tr><td>${k} of ${own.length} <span style="color:#475569">(${rec.w + k}–${rec.l + own.length - k})</span></td>
       <td>${p == null ? '<span style="color:#475569">too rare</span>' : `<div class="odds-bar"><span style="width:${p}%"></span><b>${oddsLabel(p)}</b></div>`}</td>
-      <td class="num">${(scen[k][0] / n * 100).toFixed(scen[k][0] / n < 0.1 ? 1 : 0)}%</td></tr>`; }).join('') || '<tr><td colspan="3" style="color:#475569">No simulations match these locked results.</td></tr>';
+      <td>${p == null ? '' : (pbk => `<div class="odds-bar"><span style="width:${pbk}%"></span><b>${oddsLabel(pbk)}</b></div>`)(pct(scen[k][2] / scen[k][0]))}</td>
+      <td class="num">${(scen[k][0] / n * 100).toFixed(scen[k][0] / n < 0.1 ? 1 : 0)}%</td></tr>`; }).join('') || '<tr><td colspan="4" style="color:#475569">No simulations match these locked results.</td></tr>';
 
   // rooting guide for the selected team and league-wide impact table
   const prob = (k, side, t) => tot[k][side] >= PATH_MIN ? pct(cnt[k][side][t] / tot[k][side]) : null;
