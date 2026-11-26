@@ -2093,7 +2093,7 @@ function pathSim(table, mu, remaining) {
   for (let n = 0; n < N; n++) {
     for (let t = 0; t < T; t++) { w[t] = table[t].w; pf[t] = table[t].pf; }
     for (let g = 0; g < G; g++) {
-      const sa = m[ga[g]] + LEAGUE_SD * randn(), sb = m[gb[g]] + LEAGUE_SD * randn();
+      const lv = remaining[g].live, sa = lv ? lv.ja + lv.sd * randn() : m[ga[g]] + LEAGUE_SD * randn(), sb = lv ? lv.jb + lv.sd * randn() : m[gb[g]] + LEAGUE_SD * randn();
       pf[ga[g]] += sa; pf[gb[g]] += sb;
       if (sa > sb) { w[ga[g]]++; winA[n * G + g] = 1; } else w[gb[g]]++;
     }
@@ -2117,22 +2117,22 @@ function pathMatch(picks) {
 function renderPath() {
   const info = pathInfo(), games = seasonGames(), table = seasonTable(games), mu = seasonModel(games);
   let remaining = remainingGames(mu);
-  // The in-progress week is treated as final: the favorite (ESPN-based live win %) wins, and each team banks its projected points.
+  // The in-progress week is NOT assumed final: its games stay in the simulation, with final scores drawn around ESPN's projections
+  // (spread shrinking with the share of the game left), so the current week's results still move the odds.
   const lw = LIVE && LIVE.year === SEASON_YEAR && LIVE.week === info.lastWeek + 1 ? LIVE : null;
   if (lw) {
-    for (const g of lw.games) {
-      const a = table.find(t => t.owner === g.a), b = table.find(t => t.owner === g.b);
-      if (!a || !b) continue;
-      const aWins = liveWinProb(g, true) >= 0.5;
-      a.pf += g.a_proj || g.a_pts; b.pf += g.b_proj || g.b_pts;
-      (aWins ? a : b).w++; (aWins ? b : a).l++;
-    }
-    table.sort((x, y) => y.w - x.w || y.pf - x.pf);
-    remaining = remaining.filter(g => g.week !== lw.week);
+    remaining = remaining.map(g => {
+      if (g.week !== lw.week) return g;
+      const lg = lw.games.find(x => (x.a === g.a && x.b === g.b) || (x.a === g.b && x.b === g.a));
+      if (!lg || !(lg.a_proj > 0) || !(lg.b_proj > 0)) return g;
+      const fl = lg.a === g.a, rem = (pts, proj) => Math.min(1, Math.max(0, (proj - pts) / proj));
+      const [pa, pb, ja, jb] = fl ? [lg.a_pts, lg.b_pts, lg.a_proj, lg.b_proj] : [lg.b_pts, lg.a_pts, lg.b_proj, lg.a_proj];
+      return { ...g, live: { ja, jb, sd: LIVE_SD_MULT * LEAGUE_SD * Math.sqrt((rem(pa, ja) + rem(pb, jb)) / 2) } };
+    });
   }
-  info.through = lw ? lw.week : info.lastWeek;
+  info.through = info.lastWeek;
   document.getElementById('path-h1').textContent = `${SEASON_YEAR} Playoff Path`;
-  document.getElementById('path-sub').textContent = `Through Week ${info.through}${lw ? ' (Week ' + lw.week + ' assumed final: favorites win, projected points)' : ''} · ${info.maxWeek - info.through} regular-season week${info.maxWeek - info.through === 1 ? '' : 's'} left · who is in, who is out, and which games decide it`;
+  document.getElementById('path-sub').textContent = `Through Week ${info.through}${lw ? ' (Week ' + lw.week + ' in progress, simulated from live ESPN projections)' : ''} · ${info.maxWeek - info.through} regular-season week${info.maxWeek - info.through === 1 ? '' : 's'} left · who is in, who is out, and which games decide it`;
   pathData = pathSim(table, mu, remaining);
   pathData.table = table;
   pathData.winStart = info.maxWeek - PATH_WINDOW + 1;
