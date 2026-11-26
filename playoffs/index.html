@@ -2234,15 +2234,14 @@ function renderPathTree() {
                  : { txt: `${nm(winner)} beats ${nm(loser)}`, col: '#94a3b8' };
   };
   const card = (pre, d) => {
-    const L = levels[d], o = +pre[d], lb = label(L, o), a = agg(pre), last = d === levels.length - 1;
+    const L = levels[d], o = +pre[d], lb = label(L, o), a = agg(pre);
     if (a.n < 30) return `<div class="pt-card" style="border-color:#1e293b;opacity:.6"><div class="pt-h" style="color:${lb.col}">${lb.txt}</div><div style="color:#475569">too rare</div></div>`;
     const po = pc(a.made, a.n), by = pc(a.bye, a.n), tb = pc(a.tie, a.n);
-    const recs = Object.entries(a.rec).sort((x, y) => y[1] - x[1]).slice(0, 2).map(([w, c]) => `${rec.w + (+w)}–${rec.l + ownG.length - (+w)} (${Math.round(c / a.n * 100)}%)`).join(', ');
     return `<div class="pt-card" style="border-color:${L.own ? lb.col + '55' : '#334155'}"><div class="pt-h" style="color:${lb.col}">${lb.txt}</div>
       <div class="pt-row"><span>Playoffs</span><b style="color:${po >= 50 ? '#4ade80' : '#f87171'}">${odds(po)}</b></div>
-      <div class="pt-row"><span>Bye (Top 2)</span><b style="color:${by >= 50 ? '#4ade80' : '#94a3b8'}">${odds(by)}</b></div>
-      ${last ? `<div class="pt-note">Final record: ${recs}</div>` : ''}
-      <div class="pt-note">${tb < 1 ? 'Decided on record' : 'Points tiebreaker in play ' + Math.round(tb) + '%'} · ${(a.n / n * 100).toFixed(a.n / n < 0.1 ? 1 : 0)}% of sims</div></div>`;
+      ${by >= 10 ? `<div class="pt-row"><span>Bye (Top 2)</span><b style="color:${by >= 50 ? '#4ade80' : '#94a3b8'}">${odds(by)}</b></div>` : ''}
+      ${tb > 50 ? `<div class="pt-note" style="color:#fcd34d">Points tiebreaker in play ${Math.round(tb)}%</div>` : ''}
+      <div class="pt-note">${(a.n / n * 100).toFixed(a.n / n < 0.1 ? 1 : 0)}% of sims</div></div>`;
   };
   const build = (pre, d) => d >= levels.length ? '' : ['0', '1'].map(r => {
     const k = pre + r, kids = build(k, d + 1);
