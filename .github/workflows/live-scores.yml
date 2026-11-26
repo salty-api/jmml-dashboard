@@ -90,7 +90,7 @@ jobs:
           git add index.html data.json playoffs weekly share owner rivalry season all-time team-history records who-has-him build/data/processed/live.json "build/JMML Finishes - Sheets (1).xlsx"
           git diff --cached --quiet && { echo "No change"; exit 0; }
           git commit -m "Live scores $(TZ=America/Los_Angeles date '+%Y-%m-%d %H:%M')"
-          git push
+          git push || { git pull --rebase -X theirs origin main && git push; }   # retry once if someone pushed meanwhile
 
       - name: Open an issue if the refresh failed or degraded
         if: failure() || (steps.gate.outputs.run == '1' && hashFiles('build/.live_degraded') != '')
