@@ -187,7 +187,7 @@ table.hm tr.dimmed { opacity: 0.15; }
 .pv-team { font-size: 13px; font-weight: 700; } .pv-team small { display: block; font-size: 10px; font-weight: 500; color: #475569; margin-top: 2px; }
 .pv-team.r { text-align: right; } .pv-vs { font-size: 10px; color: #334155; }
 .pv-prob { display: flex; height: 8px; border-radius: 4px; overflow: hidden; background: #1e293b; }
-.pv-prob span { background: #4ade80; } .pv-prob span + span { background: #f87171; border-left: 2px solid #111520; box-sizing: border-box; }
+.pv-prob span { background: #4ade80; } .pv-prob span + span { background: #f87171; border-left: 2px solid #111520; box-sizing: border-box; flex: none; padding-left: 8px; text-align: left; }
 .pv-prob-lbl { display: flex; justify-content: space-between; font-size: 10.5px; font-weight: 700; margin: 4px 0 8px; font-variant-numeric: tabular-nums; }
 .pv-live { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums; margin: 2px 0 8px; } .pv-live span:last-child { text-align: right; } .pv-live .lead { color: #4ade80; } .pv-live .trail { color: #94a3b8; }
 .live-badge { display: inline-block; background: #7f1d1d; color: #fca5a5; font-size: 9px; font-weight: 700; letter-spacing: .06em; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
@@ -218,9 +218,14 @@ table.hm tr.dimmed { opacity: 0.15; }
 .mg-score { font-variant-numeric: tabular-nums; font-size: 12px; color: #94a3b8; }
 .mg-score.winner { color: #e2e8f0; }
 .mg-vs { font-size: 10px; color: #1e293b; }
-.pt-tree { overflow-x: auto; padding-bottom: 6px; } .pt-br { display: flex; align-items: center; gap: 0; margin: 4px 0; } .pt-kids { display: flex; flex-direction: column; border-left: 2px solid #1e293b; margin-left: 14px; padding-left: 14px; }
-.pt-node { position: relative; } .pt-kids > .pt-br > .pt-node::before { content: ''; position: absolute; left: -14px; top: 50%; width: 14px; border-top: 2px solid #1e293b; }
-.pt-wk { font-size: 12px; font-weight: 700; color: #e2e8f0; letter-spacing: .04em; text-transform: uppercase; border-bottom: 2px solid #334155; padding: 0 0 4px 0; margin-bottom: 6px; box-sizing: border-box; } .pt-wk small { font-weight: 400; text-transform: none; color: #64748b; letter-spacing: 0; }
+.pt-tree { overflow-x: auto; padding-bottom: 6px; } .pt-br { display: flex; align-items: center; margin: 4px 0; } .pt-node { position: relative; flex: none; }
+/* connectors: parent stub -> trunk that spans only from the first child's centre to the last child's centre -> stub into each child */
+.pt-kids { position: relative; display: flex; flex-direction: column; margin-left: 14px; }
+.pt-kids::before { content: ''; position: absolute; left: -14px; width: 14px; top: 50%; border-top: 2px solid #64748b; }
+.pt-kids > .pt-br { position: relative; padding-left: 16px; }
+.pt-kids > .pt-br::before { content: ''; position: absolute; left: 0; width: 2px; top: -4px; bottom: -4px; background: #64748b; }
+.pt-kids > .pt-br:first-child::before { top: 50%; } .pt-kids > .pt-br:last-child::before { bottom: 50%; }
+.pt-kids > .pt-br::after { content: ''; position: absolute; left: 0; width: 16px; top: 50%; border-top: 2px solid #64748b; }
 .pt-card { width: 210px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 7px 10px; font-size: 11px; color: #cbd5e1; } .pt-root { border-color: #fcd34d88; }
 .pt-h { font-weight: 700; font-size: 11px; margin-bottom: 4px; color: #e2e8f0; } .pt-row { display: flex; justify-content: space-between; } .pt-note { font-size: 10px; color: #64748b; margin-top: 3px; }
 .scoreboard-stack { display: flex; flex-direction: column; gap: 18px; }
@@ -2247,10 +2252,10 @@ function renderPathTree() {
     const k = pre + r, kids = build(k, d + 1);
     return `<div class="pt-br"><div class="pt-node">${card(k, d)}</div>${kids ? `<div class="pt-kids">${kids}</div>` : ''}</div>`; }).join('');
 
-  const COL = 224;   // card width + connector, keeps week headers aligned with their step columns
+  const COL = 240;   // card width + connector, keeps week headers aligned with their step columns
   const heads = weeks.map(w => { const k = levels.filter(L => L.week === w).length;
     return `<div class="pt-wk" style="width:${k * COL}px">Week ${w}<small>${k > 1 ? ' · your game + ' + (k - 1) + ' key game' + (k > 2 ? 's' : '') : ' · your game'}</small></div>`; }).join('');
-  host.innerHTML = `<div class="pt-tree"><div style="display:flex"><div style="width:${COL}px"></div>${heads}</div>
+  host.innerHTML = `<div class="pt-tree"><div style="display:flex"><div style="width:${COL}px;flex:none"></div>${heads}</div>
     <div class="pt-br"><div class="pt-node"><div class="pt-card pt-root"><div class="pt-h">${pathSel}</div>
     <div class="pt-row"><span>Record</span><b>${rec.w}–${rec.l}</b></div><div class="pt-note">${D.assumedWeek ? 'Week ' + D.assumedWeek + ' assumed final (favorites win, projected points)' : 'Remaining games simulated'}</div></div></div>
     <div class="pt-kids">${build('', 0)}</div></div></div>
