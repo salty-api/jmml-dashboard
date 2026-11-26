@@ -2108,7 +2108,7 @@ function pathMatch(picks) {
   const D = pathData, keys = Object.keys(picks).map(Number), out = [];
   for (let n = 0; n < D.N; n++) {
     let ok = true;
-    for (const g of keys) if (D.winA[n * D.G + g] !== picks[g]) { ok = false; break; }
+    for (const g of keys) if ((D.winA[n * D.G + g] ? 0 : 1) !== picks[g]) { ok = false; break; }
     if (ok) out.push(n);
   }
   return out;
